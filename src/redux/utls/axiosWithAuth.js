@@ -6,7 +6,7 @@ export const axiosWithAuth = (id) => {
         headers: {
             Authorization: `${token}`,
             'Content-Type': 'application/json',
-            id: id,
+            id: id
         }
     });
 };

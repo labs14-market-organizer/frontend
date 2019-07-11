@@ -1,3 +1,3 @@
-import userFetch from "./userFetch";
+import userData from "./userData";
 
-export default { userFetch }
+export default { userData }
