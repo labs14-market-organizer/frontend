@@ -9,7 +9,7 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
-import { login, getCurrentUser } from "./actions/index";
+import { userData } from "./actions/index";
 
 
 /* import LandingPage from './routes/LandingPage';
@@ -21,14 +21,18 @@ var user_type = localStorage.getItem('userType');
 class App extends React.Component {
   componentWillMount() 
   {
-
+    userData.getLocalData();
+    if(!token) console.log("not logged in");//force to login
+    if(userData.error) userData.queryData
   }
 
   componentWillUpdate()
   {
+    
   }
   render() 
   {
+
   }
 }
 
@@ -40,7 +44,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { login, getCurrentUser }
+  { userData }
 )(App);
 
 const InPrivateRoute = ({ component: Component, ...rest }) => {
