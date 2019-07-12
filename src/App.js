@@ -9,7 +9,8 @@ import {
   withRouter
 } from "react-router-dom";
 import {setLocalData, getUserData} from "./redux/actions/userData";
-import { SSL_OP_EPHEMERAL_RSA } from "constants";
+
+import AuthenticatePage from "./routes/AuthenticatePage";
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -33,12 +34,14 @@ class App extends React.Component {
     console.log(token);
     return (
     <div className="App">
+      <AuthenticatePage signUp {...this.props}/>
      {
-       /*  <NavBar/>
+/*       <NavBar/>
       <Route path="/landing" component={MarketingPage}/>
       <PrivateRoute path="/" component={MainPage}/>
-      <Route path="/signup" component={SiginUpPage}/>
-      <Route path="/login" component={LogInPage}/> */}
+      <Route path="/signup" render={()=> <AuthenticatePage signUp {...props}/>}/>
+      <Route path="/login" render={()=> <AuthenticatePage logIn {...props}/>}/> */
+      }
     </div>
     );
   }
