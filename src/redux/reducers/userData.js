@@ -2,7 +2,10 @@ import {
     GET_LOCAL_DATA,
     SET_LOCAL_DATA, 
     ERROR_LOCAL_DATA_BAD_DATA, 
-    ERROR_LOCAL_DATA_BAD_TOKEN
+    ERROR_LOCAL_DATA_BAD_TOKEN,
+    GET_USER_DATA_START,
+    GET_USER_DATA_END,
+    ERROR_GET_USER_DATA
 } from '../actions/userData';
 
 const initalState =

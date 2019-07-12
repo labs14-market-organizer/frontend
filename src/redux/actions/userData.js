@@ -1,5 +1,5 @@
 import axios from "axios";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { axiosWithAuth } from "./../utls/axiosWithAuth";
 
 const HOST_URL = ""
 
@@ -15,12 +15,13 @@ export const GET_USER_DATA_END = "GET_USER_DATA_END";
 export const ERROR_GET_USER_DATA = "ERROR_GET_USER_DATA";
 
 export const getUserData = (token) => dispatch => {
-    dispatch({ type: GET_USER_START });
+    dispatch({ type: GET_USER_DATA_START });
     return axiosWithAuth(token)
         .get(`${HOST_URL}\profile`)
         .then(res => {
             if(!res.data) throw "interal client error";
             setLocalData(token,res.data);
+            return {type: GET_USER_DATA_END, payload: {token, data: res.data}}
         })
         .catch(err => {
             dispatch({ type: ERROR_GET_USER_DATA, payload: {error: err} });
@@ -36,8 +37,9 @@ export const getLocalData = () =>
     return {type: GET_LOCAL_DATA, payload: { userData: JSON.parse(data), token: token }}
 }
 
-export const storeLocalData = (token, data) => //data should be an object of the user profile info
+export const setLocalData = (token, data) => //data should be an object of the user profile info
 {
     if(token) localStorage.setItem("token", token); else return console.error("token invalid");
     if(data) localStorage.setItem("userdata", JSON.stringify(data)); else return console.error("data invalid");
+    return {type: SET_LOCAL_DATA, payload: {token, data}};
 }

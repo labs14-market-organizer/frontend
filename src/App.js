@@ -1,6 +1,5 @@
 import React from "react";
-import "./sass/global.scss";
-import { axiosWithAuth } from "./utils/axiosWithAuth";
+//import "./sass/global.scss";
 import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -9,8 +8,7 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
-import { userData } from "./actions/index";
-
+import {getLocalData, setLocalData, getUserData} from "./redux/actions/userData";
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -21,9 +19,11 @@ var user_type = localStorage.getItem('userType');
 class App extends React.Component {
   componentWillMount() 
   {
-    userData.getLocalData();
-    if(!token) console.log("not logged in");//force to login
-    if(userData.error) userData.queryData
+    this.setLocalData("token", "helloworld")
+    this.props.getLocalData();
+    console.log(this.state.token);
+   /*  if(!token) console.log("not logged in");//force to login
+    if(userData.error) userData.queryData */
   }
 
   componentWillUpdate()
@@ -32,19 +32,22 @@ class App extends React.Component {
   }
   render() 
   {
-
+    return (<strong>helloworld</strong>);
   }
 }
 
 const mapStateToProps = state => {
   return {
-    //stores
+    //actions
+    getLocalData, 
+    setLocalData, 
+    getUserData
   };
 };
 
 export default connect(
   mapStateToProps,
-  { userData }
+  { getLocalData, setLocalData, getUserData }
 )(App);
 
 const InPrivateRoute = ({ component: Component, ...rest }) => {
