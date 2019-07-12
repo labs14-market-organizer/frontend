@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
     BrowserRouter as Router,
     Route,
@@ -9,10 +10,22 @@ import {
 
 class AuthenticatePage extends React.Component
 {
+   authenticate = (e) => {
+     console.log(e);
+    const authType = e.target.name;
+    this.props.getUserData()
+    axios.get("https://cloudstands-staging.herokuapp.com/auth/google").then(console.log("did it"))
+
+  }
+
+  // this.props.getUserData()
     render()
     {
-        console.log(this.props)
-        return (<div/>)
+
+        return (<div>
+          <button onClick={this.authenticate} name="google">Google</button>
+          <button onClick={this.authenticate} name="facebook">Facebook</button>
+        </div>)
     }
 
     
