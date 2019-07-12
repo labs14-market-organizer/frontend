@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import {getLocalData } from "./userData";
+import {checkUserData } from "./userData";
 
 export default combineReducers({
     //list reducers
-    getLocalData
+    checkUserData
 });

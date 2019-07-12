@@ -8,7 +8,8 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
-import {getLocalData, setLocalData, getUserData} from "./redux/actions/userData";
+import {setLocalData, getUserData} from "./redux/actions/userData";
+import { SSL_OP_EPHEMERAL_RSA } from "constants";
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -19,37 +20,43 @@ var user_type = localStorage.getItem('userType');
 class App extends React.Component {
   componentWillMount() 
   {
-    localStorage.setItem("token", "helloworld")
-    this.props.getLocalData();
-    console.log(this.props);
-   /*  if(!token) console.log("not logged in");//force to login
-    if(userData.error) userData.queryData */
+    this.props.getUserData(); //async check on second pass
   }
 
   componentWillUpdate()
   {
-    
   }
   render() 
   {
+    let token = this.props.token;
+    if(this.props.fetching) return  (<div className="App"> {"<LoadingScreen/>"} </div>)
+    console.log(token);
     return (
-    
+    <div className="App">
+     {
+       /*  <NavBar/>
+      <Route path="/landing" component={MarketingPage}/>
+      <PrivateRoute path="/" component={MainPage}/>
+      <Route path="/signup" component={SiginUpPage}/>
+      <Route path="/login" component={LogInPage}/> */}
+    </div>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    //actions
-    getLocalData, 
-    setLocalData, 
-    getUserData
+    //states
+    ...state.checkUserData
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getLocalData, setLocalData, getUserData }
+  { //actions
+    setLocalData, 
+    getUserData 
+  }
 )(App);
 
 const InPrivateRoute = ({ component: Component, ...rest }) => {
@@ -58,7 +65,7 @@ const InPrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={props => {
         if (localStorage.getItem("userToken")) {
-          return <Redirect to="/main" />;
+          return <Redirect to="/" />;
         } else {
           return <Component {...props} />;
         }
@@ -75,7 +82,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         if (localStorage.getItem("userToken")) {
           return <Component {...props} />;
         } else {
-          return <Redirect to="/login" />;
+          return <Redirect to="/landing" />;
         }
       }}
     />
