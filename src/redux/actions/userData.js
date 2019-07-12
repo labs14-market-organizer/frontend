@@ -1,7 +1,7 @@
 import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-
+const HOST_URL = ""
 
 
 var token, data; //set globally so we can use them later for debuging;
@@ -10,21 +10,20 @@ export const GET_LOCAL_DATA = "GET_LOCAL_DATA";
 export const SET_LOCAL_DATA = "SET_LOCAL_DATA";
 export const ERROR_LOCAL_DATA_BAD_TOKEN = "ERROR_LOCAL_DATA_BAD_TOKEN";
 export const ERROR_LOCAL_DATA_BAD_DATA = "ERROR_LOCAL_DATA_BAD_DATA";
+export const GET_USER_DATA_START = "GET_USER_DATA_START";
+export const GET_USER_DATA_END = "GET_USER_DATA_END";
+export const ERROR_GET_USER_DATA = "ERROR_GET_USER_DATA";
 
-export const register = (creds) => dispatch => {
+export const getUserData = (token) => dispatch => {
     dispatch({ type: GET_USER_START });
-    let cr = { username: creds.username, password: creds.password, user_type: creds.user_type };
-    let name = creds.user_type === 1 ? "seeker" : "employer";
-    return axios
-        .post(`${SERVER_BASE_URL}/auth/register`, cr)
+    return axiosWithAuth(token)
+        .get(`${HOST_URL}\profile`)
         .then(res => {
-            if(!res.data.token || res.user_type) throw "interal client error";
-            localStorage.setItem('userToken', res.data.token);
-            console.log(res.data);
-            localStorage.setItem('userType', res.user_type );
+            if(!res.data) throw "interal client error";
+            setLocalData(token,res.data);
         })
         .catch(err => {
-            dispatch({ type: LOGIN_FAILURE, payload: err });
+            dispatch({ type: ERROR_GET_USER_DATA, payload: {error: err} });
         })
 };
 
