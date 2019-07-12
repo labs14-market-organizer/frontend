@@ -1,7 +1,15 @@
 import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
+
+
+
 var token, data; //set globally so we can use them later for debuging;
+//local data
+export const GET_LOCAL_DATA = "GET_LOCAL_DATA";
+export const SET_LOCAL_DATA = "SET_LOCAL_DATA";
+export const ERROR_LOCAL_DATA_BAD_TOKEN = "ERROR_LOCAL_DATA_BAD_TOKEN";
+export const ERROR_LOCAL_DATA_BAD_DATA = "ERROR_LOCAL_DATA_BAD_DATA";
 
 export const register = (creds) => dispatch => {
     dispatch({ type: GET_USER_START });
@@ -23,10 +31,10 @@ export const register = (creds) => dispatch => {
 export const getLocalData = () =>
 {
     token = localStorage.getItem("token");
-    if(!token) return{ error: "could not find token"}
+    if(!token) return{type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: { error: "could not find token"}}
     data = localStorage.getItem("userdata");
 
-    return { data: JSON.parse(data), token: token }
+    return {type: GET_LOCAL_DATA, payload: { userData: JSON.parse(data), token: token }}
 }
 
 export const storeLocalData = (token, data) => //data should be an object of the user profile info
