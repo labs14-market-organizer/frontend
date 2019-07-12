@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+//import logger from 'redux-logger';
 
 import rootReducer from './redux/reducers';
 
@@ -18,7 +18,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //     applyMiddleware(thunk, logger));
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
-    applyMiddleware(thunk, logger)
+    applyMiddleware(thunk, /* logger */)
 ));
 
 ReactDOM.render(

@@ -19,9 +19,9 @@ var user_type = localStorage.getItem('userType');
 class App extends React.Component {
   componentWillMount() 
   {
-    this.setLocalData("token", "helloworld")
+    localStorage.setItem("token", "helloworld")
     this.props.getLocalData();
-    console.log(this.state.token);
+    console.log(this.props);
    /*  if(!token) console.log("not logged in");//force to login
     if(userData.error) userData.queryData */
   }
@@ -32,7 +32,9 @@ class App extends React.Component {
   }
   render() 
   {
-    return (<strong>helloworld</strong>);
+    return (
+    
+    );
   }
 }
 
@@ -56,7 +58,7 @@ const InPrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={props => {
         if (localStorage.getItem("userToken")) {
-          return <Redirect to="/match" />;
+          return <Redirect to="/main" />;
         } else {
           return <Component {...props} />;
         }
@@ -73,7 +75,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         if (localStorage.getItem("userToken")) {
           return <Component {...props} />;
         } else {
-          return <Redirect to="/" />;
+          return <Redirect to="/login" />;
         }
       }}
     />

@@ -31,10 +31,11 @@ export const getUserData = (token) => dispatch => {
 export const getLocalData = () =>
 {
     token = localStorage.getItem("token");
+    console.log(token);
     if(!token) return{type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: { error: "could not find token"}}
     data = localStorage.getItem("userdata");
 
-    return {type: GET_LOCAL_DATA, payload: { userData: JSON.parse(data), token: token }}
+    return {type: GET_LOCAL_DATA, payload: { userData: JSON.parse(data), token }}
 }
 
 export const setLocalData = (token, data) => //data should be an object of the user profile info
