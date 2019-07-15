@@ -15,7 +15,7 @@ class AuthenticatePage extends React.Component {
     render()
     {
 
- AuthenticationStyling
+ 
         return (
         <Grid container
         direction="column"
@@ -42,33 +42,10 @@ class AuthenticatePage extends React.Component {
 
         </Grid>)
 
-        return (<div>
-          {/* <button onClick={this.authenticate} name="google">Google</button>
-          <button onClick={this.authenticate} name="facebook">Facebook</button> */}
-          {/* <Link to="//cloudstands-staging.herokuapp.com/auth/google"> */}
-          <a href="https://cloudstands-staging.herokuapp.com/auth/google">
-          <button  name="facebook">Facebook</button>
-          </a>
-          {/* </Link> */}
-        </div>)
- AuthenticationPage
     }
 
     
 }
-/* const mapStateToProps = state => {
-    return {
-      //states
-      ...state.checkUserData
-    };
-  };
-  
-  export default connect(
-    mapStateToProps,
-    { //actions
-      setLocalData
-     // getUserData 
-    }
-  )(App); */
+
   
 export default AuthenticatePage
