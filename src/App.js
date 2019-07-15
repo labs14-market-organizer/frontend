@@ -1,3 +1,4 @@
+
 import React from "react";
 //import "./sass/global.scss";
 import { connect } from "react-redux";
@@ -9,6 +10,10 @@ import {
   withRouter
 } from "react-router-dom";
 import {setLocalData, getUserData} from "./redux/actions/userData";
+
+import React from 'react';
+import './App.scss';
+
 
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
@@ -45,6 +50,7 @@ class App extends React.Component {
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
       <Route path="/login" render={()=> <AuthenticatePage logIn {...this.props}/>}/>
     </div>
+
     );
   }
 }
@@ -91,6 +97,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         }
       }}
     />
+
+    // test
+
   );
 };
 
