@@ -19,14 +19,14 @@ class TokenCollect extends React.Component
   gettoken()
   {
     var token = this.props.location.search.split("?jtw=")[1].split("&")[0];
-    var expr = this.props.location.search.split("&expr=")[1];
+    var expr = this.props.location.search.split("&exp=")[1];
     console.log(token);
     if(token && token.split(" ").join("") !== "" && expr && expr.split(" ").join("") !== "")
       this.props.setLocalData(token);
       //console.log("hello");
     else 
-    //{this.props.history.push("/")}
-      console.log("error");
+    {this.props.history.push("/")}
+    console.log("error");
   }
   componentWillUpdate()
   {
