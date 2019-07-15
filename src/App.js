@@ -10,8 +10,6 @@ import {
   withRouter
 } from "react-router-dom";
 import {setLocalData, getUserData} from "./redux/actions/userData";
-
-import React from 'react';
 import './App.scss';
 
 
