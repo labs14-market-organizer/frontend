@@ -38,6 +38,7 @@ class TokenCollect extends React.Component
       console.log(this.props);
       if(this.props.fetching){return(<div>Loading</div>)}
       this.props.history.push("/");
+      {/*nver should fire below*/}
       return <div>DONE</div>;
     }
 
