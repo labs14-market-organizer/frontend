@@ -34,7 +34,6 @@ class App extends React.Component {
     console.log(this.props);
     let token = this.props.token;
     if(this.props.fetching) return  (<div className="App"> {"<LoadingScreen/>"} </div>)
-    console.log(token);
     return (
     <div className="App">
       <AuthenticatePage signUp {...this.props}/>
