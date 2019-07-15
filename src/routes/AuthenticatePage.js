@@ -10,21 +10,27 @@ import {
 
 class AuthenticatePage extends React.Component
 {
-   authenticate = (e) => {
-     console.log(e);
-    const authType = e.target.name;
-    this.props.getUserData()
-    axios.get("https://cloudstands-staging.herokuapp.com/auth/google").then(console.log("did it"))
+  //  authenticate = (e) => {
+  //    console.log(e);
+  //   const authType = e.target.name;
+  //   this.props.getUserData()
+    
+  //   axios.get("https://cloudstands-staging.herokuapp.com/auth/google").then(console.log("did it"))
 
-  }
+  // }
 
   // this.props.getUserData()
     render()
     {
 
         return (<div>
-          <button onClick={this.authenticate} name="google">Google</button>
-          <button onClick={this.authenticate} name="facebook">Facebook</button>
+          {/* <button onClick={this.authenticate} name="google">Google</button>
+          <button onClick={this.authenticate} name="facebook">Facebook</button> */}
+          {/* <Link to="//cloudstands-staging.herokuapp.com/auth/google"> */}
+          <a href="https://cloudstands-staging.herokuapp.com/auth/google">
+          <button  name="facebook">Facebook</button>
+          </a>
+          {/* </Link> */}
         </div>)
     }
 
