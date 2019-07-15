@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, withRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { applyMiddleware, createStore, compose } from 'redux';
@@ -20,11 +20,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
     applyMiddleware(thunk, /* logger */)
 ));
-
+//withRouter(props => <App {...props} />); {/*allows top level to read the url tag */}
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <App />
+            <App/>
         </Router>
     </Provider>,
     document.getElementById("root")

@@ -11,6 +11,8 @@ import {
 import {setLocalData, getUserData} from "./redux/actions/userData";
 
 import AuthenticatePage from "./routes/AuthenticatePage";
+import LandingPage from "./routes/Landing";
+import TokenCollect from "./routes/TokenCollect"
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -29,19 +31,19 @@ class App extends React.Component {
   }
   render() 
   {
+    console.log(this.props);
     let token = this.props.token;
     if(this.props.fetching) return  (<div className="App"> {"<LoadingScreen/>"} </div>)
     console.log(token);
     return (
     <div className="App">
       <AuthenticatePage signUp {...this.props}/>
-     {
-/*       <NavBar/>
-      <Route path="/landing" component={MarketingPage}/>
-      <PrivateRoute path="/" component={MainPage}/>
-      <Route path="/signup" render={()=> <AuthenticatePage signUp {...props}/>}/>
-      <Route path="/login" render={()=> <AuthenticatePage logIn {...props}/>}/> */
-      }
+      {/* <NavBar/> */}
+      <Route path="/landing" component={LandingPage}/>
+      <PrivateRoute exact path="/" component={LandingPage}/>
+      <Route path="/auth/token" render={()=><TokenCollect {...this.props} />}/>
+      <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
+      <Route path="/login" render={()=> <AuthenticatePage logIn {...this.props}/>}/>
     </div>
     );
   }
@@ -60,7 +62,7 @@ export default connect(
     setLocalData, 
     getUserData 
   }
-)(App);
+)(withRouter(App));
 
 const InPrivateRoute = ({ component: Component, ...rest }) => {
   return (
