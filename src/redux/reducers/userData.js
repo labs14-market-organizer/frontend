@@ -21,7 +21,6 @@ export const checkUserData = (state = initalState, action) =>
     switch(action.type)
     {
         case GET_USER_DATA_END:
-            console.log('hellodd');
         case GET_LOCAL_DATA:
             return {
                 ...action.payload,
@@ -33,6 +32,8 @@ export const checkUserData = (state = initalState, action) =>
         case ERROR_LOCAL_DATA_BAD_TOKEN:
         case ERROR_LOCAL_DATA_BAD_DATA: //re request the data
             return {...initalState, error: action.payload.error, fetching: false}
+        
+        case GET_USER_DATA_START:
         default:
             return state;
     }
