@@ -40,6 +40,7 @@ class AuthenticatePage extends React.Component
                 
           </Box>
           
+
           <Box boxShadow={10} className='buttons' display='flex' flexDirection='column'>
               <p className="create-account">Create Account</p>
               <Button variant="contained"  label="Square" onClick={this.authenticate} className='company-buttons' style={{backgroundColor: "white", border: "1px solid black"}}>Sign Up with Square</Button>
@@ -49,6 +50,7 @@ class AuthenticatePage extends React.Component
               
               <p className="terms-of-service">By continuing, you agree to Cloud Stands<span className="bold">Terms of Service</span> and<span className="bold">Privacy Policy</span> </p>
               <p className="have-account">Already have an account?<span style={{ color: "green" , fontWeight: "bold"}}>Sign in</span> </p>
+
            </Box>
 
         </Grid>)

@@ -46,9 +46,9 @@ const getLocalData = () =>
     return {type: GET_LOCAL_DATA, payload: { userData: JSON.parse(data), token }}
 }
 
-export const setLocalData = (token, data) => //data should be an object of the user profile info
-{
-    if(token) localStorage.setItem("token", token); else return console.error("token invalid");
-    if(data) localStorage.setItem("userdata", JSON.stringify(data)); else return console.error("data invalid");
-    return {type: SET_LOCAL_DATA, payload: {token, data}};
+export const setLocalData = (token, data) => dispatch => { //data should be an object of the user profile info
+    dispatch({ type: GET_USER_DATA_START });
+    if(token) localStorage.setItem("token", token); else dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "token invalid" }});
+    if(data) localStorage.setItem("userdata", JSON.stringify(data)); else dispatch({type: SET_LOCAL_DATA, payload: {error: "data invalid" }});
+    dispatch({type: SET_LOCAL_DATA, payload: {token, data}});
 }
