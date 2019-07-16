@@ -53,22 +53,18 @@ class AuthenticatePage extends React.Component
 
         </Grid>)
     }
-
-    
 }
 /* const mapStateToProps = state => {
-    return {
-      //states
-      ...state.checkUserData
-    };
-  };
-  
-  export default connect(
-    mapStateToProps,
-    { //actions
-      setLocalData
-     // getUserData 
-    }
-  )(App); */
-  
+   return {
+     //states
+     ...state.checkUserData
+   };
+ };
+ export default connect(
+   mapStateToProps,
+   { //actions
+     setLocalData
+    // getUserData
+   }
+ )(App); */
 export default AuthenticatePage
