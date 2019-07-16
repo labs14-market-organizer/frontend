@@ -1,3 +1,57 @@
 .meet-the-team {
     display: none
+
 }
+.cloud {
+    width: 107px;
+    height: 46px;
+    font-family: LuckiestGuy;
+    font-size: 38px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #7f817e;
+  
+}
+h1 {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+.buttons {
+    margin-top: 20px;
+    margin-left: 1%;
+    width: 90%;
+    border-radius: 15px;
+    height: 450px;
+    .create-account {
+        font-size: 44px;
+        margin-left: 5%;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    .company-buttons{
+    height: 50px;
+    width: 75%;
+    margin-left: 10%;
+    text-decoration: "none"; 
+    margin-top: "4px";
+    background-color: "white"; 
+    border-radius: 10px;
+    margin-bottom: 15px;
+    }
+    p .bold {
+        font-weight: bold;
+    }
+    .terms-of-service {
+        font-size: 14px;
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+    .have-account {
+        font-size: 20px;
+        margin-left: 4%;
+    }
+}
+
