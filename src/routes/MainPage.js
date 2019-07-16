@@ -13,16 +13,19 @@ class LandingPage extends React.Component
     {
         return(
         <div>
-          <div>LandingPage</div>
-          <Link to="/signup">signup</Link>
-          <br/>
-          <Link to="/login">login</Link>
+          <div>Welcome Market Owner</div>
+          <button onClick={()=> this.logout()}>Logout</button>
         </div>
         )
     }
-
+    logout()
+    {
+        localStorage.clear();
+        this.props.history.push("/");
+    }
     
 }
+
 /* const mapStateToProps = state => {
     return {
       //states

@@ -16,6 +16,7 @@ import './App.scss';
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
 import TokenCollect from "./routes/TokenCollect"
+import MainPage from "./routes/MainPage";
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -39,13 +40,13 @@ class App extends React.Component {
     if(this.props.fetching) return  (<div className="App"> {"<LoadingScreen/>"} </div>)
     return (
     <div className="App">
-      <AuthenticatePage signUp {...this.props}/>
+      
       {/* <NavBar/> */}
       <Route path="/landing" component={LandingPage}/>
-      <PrivateRoute exact path="/" component={LandingPage}/>
+      <PrivateRoute exact path="/" component={MainPage} props={this.props} />
       <Route path="/auth/token" render={()=><TokenCollect {...this.props} />}/>
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
-      <Route path="/login" render={()=> <AuthenticatePage logIn {...this.props}/>}/>
+      <Route path="/login" render={()=> <div><AuthenticatePage logIn {...this.props}/></div>}/>
     </div>
 
     );
@@ -67,28 +68,30 @@ export default connect(
   }
 )(withRouter(App));
 
-const InPrivateRoute = ({ component: Component, ...rest }) => {
+const InPrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
   return (
     <Route
       {...rest}
       render={props => {
-        if (localStorage.getItem("userToken")) {
+        if (localStorage.getItem("token")) {
           return <Redirect to="/" />;
         } else {
-          return <Component {...props} />;
+          return <Component {...props} {...userprops} />;
         }
       }}
     />
   );
 };
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component,  props: userprops, ...rest }) => {
+  console.log(userprops);
   return (
     <Route
       {...rest}
       render={props => {
-        if (localStorage.getItem("userToken")) {
-          return <Component {...props} />;
+        if (localStorage.getItem("token")) {
+          console.log(userprops);
+          return <Component {...props} {...userprops} />;
         } else {
           return <Redirect to="/landing" />;
         }
