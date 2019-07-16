@@ -12,13 +12,13 @@ class TokenCollect extends React.Component
   
   componentWillMount()
   {
-    if(this.props.fetching)
-      this.props.history.push("/")
+    if(this.props.fetching);
+      //this.props.history.push("/")
     this.gettoken();
   }
   gettoken()
   {
-    if(!this.props.location || !this.props.location.search) return this.props.history.push("/");
+    //if(!this.props.location || !this.props.location.search) return this.props.history.push("/");
     console.log(this.props.location.search.split("?jwt="));
     //try{ //add try so it fails gracefully
     var token = this.props.location.search.split("?jwt=")[1].split("&")[0];
