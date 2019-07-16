@@ -44,7 +44,7 @@ class App extends React.Component {
     <div className="App">
       
       {/* <NavBar/> */}
-      <Route path="/landing" component={LandingPage}/>
+      <Route path="/landing" component={MarketingPage}/>
       <PrivateRoute exact path="/" component={MainPage} props={this.props} />
       <Route path="/auth/token" render={()=><TokenCollect {...this.props} />}/>
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>

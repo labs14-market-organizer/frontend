@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Box,
@@ -81,9 +82,11 @@ const MarketingPage = () => {
                 Cloud Markets is a the best way to promote organization and
                 communication between vendors and small markets.
               </Typography>
-              <Button bg="primary" label="CTA">
-                JOIN CLOUD STANDS
-              </Button>
+              <Link to="/signup">
+                <Button bg="primary" label="CTA"> 
+                  JOIN CLOUD STANDS
+                </Button>
+              </Link> 
             </Grid>
           </ThemeProvider>
         </ThemeProvider>
