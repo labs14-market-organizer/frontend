@@ -18,18 +18,18 @@ class TokenCollect extends React.Component
   }
   gettoken()
   {
-    //if(!this.props.location || !this.props.location.search) return this.props.history.push("/");
+    if(!this.props.location || !this.props.location.search) return this.props.history.push("/");
     console.log(this.props.location.search.split("?jwt="));
-    //try{ //add try so it fails gracefully
+    try{ //add try so it fails gracefully
     var token = this.props.location.search.split("?jwt=")[1].split("&")[0];
     var expr = this.props.location.search.split("&exp=")[1];
     console.log(token);
-    //} catch { return this.props.history.push("/");}
+    } catch { return this.props.history.push("/");}
     if(token && token.split(" ").join("") !== "" && expr && expr.split(" ").join("") !== "")
       this.props.setLocalData(token);
       //console.log("hello");
     else 
-    //{this.props.history.push("/")}
+    {this.props.history.push("/")}
     console.log("error");
   }
   componentWillUpdate()
@@ -41,7 +41,7 @@ class TokenCollect extends React.Component
     {
       console.log(this.props);
       if(this.props.fetching){return(<div>Loading</div>)}
-      //this.props.history.push("/");
+      this.props.history.push("/");
       {/*nver should fire below*/}
       return <div>DONE</div>;
     }
