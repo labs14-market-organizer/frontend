@@ -12,8 +12,8 @@ class TokenCollect extends React.Component
   
   componentWillMount()
   {
-    if(this.props.fetching)
-      this.props.history.push("/")
+    if(this.props.fetching);
+      //this.props.history.push("/")
     this.gettoken();
   }
   gettoken()
