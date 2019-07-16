@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { BrowserRouter as Router, withRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -8,6 +9,8 @@ import thunk from 'redux-thunk';
 //import logger from 'redux-logger';
 
 import rootReducer from './redux/reducers';
+
+
 
 import './index.scss';
 import App from './App';
