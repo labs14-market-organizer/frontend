@@ -8,41 +8,38 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
-import {setLocalData, getUserData} from "./redux/actions/userData";
+import { setLocalData, getUserData } from "./redux/actions/userData";
 
 import AuthenticatePage from "./routes/AuthenticatePage";
+import MarketingPage from "./routes/MarketingPage";
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
 
-var user_type = localStorage.getItem('userType');
+var user_type = localStorage.getItem("userType");
 
 class App extends React.Component {
-  componentWillMount() 
-  {
+  componentWillMount() {
     this.props.getUserData(); //async check on second pass
   }
 
-  componentWillUpdate()
-  {
-  }
-  render() 
-  {
+  componentWillUpdate() {}
+  render() {
     let token = this.props.token;
-    if(this.props.fetching) return  (<div className="App"> {"<LoadingScreen/>"} </div>)
+    if (this.props.fetching)
+      return <div className="App"> {"<LoadingScreen/>"} </div>;
     console.log(token);
     return (
-    <div className="App">
-      <AuthenticatePage signUp {...this.props}/>
-     {
-/*       <NavBar/>
+      <div className="App">
+        {/* <AuthenticatePage signUp {...this.props} /> */}
+        <MarketingPage />
+        {/*       <NavBar/>
       <Route path="/landing" component={MarketingPage}/>
       <PrivateRoute path="/" component={MainPage}/>
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...props}/>}/>
-      <Route path="/login" render={()=> <AuthenticatePage logIn {...props}/>}/> */
-      }
-    </div>
+      <Route path="/login" render={()=> <AuthenticatePage logIn {...props}/>}/> */}
+      </div>
     );
   }
 }
@@ -56,9 +53,10 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { //actions
-    setLocalData, 
-    getUserData 
+  {
+    //actions
+    setLocalData,
+    getUserData
   }
 )(App);
 
@@ -93,14 +91,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 function Public() {
-    return <Redirect to="/match"/>;
+  return <Redirect to="/match" />;
 }
 
 function Protected() {
-    return <Redirect to="/match"/>;
+  return <Redirect to="/match" />;
 }
 
-function LogOut(props)
-{
-    return <button onClick={props.logout}>LOGOUT</button>;
+function LogOut(props) {
+  return <button onClick={props.logout}>LOGOUT</button>;
 }
