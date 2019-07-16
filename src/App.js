@@ -17,7 +17,7 @@ import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
 import TokenCollect from "./routes/TokenCollect"
 import MainPage from "./routes/MainPage";
-
+import UserList from "./routes/UserList";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -47,6 +47,7 @@ class App extends React.Component {
       <Route path="/auth/token" render={()=><TokenCollect {...this.props} />}/>
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
       <Route path="/login" render={()=> <div><AuthenticatePage logIn {...this.props}/></div>}/>
+      <Route path="/userslist" component={UserList} />
     </div>
 
     );
