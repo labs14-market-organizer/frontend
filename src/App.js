@@ -9,26 +9,28 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+
 import {setLocalData, getUserData} from "./redux/actions/userData";
 import './App.scss';
 
-
+import MarketingPage from "./routes/MarketingPage";
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
 import TokenCollect from "./routes/TokenCollect"
 import MainPage from "./routes/MainPage";
 
+
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
 
-var user_type = localStorage.getItem('userType');
+var user_type = localStorage.getItem("userType");
 
 class App extends React.Component {
-  componentWillMount() 
-  {
+  componentWillMount() {
     this.props.getUserData(); //async check on second pass
   }
+
 
   componentWillUpdate()
   {
@@ -42,7 +44,7 @@ class App extends React.Component {
     <div className="App">
       
       {/* <NavBar/> */}
-      <Route path="/landing" component={LandingPage}/>
+      <Route path="/landing" component={MarketingPage}/>
       <PrivateRoute exact path="/" component={MainPage} props={this.props} />
       <Route path="/auth/token" render={()=><TokenCollect {...this.props} />}/>
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
@@ -62,9 +64,10 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { //actions
-    setLocalData, 
-    getUserData 
+  {
+    //actions
+    setLocalData,
+    getUserData
   }
 )(withRouter(App));
 
@@ -104,14 +107,13 @@ const PrivateRoute = ({ component: Component,  props: userprops, ...rest }) => {
 };
 
 function Public() {
-    return <Redirect to="/match"/>;
+  return <Redirect to="/match" />;
 }
 
 function Protected() {
-    return <Redirect to="/match"/>;
+  return <Redirect to="/match" />;
 }
 
-function LogOut(props)
-{
-    return <button onClick={props.logout}>LOGOUT</button>;
+function LogOut(props) {
+  return <button onClick={props.logout}>LOGOUT</button>;
 }
