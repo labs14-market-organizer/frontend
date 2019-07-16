@@ -18,9 +18,13 @@ class TokenCollect extends React.Component
   }
   gettoken()
   {
-    var token = this.props.location.search.split("?jtw=")[1].split("&")[0];
+    if(!this.props.location || !this.props.location.search) return this.props.history.push("/");
+    console.log(this.props.location.search.split("?jwt="));
+    //try{ //add try so it fails gracefully
+    var token = this.props.location.search.split("?jwt=")[1].split("&")[0];
     var expr = this.props.location.search.split("&exp=")[1];
     console.log(token);
+    //} catch { return this.props.history.push("/");}
     if(token && token.split(" ").join("") !== "" && expr && expr.split(" ").join("") !== "")
       this.props.setLocalData(token);
       //console.log("hello");
