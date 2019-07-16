@@ -1,3 +1,4 @@
+
 import React from "react";
 //import "./sass/global.scss";
 import { connect } from "react-redux";
@@ -9,6 +10,8 @@ import {
   withRouter
 } from "react-router-dom";
 import {setLocalData, getUserData} from "./redux/actions/userData";
+import './App.scss';
+
 
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
@@ -34,7 +37,6 @@ class App extends React.Component {
     console.log(this.props);
     let token = this.props.token;
     if(this.props.fetching) return  (<div className="App"> {"<LoadingScreen/>"} </div>)
-    console.log(token);
     return (
     <div className="App">
       <AuthenticatePage signUp {...this.props}/>
@@ -45,6 +47,7 @@ class App extends React.Component {
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
       <Route path="/login" render={()=> <AuthenticatePage logIn {...this.props}/>}/>
     </div>
+
     );
   }
 }
@@ -91,6 +94,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         }
       }}
     />
+
+    // test
+
   );
 };
 
