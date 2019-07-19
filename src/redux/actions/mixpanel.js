@@ -1,5 +1,5 @@
 import mixpanel from 'mixpanel-browser';
-mixpanel.init(process.env.MIXPANEL);//mixpanel token.
+mixpanel.init(process.env.REACT_APP_MIXPANEL);//mixpanel token.
 
 
 let env_check = process.env.NODE_ENV === 'production';
