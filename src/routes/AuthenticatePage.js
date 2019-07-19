@@ -43,7 +43,7 @@ class AuthenticatePage extends React.Component
 
           <Box boxShadow={10} className='buttons' display='flex' flexDirection='column'>
               <p className="create-account">Create Account</p>
-              <Button variant="contained"  label="Square" onClick={this.authenticate} className='company-buttons' style={{backgroundColor: "white", border: "1px solid black"}}>Sign Up with Square</Button>
+              <Button variant="contained"  label="Square" href="https://localhost:5000/auth/square" className='company-buttons' style={{backgroundColor: "white", border: "1px solid black"}}>Sign Up with Square</Button>
               <Button variant="contained" label="Google" onClick={this.authenticate} className="company-buttons" style={{backgroundColor: '#3b5998'}}>Sign Up With Facebook</Button>
               <Button variant="contained" label="Google" href="https://cloudstands-deploy.herokuapp.com/auth/google"  className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button>
               

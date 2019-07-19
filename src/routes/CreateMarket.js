@@ -1,9 +1,10 @@
 import React from 'react';
 import Arrow from '../assets/ic-arrow-back.svg';
-import { TextField, MuiThemeProvider, createMuiTheme }  from '@material-ui/core';
+import { TextField, MuiThemeProvider, createMuiTheme, Grid }  from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
 import Radio from '@material-ui/core/Radio';
+
 
 
 const theme = createMuiTheme({
@@ -14,6 +15,15 @@ const theme = createMuiTheme({
         secondary: {
             main: green[500]
         },
+        root: {
+            flexGrow: 1,
+          },
+          paper: {
+            textAlign: 'center'
+          },
+          root: {
+              flexGrow: 1
+          }
     }
 })
 
@@ -41,8 +51,7 @@ class CreateMarket extends React.Component {
 
 
     render() {
-        console.log(this.state.name);
-        console.log(this.state.description);
+       
         return (
             <MuiThemeProvider theme={theme}>
                 <>
@@ -50,39 +59,43 @@ class CreateMarket extends React.Component {
                     <img src={Arrow}/>
                     <h1>Create Market</h1>
                 </div>
-                <TextField
-                    required
-                    id="name"
-                    label="Name"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br></br>
-                <TextField
-                    required
-                    id="description"
-                    label="Description"
-                    name="description"
-                    value={this.state.description}
-                    onChange={this.handleChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br></br>
-                <TextField
-                    required
-                    id="address"
-                    label="Address"
-                    name="address"
-                    value={this.state.address}
-                    onChange={this.handleChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <TextField 
+                        className={theme.paper}
+                        required
+                        id="name"
+                        label="Name"
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        variant="outlined"
+                
+                    /></Grid>
+                    <br></br>
+                    <TextField
+                        required
+                        id="description"
+                        label="Description"
+                        name="description"
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                    <br></br>
+                    <TextField
+                        required
+                        id="address"
+                        label="Address"
+                        name="address"
+                        value={this.state.address}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </Grid>
                 <h6>Select market hours of operation</h6>
                 <Button variant="outlined" color= 'primary'>Su</Button>
                 <Button variant="outlined" color= 'primary'>M</Button>
