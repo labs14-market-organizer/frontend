@@ -4,7 +4,8 @@ mixpanel.init(process.env.REACT_APP_MIXPANEL);//mixpanel token.
 
 let env_check = process.env.NODE_ENV === 'production';
 // let env_check = true;
-  console.log(process.env.NODE_ENV)
+  console.log(process.env.NODE_ENV);
+  console.log(process.env.REACT_APP_MIXPANEL);
 let actions = {
   
   identify: (id) => {
