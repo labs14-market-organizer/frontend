@@ -17,6 +17,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import logo from "../assets/standLogo.svg";
 import cloud from "../assets/topCloud.svg";
 
+import { Mixpanel } from '../redux/actions/mixpanel';
+
 const theme = {
   spacing: 8,
 }
@@ -83,10 +85,13 @@ const MarketingPage = () => {
                 communication between vendors and small markets.
               </Typography>
               <Link to="/signup">
-                <Button bg="primary" label="CTA"> 
+                <Button bg="primary" label="CTA" onClick={() => Mixpanel.track('joined button clicked')}> 
                   JOIN CLOUD STANDS
                 </Button>
               </Link> 
+              <Button variant="contained" onClick={() => Mixpanel.track('Test button for mixpanel')}>
+                Mixpanel Test
+              </Button>
             </Grid>
           </ThemeProvider>
         </ThemeProvider>
