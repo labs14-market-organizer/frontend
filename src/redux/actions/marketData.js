@@ -53,8 +53,11 @@ export const createNewMarket = (market) => dispatch =>
 
 export const getMarketById = (marketId) => dispatch => 
 {
+    dispatch({ type: GET_MARKET_DATA_START });
+    let token = localStorage.getItem("token");
+    if(!token || !market.id || market.id < 1 || isNaN(market.id)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
-    .get(`${HOST_URL}/${marketId}`)
+    .get(`${HOST_URL}/market/${marketId}`)
     .then(res => {
         dispatch({type: GET_MARKET_DATA_END, payload: {data: res.data}});
     })
@@ -63,3 +66,36 @@ export const getMarketById = (marketId) => dispatch =>
         dispatch({type: ERROR_GET_MARKET_DATA,  payload: {error: err}});
     })
 }
+
+export const updataMarket = (market) => dispatch => 
+{
+    dispatch({ type: GET_MARKET_DATA_START });
+    let token = localStorage.getItem("token");
+    if(!token || !market.id || market.id < 1 || isNaN(market.id)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    return axiosWithAuth(token)
+    .put(`${HOST_URL}/market/${market.id}`)
+    .then(res => {
+        dispatch({type: SET_MARKET_DATA_END, payload: {data: res.data}});
+    })
+    .catch(err => {
+        //check if bad token if so clear local data
+        dispatch({type: ERROR_GET_MARKET_DATA,  payload: {error: err}});
+    })
+}
+
+export const deleteMarket = (marketId) => dispatch => 
+{
+    dispatch({ type: SET_MARKET_DATA_START });
+    let token = localStorage.getItem("token");
+    if(!token || !market.id || market.id < 1 || isNaN(market.id)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    return axiosWithAuth(token)
+    .put(`${HOST_URL}/market/${market.id}`)
+    .then(res => {
+        dispatch({type: SET_MARKET_DATA_END, payload: {data: res.data}});
+    })
+    .catch(err => {
+        //check if bad token if so clear local data
+        dispatch({type: ERROR_GET_MARKET_DATA,  payload: {error: err}});
+    })
+}
+
