@@ -89,9 +89,6 @@ const MarketingPage = () => {
                   JOIN CLOUD STANDS
                 </Button>
               </Link> 
-              <Button variant="contained" onClick={() => Mixpanel.track('Test button for mixpanel')}>
-                Mixpanel Test
-              </Button>
             </Grid>
           </ThemeProvider>
         </ThemeProvider>
