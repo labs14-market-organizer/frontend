@@ -1,6 +1,7 @@
 import React from 'react';
 import Arrow from '../assets/ic-arrow-back.svg';
 import { TextField, MuiThemeProvider, createMuiTheme, Typography, Container }  from '@material-ui/core';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
 import Radio from '@material-ui/core/Radio';
@@ -18,28 +19,30 @@ const theme = createMuiTheme({
 })
 
 class CreateMarket extends React.Component {
-    state = {
-        name: '',
-        description: '',
-        address: '',
-        operation: {
+    constructor() {
+        super();
+        this.state = {
             name: '',
-            start: '',
-            end: ''
-        },
-        market_type: 1, //(1 = private, 2=public)
-        website: '',
-        facebook: '',
-        image: '', 
-        hoursOfOperation: 3,
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false,
-        saturday: false,
-        sunday: false
+            description: '',
+            address: '',
+            operation: [],
+            market_type: 1, //(1 = private, 2=public)
+            website: '',
+            facebook: '',
+            image: '', 
+            twitter: '',
+            daysHoursField: 1, //keeping total of how many days and times need to be displayed.
+            monday: false,
+            tuesday: false,
+            wednesday: false,
+            thursday: false,
+            friday: false,
+            saturday: false,
+            sunday: false
+        
+        }
     }
+   
     handleChange = e => {
         this.setState({
             ...this.state,
@@ -47,45 +50,78 @@ class CreateMarket extends React.Component {
         })
     }
 
-    dayChange = (day) => {
-        // console.log(day)
-        console.log(this.state.day);
-        
-        // let change;
-        // if (this.state.day === false){
-        //      change = true
-        // } else {
-        //      change = null
-        // }
+    changeDay = (e) => {
+        if (e.currentTarget.value === 'false'){
+            this.setState({
+                ...this.state,
+                [e.currentTarget.name]: true
+            })
+        } else {
+            this.setState({
+                ...this.state,
+                [e.currentTarget.name]: false
+            })
+      
+        }
+    }
+            
+
+    
+
+    setHours = (e) => {
+        e.preventDefault();
         this.setState({
             ...this.state,
-            day: !this.state.day
-        })
+            operation: [...this.state,{
 
+            }]
+        })
     }
 
 
     render() {
-        const daysOfOpertaion = null;
-        const displayedBlocks = () => {
-            for (let i = 0; i < this.state.hoursAdded; i++){
-                console.log(this.state.hoursAdded)
-            return daysOfOpertaion
-        }
+        const daysOfOperation =  <div><Button variant="outlined" color= 'primary' name="sunday" value={this.state.sunday} onClick={(e) => this.changeDay(e)}>Su</Button>
+
+        <Button variant="outlined" color= 'primary' name="monday" value={this.state.monday} onClick={(e) => this.changeDay(e)}>M</Button>
+
+        <ToggleButton variant="outlined" color= 'primary' name="tuesday" value={this.state.tuesday} onClick={(e) => this.changeDay(e)}>Tu</ToggleButton>
+        <Button variant="outlined" color= 'primary' name="wednesday" value={this.state.wednesday} onClick={(e) => this.changeDay(e)}>W</Button>
+        <Button variant="outlined" color= 'primary' name="thursday" value={this.state.thursday} onClick={(e) => this.changeDay(e)}>Th</Button>
+        <Button variant="outlined" color= 'primary' name="friday" value={this.state.friday} onClick={(e) => this.changeDay(e)}>F</Button>
+        <Button variant="outlined" color= 'primary' name="saturday" value={this.state.saturday} onClick={(e) => this.changeDay(e)}>Sa</Button>
+        <TextField
+            id="time"
+            type="time"
+            defaultValue="00:00"
+            InputLabelProps={{
+                shrink: true,
+            }}
+        />
         
+        <TextField
+            id="time"
+            type="time"
+            defaultValue="00:00"
+            InputLabelProps={{
+                shrink: true,
+            }} />
+        </div>;
+        const items = []
+        for (let i = 0; i < this.state.daysHoursField; i++){
+            items.push(<div key={i}>{daysOfOperation}</div>)
         }
 
         return (
             <MuiThemeProvider theme={theme}>
                 <>
-                <Typography className="header">
+                <div className="header">
                     <img src={Arrow}/>
                     <h4 className="createHeader">Create Market</h4>
-                </Typography>
-                <Typography className="addPhoto">
+                </div>
+                <div className="addPhoto">
                     <img />
                     <p className="add">ADD COVER PHOTO</p>
-                </Typography>
+                </div>
                 <Container maxWidth="sm">
                 <TextField
                     required
@@ -166,31 +202,9 @@ class CreateMarket extends React.Component {
                 </Container>
                 <h6>Select market hours of operation</h6>
               
-                {/* {daysOfOpertaion} */}
-                <div><Button variant="outlined" color= 'primary' onClick={(sunday) => this.dayChange(sunday)}>Su</Button>
-                <Button variant="outlined" color= 'primary' onClick={(monday) => this.dayChange(monday)}>M</Button>
-                <Button variant="outlined" color= 'primary' onClick={(tuesday) => this.dayChange(tuesday)}>Tu</Button>
-                <Button variant="outlined" color= 'primary' onClick={(wednesday) => this.dayChange(wednesday)}>W</Button>
-                <Button variant="outlined" color= 'primary' onClick={(thursday) => this.dayChange(thursday)}>Th</Button>
-                <Button variant="outlined" color= 'primary' onClick={(friday) => this.dayChange(friday)}>F</Button>
-                <Button variant="outlined" color= 'primary' onClick={(saturday) => this.dayChange(saturday)}>Sa</Button>
-                <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="00:00"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
+                {items}
+               
                 
-                <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="00:00"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                /> </div>
                 <br></br>
 
                 
@@ -210,7 +224,6 @@ class CreateMarket extends React.Component {
                 <br></br>
 
                 <TextField
-                    required
                     id="website"
                     label="Website"
                     name="website"
@@ -223,11 +236,28 @@ class CreateMarket extends React.Component {
                 <br></br>
 
                 <TextField
-                    required
                     id="facebook"
                     label="Facebook"
                     name="facebook"
                     value={this.state.facebook}
+                    onChange={this.handleChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                 <TextField
+                    id="twitter"
+                    label="Twitter"
+                    name="twitter"
+                    value={this.state.twitter}
+                    onChange={this.handleChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                 <TextField
+                    id="instagram"
+                    label="Instagram"
+                    name="instagram"
+                    value={this.state.instagram}
                     onChange={this.handleChange}
                     margin="normal"
                     variant="outlined"
@@ -242,6 +272,7 @@ class CreateMarket extends React.Component {
         )
     }
 }
+
 
 
 export default CreateMarket;
