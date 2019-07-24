@@ -1,10 +1,11 @@
 import React from 'react';
 import Arrow from '../assets/ic-arrow-back.svg';
 import { TextField, MuiThemeProvider, createMuiTheme, Typography, Container }  from '@material-ui/core';
-import ToggleButton from '@material-ui/lab/ToggleButton';
+//import ToggleButton from '@material-ui/lab/ToggleButton';
 import Button from '@material-ui/core/Button';
-import green from '@material-ui/core/colors/green';
+import { green } from '@material-ui/core/colors';
 import Radio from '@material-ui/core/Radio';
+import { withStyles } from '@material-ui/core/styles';
 import '../scss/CreateMarket.scss';
 
 const theme = createMuiTheme({
@@ -41,8 +42,8 @@ class CreateMarket extends React.Component {
             sunday: false,
             start: 1200,
             end: 1200,
-            daysList: []
-        
+            daysList: [],
+            radio: "Public Market",
         }
     }
    
@@ -50,6 +51,12 @@ class CreateMarket extends React.Component {
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
+        })
+    }
+
+    onRadioChange = e => {
+        this.setState({
+        [e.target.name]: e.target.value
         })
     }
 
@@ -96,7 +103,6 @@ class CreateMarket extends React.Component {
                         i--;
                     }
                 }
-              
             }
         }
 
@@ -139,8 +145,8 @@ class CreateMarket extends React.Component {
         <Button variant="outlined" color= 'primary' name="thursday" value={this.state.thursday} onClick={(e) => this.changeDay(e)}>Th</Button>
         <Button variant="outlined" color= 'primary' name="friday" value={this.state.friday} onClick={(e) => this.changeDay(e)}>F</Button>
         <Button variant="outlined" color= 'primary' name="saturday" value={this.state.saturday} onClick={(e) => this.changeDay(e)}>Sa</Button>
-        <br></br>
-        <br></br>
+        <br />
+        <br />
         <TextField
             id="time"
             type="time"
@@ -149,6 +155,9 @@ class CreateMarket extends React.Component {
                 shrink: true,
             }}
         />
+        
+        {/**This code just adds the hiphen between the time boxes */}
+        &nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;
         
         <TextField
             id="time"
@@ -257,23 +266,36 @@ class CreateMarket extends React.Component {
                 {items}
                
                 
-                <br></br>
+                <br />
 
                 
 
-                <br></br>
-                <br></br>
+                <br />
+                <br />
 
                 <Button variant="outlined" color= 'primary' onClick={(e) => this.setHours(e)}>+ADD HOURS</Button>
 
-                <br></br>
+                <br />
 
                 <h6>Market Status</h6>
 
-                <Radio/>Public Market
-                <br></br>
-                <Radio/>Private Market
-                <br></br>
+                {/*Radio buttons, default to public market*/}
+                <Radio
+                    name="radio"
+                    value="Public Market"
+                    checked={this.state.radio === 'Public Market'}
+                    onChange={(e) => this.onRadioChange(e)}
+                />Public Market<br />
+                <Radio
+                    name="radio"
+                    value="Private Market"
+                    checked={this.state.radio === 'Private Market'}
+                    onChange={(e) => this.onRadioChange(e)}
+                />Private Market<br />
+
+            {/*This can be removed before deployment, was used for testing */}
+                Radio: {this.state.radio} <br />
+
                 <Container maxWidth="sm">
                 <TextField
                     id="website"
@@ -285,7 +307,7 @@ class CreateMarket extends React.Component {
                     variant="outlined"
                 />
 
-                <br></br>
+                <br />
 
                 <TextField
                     id="facebook"
@@ -316,7 +338,7 @@ class CreateMarket extends React.Component {
                 />
                 </Container>
 
-                <br></br>
+                <br />
 
                 <Button variant="contained" color='secondary'>SAVE</Button>
             
