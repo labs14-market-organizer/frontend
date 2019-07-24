@@ -38,7 +38,10 @@ class CreateMarket extends React.Component {
             thursday: false,
             friday: false,
             saturday: false,
-            sunday: false
+            sunday: false,
+            start: 1200,
+            end: 1200,
+            daysList: []
         
         }
     }
@@ -51,17 +54,27 @@ class CreateMarket extends React.Component {
     }
 
     changeDay = (e) => {
+        console.log(this.state.daysList)
+        let number, newDaysList;
         if (e.currentTarget.value === 'false'){
             this.setState({
                 ...this.state,
-                [e.currentTarget.name]: true
+                [e.currentTarget.name]: true,
+                daysList: [...this.state.daysList, [e.currentTarget.name]]
             })
         } else {
+            newDaysList = [];
+            for (let i = 0; i < this.state.daysList.length; i++){
+                if (this.state.daysList[i][0] !== e.currentTarget.name) {
+                    newDaysList.push(this.state.daysList[i])
+                }
+            }
             this.setState({
                 ...this.state,
-                [e.currentTarget.name]: false
+                [e.currentTarget.name]: false,
+                daysList: newDaysList
             })
-      
+        
         }
     }
             
@@ -70,25 +83,44 @@ class CreateMarket extends React.Component {
 
     setHours = (e) => {
         e.preventDefault();
+        let startTime = this.state.start;
+        let endTime = this.state.end;
+        let newDaysList = this.state.daysList
+        let opList = [];
+        for (let i = 0; i < newDaysList.length; i++){
+            opList.push( { 
+                day: newDaysList[i][0],
+                start: startTime,
+                end: endTime
+            })
+            
+        
+        }
+        //need to put check in to make sure the day being added isn't already in the operation list and if it is take it out and replace with new one.
         this.setState({
             ...this.state,
-            operation: [...this.state,{
-
-            }]
+            operation: [...this.state.operation, ...opList],
+            daysHoursField: this.state.daysHoursField + 1,
+            daysList: []
         })
+
+           
     }
 
 
     render() {
+        console.log(this.state.operation)
         const daysOfOperation =  <div><Button variant="outlined" color= 'primary' name="sunday" value={this.state.sunday} onClick={(e) => this.changeDay(e)}>Su</Button>
 
         <Button variant="outlined" color= 'primary' name="monday" value={this.state.monday} onClick={(e) => this.changeDay(e)}>M</Button>
 
-        <ToggleButton variant="outlined" color= 'primary' name="tuesday" value={this.state.tuesday} onClick={(e) => this.changeDay(e)}>Tu</ToggleButton>
+        <Button variant="outlined" color= 'primary' name="tuesday" value={this.state.tuesday} onClick={(e) => this.changeDay(e)}>Tu</Button>
         <Button variant="outlined" color= 'primary' name="wednesday" value={this.state.wednesday} onClick={(e) => this.changeDay(e)}>W</Button>
         <Button variant="outlined" color= 'primary' name="thursday" value={this.state.thursday} onClick={(e) => this.changeDay(e)}>Th</Button>
         <Button variant="outlined" color= 'primary' name="friday" value={this.state.friday} onClick={(e) => this.changeDay(e)}>F</Button>
         <Button variant="outlined" color= 'primary' name="saturday" value={this.state.saturday} onClick={(e) => this.changeDay(e)}>Sa</Button>
+        <br></br>
+        <br></br>
         <TextField
             id="time"
             type="time"
@@ -212,7 +244,7 @@ class CreateMarket extends React.Component {
                 <br></br>
                 <br></br>
 
-                <Button variant="outlined" color= 'primary'>+ADD HOURS</Button>
+                <Button variant="outlined" color= 'primary' onClick={(e) => this.setHours(e)}>+ADD HOURS</Button>
 
                 <br></br>
 
@@ -222,7 +254,7 @@ class CreateMarket extends React.Component {
                 <br></br>
                 <Radio/>Private Market
                 <br></br>
-
+                <Container maxWidth="sm">
                 <TextField
                     id="website"
                     label="Website"
@@ -262,6 +294,7 @@ class CreateMarket extends React.Component {
                     margin="normal"
                     variant="outlined"
                 />
+                </Container>
 
                 <br></br>
 
