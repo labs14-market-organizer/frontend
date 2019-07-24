@@ -85,29 +85,49 @@ class CreateMarket extends React.Component {
         e.preventDefault();
         let startTime = this.state.start;
         let endTime = this.state.end;
-        let newDaysList = this.state.daysList
+        let newDaysList = this.state.daysList;
+        let currentOpList = this.state.operation;
         let opList = [];
-        for (let i = 0; i < newDaysList.length; i++){
-            opList.push( { 
+        for (let i = 0; i < currentOpList.length; i++) { //the purpose of these loops are to check to see if the old list has same days as the new list and if it does the old list day will be removed.
+            for (let x = 0; x < newDaysList.length; x++) {
+                if (currentOpList[i] !== undefined) {
+                    if (currentOpList[i].day === newDaysList[x][0]) {
+                        currentOpList.splice(i, 1)
+                        i--;
+                    }
+                }
+              
+            }
+        }
+
+
+        for (let i = 0; i < newDaysList.length; i++){ //new market hour days are added.
+            opList.push({ 
                 day: newDaysList[i][0],
                 start: startTime,
                 end: endTime
             })
-            
-        
         }
-        //need to put check in to make sure the day being added isn't already in the operation list and if it is take it out and replace with new one.
+
+        //currently its hard coded.
         this.setState({
             ...this.state,
-            operation: [...this.state.operation, ...opList],
+            operation: [...currentOpList, ...opList],
             daysHoursField: this.state.daysHoursField + 1,
-            daysList: []
+            daysList: [],
+            monday: false,
+            tuesday: false,
+            wednesday: false,
+            thursday: false,
+            friday: false,
+            saturday: false,
+            sunday: false
         })
 
-           
+    
     }
 
-
+// 
     render() {
         console.log(this.state.operation)
         const daysOfOperation =  <div><Button variant="outlined" color= 'primary' name="sunday" value={this.state.sunday} onClick={(e) => this.changeDay(e)}>Su</Button>
