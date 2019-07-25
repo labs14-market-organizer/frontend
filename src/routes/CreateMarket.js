@@ -54,6 +54,7 @@ class CreateMarket extends React.Component {
         })
     }
 
+
     onRadioChange = e => {
         this.setState({
         [e.target.name]: e.target.value
@@ -83,6 +84,16 @@ class CreateMarket extends React.Component {
             })
         
         }
+    }
+
+    deleteTime = (e, day) => {
+        e.preventDefault();
+        console.log(day)
+        let newDays = this.state.operation;
+        let days = newDays.filter(dayz => dayz.day !== day)
+        this.setState({
+            operation: [...days]
+        })
     }
             
 
@@ -136,42 +147,9 @@ class CreateMarket extends React.Component {
 // 
     render() {
         console.log(this.state.operation)
-        const daysOfOperation =  <div><Button variant="outlined" color= 'primary' name="sunday" value={this.state.sunday} onClick={(e) => this.changeDay(e)}>Su</Button>
-
-        <Button variant="outlined" color= 'primary' name="monday" value={this.state.monday} onClick={(e) => this.changeDay(e)}>M</Button>
-
-        <Button variant="outlined" color= 'primary' name="tuesday" value={this.state.tuesday} onClick={(e) => this.changeDay(e)}>Tu</Button>
-        <Button variant="outlined" color= 'primary' name="wednesday" value={this.state.wednesday} onClick={(e) => this.changeDay(e)}>W</Button>
-        <Button variant="outlined" color= 'primary' name="thursday" value={this.state.thursday} onClick={(e) => this.changeDay(e)}>Th</Button>
-        <Button variant="outlined" color= 'primary' name="friday" value={this.state.friday} onClick={(e) => this.changeDay(e)}>F</Button>
-        <Button variant="outlined" color= 'primary' name="saturday" value={this.state.saturday} onClick={(e) => this.changeDay(e)}>Sa</Button>
-        <br />
-        <br />
-        <TextField
-            id="time"
-            type="time"
-            defaultValue="00:00"
-            InputLabelProps={{
-                shrink: true,
-            }}
-        />
+        console.log(this.state.start)
+        console.log(this.state.end)
         
-        {/**This code just adds the hiphen between the time boxes */}
-        &nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;
-        
-        <TextField
-            id="time"
-            type="time"
-            defaultValue="00:00"
-            InputLabelProps={{
-                shrink: true,
-            }} />
-        </div>;
-        const items = []
-        for (let i = 0; i < this.state.daysHoursField; i++){
-            items.push(<div key={i}>{daysOfOperation}</div>)
-        }
-
         return (
             <MuiThemeProvider theme={theme}>
                 <>
@@ -263,7 +241,38 @@ class CreateMarket extends React.Component {
                 </Container>
                 <h6>Select market hours of operation</h6>
               
-                {items}
+                <div>
+                    <button className={this.state.sunday ? "colorButton" : 'regularButton' } name="sunday" value={this.state.sunday} onClick={(e) => this.changeDay(e)}>Su</button>
+                    <button  className={this.state.monday ? "colorButton" : 'regularButton' } name="monday" value={this.state.monday} onClick={(e) => this.changeDay(e)}>M</button>
+                    <button  className={this.state.tuesday ? "colorButton" : 'regularButton' } name="tuesday" value={this.state.tuesday} onClick={(e) => this.changeDay(e)}>Tu</button>
+                    <button  className={this.state.wednesday ? "colorButton" : 'regularButton' } name="wednesday" value={this.state.wednesday} onClick={(e) => this.changeDay(e)}>W</button>
+                    <button  className={this.state.thursday ? "colorButton" : 'regularButton' } name="thursday" value={this.state.thursday} onClick={(e) => this.changeDay(e)}>Th</button>
+                    <button  className={this.state.friday ? "colorButton" : 'regularButton' } name="friday" value={this.state.friday} onClick={(e) => this.changeDay(e)}>F</button>
+                    <button className={this.state.saturday ? "colorButton" : 'regularButton' } name="saturday" value={this.state.saturday} onClick={(e) => this.changeDay(e)}>Sa</button>
+                    <br />
+        <br />
+        <TextField
+            name="start"
+            type="time"
+            onChange={this.handleChange}
+            defaultValue="00:00"
+            InputLabelProps={{
+                shrink: true,
+            }}
+        />
+        
+        {/**This code just adds the hiphen between the time boxes */}
+        &nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;
+        
+        <TextField
+            name="end"
+            type="time"
+            onChange={this.handleChange}
+            defaultValue="00:00"
+            InputLabelProps={{
+                shrink: true,
+            }} />
+        </div>;
                
                 
                 <br />
@@ -276,6 +285,14 @@ class CreateMarket extends React.Component {
                 <Button variant="outlined" color= 'primary' onClick={(e) => this.setHours(e)}>+ADD HOURS</Button>
 
                 <br />
+                {(this.state.operation.length > 0) ? <h2>Market Hours</h2> : null
+                }
+                
+                {this.state.operation.map(item => {
+                    return <div>
+                        <h8>Day: {item.day}, Open: {item.start}, Close: {item.end}</h8><span><button onClick={(e) => this.deleteTime(e, item.day)}>Delete time</button></span>
+                    </div>
+                })}
 
                 <h6>Market Status</h6>
 
