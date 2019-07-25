@@ -55,7 +55,7 @@ export const getMarketById = (marketId) => dispatch =>
 {
     dispatch({ type: GET_MARKET_DATA_START });
     let token = localStorage.getItem("token");
-    if(!token || !market.id || market.id < 1 || isNaN(market.id)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    if(!token || !marketId || marketId < 1 || isNaN(marketId)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
     .get(`${HOST_URL}/market/${marketId}`)
     .then(res => {
@@ -87,7 +87,7 @@ export const deleteMarket = (marketId) => dispatch =>
 {
     dispatch({ type: SET_MARKET_DATA_START });
     let token = localStorage.getItem("token");
-    if(!token || !market.id || market.id < 1 || isNaN(market.id)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    if(!token || !marketId || marketId < 1 || isNaN(marketId)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
     .put(`${HOST_URL}/market/${market.id}`)
     .then(res => {
