@@ -20,8 +20,10 @@ const theme = createMuiTheme({
 })
 
 class CreateMarket extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.state = this.props.currentMarket;
+        if (!this.state)
         this.state = {
             name: '',
             description: '',
@@ -143,7 +145,7 @@ class CreateMarket extends React.Component {
 
     
     }
-
+    //createNewMarket action. update market.
 // 
     render() {
         console.log(this.state.operation)
@@ -273,7 +275,6 @@ class CreateMarket extends React.Component {
                 shrink: true,
             }} />
         </div>;
-               
                 
                 <br />
 

@@ -50,8 +50,8 @@ class App extends React.Component {
       <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
       <Route path="/login" render={()=> <div><AuthenticatePage logIn {...this.props}/></div>}/>
       <PrivateRoute path="/userslist" component={UserList} />
-      <Route path="/createmarket" component={CreateMarket} />
-    </div>
+      <Route path="/createmarket" render={(props) => <CreateMarket {...this.props} /> }/>
+    </div> 
 
     );
   }
