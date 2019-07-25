@@ -67,7 +67,7 @@ export const getMarketById = (marketId) => dispatch =>
     })
 }
 
-export const updataMarket = (market) => dispatch => 
+export const updateMarket = (market) => dispatch => 
 {
     dispatch({ type: GET_MARKET_DATA_START });
     let token = localStorage.getItem("token");

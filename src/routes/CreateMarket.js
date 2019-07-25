@@ -7,6 +7,8 @@ import { green } from '@material-ui/core/colors';
 import Radio from '@material-ui/core/Radio';
 import { withStyles } from '@material-ui/core/styles';
 import '../scss/CreateMarket.scss';
+import { createNewMarket, updateMarket } from '../redux/actions/marketData';
+import { connect } from "react-redux";
 
 const theme = createMuiTheme({
     palette: {
@@ -20,6 +22,7 @@ const theme = createMuiTheme({
 })
 
 class CreateMarket extends React.Component {
+    isUpdating = false;
     constructor(props) {
         super(props);
         this.state = this.props.currentMarket;
@@ -47,6 +50,9 @@ class CreateMarket extends React.Component {
             daysList: [],
             radio: "Public Market",
         }
+        else 
+        this.isUpdating = true;
+        
     }
    
     handleChange = e => {
@@ -274,7 +280,7 @@ class CreateMarket extends React.Component {
             InputLabelProps={{
                 shrink: true,
             }} />
-        </div>;
+        </div>
                 
                 <br />
 
@@ -366,6 +372,14 @@ class CreateMarket extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+      //states
+      ...state.checkUserData
+    };
+  };
 
+export default connect(mapStateToProps, { createNewMarket, updateMarket })(CreateMarket)
 
-export default CreateMarket;
+  
+ 

@@ -22,16 +22,18 @@
 }
 
 .regularButton {
-    height: 40px;
-    width: 40px;
-    margin-left: 2%;
+    font-size: 5vw;
+    height: 12.5vw;
+    width: 12.5vw;
+    margin-left: 1vw;
     border-radius: 10px;
 }
 
 .colorButton {
-    height: 40px;
-    width: 40px;
+    font-size: 5vw;
+    height: 12.5vw;
+    width: 12.5vw;
     background-color: green;
-    margin-left: 2%;
+    margin-left: 1vw;
     border-radius: 10px;
 }
