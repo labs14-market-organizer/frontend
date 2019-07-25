@@ -125,19 +125,6 @@ class CreateMarket extends React.Component {
                 }
             }
         }
-        // for (let x = 0; x < normalWeek.length; x++) {
-        //     for (let i = 0; i < newDaysList.length; i++){ //new market hour days are added.
-        //         if (normalWeek[x] === newDaysList[i][0]) {
-        //             opList.push({ 
-        //             day: newDaysList[i][0],
-        //             start: startTime,
-        //             end: endTime
-        //         })
-        //         }
-                
-        //     }
-        // }
-            
 
         for (let i = 0; i < newDaysList.length; i++){ //new market hour days are added.
             opList.push({ 
@@ -176,24 +163,6 @@ class CreateMarket extends React.Component {
        
     }
 
-    // sort = () => { //may need to change to add days that are closed.
-    //     console.log('here')
-    //     let operation = this.state.operation;
-    //     let sortedList = [];
-    //     const normalWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    //     for (let i = 0; i < normalWeek.length; i++){
-    //         for (let x = 0; x < operation.length; x++) {
-    //             if (normalWeek[i] === operation[x].day){
-    //                 sortedList.push(operation[i]);
-    //             }
-    //         }
-    //     }
-    //     this.setState({
-    //         ...this.state,
-    //         operation: [...sortedList]
-    //     })
-    // }
-
     save = (e) => {
         e.preventDefault()
         if (this.state.isUpdating) {
@@ -204,10 +173,6 @@ class CreateMarket extends React.Component {
     }
 
     render() {
-        console.log(this.state.operation)
-        console.log(this.state.start)
-        console.log(this.state.end)
-        
         return (
             <MuiThemeProvider theme={theme}>
                 <>
