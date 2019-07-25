@@ -34,8 +34,12 @@ market =
 export const createNewMarket = (market) => dispatch => 
 {
     dispatch({ type: SET_MARKET_DATA_START });
+    console.log(market);
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    
+    market = cleanData(market);
+    if(market.error) return dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: market.error} });
 
     return axiosWithAuth(token)
     .post(`${HOST_URL}`)
@@ -53,7 +57,7 @@ export const createNewMarket = (market) => dispatch =>
 
 export const getMarketById = (marketId) => dispatch => 
 {
-    dispatch({ type: GET_MARKET_DATA_START });
+    dispatch({ type: GET_MARKET_DATA_START });    
     let token = localStorage.getItem("token");
     if(!token || !marketId || marketId < 1 || isNaN(marketId)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
@@ -99,3 +103,29 @@ export const deleteMarket = (marketId) => dispatch =>
     })
 }
 
+function cleanData(market)
+{
+    let clean = 
+    {
+        address: market.address,
+        city: market.city,
+        description: market.description,
+        facebook: market.facebook,
+        image: market.image,
+        instagram: market.instagram,
+        market_type: market.market_type,
+        name: market.name,
+        operation: market.operation,
+        state: market.state,
+        twitter: market.twitter,
+        website: market.website,
+        zipcode: market.zipcode
+    }
+    let required = ["address", "city", "description","state","zipcode"]
+    let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
+    if(test.length > 0) return {error: `${test[0]} is a required field`};
+    if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
+    if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
+
+    return clean;
+}

@@ -13,7 +13,8 @@ const initalState =
     token: null,
     marketData: null,
     error: undefined,
-    fetching: true
+    fetching: true,
+    updated: false
 }
 
 export const checkUserData = (state = initalState, action) =>
@@ -24,18 +25,19 @@ export const checkUserData = (state = initalState, action) =>
         case GET_MARKET_DATA_END:
             return {
                 ...state,
-                ...action.payload,w
-                fetching: false
+                ...action.payload,
+                fetching: false,
+                updated: true
             }        
         case ERROR_GET_MARKET_DATA:
         case ERROR_SET_MARKET_DATA:
-            return {...initalState, token: state.token,  error: action.payload.error, fetching: false}
+            return {...initalState, token: state.token,  error: action.payload.error, fetching: false, updated: false }
         case ERROR_INVALID_TOKEN: //this should nv trigger, we auto check data and request if data doesnt exist
         return {...initalState,  error: action.payload.error, fetching: false}
     
         case SET_MARKET_DATA_START:
         case GET_MARKET_DATA_START:
-            fetching = true;
+            state.fetching = true;
         default:
             return state;
     }
