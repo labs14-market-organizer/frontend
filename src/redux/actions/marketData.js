@@ -89,7 +89,7 @@ export const deleteMarket = (marketId) => dispatch =>
     let token = localStorage.getItem("token");
     if(!token || !marketId || marketId < 1 || isNaN(marketId)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
-    .put(`${HOST_URL}/market/${market.id}`)
+    .put(`${HOST_URL}/market/${marketId}`)
     .then(res => {
         dispatch({type: SET_MARKET_DATA_END, payload: {data: res.data}});
     })

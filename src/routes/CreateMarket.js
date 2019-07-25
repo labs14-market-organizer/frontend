@@ -151,8 +151,15 @@ class CreateMarket extends React.Component {
 
     
     }
-    //createNewMarket action. update market.
-// 
+    save = (e) => {
+        e.preventDefault()
+        if (this.state.isUpdating) {
+            this.props.updateMarket(this.state)
+        } else {
+            this.props.createNewMarket(this.state)
+        }
+    }
+
     render() {
         console.log(this.state.operation)
         console.log(this.state.start)
@@ -364,7 +371,7 @@ class CreateMarket extends React.Component {
 
                 <br />
 
-                <Button variant="contained" color='secondary'>SAVE</Button>
+                <Button variant="contained" color='secondary' onClick={(e)  => this.save(e)}>SAVE</Button>
             
                 </>
             </MuiThemeProvider>
