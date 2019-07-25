@@ -113,6 +113,7 @@ class CreateMarket extends React.Component {
         let endTime = this.state.end;
         let newDaysList = this.state.daysList;
         let currentOpList = this.state.operation;
+        const normalWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         let opList = [];
         for (let i = 0; i < currentOpList.length; i++) { //the purpose of these loops are to check to see if the old list has same days as the new list and if it does the old list day will be removed.
             for (let x = 0; x < newDaysList.length; x++) {
@@ -124,7 +125,19 @@ class CreateMarket extends React.Component {
                 }
             }
         }
-
+        // for (let x = 0; x < normalWeek.length; x++) {
+        //     for (let i = 0; i < newDaysList.length; i++){ //new market hour days are added.
+        //         if (normalWeek[x] === newDaysList[i][0]) {
+        //             opList.push({ 
+        //             day: newDaysList[i][0],
+        //             start: startTime,
+        //             end: endTime
+        //         })
+        //         }
+                
+        //     }
+        // }
+            
 
         for (let i = 0; i < newDaysList.length; i++){ //new market hour days are added.
             opList.push({ 
@@ -134,10 +147,21 @@ class CreateMarket extends React.Component {
             })
         }
 
+        let sortOperation = []; //sorting the days.
+        let op = [...currentOpList, ...opList]
+        for (let i = 0; i < normalWeek.length; i++) {
+            for (let x = 0; x < op.length; x++){
+                if (normalWeek[i] === op[x].day) {
+                    sortOperation.push(op[x])
+                }
+            }
+        }
+
         //currently its hard coded.
         this.setState({
             ...this.state,
-            operation: [...currentOpList, ...opList],
+            // operation: [...currentOpList, ...opList],
+            operation: [...sortOperation],
             daysHoursField: this.state.daysHoursField + 1,
             daysList: [],
             monday: false,
@@ -149,10 +173,36 @@ class CreateMarket extends React.Component {
             sunday: false
         })
 
-    
+       
     }
-    //createNewMarket action. update market.
-// 
+
+    // sort = () => { //may need to change to add days that are closed.
+    //     console.log('here')
+    //     let operation = this.state.operation;
+    //     let sortedList = [];
+    //     const normalWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    //     for (let i = 0; i < normalWeek.length; i++){
+    //         for (let x = 0; x < operation.length; x++) {
+    //             if (normalWeek[i] === operation[x].day){
+    //                 sortedList.push(operation[i]);
+    //             }
+    //         }
+    //     }
+    //     this.setState({
+    //         ...this.state,
+    //         operation: [...sortedList]
+    //     })
+    // }
+
+    save = (e) => {
+        e.preventDefault()
+        if (this.state.isUpdating) {
+            this.props.updateMarket(this.state)
+        } else {
+            this.props.createNewMarket(this.state)
+        }
+    }
+
     render() {
         console.log(this.state.operation)
         console.log(this.state.start)
@@ -364,7 +414,7 @@ class CreateMarket extends React.Component {
 
                 <br />
 
-                <Button variant="contained" color='secondary'>SAVE</Button>
+                <Button variant="contained" color='secondary' onClick={(e)  => this.save(e)}>SAVE</Button>
             
                 </>
             </MuiThemeProvider>
