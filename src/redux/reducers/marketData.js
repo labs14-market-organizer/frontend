@@ -20,19 +20,22 @@ export const checkUserData = (state = initalState, action) =>
 {
     switch(action.type)
     {
+        case SET_MARKET_DATA_END:
         case GET_MARKET_DATA_END:
             return {
-                ...action.payload,
+                ...state,
+                ...action.payload,w
                 fetching: false
-            }
-        case SET_LOCAL_DATA:
-            return {fetching: false, ...state}; //dont do anything this just sets data
+            }        
         case ERROR_GET_MARKET_DATA:
-        case ERROR_LOCAL_DATA_BAD_TOKEN:
-        case ERROR_LOCAL_DATA_BAD_DATA: //this should nv trigger, we auto check data and request if data doesnt exist
-            return {...initalState, error: action.payload.error, fetching: false}
-        
+        case ERROR_SET_MARKET_DATA:
+            return {...initalState, token: state.token,  error: action.payload.error, fetching: false}
+        case ERROR_INVALID_TOKEN: //this should nv trigger, we auto check data and request if data doesnt exist
+        return {...initalState,  error: action.payload.error, fetching: false}
+    
+        case SET_MARKET_DATA_START:
         case GET_MARKET_DATA_START:
+            fetching = true;
         default:
             return state;
     }

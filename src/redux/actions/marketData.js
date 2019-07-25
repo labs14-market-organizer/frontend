@@ -41,7 +41,7 @@ export const createNewMarket = (market) => dispatch =>
     .post(`${HOST_URL}`)
     .then(res => {
         localStorage.removeItem("userData");//remove out of date data
-        dispatch({type: SET_MARKET_DATA_END, payload: {data: res.data}}); //fire this first so we dont get GET_START fire before GET_END
+        dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: res.data}}); //fire this first so we dont get GET_START fire before GET_END
         getUserData(token); //fire another endpoint here so we can be quicker about gathering data
         return
     })
@@ -59,7 +59,7 @@ export const getMarketById = (marketId) => dispatch =>
     return axiosWithAuth(token)
     .get(`${HOST_URL}/market/${marketId}`)
     .then(res => {
-        dispatch({type: GET_MARKET_DATA_END, payload: {data: res.data}});
+        dispatch({type: GET_MARKET_DATA_END, payload: {curentMarket: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data
@@ -75,7 +75,7 @@ export const updateMarket = (market) => dispatch =>
     return axiosWithAuth(token)
     .put(`${HOST_URL}/market/${market.id}`)
     .then(res => {
-        dispatch({type: SET_MARKET_DATA_END, payload: {data: res.data}});
+        dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data
@@ -91,7 +91,7 @@ export const deleteMarket = (marketId) => dispatch =>
     return axiosWithAuth(token)
     .put(`${HOST_URL}/market/${market.id}`)
     .then(res => {
-        dispatch({type: SET_MARKET_DATA_END, payload: {data: res.data}});
+        dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: undefined}});
     })
     .catch(err => {
         //check if bad token if so clear local data
