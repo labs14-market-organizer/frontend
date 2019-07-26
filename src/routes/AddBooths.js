@@ -1,14 +1,18 @@
 import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
-import { TextField, Input, InputAdornment, FormControl, InputLabel } from '@material-ui/core';
+import { TextField, InputAdornment } from '@material-ui/core';
+
+
 
 class AddBooths extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             boothtype: '',
-            numberofbooths: null,
-            boothprice: null,
+            numberofbooths: '',
+            boothprice: '',
+            length: '',
+            width: '',
         }
     }
 
@@ -35,11 +39,14 @@ class AddBooths extends React.Component {
                         name="boothtype"
                         value={this.state.boothtype}
                         onChange={this.handleChange}
+                        InputProps={{
+                        startAdornment: <InputAdornment position="start"></InputAdornment>}}
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
                         autoComplete={true}
                     />
+                    <h5>Ex. Standard Booths. Larger Booths. Corner Booths. etc.</h5>
                     <TextField
                         type="number"
                         required
@@ -48,12 +55,15 @@ class AddBooths extends React.Component {
                         name="numberofbooths"
                         value={this.state.numberofbooths}
                         onChange={this.handleChange}
+                        InputProps={{
+                        startAdornment: <InputAdornment position="start"></InputAdornment>}}
                         margin="normal"
                         variant="outlined"
                         autoComplete={true}
                     />
                     <TextField
                         id="boothprice"
+                        name="boothprice"
                         type="number"
                         variant="outlined"
                         label="Price per Booth"
@@ -63,7 +73,29 @@ class AddBooths extends React.Component {
                         startAdornment: <InputAdornment position="start">$</InputAdornment>,
                         }}
                     />
-                    
+
+                        <h5>Size of Booths</h5>
+                    <TextField
+                        id="length"
+                        name="length"
+                        type="number"
+                        value={this.state.length}
+                        onChange={this.handleChange}
+                        InputProps={{
+                        endAdornment: <InputAdornment position="end">ft</InputAdornment>
+                        }}
+                    />
+                    &nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;
+                    <TextField
+                        id="width"
+                        name="width"
+                        type="number"
+                        value={this.state.width}
+                        onChange={this.handleChange}
+                        InputProps={{
+                        endAdornment: <InputAdornment position="end">ft</InputAdornment>
+                        }}
+                    />
 
                 </div>
             </form>

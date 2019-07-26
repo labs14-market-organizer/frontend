@@ -409,9 +409,6 @@ class CreateMarket extends React.Component {
             type="time"
             onChange={this.handleChange}
             defaultValue="00:00"
-            InputLabelProps={{
-              shrink: true
-            }}
           />
           {/**This code just adds the hiphen between the time boxes */}
           &nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;
@@ -420,9 +417,6 @@ class CreateMarket extends React.Component {
             type="time"
             onChange={this.handleChange}
             defaultValue="00:00"
-            InputLabelProps={{
-              shrink: true
-            }}
           />
         </div>
         <StyledDiv>
