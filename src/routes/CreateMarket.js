@@ -44,7 +44,8 @@ class CreateMarket extends React.Component {
       start: 1200,
       end: 1200,
       daysList: [],
-      radio: "Public Market"
+      radio: "Public Market",
+
   };
     else this.isUpdating = true;
   }
@@ -106,6 +107,8 @@ class CreateMarket extends React.Component {
           operation: [...newList]
       })
   }
+
+   touched = false
   
 
   setHours = e => {
@@ -191,12 +194,13 @@ class CreateMarket extends React.Component {
           <img src={Arrow} />
           <h4 className="createHeader">Create Market</h4>
         </div>
-        <div className="addPhoto">
+        {/* <div className="addPhoto">
           <img />
           <p className="add">ADD COVER PHOTO</p>
-        </div>
+        </div> */}
         <Container maxWidth="sm">
           <TextField
+            error={this.touched && this.state.name == "" ? true : false}
             required
             id="name"
             label="Market Name"
@@ -210,6 +214,7 @@ class CreateMarket extends React.Component {
           />
           <br />
           <TextField
+            error={this.touched && this.state.description == "" ? true : false}
             required
             id="description"
             label="Market Description"
@@ -224,6 +229,7 @@ class CreateMarket extends React.Component {
           />
           <br />
           <TextField
+            error={this.touched && this.state.address == "" ? true : false}
             required
             id="address"
             label="Address"
@@ -235,6 +241,7 @@ class CreateMarket extends React.Component {
             fullWidth={true}
           />
           <TextField
+            error={this.touched && this.state.city == "" ? true : false}
             required
             id="city"
             label="City"
@@ -246,8 +253,9 @@ class CreateMarket extends React.Component {
             fullWidth={true}
           />
           </Container>
-          <div className="flexes">
+          <StyledContainer>
             <TextField
+              error={this.touched && this.state.state == "" ? true : false}            
               required
               id="state"
               label="State"
@@ -258,8 +266,8 @@ class CreateMarket extends React.Component {
               variant="outlined"
               style={{ width: "44%" }}
             />
-            </div>
             <TextField
+              error={this.touched && this.state.zipcode == "" ? true : false}
               required
               id="zipcode"
               label="Zip Code"
@@ -271,6 +279,7 @@ class CreateMarket extends React.Component {
               style={{ width: "44%", marginLeft: "8%" }}
               fullWidth={true}
             />
+            </StyledContainer>
             <Container maxWidth="sm">
             <TextField
             id="website"
@@ -439,19 +448,15 @@ class CreateMarket extends React.Component {
        
         
         {this.state.operation.map(item => {
-                        return (item.start !== null) ? <p>{item.day}: {item.start} - {item.end} 
-                        <button value={this.state[item.day]} onClick={(e) => this.deleteTime(e, item.day)}>X</button></p> 
-                        : <p>{item.day} : Closed </p>
+                        return (item.start !== null) ? <Typography variant="body1">{item.day}: {item.start} - {item.end} 
+                        <button value={this.state[item.day]} onClick={(e) => this.deleteTime(e, item.day)}>X</button></Typography> 
+                        : <StyledTypography variant="body1">{item.day} : Closed </StyledTypography>
                     })}
         <br />
-        <SaveFix>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={e => this.save(e)}
-          >
-            SAVE
-          </Button>
+        <SaveFix 
+            onClick={(e) => {this.save(e); this.touched = true }}>
+
+            <Typography variant="button"> Next</Typography>
         </SaveFix>
       </form>
     );
@@ -461,10 +466,12 @@ class CreateMarket extends React.Component {
 const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 50px;
+  margin: 50px auto;
+  max-width: 520px;
   .MuiButton-root {
     height: 50px;
-    width: 50px;
+    width: 3%;
+    margin: 0 auto;
     cursor: pointer;
   }
 
@@ -475,12 +482,32 @@ const StyledDiv = styled.div`
   .MuiButton-outlined {
     border: 1.5px solid;
   }
+
+
 `;
 const SaveFix = styled.button`
-  margin: 50px;
+  margin: 50px auto;
   height: 50px;
-  width: 100px;
+  cursor: pointer;
+  width: 420px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #478529;
+  border: none;
 `;
+
+const StyledContainer = styled(Container)`
+max-width: 623px;
+.MuiInputBase-input ,.MuiOutlinedInput-input {
+  width: 100%;
+}
+
+
+`
+const StyledTypography = styled(Typography)`
+text-transform: capitalize;
+
+`
 
 const mapStateToProps = state => {
   return {
