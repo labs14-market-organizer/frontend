@@ -24,7 +24,6 @@ const UserOnboarding = () => {
     )
 }
 
-
 const StyleBox = styled(Box)`
         height: 40vw;
         width: 90vw; 
