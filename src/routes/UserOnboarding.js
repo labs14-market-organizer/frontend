@@ -24,13 +24,14 @@ const UserOnboarding = () => {
     )
 }
 
+
 const StyleBox = styled(Box)`
-        height: '40vw';
-        width: '90vw'; 
-        marginLeft: '5%'; 
-        marginBottom: "20px"; 
-        textAlign: "center"; 
-        borderRadius: "10px";
+        height: 40vw;
+        width: 90vw; 
+        margin-left: 5%; 
+        margin-bottom: 20px; 
+        text-align: center; 
+        border-radius: 10px;
 `;
 
 export default UserOnboarding;
