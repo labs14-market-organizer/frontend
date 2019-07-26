@@ -22,6 +22,7 @@ import TokenCollect from "./routes/TokenCollect";
 import MainPage from "./routes/MainPage";
 import UserList from "./routes/UserList";
 import CreateMarket from "./routes/CreateMarket";
+import UserOnboarding from "./routes/UserOnboarding";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -73,6 +74,10 @@ class App extends React.Component {
               path="/createmarket"
               render={props => <CreateMarket {...this.props} />}
             />
+              <Route
+              path="/useronboarding"
+              render={props => <UserOnboarding {...this.props} />}
+              />
           </div>
         </MuiThemeProvider>
       </StylesProvider>
