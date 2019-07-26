@@ -1,6 +1,10 @@
 import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
-import { TextField, InputAdornment } from '@material-ui/core';
+import { TextField, InputAdornment, Button } from '@material-ui/core';
+import { height } from "@material-ui/system";
+import { Radio } from '@material-ui/core/Radio';
+import { breakStatement } from "@babel/types";
+
 
 
 
@@ -13,15 +17,28 @@ class AddBooths extends React.Component {
             boothprice: '',
             length: '',
             width: '',
+            boothdescription: '',
         }
     }
 
     handleChange = e => {
+        console.log(this.state.boothdescription)
+
         this.setState({
           ...this.state,
           [e.target.name]: e.target.value
         });
-      };
+    };
+
+    handleSave = e => {
+        e.preventDefault();
+        
+    };
+
+    handleAdd = e => {
+        e.preventDefault();
+
+    };
 
 
     render() {
@@ -29,9 +46,19 @@ class AddBooths extends React.Component {
             <form>
                 <div className="header">
                     <img src={Arrow} />
-                    <h4 className="addbooths">Add Booths</h4>
+                    <h4 
+                    className="addbooths"
+                    style={{
+                        marginLeft: '20px',
+                        }}>Add Booths</h4>
                 </div><br />
-                <div>
+
+            {/* Styled this div for the time being...will change later */}
+                <div 
+                    style={{
+                        width:'90vw',
+                    }}
+                >
                     <TextField 
                         required
                         id="boothtype"
@@ -41,12 +68,17 @@ class AddBooths extends React.Component {
                         onChange={this.handleChange}
                         InputProps={{
                         startAdornment: <InputAdornment position="start"></InputAdornment>}}
-                        margin="normal"
+                        style={{
+                            margin: "20px",
+                            marginBottom: "0px"
+                        }}
                         variant="outlined"
                         fullWidth={true}
                         autoComplete={true}
                     />
-                    <h5>Ex. Standard Booths. Larger Booths. Corner Booths. etc.</h5>
+                    <h5 style={{
+                            margin: '10px 0px'
+                        }}>Ex. Standard Booths. Larger Booths. Corner Booths. etc.</h5>
                     <TextField
                         type="number"
                         required
@@ -57,7 +89,11 @@ class AddBooths extends React.Component {
                         onChange={this.handleChange}
                         InputProps={{
                         startAdornment: <InputAdornment position="start"></InputAdornment>}}
-                        margin="normal"
+                        style={{
+                            margin: '10px',
+                            width: '45%',
+                            height: '80px'
+                        }}
                         variant="outlined"
                         autoComplete={true}
                     />
@@ -72,6 +108,11 @@ class AddBooths extends React.Component {
                         onChange={this.handleChange}
                         InputProps={{
                         startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                        }}
+                        style={{
+                            margin: '10px',
+                            width: '45%',
+                            height: '80px'
                         }}
                     />
 
@@ -106,9 +147,44 @@ class AddBooths extends React.Component {
                         fullWidth={true}
                         margin="normal"
                         variant="outlined"
+                        value={this.state.boothdescription}
+                        onChange={this.handleChange}
                         InputProps={{
                         startAdornment: <InputAdornment position="start"></InputAdornment>}}
+                        style={{
+                            margin: "20px",
+                            marginBottom: "0px"
+                        }}
                     />
+
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        style={{
+                            margin: '30px 30px',
+                            height: '80px'
+                        }}
+                        /*onClick={this.handleSave} */
+                    >Save</Button>
+                    
+                    <hr
+                        style={{
+                            margin:'5%',
+                            justifyContent: 'center',
+                        }} 
+                    />
+
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        fullWidth
+                        style={{
+                            margin: '30px 30px',
+                            height: '80px',
+                        }}
+                        /*onClick={this.handleAdd}*/
+                    >Add new booth type</Button>
 
                 </div>
             </form>
