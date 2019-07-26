@@ -23,29 +23,29 @@ class CreateMarket extends React.Component {
     super(props);
     this.state = this.props.currentMarket;
     if (!this.state)
-      this.state = {
-        name: "",
-        description: "",
-        address: "",
-        operation: [],
-        market_type: 1, //(1 = private, 2=public)
-        website: "",
-        facebook: "",
-        image: "",
-        twitter: "",
-        daysHoursField: 1, //keeping total of how many days and times need to be displayed.
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false,
-        saturday: false,
-        sunday: false,
-        start: 1200,
-        end: 1200,
-        daysList: [],
-        radio: "Public Market"
-      };
+    this.state = {
+      name: '',
+      description: '',
+      address: '',
+      operation: [{ day: 'sunday', start: null, end: null }, { day: 'monday', start: null, end: null },{ day: 'tuesday', start: null, end: null }, { day: 'wednesday', start: null, end: null },{ day: 'thursday', start: null, end: null }, { day: 'friday', start: null, end: null }, { day: 'saturday', start: null, end: null }],
+      market_type: 1, //(1 = private, 2=public)
+      website: '',
+      facebook: '',
+      image: '', 
+      twitter: '',
+      daysHoursField: 1, //keeping total of how many days and times need to be displayed.
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+      saturday: false,
+      sunday: false,
+      start: 1200,
+      end: 1200,
+      daysList: [],
+      radio: "Public Market"
+  };
     else this.isUpdating = true;
   }
 
@@ -85,16 +85,28 @@ class CreateMarket extends React.Component {
       });
     }
   };
-
-  deleteTime = (e, day) => {
-    e.preventDefault();
-    console.log(day);
-    let newDays = this.state.operation;
-    let days = newDays.filter(dayz => dayz.day !== day);
-    this.setState({
-      operation: [...days]
-    });
-  };
+    deleteTime = (e, day) => {
+      e.preventDefault();
+      console.log(day)
+      let newDays = this.state.operation;
+      const newList = []
+      for (let i = 0; i < newDays.length; i++){
+          if (newDays[i].day === day) {
+              newList.push({
+                  day: day,
+                  start: null,
+                  end: null
+              })
+          } else {
+              newList.push(newDays[i])
+          }
+      }
+      this.setState({
+          ...this.state,
+          operation: [...newList]
+      })
+  }
+  
 
   setHours = e => {
     e.preventDefault();
@@ -170,6 +182,9 @@ class CreateMarket extends React.Component {
   };
 
   render() {
+    if (this.props.updated) {
+      this.props.history.push('/')
+  }
     return (
       <form>
         <div className="header">
@@ -230,6 +245,7 @@ class CreateMarket extends React.Component {
             variant="outlined"
             fullWidth={true}
           />
+          </Container>
           <div className="flexes">
             <TextField
               required
@@ -240,8 +256,9 @@ class CreateMarket extends React.Component {
               onChange={this.handleChange}
               margin="normal"
               variant="outlined"
-              style={{ width: "45%" }}
+              style={{ width: "44%" }}
             />
+            </div>
             <TextField
               required
               id="zipcode"
@@ -251,10 +268,72 @@ class CreateMarket extends React.Component {
               onChange={this.handleChange}
               margin="normal"
               variant="outlined"
-              style={{ width: "45%", marginLeft: "9%" }}
+              style={{ width: "44%", marginLeft: "8%" }}
+              fullWidth={true}
             />
-          </div>
-        </Container>
+            <Container maxWidth="sm">
+            <TextField
+            id="website"
+            label="Website"
+            name="website"
+            value={this.state.website}
+            onChange={this.handleChange}
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
+          />
+
+          <br />
+
+          <TextField
+            id="facebook"
+            label="Facebook"
+            name="facebook"
+            value={this.state.facebook}
+            onChange={this.handleChange}
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
+          />
+          <TextField
+            id="twitter"
+            label="Twitter"
+            name="twitter"
+            value={this.state.twitter}
+            onChange={this.handleChange}
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
+          />
+          <TextField
+            id="instagram"
+            label="Instagram"
+            name="instagram"
+            value={this.state.instagram}
+            onChange={this.handleChange}
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
+          />
+          
+        </Container>  
+        <h6>Market Status</h6>
+        {/*Radio buttons, default to public market*/}
+        <Radio
+          name="radio"
+          value="Public Market"
+          checked={this.state.radio === "Public Market"}
+          onChange={e => this.onRadioChange(e)}
+        />
+        Public Market
+        <br />
+        <Radio
+          name="radio"
+          value="Private Market"
+          checked={this.state.radio === "Private Market"}
+          onChange={e => this.onRadioChange(e)}
+        />
+        Private Market
         <h6>Select market hours of operation</h6>
         <div>
           <StyledDiv>
@@ -355,82 +434,15 @@ class CreateMarket extends React.Component {
           </Button>
         </StyledDiv>
         <br />
-        {this.state.operation.length > 0 ? <h2>Market Hours</h2> : null}
+        
+      
+       
+        
         {this.state.operation.map(item => {
-          return (
-            <div>
-              <h8>
-                Day: {item.day}, Open: {item.start}, Close: {item.end}
-              </h8>
-              <span>
-                <button onClick={e => this.deleteTime(e, item.day)}>
-                  Delete time
-                </button>
-              </span>
-            </div>
-          );
-        })}
-        <h6>Market Status</h6>
-        {/*Radio buttons, default to public market*/}
-        <Radio
-          name="radio"
-          value="Public Market"
-          checked={this.state.radio === "Public Market"}
-          onChange={e => this.onRadioChange(e)}
-        />
-        Public Market
-        <br />
-        <Radio
-          name="radio"
-          value="Private Market"
-          checked={this.state.radio === "Private Market"}
-          onChange={e => this.onRadioChange(e)}
-        />
-        Private Market
-        <br />
-        {/*This can be removed before deployment, was used for testing */}
-        Radio: {this.state.radio} <br />
-        <Container maxWidth="sm">
-          <TextField
-            id="website"
-            label="Website"
-            name="website"
-            value={this.state.website}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-          />
-
-          <br />
-
-          <TextField
-            id="facebook"
-            label="Facebook"
-            name="facebook"
-            value={this.state.facebook}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            id="twitter"
-            label="Twitter"
-            name="twitter"
-            value={this.state.twitter}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            id="instagram"
-            label="Instagram"
-            name="instagram"
-            value={this.state.instagram}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-          />
-        </Container>
+                        return (item.start !== null) ? <p>{item.day}: {item.start} - {item.end} 
+                        <button value={this.state[item.day]} onClick={(e) => this.deleteTime(e, item.day)}>X</button></p> 
+                        : <p>{item.day} : Closed </p>
+                    })}
         <br />
         <SaveFix>
           <Button
