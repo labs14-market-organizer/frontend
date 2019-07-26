@@ -7,30 +7,44 @@ import styled from "styled-components";
 const UserOnboarding = () => {
     return (
         <div>
-        <Typography>
-            Cloud stands wants to provide you with the best possible experience.  Which best describes you roles?
-        </Typography>
+        <Explain>
+            Cloud stands wants to provide you with the best possible experience. <br></br> Which best describes you roles?
+        </Explain>
         <Link to="/createmarket" style={{textDecoration: "none"}} >
                 <StyleBox boxShadow={10} >
-                    <Typography > Market Owner </Typography>
+                    <Selected > Market Owner </Selected>
                 </StyleBox>
         </Link>
         <Link to="" style={{textDecoration: "none"}}>
-            <Box boxShadow={10} style={{ height: '250px'}}>
-                Vendor
-           </Box>
+            <StyleBox boxShadow={10}>
+            <Selected >Vendor</Selected>
+           </StyleBox>
         </Link>
         </div>
     )
 }
 
 const StyleBox = styled(Box)`
-        height: 40vw;
-        width: 90vw; 
+        height: 25vh;
+        width: 85vw; 
         margin-left: 5%; 
         margin-bottom: 20px; 
         text-align: center; 
         border-radius: 10px;
+        margin-top: 20px;
+        
+`;
+const Selected = styled.div`
+        font-size: 22px;
+        color: black;
+        font-family: Raleway;
+        font-weight: 600;
+        height: 25vh;
+        padding-top: 9.5vh;
+`;
+const Explain = styled.div`
+        font-size: 16px;
+        line-height: 24px;
 `;
 
 export default UserOnboarding;
