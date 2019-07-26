@@ -113,68 +113,71 @@ class CreateMarket extends React.Component {
 
   setHours = e => {
     e.preventDefault();
-    let startTime = this.state.start;
-    let endTime = this.state.end;
-    let newDaysList = this.state.daysList;
-    let currentOpList = this.state.operation;
-    const normalWeek = [
-      "sunday",
-      "monday",
-      "tuesday",
-      "wednesday",
-      "thursday",
-      "friday",
-      "saturday"
-    ];
-    let opList = [];
-    for (let i = 0; i < currentOpList.length; i++) {
-      //the purpose of these loops are to check to see if the old list has same days as the new list and if it does the old list day will be removed.
-      for (let x = 0; x < newDaysList.length; x++) {
-        if (currentOpList[i] !== undefined) {
-          if (currentOpList[i].day === newDaysList[x][0]) {
-            currentOpList.splice(i, 1);
-            i--;
+    if (this.state.start < this.state.end) {
+      let startTime = this.state.start;
+      let endTime = this.state.end;
+      let newDaysList = this.state.daysList;
+      let currentOpList = this.state.operation;
+      const normalWeek = [
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday"
+      ];
+      let opList = [];
+      for (let i = 0; i < currentOpList.length; i++) {
+        //the purpose of these loops are to check to see if the old list has same days as the new list and if it does the old list day will be removed.
+        for (let x = 0; x < newDaysList.length; x++) {
+          if (currentOpList[i] !== undefined) {
+            if (currentOpList[i].day === newDaysList[x][0]) {
+              currentOpList.splice(i, 1);
+              i--;
+            }
           }
         }
       }
-    }
 
-    for (let i = 0; i < newDaysList.length; i++) {
-      //new market hour days are added.
-      opList.push({
-        day: newDaysList[i][0],
-        start: startTime,
-        end: endTime
-      });
-    }
+      for (let i = 0; i < newDaysList.length; i++) {
+        //new market hour days are added.
+        opList.push({
+          day: newDaysList[i][0],
+          start: startTime,
+          end: endTime
+        });
+      }
 
-    let sortOperation = []; //sorting the days.
-    let op = [...currentOpList, ...opList];
-    for (let i = 0; i < normalWeek.length; i++) {
-      for (let x = 0; x < op.length; x++) {
-        if (normalWeek[i] === op[x].day) {
-          sortOperation.push(op[x]);
+      let sortOperation = []; //sorting the days.
+      let op = [...currentOpList, ...opList];
+      for (let i = 0; i < normalWeek.length; i++) {
+        for (let x = 0; x < op.length; x++) {
+          if (normalWeek[i] === op[x].day) {
+            sortOperation.push(op[x]);
+          }
         }
       }
+
+      //currently its hard coded.
+      this.setState({
+        ...this.state,
+        // operation: [...currentOpList, ...opList],
+        operation: [...sortOperation],
+        daysHoursField: this.state.daysHoursField + 1,
+        daysList: [],
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false
+      });
+    } else {
+      alert('Please change the time to be accurate')
     }
-
-    //currently its hard coded.
-    this.setState({
-      ...this.state,
-      // operation: [...currentOpList, ...opList],
-      operation: [...sortOperation],
-      daysHoursField: this.state.daysHoursField + 1,
-      daysList: [],
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false
-    });
-  };
-
+};
   save = e => {
     e.preventDefault();
     if (this.state.isUpdating) {
@@ -192,7 +195,7 @@ class CreateMarket extends React.Component {
       <form>
         <div className="header">
           <img src={Arrow} />
-          <h4 className="createHeader">Create Market</h4>
+          <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
         </div>
         {/* <div className="addPhoto">
           <img />
@@ -343,7 +346,7 @@ class CreateMarket extends React.Component {
           onChange={e => this.onRadioChange(e)}
         />
         Private Market
-        <h6>Select market hours of operation</h6>
+        <h4>Market Days {'&'} Times Of Operation</h4>
         <div>
           <StyledDiv>
             <Button
@@ -441,8 +444,7 @@ class CreateMarket extends React.Component {
           >
             +ADD HOURS
           </Button>
-        </StyledDiv>
-        <br />
+        </StyledDiv>    
         
       
        
@@ -456,7 +458,7 @@ class CreateMarket extends React.Component {
         <SaveFix 
             onClick={(e) => {this.save(e); this.touched = true }}>
 
-            <Typography variant="button"> Next</Typography>
+            <Typography variant="button"> Next</Typography>      
         </SaveFix>
       </form>
     );
