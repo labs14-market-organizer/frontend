@@ -65,6 +65,7 @@ class AddBooths extends React.Component {
                         id="boothprice"
                         name="boothprice"
                         type="number"
+                        margin="normal"
                         variant="outlined"
                         label="Price per Booth"
                         value={this.state.boothprice}
@@ -95,6 +96,18 @@ class AddBooths extends React.Component {
                         InputProps={{
                         endAdornment: <InputAdornment position="end">ft</InputAdornment>
                         }}
+                    />
+
+                    <TextField
+                        id="boothdescription"
+                        name="boothdescription"
+                        label="Booth Description"
+                        multiline rows="4"
+                        fullWidth={true}
+                        margin="normal"
+                        variant="outlined"
+                        InputProps={{
+                        startAdornment: <InputAdornment position="start"></InputAdornment>}}
                     />
 
                 </div>
