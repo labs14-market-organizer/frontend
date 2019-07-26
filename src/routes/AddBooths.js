@@ -163,6 +163,7 @@ class AddBooths extends React.Component {
                         fullWidth
                         style={{
                             margin: '30px 30px',
+                            fontSize:'1.75em',
                             height: '80px'
                         }}
                         /*onClick={this.handleSave} */
@@ -181,6 +182,7 @@ class AddBooths extends React.Component {
                         fullWidth
                         style={{
                             margin: '30px 30px',
+                            fontSize:'1.75em',
                             height: '80px',
                         }}
                         /*onClick={this.handleAdd}*/
