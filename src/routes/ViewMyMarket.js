@@ -51,9 +51,16 @@ const ArrowImage = styled.img`
 const Container = styled.div`
   text-align: left;
   margin-left: 3%;
+  @media(min-width: 600px){
+    max-width: 1000px;
+    margin: 0 auto;
+  }
 `
 const MarketName = styled.p`
   font-size: 24px;
+  @media(min-width: 600px){
+    font-size: 36px;
+  }
 `
 const MarketDescription = styled.p`
   font-size: 16px;
@@ -73,6 +80,10 @@ const WhiteButton = styled(Button)`
   height: 60px;
   font-size: 16px;
   border-radius: 10px;
+  @media(min-width: 600px){
+    width: 300px;
+    
+  }
 `
 const GreenButton = styled(Button)`
   width: 40vw;
@@ -82,6 +93,10 @@ const GreenButton = styled(Button)`
   color: white;
   font-size: 16px;
   border-radius: 10px;
+  @media(min-width: 600px){
+    width: 300px;
+    margin-left: 6vw;
+  }
 
 `
 const mapStateToProps = state => {
