@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
 import { Button } from "@material-ui/core"
+import { Link } from "react-router-dom";
 
 const ViewMyMarket = () => {
-  const sites = ['website', 'facebook', 'twitter', 'instagram'];//going to use to check to see if obj contains when I loop over the obj.
+  const sites = ["website", "facebook", "twitter", "instagram"];//going to use to check to see if obj contains when I loop over the obj.
     return (
       <div>
         <Header>
@@ -22,7 +23,9 @@ const ViewMyMarket = () => {
             <Tag>Facebook</Tag>
             <Flex>
               <WhiteButton variant="outlined">Edit Booths</WhiteButton>
-              <GreenButton variant="outlined">Edit Market</GreenButton>
+              <Link to="/createmarket" style={{ textDecoration: "none"}} >
+                <GreenButton variant="outlined">Edit Market</GreenButton>
+              </Link>
             </Flex>
         </Container>
       </div>
