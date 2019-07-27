@@ -489,7 +489,7 @@ const StyledDiv = styled.div`
 `;
 const SaveFix = styled.button`
   margin: 50px auto;
-  height: 50px;
+  height: 60px;
   cursor: pointer;
   width: 420px;
   border-radius: 5px;
