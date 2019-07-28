@@ -1,10 +1,12 @@
 import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
+import Add from "../assets/add.svg";
 import {
     TextField,
     Button,
     Typography,
-    Container
+    Container,
+    Checkbox
   } from "@material-ui/core";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -34,6 +36,12 @@ class CreateVendor extends React.Component{
         });
       };
 
+    checkChange = e => {
+        this.setState({
+            ...this.state,
+            [e.target.name]: !e.target.value
+        })
+    }
     render() {
         return (
             <div>
@@ -73,6 +81,7 @@ class CreateVendor extends React.Component{
                         multiline
                     />
                     <p>What are the specific items you plan to sell?</p>
+                    <img src={Add} />
                     <TextField
                         id="items"
                         label="Add Item"
@@ -86,6 +95,38 @@ class CreateVendor extends React.Component{
                      <p>
                          Special Considerations
                      </p>
+                     <Checkbox
+                        checked={this.state.electricty}
+                        onChange={this.checkChange}
+                        value="electricty"
+                        inputProps={{
+                        'aria-label': 'primary checkbox',
+                        }}
+                    />
+                    <Checkbox
+                        checked={this.state.ventilation}
+                        onChange={this.checkChange}
+                        value="ventilation"
+                        inputProps={{
+                        'aria-label': 'primary checkbox',
+                        }}
+                    />
+                    <Checkbox
+                        checked={this.state.loud}
+                        onChange={this.checkChange}
+                        value="loud"
+                        inputProps={{
+                        'aria-label': 'primary checkbox',
+                        }}
+                    />
+                    <Checkbox
+                        checked={this.state.other_special}
+                        onChange={this.checkChange}
+                        value="other_special"
+                        inputProps={{
+                        'aria-label': 'primary checkbox',
+                        }}
+                    />
                      <TextField
                         id="website"
                         label="Business Website"
