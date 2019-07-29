@@ -1,6 +1,8 @@
 import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
 import { TextField, InputAdornment, Button } from '@material-ui/core';
+import { connect } from "react-redux";
+// import { createNewBooth, updateBooth } from "../redux/actions/marketData";
 
 
 
@@ -35,15 +37,31 @@ class AddBooths extends React.Component {
     handleSave = e => {
         e.preventDefault();
         
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
     };
 
     handleAdd = e => {
         e.preventDefault();
 
+        this.setState({
+            boothtype: '',
+            numberofbooths: '',
+            boothprice: '',
+            length: '',
+            width: '',
+            boothdescription: '',
+        })
     };
 
 
     render() {
+        if (this.props.checkBoothData.updated){
+            this.props.history.push('/');
+        }
+
         return (
             <form>
                 <header 
@@ -219,4 +237,13 @@ class AddBooths extends React.Component {
     }
 }
 
-export default AddBooths;
+const mapStateToProps = state => {
+    return {
+      ...state.checkBoothData
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    { createNewBooth, updateBooth }
+  )(AddBooths);
