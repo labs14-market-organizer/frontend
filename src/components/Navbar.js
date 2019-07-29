@@ -14,55 +14,60 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
 
+
+const Navbar = () => {
+  return (
+    <div>
+        <StyledImg src={cloud}  width="100%" height="87px" />
+    <StyledBox >
+            <MenuIcon className="menuIcon" fontSize="large"/>
+        
+                <CloudText>
+                  CLOUD
+                </CloudText>
+
+
+              <StandsText>
+                STANDS
+              </StandsText>
+
+    </StyledBox>
+    </div>
+  );
+};
+
+
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Luckiest Guy";
     color: #7f817e;
+    margin-right: 8px;
 `;
 
 const StandsText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Raleway Dots";
     color: black;
 `;
+const StyledBox = styled(Box)`
+  display: flex;
+  flex-wrap: nowrap;
+  position: absolute;
+  top: 0;
+  margin-top: 2px;
 
-const StyledBox = styled(({ m, p, ...otherProps}) => <Box m={0} p={0} {...otherProps} />)`
+  align-items: center;
 
-img {
-}
+  .menuIcon {
+    padding: 0 16px;
+    
+
+
+  }
+
+
 `;
 
-
-
-
-
-
-const Navbar = () => {
-  return (
-    <StyledBox m={0} p={0}>
-        <img src={cloud} zIndex="bottom" width="100%" height="100%" />
-      <Container>
-        <Grid container justify="space-around">
-          <Box mt={-13}>
-            <MenuIcon />
-          </Box>
-            <Grid item xs={3}>
-              <Box mt={-14}>
-        
-                <CloudText>
-                  CLOUD
-                </CloudText>
-
-              </Box>
-            </Grid>
-
-            <Box mt={-14}>
-              <StandsText>
-                STANDS
-              </StandsText>
-            </Box>
-        </Grid>
-      </Container>
-    </StyledBox>
-  );
-};
+const StyledImg = styled.img`
+z-index: -10
+`
 
 export default Navbar;
