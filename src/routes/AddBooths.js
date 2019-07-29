@@ -138,6 +138,10 @@ class AddBooths extends React.Component {
                         type="number"
                         value={this.state.length}
                         onChange={this.handleChange}
+                        style={{
+                            width: '76px',
+                            marginBottom: '20px'
+                        }}
                         InputProps={{
                         endAdornment: <InputAdornment position="end">ft</InputAdornment>
                         }}
@@ -149,6 +153,10 @@ class AddBooths extends React.Component {
                         type="number"
                         value={this.state.width}
                         onChange={this.handleChange}
+                        style={{
+                            width: '76px',
+                            marginBottom: '20px'
+                        }}
                         InputProps={{
                         endAdornment: <InputAdornment position="end">ft</InputAdornment>
                         }}
