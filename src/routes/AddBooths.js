@@ -44,19 +44,23 @@ class AddBooths extends React.Component {
     render() {
         return (
             <form>
-                <div className="header">
+                <header 
+                className="header"
+                >
                     <img src={Arrow} />
                     <h4 
                     className="addbooths"
                     style={{
-                        marginLeft: '20px',
+                        marginLeft: '5%',
                         }}>Add Booths</h4>
-                </div><br />
+                </header>
 
             {/* Styled this div for the time being...will change later */}
-                <div 
+                <body 
                     style={{
-                        width:'90vw',
+                        width:'98%',
+                        height: '100%',
+                        margin: 'auto'
                     }}
                 >
                     <TextField 
@@ -69,7 +73,7 @@ class AddBooths extends React.Component {
                         InputProps={{
                         startAdornment: <InputAdornment position="start"></InputAdornment>}}
                         style={{
-                            margin: "20px",
+                            margin: '2% 0',
                             marginBottom: "0px"
                         }}
                         variant="outlined"
@@ -79,44 +83,58 @@ class AddBooths extends React.Component {
                     <h5 style={{
                             margin: '10px 0px'
                         }}>Ex. Standard Booths. Larger Booths. Corner Booths. etc.</h5>
-                    <TextField
-                        type="number"
-                        required
-                        id="numberofbooths"
-                        label="Number of Booths"
-                        name="numberofbooths"
-                        value={this.state.numberofbooths}
-                        onChange={this.handleChange}
-                        InputProps={{
-                        startAdornment: <InputAdornment position="start"></InputAdornment>}}
-                        style={{
-                            margin: '10px',
-                            width: '45%',
-                            height: '80px'
-                        }}
-                        variant="outlined"
-                        autoComplete={true}
-                    />
-                    <TextField
-                        id="boothprice"
-                        name="boothprice"
-                        type="number"
-                        margin="normal"
-                        variant="outlined"
-                        label="Price per Booth"
-                        value={this.state.boothprice}
-                        onChange={this.handleChange}
-                        InputProps={{
-                        startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                        }}
-                        style={{
-                            margin: '10px',
-                            width: '45%',
-                            height: '80px'
-                        }}
-                    />
 
-                        <h5>Size of Booths</h5>
+                    <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-evenly'
+                    }}>
+                        <TextField
+                            type="number"
+                            required
+                            id="numberofbooths"
+                            label="Number of Booths"
+                            name="numberofbooths"
+                            value={this.state.numberofbooths}
+                            onChange={this.handleChange}
+                            InputProps={{
+                            startAdornment: <InputAdornment position="start"></InputAdornment>}}
+                            style={{
+                                margin: '10px',
+                                width: '45%',
+                                height: '80px'
+                            }}
+                            variant="outlined"
+                            autoComplete={true}
+                        />
+                        <TextField
+                            id="boothprice"
+                            name="boothprice"
+                            type="number"
+                            margin="normal"
+                            variant="outlined"
+                            label="Price per Booth"
+                            value={this.state.boothprice}
+                            onChange={this.handleChange}
+                            InputProps={{
+                            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                            }}
+                            style={{
+                                margin: '10px',
+                                width: '45%',
+                                height: '80px'
+                            }}
+                        />
+                    </div>
+
+                        <h5
+                        style={{
+                            display: 'flex'
+                        }}>Size of Booths</h5>
+                    <div
+                    style={{
+                        display: 'flex'
+                    }}>
                     <TextField
                         id="length"
                         name="length"
@@ -138,6 +156,7 @@ class AddBooths extends React.Component {
                         endAdornment: <InputAdornment position="end">ft</InputAdornment>
                         }}
                     />
+                    </div>
 
                     <TextField
                         id="boothdescription"
@@ -152,7 +171,7 @@ class AddBooths extends React.Component {
                         InputProps={{
                         startAdornment: <InputAdornment position="start"></InputAdornment>}}
                         style={{
-                            margin: "20px",
+                            
                             marginBottom: "0px"
                         }}
                     />
@@ -162,33 +181,29 @@ class AddBooths extends React.Component {
                         color="primary"
                         fullWidth
                         style={{
-                            margin: '30px 30px',
                             fontSize:'1.75em',
+                            margin: '2% auto',
                             height: '80px'
                         }}
                         /*onClick={this.handleSave} */
                     >Save</Button>
                     
-                    <hr
-                        style={{
-                            margin:'5%',
-                            justifyContent: 'center',
-                        }} 
-                    />
+                    <hr/>
 
                     <Button
                         variant="outlined"
                         color="secondary"
                         fullWidth
                         style={{
-                            margin: '30px 30px',
+                            
                             fontSize:'1.75em',
+                            margin: '2% auto',
                             height: '80px',
                         }}
                         /*onClick={this.handleAdd}*/
                     >Add new booth type</Button>
 
-                </div>
+                </body>
             </form>
         )
     }
