@@ -21,7 +21,7 @@ class CreateVendor extends React.Component{
             electricty: false,
             ventilation: false,
             loud: false,
-            other_special: [],
+            other_special: {},
             website: '',
             facebook: '',
             twitter: '',

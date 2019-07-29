@@ -42,7 +42,7 @@ export const createNewMarket = (market) => dispatch =>
     if(market.error) return dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: market.error} });
 
     return axiosWithAuth(token)
-    .post(`${HOST_URL}`)
+    .post(`${HOST_URL}/markets`, market)
     .then(res => {
         localStorage.removeItem("userData");//remove out of date data
         dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: res.data}}); //fire this first so we dont get GET_START fire before GET_END
