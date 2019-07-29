@@ -188,9 +188,11 @@ class CreateMarket extends React.Component {
   };
 
   render() {
-    if (this.props.updated) {
+    if (this.props.checkMarketData.updated) {
       this.props.history.push('/')
   }
+  console.log(this.props)
+
     return (
       <form>
         <div className="header">
@@ -512,9 +514,9 @@ text-transform: capitalize;
 `
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
-    //states
-    ...state.checkUserData
+    ...state
   };
 };
 

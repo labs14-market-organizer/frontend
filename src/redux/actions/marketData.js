@@ -107,20 +107,22 @@ function cleanData(market)
 {
     let clean = 
     {
-        address: market.address,
+        // address: market.address,
         city: market.city,
         description: market.description,
-        facebook: market.facebook,
-        image: market.image,
-        instagram: market.instagram,
-        market_type: market.market_type,
+        // facebook: market.facebook,
+        // image: market.image,
+        // instagram: market.instagram,
+        // market_type: market.market_type,
         name: market.name,
-        operation: market.operation,
+        // operation: market.operation,
         state: market.state,
-        twitter: market.twitter,
-        website: market.website,
+        // twitter: market.twitter,
+        // website: market.website,
         zipcode: market.zipcode
     }
+    console.log(clean)
+    return clean;
     let required = ["address", "city", "description","state","zipcode"]
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
     if(test.length > 0) return {error: `${test[0]} is a required field`};
