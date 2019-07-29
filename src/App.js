@@ -76,7 +76,7 @@ class App extends React.Component {
             />
             <Route
               path="/addbooths"
-              render={props => <AddBooths {...this.props} />}
+              render={props => <AddBooths {...this.props} currentBooth={undefined} />}
             />
           </div>
         </MuiThemeProvider>

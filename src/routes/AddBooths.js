@@ -8,6 +8,9 @@ import { TextField, InputAdornment, Button } from '@material-ui/core';
 class AddBooths extends React.Component {
     constructor(props) {
         super(props);
+        if(this.props.currentBooth)
+            this.state = this.props.currentBooth;
+        else
         this.state = {
             boothtype: '',
             numberofbooths: '',
@@ -16,6 +19,8 @@ class AddBooths extends React.Component {
             width: '',
             boothdescription: '',
         }
+        this.isUpdating = !!this.props.currentBooth
+        console.log(this.isUpdating)
     }
 
     handleChange = e => {
@@ -49,7 +54,7 @@ class AddBooths extends React.Component {
                     className="addbooths"
                     style={{
                         marginLeft: '5%',
-                        }}>Add Booths</h4>
+                        }}>{this.isUpdating ? "Update" : "Add"} Booths</h4>
                 </header>
 
             {/* Styled this div for the time being...will change later */}
