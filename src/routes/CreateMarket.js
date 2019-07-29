@@ -45,7 +45,8 @@ class CreateMarket extends React.Component {
       end: 1200,
       daysList: [],
       radio: "Public Market",
-
+      instagram: '',
+      zipcode: ''
   };
     else this.isUpdating = true;
   }
@@ -187,9 +188,26 @@ class CreateMarket extends React.Component {
     }
   };
 
+  militaryConvert(time){
+    let hours = time.split('');
+    let am = "am";
+    let newHours, combined, subtractedHours, rest;
+    if (hours[0] === "0"){
+      combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
+      return combined;
+    } else if (hours[0] === "1" && hours[1] === "2") {
+      return hours.join('') + "pm";
+    } else {
+      combined = parseInt(hours[0] + hours[1]);
+      rest = hours[2] + hours[3] + hours[4];
+      subtractedHours = combined - 12;
+      return (subtractedHours.toString() + rest + "pm");
+    }
+  }
+
   render() {
     if (this.props.checkMarketData.updated) {
-      this.props.history.push('/')
+      this.props.history.push('/addbooths')
   }
   console.log(this.props)
 
@@ -331,6 +349,7 @@ class CreateMarket extends React.Component {
           />
           
         </Container>  
+       <StyleLeft>
         <h6>Market Status</h6>
         {/*Radio buttons, default to public market*/}
         <Radio
@@ -350,7 +369,7 @@ class CreateMarket extends React.Component {
         Private Market
         <h4>Market Days {'&'} Times Of Operation</h4>
         <div>
-          <StyledDiv>
+  
             <Button
               variant={this.state.sunday ? "contained" : "outlined"}
               color="secondary"
@@ -414,7 +433,7 @@ class CreateMarket extends React.Component {
             >
               Sa
             </Button>
-          </StyledDiv>
+          
           <TextField
             name="start"
             type="time"
@@ -444,7 +463,7 @@ class CreateMarket extends React.Component {
             color="secondary"
             onClick={e => this.setHours(e)}
           >
-            +ADD HOURS
+            +ADD HOUR
           </Button>
         </StyledDiv>    
         
@@ -452,11 +471,13 @@ class CreateMarket extends React.Component {
        
         
         {this.state.operation.map(item => {
-                        return (item.start !== null) ? <Typography variant="body1">{item.day}: {item.start} - {item.end} 
-                        <button value={this.state[item.day]} onClick={(e) => this.deleteTime(e, item.day)}>X</button></Typography> 
+                        return (item.start !== null) ? 
+                        <Typography variant="body1">{item.day}: {this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}
+                          <button value={this.state[item.day]} onClick={(e) => this.deleteTime(e, item.day)}>X</button></Typography> 
                         : <StyledTypography variant="body1">{item.day} : Closed </StyledTypography>
                     })}
         <br />
+        </StyleLeft>            
         <SaveFix 
             onClick={(e) => {this.save(e); this.touched = true }}>
 
@@ -509,9 +530,13 @@ max-width: 623px;
 
 `
 const StyledTypography = styled(Typography)`
-text-transform: capitalize;
+  text-transform: capitalize;
 
 `
+const StyleLeft = styled.div`
+  text-align: left;
+`
+
 
 const mapStateToProps = state => {
   console.log(state)
