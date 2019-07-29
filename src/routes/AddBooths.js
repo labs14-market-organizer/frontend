@@ -2,7 +2,7 @@ import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
 import { TextField, InputAdornment, Button } from '@material-ui/core';
 import { connect } from "react-redux";
-// import { createNewBooth, updateBooth } from "../redux/actions/marketData";
+import { createNewBooth, updateBooth } from "../redux/actions/boothData";
 
 
 
@@ -36,11 +36,8 @@ class AddBooths extends React.Component {
 
     handleSave = e => {
         e.preventDefault();
-        
-        this.setState({
-            ...this.state,
-            [e.target.name]: e.target.value
-        });
+        if(this.isUpdating) this.updateBooth(this.state);
+        else this.props.createNewBooth(this.state);
     };
 
     handleAdd = e => {
@@ -213,7 +210,7 @@ class AddBooths extends React.Component {
                             margin: '2% auto',
                             height: '80px'
                         }}
-                        /*onClick={this.handleSave} */
+                        onClick={this.handleSave}
                     >Save</Button>
                     
                     <hr/>
@@ -238,8 +235,9 @@ class AddBooths extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
-      ...state.checkBoothData
+        checkBoothData: state.checkBoothData
     };
   };
   
