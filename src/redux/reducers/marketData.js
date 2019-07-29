@@ -17,12 +17,13 @@ const initalState =
     updated: false
 }
 
-export const checkUserData = (state = initalState, action) =>
+export const checkMarketData = (state = initalState, action) =>
 {
     switch(action.type)
     {
         case SET_MARKET_DATA_END:
         case GET_MARKET_DATA_END:
+            console.log('hey')
             return {
                 ...state,
                 ...action.payload,

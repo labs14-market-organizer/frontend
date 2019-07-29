@@ -23,6 +23,8 @@ import MainPage from "./routes/MainPage";
 import UserList from "./routes/UserList";
 import CreateMarket from "./routes/CreateMarket";
 import UserOnboarding from "./routes/UserOnboarding";
+import ViewMyMarket from "./routes/ViewMyMarket";
+import CreateVendor from "./routes/CreateVendor";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -77,6 +79,14 @@ class App extends React.Component {
               <Route
               path="/useronboarding"
               render={props => <UserOnboarding {...this.props} />}
+              />
+              <Route
+              path="/viewmymarket"
+              render={props => <ViewMyMarket {...this.props} />}
+              />
+               <Route
+              path="/createvendor"
+              render={props => <CreateVendor {...this.props} />}
               />
           </div>
         </MuiThemeProvider>
