@@ -83,6 +83,7 @@ const MarketingPage = () => {
       <TitleBox className="instructions">
         <Typography variant="subtitle1">HOW DOES IT WORK?</Typography>
       </TitleBox>
+
 <Step1Container>
       <Step1Label>
         <Typography variant="subtitle2">STEP 1</Typography>
@@ -95,6 +96,8 @@ const MarketingPage = () => {
       </Step1Paper>
       <Box5/>
 </Step1Container>
+
+
       <Box>
         <Typography variant="subtitle2">STEP 2</Typography>
       </Box>
@@ -251,21 +254,23 @@ const Box5 = styled(Box)`
 
 const Step1Label = styled(Box)`
   background-color: #044d4c;
-  transform: rotate(270deg);
-  width: 269px;
-  margin-right: -78px;
-  height: 45px;
+  height: 230px;
+  margin-right: 16px;
+  width: 45px;
   border-radius: 10px 10px 10px 10px;
   color: white;
   box-sizing: border-box;
-  margin-left: -96px;
+  /* margin-left: -96px; */
   display: flex;
   justify-content: center;
   align-items: center;
 
+
   .MuiTypography-subtitle2 {
     font-size: 22px;
     font-weight: 600;
+    transform: rotate(270deg);
+    
 
     
   }
@@ -280,6 +285,7 @@ display: flex;
 margin-top: 86px;
 align-items: center;
 height: 230px;
+
   
 
 `
