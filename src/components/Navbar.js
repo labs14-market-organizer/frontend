@@ -59,6 +59,7 @@ const StyledBox = styled(Box)`
   .menuIcon {
     padding: 0 16px;
     
+    
 
 
   }
