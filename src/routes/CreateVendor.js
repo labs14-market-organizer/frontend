@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 
+
 class CreateVendor extends React.Component{
     constructor(props){
         super(props);
@@ -19,15 +20,16 @@ class CreateVendor extends React.Component{
             name: '',
             description: '',
             items: [],
+            item: '',
             electricty: false,
             ventilation: false,
             loud: false,
-            other_special: {},
+            other_special: '',
             website: '',
             facebook: '',
             twitter: '',
-            instagram: ''
-
+            instagram: '',
+            count: [0]
         }
     }
     handleChange = e => {
@@ -43,7 +45,47 @@ class CreateVendor extends React.Component{
             [e.target.name]: !e.target.value
         })
     }
+    addItem = e => {
+      e.preventDefault();
+      if (this.state.item !== ''){
+        let item = this.state.item;
+        let itemList = [...this.state.items, item];
+        this.setState({
+          ...this.state,
+          items: itemList,
+          item: ''
+        })
+      }
+    }
+    addCount = e => {
+      let newCount = [...this.state.count, this.state.count.length]
+          this.setState({
+            ...this.state,
+            count: newCount
+          })
+        }
+    deleteItem = (number) => {
+      const newItems = this.state.items.filter((item, index) => index !== number);
+      this.setState({
+        ...this.state,
+        items: newItems
+      })
+    }
+  
+    
     render() {
+      // console.log(this.state.name + ' name')
+      // console.log(this.state.description + ' description')
+      // console.log(this.state.electricty + ' ele')
+      // console.log(this.state.loud + ' loud')
+      // console.log(this.state.other_special + ' other')
+      // console.log(this.state.website + ' website')
+      // console.log(this.state.facebook + ' facebook')
+      // console.log(this.state.instagram + ' instag')
+      // console.log(this.state.twitter + ' twitter')
+      console.log(this.state.item)
+      console.log(this.state.items)
+      let flag = false;
         return (
             <div>
                 <Header>
@@ -51,8 +93,8 @@ class CreateVendor extends React.Component{
                     <CreateHeader>Create Vendor</CreateHeader>
                 </Header>
                 <Container maxWidth="sm">
+                <form>
                     <TextField
-                        error={this.touched && this.state.name == "" ? true : false}
                         required
                         id="name"
                         label="Business Name"
@@ -66,7 +108,6 @@ class CreateVendor extends React.Component{
                         style={{marginTop: "20px"}}
                     />
                     <TextField
-                        error={this.touched && this.state.description == "" ? true : false}
                         required
                         id="description"
                         label="Business Description"
@@ -81,45 +122,67 @@ class CreateVendor extends React.Component{
                         rows="3"
                         multiline
                     />
-                    <p>What are the specific items you plan to sell?</p>
-                    <img src={Add} />
+                    <StyledContainer>
+                    
+                    <StyledP>What are the specific items you plan to sell?</StyledP>
+                    <img src={Add} onClick={this.addItem} />
                     <TextField
-                        id="items"
+                        required
+                        id="item"
                         label="Add Item"
-                        name="items"
-                        value={this.state.items}
+                        name="item"
+                        value={this.state.item}
                         onChange={this.handleChange}
                         margin="normal"
+                        variant="outlined"
                         fullWidth={true}
                         autoComplete={true}
-                     />
-                     <p>
+                        style={{marginTop: "20px"}}
+                  
+                    />
+                    {this.state.items.map((item, index) => 
+                    <div>
+                       <p>{item}</p> 
+                       <button onClick={() => this.deleteItem(index)}>X</button>
+                    </div>
+                    )}
+                    
+                     <StyledP>
+
                          Special Considerations
-                     </p>
-                     <Checkbox
+                     </StyledP>
+                    <FlexColumn>
+                    <FlexContainer>
+                      <Checkbox
                         checked={this.state.electricty}
                         onChange={this.checkChange}
-                        value="electricty"
+                        value={Boolean}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /> <StyledP>Need Electricity</StyledP>
+                    </FlexContainer>
+                    <FlexContainer>
                     <Checkbox
                         checked={this.state.ventilation}
                         onChange={this.checkChange}
-                        value="ventilation"
+                        value={Boolean}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /><StyledP>Need Ventilation</StyledP>
+                    </FlexContainer>
+                    <FlexContainer>
                     <Checkbox
                         checked={this.state.loud}
                         onChange={this.checkChange}
-                        value="loud"
+                        value={Boolean}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /><StyledP>Have loud machinery</StyledP>
+                    </FlexContainer>
+                    <FlexContainer>
                     <Checkbox
                         checked={this.state.other_special}
                         onChange={this.checkChange}
@@ -127,7 +190,19 @@ class CreateVendor extends React.Component{
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /><TextField
+                        id="other_special" 
+                        label="Other"
+                        name="other_special"
+                        value={this.state.other_special}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        fullWidth={true}
+                        style={{marginTop: "-18px", fontFamily:"Raleway"}}
+                     />
+                    </FlexContainer>
+                    </FlexColumn>
+                    </StyledContainer>
                      <TextField
                         id="website"
                         label="Business Website"
@@ -170,6 +245,7 @@ class CreateVendor extends React.Component{
                         variant="outlined"
                      />
                      <GreenButton variant="outlined">Save</GreenButton>
+                     </form>
                 </Container>
             </div>
         )
@@ -203,8 +279,27 @@ const GreenButton = styled(Button)`
   @media(min-width: 600px){
     width: 400px;
   }
+`;
 
-`
+const StyledP = styled.p`
+  font-family: Raleway;
+  font-size: 16px;
+  line-height: 1.5;
+`;
+
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+`;
+const StyledContainer = styled.div`
+  text-align: left;
+`;
+
 const mapStateToProps = state => {
     return {
       //states
