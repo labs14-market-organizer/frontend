@@ -45,7 +45,8 @@ class CreateMarket extends React.Component {
       end: 1200,
       daysList: [],
       radio: "Public Market",
-
+      instagram: '',
+      zipcode: ''
   };
     else this.isUpdating = true;
   }
@@ -187,9 +188,30 @@ class CreateMarket extends React.Component {
     }
   };
 
+  militaryConvert(time){
+    console.log('here ya go')
+    let hours = time.split('');
+    let am = "am";
+    let newHours, combined, subtractedHours, rest;
+    if (hours[0] === "0"){
+      combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
+      console.log(combined)
+      return combined;
+    } else if (hours[0] === "1" && hours[1] === "2") {
+      return hours.join('') + "pm";
+    } else if (hours[0] === "1" && (hours[1] === "0" || hours[1] === "1")) {
+      return hours.join('') + "am";
+    } else {
+      combined = parseInt(hours[0] + hours[1]);
+      rest = hours[2] + hours[3] + hours[4];
+      subtractedHours = combined - 12;
+      return (subtractedHours.toString() + rest + "pm");
+    }
+  }
+
   render() {
     if (this.props.checkMarketData.updated) {
-      this.props.history.push('/')
+      this.props.history.push('/addbooths')
   }
   console.log(this.props)
 
@@ -331,27 +353,35 @@ class CreateMarket extends React.Component {
           />
           
         </Container>  
+       <StyleLeft>
         <h6>Market Status</h6>
         {/*Radio buttons, default to public market*/}
+        <div style={{display: "flex"}}>
         <Radio
+          style={{marginTop: "-23px"}}
           name="radio"
           value="Public Market"
           checked={this.state.radio === "Public Market"}
           onChange={e => this.onRadioChange(e)}
         />
-        Public Market
+        <div style={{marginTop: "-13px"}}>Public Market</div>
+        </div>
         <br />
+        <div style={{display: "flex"}}>
         <Radio
+          style={{marginTop: "-20px"}}
           name="radio"
           value="Private Market"
           checked={this.state.radio === "Private Market"}
           onChange={e => this.onRadioChange(e)}
         />
-        Private Market
+        <div style={{marginTop: "-8px", marginBottom: "10px"}}> Private Market</div>
+        </div>
+        <hr style={{width: "90vw", marginLeft: "5px"}}></hr>
         <h4>Market Days {'&'} Times Of Operation</h4>
-        <div>
-          <StyledDiv>
-            <Button
+        <StyledDiv>
+  
+            <StyledDays
               variant={this.state.sunday ? "contained" : "outlined"}
               color="secondary"
               name="sunday"
@@ -359,8 +389,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Su
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.monday ? "contained" : "outlined"}
               color="secondary"
               name="monday"
@@ -368,8 +398,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               M
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.tuesday ? "contained" : "outlined"}
               color="secondary"
               name="tuesday"
@@ -377,8 +407,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Tu
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.wednesday ? "contained" : "outlined"}
               color="secondary"
               name="wednesday"
@@ -386,8 +416,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               W
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.thursday ? "contained" : "outlined"}
               color="secondary"
               name="thursday"
@@ -395,8 +425,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Th
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.friday ? "contained" : "outlined"}
               color="secondary"
               name="friday"
@@ -404,8 +434,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               F
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.saturday ? "contained" : "outlined"}
               color="secondary"
               name="saturday"
@@ -413,9 +443,11 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Sa
-            </Button>
+            </StyledDays>
           </StyledDiv>
+          <div style={{display: "flex"}}>
           <TextField
+            style={{marginLeft: "23%", marginTop: "25px"}}
             name="start"
             type="time"
             onChange={this.handleChange}
@@ -425,8 +457,10 @@ class CreateMarket extends React.Component {
             }}
           />
           {/**This code just adds the hiphen between the time boxes */}
-          &nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;
+          {/* <span style={{marginTop: "30px"}}>&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;</span> */}
+          <div style={{marginTop: "30px"}}>-</div>
           <TextField
+          style={{marginTop: "25px", marginLeft: "2%"}}
             name="end"
             type="time"
             onChange={this.handleChange}
@@ -443,6 +477,7 @@ class CreateMarket extends React.Component {
             size="large"
             color="secondary"
             onClick={e => this.setHours(e)}
+            style={{width: "80vw", marginTop: "-20px", height: "60px", marginBottom: "32px"}}
           >
             +ADD HOURS
           </Button>
@@ -452,11 +487,13 @@ class CreateMarket extends React.Component {
        
         
         {this.state.operation.map(item => {
-                        return (item.start !== null) ? <Typography variant="body1">{item.day}: {item.start} - {item.end} 
-                        <button value={this.state[item.day]} onClick={(e) => this.deleteTime(e, item.day)}>X</button></Typography> 
-                        : <StyledTypography variant="body1">{item.day} : Closed </StyledTypography>
+                        return (item.start !== null) ? 
+                        <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
+                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledP> 
+                        : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP>
                     })}
         <br />
+        </StyleLeft>            
         <SaveFix 
             onClick={(e) => {this.save(e); this.touched = true }}>
 
@@ -470,13 +507,22 @@ class CreateMarket extends React.Component {
 const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 50px auto;
+  margin: 50px 10px auto;
   max-width: 520px;
   .MuiButton-root {
-    height: 50px;
-    width: 3%;
+    height: 40px;
+    width: 13vh;
+    margin-left: 1%;
     margin: 0 auto;
     cursor: pointer;
+    min-width: 0;
+    
+  }
+  .MuiButton-label{
+    text-transform: capitalize;
+    font-family: Raleway;
+    font-size: 16px;
+    font-weight: 500;
   }
 
   .biggerButton {
@@ -489,11 +535,16 @@ const StyledDiv = styled.div`
 
 
 `;
+const StyledDays = styled(Button)`
+  width: 14vw;
+  margin-left: 1%;
+`;
+
 const SaveFix = styled.button`
   margin: 50px auto;
   height: 60px;
   cursor: pointer;
-  width: 420px;
+  width: 80vw;
   border-radius: 5px;
   color: #fff;
   background-color: #478529;
@@ -507,11 +558,32 @@ max-width: 623px;
 }
 
 
-`
+`;
 const StyledTypography = styled(Typography)`
-text-transform: capitalize;
+  text-transform: capitalize;
+  .MuiTypography-body1 {
+    width: 300px;
+    color: blue;
+  }
+`;
+const StyleLeft = styled.div`
+  text-align: left;
+  margin-left: 3%;
+`;
 
+const StyledUp = styled.div`
+  text-transform: capitalize;
+  width: 150px;
+  font-size: 18px;
+  font-family: Raleway;
+`;
+
+const StyledP = styled.p`
+  display: flex;
+  font-size: 18px;
+  font-family: Raleway;
 `
+
 
 const mapStateToProps = state => {
   console.log(state)
