@@ -550,7 +550,9 @@ max-width: 623px;
 `
 const StyledTypography = styled(Typography)`
   text-transform: capitalize;
-
+  .MuiTypography-body1 {
+    width: 300px;
+  }
 `
 const StyleLeft = styled.div`
   text-align: left;
