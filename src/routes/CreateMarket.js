@@ -488,7 +488,7 @@ class CreateMarket extends React.Component {
                         return (item.start !== null) ? 
                         <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
                           <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledP> 
-                        : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day} :</StyledUp> Closed </StyledP>
+                        : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP>
                     })}
         <br />
         </StyleLeft>            
