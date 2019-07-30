@@ -72,19 +72,6 @@ class CreateVendor extends React.Component{
   
     
     render() {
-      console.log(this.state.name + ' name')
-      console.log(this.state.description + ' description')
-      console.log(this.state.electricity + ' ele')
-      console.log(this.state.loud + ' loud')
-      console.log(this.state.other_special + ' other')
-      console.log(this.state.website + ' website')
-      console.log(this.state.facebook + ' facebook')
-      console.log(this.state.instagram + ' instag')
-      console.log(this.state.twitter + ' twitter')
-      console.log(this.state.item)
-      console.log(this.state.electricity)
-      console.log(this.state.other_special);
-      let flag = false;
         return (
             <div>
                 <Header>
@@ -140,7 +127,7 @@ class CreateVendor extends React.Component{
                     </FlexContainer>
                     {(this.state.items.length > 0) ? <p>What I sell!</p>: null}
                     {this.state.items.map((item, index) => 
-                    <FlexContainer>
+                    <FlexContainer  key={index}>
                        <p>{item}</p> 
                        <button onClick={() => this.deleteItem(index)}>X</button>
                     </FlexContainer>
