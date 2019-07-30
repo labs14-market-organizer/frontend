@@ -199,6 +199,8 @@ class CreateMarket extends React.Component {
       return combined;
     } else if (hours[0] === "1" && hours[1] === "2") {
       return hours.join('') + "pm";
+    } else if (hours[0] === "1" && (hours[1] === "0" || hours[1] === "1")) {
+      return hours.join('') + "am";
     } else {
       combined = parseInt(hours[0] + hours[1]);
       rest = hours[2] + hours[3] + hours[4];
