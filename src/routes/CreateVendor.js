@@ -125,26 +125,26 @@ class CreateVendor extends React.Component{
                     <StyledContainer>
                     
                     <StyledP>What are the specific items you plan to sell?</StyledP>
+                    <FlexContainer>
                     <img src={Add} onClick={this.addItem} />
                     <TextField
-                        required
                         id="item"
                         label="Add Item"
                         name="item"
                         value={this.state.item}
                         onChange={this.handleChange}
                         margin="normal"
-                        variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
-                        style={{marginTop: "20px"}}
+                        style={{marginTop: "-20px"}}
                   
                     />
+                    </FlexContainer>
+                    {(this.state.items.length > 0) ? <p>What I sell!</p>: null}
                     {this.state.items.map((item, index) => 
-                    <div>
+                    <FlexContainer>
                        <p>{item}</p> 
                        <button onClick={() => this.deleteItem(index)}>X</button>
-                    </div>
+                    </FlexContainer>
                     )}
                     
                      <StyledP>
