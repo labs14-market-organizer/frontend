@@ -486,9 +486,9 @@ class CreateMarket extends React.Component {
         
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
-                        <div><StyledUp> {item.day}</StyledUp>: <p>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</p>
-                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></div> 
-                        : <div> <span style={{fontWeight: "600"}}>{item.day}</span> : Closed </div>
+                        <StyledP><StyledUp> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
+                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledP> 
+                        : <StyledP> <StyledUp>{item.day} :</StyledUp> Closed </StyledP>
                     })}
         <br />
         </StyleLeft>            
@@ -570,9 +570,17 @@ const StyleLeft = styled.div`
 `;
 
 const StyledUp = styled.div`
-  width: 300px;
-  border: 1px solid red;
+  text-transform: capitalize;
+  width: 150px;
+  font-size: 18px;
+  font-family: Raleway;
 `;
+
+const StyledP = styled.p`
+  display: flex;
+  font-size: 18px;
+  font-family: Raleway;
+`
 
 
 const mapStateToProps = state => {
