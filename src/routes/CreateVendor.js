@@ -25,7 +25,7 @@ class CreateVendor extends React.Component{
             website: '',
             facebook: '',
             twitter: '',
-            instagram: '',
+            instagram: ''
 
         }
     }

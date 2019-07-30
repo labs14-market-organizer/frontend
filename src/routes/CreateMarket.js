@@ -377,7 +377,7 @@ class CreateMarket extends React.Component {
         </div>
         <hr style={{width: "90vw", marginLeft: "5px"}}></hr>
         <h4>Market Days {'&'} Times Of Operation</h4>
-        <div style={{width: "99vw", display: "flex", flexDirection: "nowrap", margin: "0 auto"}}>
+        <StyledDiv>
   
             <StyledDays
               variant={this.state.sunday ? "contained" : "outlined"}
@@ -442,7 +442,7 @@ class CreateMarket extends React.Component {
             >
               Sa
             </StyledDays>
-            </div>
+          </StyledDiv>
           <div style={{display: "flex"}}>
           <TextField
             style={{marginLeft: "23%", marginTop: "25px"}}
@@ -475,9 +475,9 @@ class CreateMarket extends React.Component {
             size="large"
             color="secondary"
             onClick={e => this.setHours(e)}
-            style={{width: "80vw"}}
+            style={{width: "80vw", marginTop: "-20px", height: "60px", marginBottom: "32px"}}
           >
-            +ADD HOUR
+            +ADD HOURS
           </Button>
         </StyledDiv>    
         
@@ -486,9 +486,9 @@ class CreateMarket extends React.Component {
         
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
-                        <StyledTypography variant="body1"><span style={{fontWeight: "600"}}> {item.day}</span>: {this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}
-                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledTypography> 
-                        : <StyledTypography variant="body1"> <span style={{fontWeight: "600"}}>{item.day}</span> : Closed </StyledTypography>
+                        <div><StyledUp> {item.day}</StyledUp>: <p>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</p>
+                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></div> 
+                        : <div> <span style={{fontWeight: "600"}}>{item.day}</span> : Closed </div>
                     })}
         <br />
         </StyleLeft>            
@@ -505,13 +505,22 @@ class CreateMarket extends React.Component {
 const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 50px auto;
+  margin: 50px 10px auto;
   max-width: 520px;
   .MuiButton-root {
-    height: 50px;
-    width: 3%;
+    height: 40px;
+    width: 13vh;
+    margin-left: 1%;
     margin: 0 auto;
     cursor: pointer;
+    min-width: 0;
+    
+  }
+  .MuiButton-label{
+    text-transform: capitalize;
+    font-family: Raleway;
+    font-size: 16px;
+    font-weight: 500;
   }
 
   .biggerButton {
@@ -547,17 +556,23 @@ max-width: 623px;
 }
 
 
-`
+`;
 const StyledTypography = styled(Typography)`
   text-transform: capitalize;
   .MuiTypography-body1 {
     width: 300px;
+    color: blue;
   }
-`
+`;
 const StyleLeft = styled.div`
   text-align: left;
   margin-left: 3%;
-`
+`;
+
+const StyledUp = styled.div`
+  width: 300px;
+  border: 1px solid red;
+`;
 
 
 const mapStateToProps = state => {
