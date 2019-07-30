@@ -486,9 +486,9 @@ class CreateMarket extends React.Component {
         
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
-                        <StyledP><StyledUp> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
+                        <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
                           <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledP> 
-                        : <StyledP> <StyledUp>{item.day} :</StyledUp> Closed </StyledP>
+                        : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day} :</StyledUp> Closed </StyledP>
                     })}
         <br />
         </StyleLeft>            
