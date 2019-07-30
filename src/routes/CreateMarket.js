@@ -189,11 +189,13 @@ class CreateMarket extends React.Component {
   };
 
   militaryConvert(time){
+    console.log('here ya go')
     let hours = time.split('');
     let am = "am";
     let newHours, combined, subtractedHours, rest;
     if (hours[0] === "0"){
       combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
+      console.log(combined)
       return combined;
     } else if (hours[0] === "1" && hours[1] === "2") {
       return hours.join('') + "pm";
@@ -352,25 +354,32 @@ class CreateMarket extends React.Component {
        <StyleLeft>
         <h6>Market Status</h6>
         {/*Radio buttons, default to public market*/}
+        <div style={{display: "flex"}}>
         <Radio
+          style={{marginTop: "-23px"}}
           name="radio"
           value="Public Market"
           checked={this.state.radio === "Public Market"}
           onChange={e => this.onRadioChange(e)}
         />
-        Public Market
+        <div style={{marginTop: "-13px"}}>Public Market</div>
+        </div>
         <br />
+        <div style={{display: "flex"}}>
         <Radio
+          style={{marginTop: "-20px"}}
           name="radio"
           value="Private Market"
           checked={this.state.radio === "Private Market"}
           onChange={e => this.onRadioChange(e)}
         />
-        Private Market
+        <div style={{marginTop: "-8px", marginBottom: "10px"}}> Private Market</div>
+        </div>
+        <hr style={{width: "90vw", marginLeft: "5px"}}></hr>
         <h4>Market Days {'&'} Times Of Operation</h4>
-        <div>
+        <div style={{width: "99vw", display: "flex", flexDirection: "nowrap", margin: "0 auto"}}>
   
-            <Button
+            <StyledDays
               variant={this.state.sunday ? "contained" : "outlined"}
               color="secondary"
               name="sunday"
@@ -378,8 +387,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Su
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.monday ? "contained" : "outlined"}
               color="secondary"
               name="monday"
@@ -387,8 +396,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               M
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.tuesday ? "contained" : "outlined"}
               color="secondary"
               name="tuesday"
@@ -396,8 +405,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Tu
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.wednesday ? "contained" : "outlined"}
               color="secondary"
               name="wednesday"
@@ -405,8 +414,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               W
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.thursday ? "contained" : "outlined"}
               color="secondary"
               name="thursday"
@@ -414,8 +423,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Th
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.friday ? "contained" : "outlined"}
               color="secondary"
               name="friday"
@@ -423,8 +432,8 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               F
-            </Button>
-            <Button
+            </StyledDays>
+            <StyledDays
               variant={this.state.saturday ? "contained" : "outlined"}
               color="secondary"
               name="saturday"
@@ -432,9 +441,11 @@ class CreateMarket extends React.Component {
               onClick={e => this.changeDay(e)}
             >
               Sa
-            </Button>
-          
+            </StyledDays>
+            </div>
+          <div style={{display: "flex"}}>
           <TextField
+            style={{marginLeft: "23%", marginTop: "25px"}}
             name="start"
             type="time"
             onChange={this.handleChange}
@@ -444,8 +455,10 @@ class CreateMarket extends React.Component {
             }}
           />
           {/**This code just adds the hiphen between the time boxes */}
-          &nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;
+          {/* <span style={{marginTop: "30px"}}>&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;</span> */}
+          <div style={{marginTop: "30px"}}>-</div>
           <TextField
+          style={{marginTop: "25px", marginLeft: "2%"}}
             name="end"
             type="time"
             onChange={this.handleChange}
@@ -462,6 +475,7 @@ class CreateMarket extends React.Component {
             size="large"
             color="secondary"
             onClick={e => this.setHours(e)}
+            style={{width: "80vw"}}
           >
             +ADD HOUR
           </Button>
@@ -472,9 +486,9 @@ class CreateMarket extends React.Component {
         
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
-                        <Typography variant="body1">{item.day}: {this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}
-                          <button value={this.state[item.day]} onClick={(e) => this.deleteTime(e, item.day)}>X</button></Typography> 
-                        : <StyledTypography variant="body1">{item.day} : Closed </StyledTypography>
+                        <StyledTypography variant="body1"><span style={{fontWeight: "600"}}> {item.day}</span>: {this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}
+                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledTypography> 
+                        : <StyledTypography variant="body1"> <span style={{fontWeight: "600"}}>{item.day}</span> : Closed </StyledTypography>
                     })}
         <br />
         </StyleLeft>            
@@ -510,11 +524,16 @@ const StyledDiv = styled.div`
 
 
 `;
+const StyledDays = styled(Button)`
+  width: 14vw;
+  margin-left: 1%;
+`;
+
 const SaveFix = styled.button`
   margin: 50px auto;
   height: 60px;
   cursor: pointer;
-  width: 420px;
+  width: 80vw;
   border-radius: 5px;
   color: #fff;
   background-color: #478529;
@@ -535,6 +554,7 @@ const StyledTypography = styled(Typography)`
 `
 const StyleLeft = styled.div`
   text-align: left;
+  margin-left: 3%;
 `
 
 
