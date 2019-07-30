@@ -84,43 +84,47 @@ const MarketingPage = () => {
         <Typography variant="subtitle1">HOW DOES IT WORK?</Typography>
       </TitleBox>
 
-<Step1Container>
-      <Step1Label>
-        <Typography variant="subtitle2">STEP 1</Typography>
-      </Step1Label>
-      <Step1Paper>
-        <img src={step1} />
-        <Typography variant="body1">
-          Sign up as a market owner or vendor
-        </Typography>
-      </Step1Paper>
-      <Box5/>
-</Step1Container>
+      <Step1Container>
+        <Step1Label>
+          <Typography variant="subtitle2">STEP 1</Typography>
+        </Step1Label>
+        <Step1Paper>
+          <img src={step1} />
+          <Typography variant="body1">
+            Sign up as a market owner or vendor
+          </Typography>
+        </Step1Paper>
+        <Box5 />
+      </Step1Container>
 
+      <Step2Container>
+        <Step2Label>
+          <Typography variant="subtitle2">STEP 2</Typography>
+        </Step2Label>
+        <Step2Paper>
+          <img src={step2} />
+          <Typography variant="body1">
+            Allow Square to process all costs of joining a market
+          </Typography>
+        </Step2Paper>
+      </Step2Container>
 
-      <Box>
-        <Typography variant="subtitle2">STEP 2</Typography>
-      </Box>
-      <Box>
-        <img src={step2} />
-        <Typography variant="body1">
-          Allow Square to process all costs of joining a market
-        </Typography>
-      </Box>
-      <Box>
-        <Typography variant="subtitle2">STEP 3</Typography>
-      </Box>
-      <Box>
-        <img src={step3} />
-        <Typography variant="body1">
-          As a market owner, streamline the on-boarding process for vendors. As
-          a vendor, discover & join local markets.
-        </Typography>
-      </Box>
+      <Step3Container>
+        <Step3Label>
+          <Typography variant="subtitle2">STEP 3</Typography>
+        </Step3Label>
+        <Step3Paper>
+          <img src={step3} />
+          <Typography variant="body1">
+            As a market owner, streamline the on-boarding process for vendors.
+            As a vendor, discover & join local markets.
+          </Typography>
+        </Step3Paper>
+      </Step3Container>
 
-      <Box>
-        <Typography variant="subtitle1">CLOUD STANDS & YOU</Typography>
-      </Box>
+      <TitleBox className="testimonial">
+        <Typography  variant="subtitle1">CLOUD STANDS & YOU</Typography>
+      </TitleBox>
 
       <Box>
         <img src={testimonial1} />
@@ -252,69 +256,166 @@ const Box5 = styled(Box)`
   margin-left: 12px;
 `;
 
+const Step1Container = styled(Box)`
+  display: flex;
+  margin-top: 12px;
+  align-items: center;
+  height: 230px;
+`;
+
 const Step1Label = styled(Box)`
   background-color: #044d4c;
   height: 230px;
-  margin-right: 16px;
-  width: 45px;
-  border-radius: 10px 10px 10px 10px;
+  margin-right: 12px;
+  width: 60px;
+  border-radius: 0px 10px 10px 0px;
   color: white;
   box-sizing: border-box;
   /* margin-left: -96px; */
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-
+  position: absolute;
 
   .MuiTypography-subtitle2 {
     font-size: 22px;
     font-weight: 600;
     transform: rotate(270deg);
-    
-
-    
+    margin-right: -12px;
   }
-
-
-
-
-`
-
-const Step1Container = styled(Box)`
-display: flex;
-margin-top: 86px;
-align-items: center;
-height: 230px;
-
-  
-
-`
+`;
 
 const Step1Paper = styled(Paper)`
-display: flex;
-flex-direction: column;
-background-color: #e6eded;
-height: 100%;
-box-shadow: none;
-padding: 20px;
-text-align: left;
-box-sizing: border-box;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #e6eded;
+  height: 100%;
+  box-shadow: none;
+  text-align: left;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 72px;
+  padding: 20px 12px;
 
+  .MuiTypography-body1 {
+    margin-top: 24px;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Roboto;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+  img {
+    margin-top: 16px;
+  }
+`;
 
-.MuiTypography-body1 {
-  margin-top: 24px;
-  font-size: 16px;
-  line-height: 24px;
-  font-family: Roboto;
-  font-weight: normal;
-}
+const Step2Container = styled(Box)`
+  display: flex;
+  margin-top: 12px;
+  align-items: center;
+  height: 230px;
+`;
 
+const Step2Label = styled(Box)`
+  background-color: #044d4c;
+  height: 230px;
+  margin-right: 12px;
+  width: 92px;
+  border-radius: 0px 10px 10px 0px;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  /* margin-left: -96px; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
 
-img {
-  
-}
-`
+  .MuiTypography-subtitle2 {
+    font-size: 22px;
+    margin-right: -12px;
+    font-weight: 600;
+    transform: rotate(270deg);
+    margin-right: -12px;
+  }
+`;
+
+const Step2Paper = styled(Paper)`
+  display: flex;
+  flex-direction: column;
+  background-color: #e6eded;
+  height: 100%;
+  box-shadow: none;
+  padding: 20px 12px;
+  text-align: left;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 104px;
+  .MuiTypography-body1 {
+    margin-top: 24px;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Roboto;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+`;
+
+const Step3Container = styled(Box)`
+  display: flex;
+  margin-top: 12px;
+  align-items: center;
+  height: 230px;
+`;
+
+const Step3Label = styled(Box)`
+  background-color: #044d4c;
+  height: 230px;
+  margin-right: 12px;
+  width: 120px;
+  border-radius: 0px 10px 10px 0px;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  /* margin-left: -96px; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+
+  .MuiTypography-subtitle2 {
+    font-size: 22px;
+    font-weight: 600;
+    transform: rotate(270deg);
+    margin-right: -12px;
+  }
+`;
+
+const Step3Paper = styled(Paper)`
+  display: flex;
+  flex-direction: column;
+  background-color: #e6eded;
+  height: 100%;
+  box-shadow: none;
+  padding: 20px 12px;
+  text-align: left;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 132px;
+
+  .MuiTypography-body1 {
+    margin-top: 2px;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Roboto;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+  img {
+    margin-top: -12px;
+  }
+`;
 
 const TitleBox = styled(Box)`
   height: 60px;
@@ -335,7 +436,18 @@ const TitleBox = styled(Box)`
     text-align: right;
     padding-right: 24px;
   }
+
+  &&.testimonial {
+    justify-content: center;
+    background-color: #478529;
+    padding-left: 0px;
+    margin-bottom: 12px;
+
+    /* text-align: right; */
+    /* padding-right: 24px; */
+  }
 `;
+
 const SmallMarkets = styled(Paper)`
   margin-left: 12px;
   background-color: #f6e7cc;
