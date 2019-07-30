@@ -21,15 +21,14 @@ class CreateVendor extends React.Component{
             description: '',
             items: [],
             item: '',
-            electricty: false,
+            electricity: false,
             ventilation: false,
             loud: false,
             other_special: '',
             website: '',
             facebook: '',
             twitter: '',
-            instagram: '',
-            count: [0]
+            instagram: ''
         }
     }
     handleChange = e => {
@@ -38,13 +37,12 @@ class CreateVendor extends React.Component{
           [e.target.name]: e.target.value
         });
       };
+      
+    checkChange = name => e => {
+      e.preventDefault()
+      this.setState({ ...this.state, [name]: e.target.checked });
+    };
 
-    checkChange = e => {
-        this.setState({
-            ...this.state,
-            [e.target.name]: !e.target.value
-        })
-    }
     addItem = e => {
       e.preventDefault();
       if (this.state.item !== ''){
@@ -74,17 +72,18 @@ class CreateVendor extends React.Component{
   
     
     render() {
-      // console.log(this.state.name + ' name')
-      // console.log(this.state.description + ' description')
-      // console.log(this.state.electricty + ' ele')
-      // console.log(this.state.loud + ' loud')
-      // console.log(this.state.other_special + ' other')
-      // console.log(this.state.website + ' website')
-      // console.log(this.state.facebook + ' facebook')
-      // console.log(this.state.instagram + ' instag')
-      // console.log(this.state.twitter + ' twitter')
+      console.log(this.state.name + ' name')
+      console.log(this.state.description + ' description')
+      console.log(this.state.electricity + ' ele')
+      console.log(this.state.loud + ' loud')
+      console.log(this.state.other_special + ' other')
+      console.log(this.state.website + ' website')
+      console.log(this.state.facebook + ' facebook')
+      console.log(this.state.instagram + ' instag')
+      console.log(this.state.twitter + ' twitter')
       console.log(this.state.item)
-      console.log(this.state.items)
+      console.log(this.state.electricity)
+      console.log(this.state.other_special);
       let flag = false;
         return (
             <div>
@@ -154,9 +153,10 @@ class CreateVendor extends React.Component{
                     <FlexColumn>
                     <FlexContainer>
                       <Checkbox
-                        checked={this.state.electricty}
-                        onChange={this.checkChange}
-                        value={Boolean}
+                        name="electricity"
+                        checked={this.state.electricity}
+                        onChange={this.checkChange("electricity")}
+                        value={this.state.electricity}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
@@ -164,9 +164,10 @@ class CreateVendor extends React.Component{
                     </FlexContainer>
                     <FlexContainer>
                     <Checkbox
+                        name="ventilation"
                         checked={this.state.ventilation}
-                        onChange={this.checkChange}
-                        value={Boolean}
+                        onChange={this.checkChange("ventilation")}
+                        value={this.state.ventilation}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
@@ -174,9 +175,10 @@ class CreateVendor extends React.Component{
                     </FlexContainer>
                     <FlexContainer>
                     <Checkbox
+                        name="loud"
                         checked={this.state.loud}
-                        onChange={this.checkChange}
-                        value={Boolean}
+                        onChange={this.checkChange("loud")}
+                        value={this.state.loud}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
