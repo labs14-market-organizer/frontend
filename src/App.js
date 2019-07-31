@@ -25,6 +25,7 @@ import CreateMarket from "./routes/CreateMarket";
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
 import CreateVendor from "./routes/CreateVendor";
+import SearchMarkets from "./routes/SearchMarkets";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -87,6 +88,10 @@ class App extends React.Component {
                <Route
               path="/createvendor"
               render={props => <CreateVendor {...this.props} />}
+              />
+               <Route
+              path="/searchmarkets"
+              render={props => <SearchMarkets {...this.props} />}
               />
           </div>
         </MuiThemeProvider>
