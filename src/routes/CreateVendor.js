@@ -13,9 +13,13 @@ import styled from "styled-components";
 
 
 
+
 class CreateVendor extends React.Component{
+    isUpdating = false;
     constructor(props){
         super(props);
+        this.state = this.props.currentVendor;
+        if (!this.state)
         this.state = {
             name: '',
             description: '',
@@ -29,7 +33,8 @@ class CreateVendor extends React.Component{
             facebook: '',
             twitter: '',
             instagram: ''
-        }
+        };
+        else this.isUpdating = true;
     }
     handleChange = e => {
         this.setState({
@@ -62,7 +67,9 @@ class CreateVendor extends React.Component{
             count: newCount
           })
         }
-    deleteItem = (number) => {
+
+    deleteItem = (e, number) => {
+      e.preventDefault();
       const newItems = this.state.items.filter((item, index) => index !== number);
       this.setState({
         ...this.state,
@@ -76,7 +83,7 @@ class CreateVendor extends React.Component{
             <div>
                 <Header>
                     <ArrowImage src={Arrow} />
-                    <CreateHeader>Create Vendor</CreateHeader>
+                    <CreateHeader>{(this.isUpdating) ? "Edit Vendor" : "Create Vendor" }</CreateHeader>
                 </Header>
                 <Container maxWidth="sm">
                 <form>
@@ -125,11 +132,12 @@ class CreateVendor extends React.Component{
                   
                     />
                     </FlexContainer>
-                    {(this.state.items.length > 0) ? <p>What I sell!</p>: null}
+                    {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
                     {this.state.items.map((item, index) => 
                     <FlexContainer  key={index}>
+                       <button onClick={(e) => this.deleteItem(e,index)} style={{border: "none", backgroundColor: "white", fontSize: "18px", marginRight: "15px"}}>X</button>
                        <p>{item}</p> 
-                       <button onClick={() => this.deleteItem(index)}>X</button>
+                       
                     </FlexContainer>
                     )}
                     
@@ -291,8 +299,7 @@ const StyledContainer = styled.div`
 
 const mapStateToProps = state => {
     return {
-      //states
-      ...state.checkUserData
+      ...state
     };
   };
   
