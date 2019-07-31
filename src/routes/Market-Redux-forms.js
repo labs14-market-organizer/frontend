@@ -22,7 +22,6 @@ import {Redirect} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel'
 
 function validate (values) {
-  console.log(values);
   const errors = {};
   const requiredFields = [
     "Market Name",
@@ -41,7 +40,8 @@ function validate (values) {
   });
   if (values.Website && !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(values.Website)) 
     errors.Website = "Invalid Website";
-    try {if(!values.operation || JSON.parse(values.operation).filter(x=> x.start && x.end).length < 1) errors.operation = "Must define hours";}
+    if(values.operation === "\"invalid hours\"") errors.operation = "Start cant be after End"
+    else try {if(!values.operation || JSON.parse(values.operation).filter(x=> x.start && x.end).length < 1) errors.operation = "Must define hours";}
     catch {errors.operation = "Must define hours"}
   return errors;
 }
@@ -66,22 +66,22 @@ const renderTextField = ({
 />
 )};
 
-const renderRadioGroup = ({ label, input, meta: { touched, error }, ...rest}) => (
+const renderRadioGroup = ({ label, input, meta: { dirty, error }, ...rest}) => (
   <RadioButtonGroup
     label={label}
-    error={touched && error ? error : ""}
+    error={dirty && error ? error : ""}
     errorText={true}
     {...input}
     {...rest}
     valueSelected={input.value}
     onChange={(event, value) => input.onChange(value)}
+    style={dirty && error ? {border: "solid red 2px"} : {}}
   />
 );
 
 const renderButton = ({ input,
-  label, prefunc, meta: { visited, error }, ...rest}) =>{
+  label, prefunc, Style, meta: { visited, error }, ...rest}) =>{
   {
-    console.log(visited)
     let witherror = {color: "red", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "-30px", transition: "margin 0.2s"};
     let noerror = {marginTop: "-50px"}
     return (
@@ -94,7 +94,7 @@ const renderButton = ({ input,
       errorText={true}
       {...input}
       {...rest}
-      style={error && visited ? {color: "red"} : {}}
+      style={error && visited ? {color: "red"} : {...Style}}
     >{label}</Button>
     </div>
   );}}
@@ -104,6 +104,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 class CreateMarket extends React.Component
 {
+  isUpdating = false;
   constructor(props)
   {
     super(props);
@@ -118,11 +119,34 @@ class CreateMarket extends React.Component
       friday: false,
       saturday: false,
       sunday: false,
-      start: 100,
+      start: 1200,
       end: 1200,
       daysList: [],
       radio: "Public Market"
     };
+    console.log("hello world")
+    console.log(this.props.market);
+    if(this.props.market)
+    {
+      this.isUpdating = true;
+      //this.state.operation = this.props.market.operation;
+      this.props.initialize(
+        {
+          "Market Name": this.props.market.name,
+          "Market Description": this.props.market.description,
+          Address: this.props.market.address,
+          City: this.props.market.city,
+          State: this.props.market.state,
+          "Zip Code": this.props.market.zipcode,
+          Website: this.props.market.website,
+          Facebook: this.props.market.facebook,
+          Twitter: this.props.market.twitter,
+          Instagram: this.props.market.instagram,
+          market_type: this.props.market.type,
+          operation: this.props.market.operation ? JSON.stringify(this.props.market.operation) : ""
+        }
+      )
+    }
   }
 
   handleChange = e => {
@@ -244,18 +268,9 @@ class CreateMarket extends React.Component
       });
       return sortOperation;
     } else {
-      alert('Please change the time to be accurate')
     }
-    return null;
+    return "invalid hours";
 };
-  save = e => {
-    e.preventDefault();
-    if (this.state.isUpdating) {
-      this.props.updateMarket(this.state);
-    } else {
-      this.props.createNewMarket(this.state);
-    }
-  };
 
   militaryConvert(time){
     time = String(time);
@@ -284,7 +299,7 @@ class CreateMarket extends React.Component
       <form onSubmit={handleSubmit}>
         <div className="header">
             <img src={Arrow} />
-            <h4 className="createHeader">{(false) ? "Edit Market" : "Create Market" }</h4>
+            <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
         </div>
         {/* <div className="addPhoto">
             <img />
@@ -367,17 +382,17 @@ class CreateMarket extends React.Component
           />
         </Container>
         <StyleLeft>
-        <h6>Market Status</h6>
+        <h5>Market Status</h5>
         {/*Radio buttons, default to public market*/}
       <Field name="market_type" component={renderRadioGroup}>
         <div style={{display: "flex"}}>
           <Radio value="Public" label="Public" name="Public"/>
-          <div style={{marginTop: "-13px"}}>Public Market</div>
+          <div style={{marginTop: "8px"}}>Public Market</div>
         </div>
         <br />
         <div style={{display: "flex"}}>
           <Radio id="Private" value="Private" label="Private" name="Private"/>
-          <div style={{marginTop: "-8px", marginBottom: "10px"}}> Private Market</div>
+          <div style={{marginTop: "8px", marginBottom: "10px"}}> Private Market</div>
         </div>
       </Field>
         <h4>Market Days {'&'} Times Of Operation</h4>
@@ -503,7 +518,15 @@ class CreateMarket extends React.Component
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
                         <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
-                          <Field component={renderButton} name="operation" label={"x"} style={{fontWeight: "600"}} prefunc={(e) => this.deleteTime(e, item.day)}></Field></StyledP> 
+                          <Field 
+                            component={renderButton} name="operation" 
+                            label={"x"}  
+                            size="small"
+                            color="secondary" 
+                            Style={{marginTop: "25px"}}
+                            prefunc={(e) => this.deleteTime(e, item.day)}
+                          />
+                            </StyledP> 
                         : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP>
                     })}
         <br />
@@ -582,7 +605,8 @@ const StyledTypography = styled(Typography)`
 `;
 const StyleLeft = styled.div`
   text-align: left;
-  margin-left: 3%;
+  max-width: 600px;
+  margin: 0 auto;
 `;
 
 const StyledUp = styled.div`
@@ -630,10 +654,11 @@ class CreateMarketContainer extends React.Component
   }
   handleRedux = (values) =>
   {
-    this.props.createNewMarket({...this.init, ...values});
+    if (this.props.currentMarket) this.props.updateMarket(this.props.currentMarket.id, values)
+    else this.props.createNewMarket({...this.init, ...values});
   }
   render(){
-    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} />);
+    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} market={this.props.currentMarket}/>);
   }
 }
 
