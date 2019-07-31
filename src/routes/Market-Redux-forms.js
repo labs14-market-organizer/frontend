@@ -27,6 +27,7 @@ function validate (values) {
   const requiredFields = [
     "Market Name",
     "Market Description",
+    "market_type",
     "Address",
     "City",
     "State",
@@ -40,6 +41,8 @@ function validate (values) {
   });
   if (values.Website && !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(values.Website)) 
     errors.Website = "Invalid Website";
+    try {if(!values.operation || JSON.parse(values.operation).filter(x=> x.start && x.end).length < 1) errors.operation = "Must define hours";}
+    catch {errors.operation = "Must define hours"}
   return errors;
 }
 
@@ -597,9 +600,9 @@ const ReduxForms = reduxForm({
 })(CreateMarket);
 
 
-const CreateMarketContainer = (props) =>
+class CreateMarketContainer extends React.Component
 {
-  const init = {
+  init = {
     name: '',
     description: '',
     address: '',
@@ -611,13 +614,14 @@ const CreateMarketContainer = (props) =>
     twitter: '',
     instagram: '',
     zipcode: ''
-}
-  function handleRedux(values) 
-  {
-    props.createNewMarket({...init, ...values});
   }
-  //if(props.checkMarketData.updated) {return <div>DONE</div>}
-  return (<ReduxForms {...props} onSubmit={handleRedux} redirect={props.checkMarketData.updated} />);
+  handleRedux = (values) =>
+  {
+    this.props.createNewMarket({...this.init, ...values});
+  }
+  render(){
+    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} />);
+  }
 }
 
 export default connect(

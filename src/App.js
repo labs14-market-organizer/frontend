@@ -90,7 +90,7 @@ class App extends React.Component {
               render={props => <CreateVendor {...this.props} />}
               />
               <Route
-              paht="/test"
+              path="/test"
               render={props => <MarketReduxForms />}
               />
           </div>
