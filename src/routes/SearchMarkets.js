@@ -20,21 +20,24 @@ class SearchMarkets extends React.Component {
         });
       };
 
+
     render() {
         return (
             <StyledContainer>
-                <TextField
-                    id="search"
-                    label="Search Markets"
-                    name="search"
-                    placeholder="City, State or Zip Code"
-                    value={this.state.search}
-                    onChange={this.handleChange}
-                    margin="normal"
-                    variant="outlined"
-                    fullWidth={true}
-                    style={{marginTop: "60px"}}
-                />
+                <form>
+                    <TextField
+                        id="search"
+                        label="Search Markets"
+                        name="search"
+                        placeholder="City, State or Zip Code"
+                        value={this.state.search}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        style={{marginTop: "60px"}}
+                    />
+                </form>
             </StyledContainer>
         )
     }
