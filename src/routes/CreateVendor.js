@@ -10,7 +10,7 @@ import {
   } from "@material-ui/core";
 import { connect } from "react-redux";
 import styled from "styled-components";
-
+import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 
 
 
@@ -320,5 +320,5 @@ const mapStateToProps = state => {
   
   export default connect(
     mapStateToProps,
-    { }
+    { createNewVendor, updateVendor  }
   )(CreateVendor);
