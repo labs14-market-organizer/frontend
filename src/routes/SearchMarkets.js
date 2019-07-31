@@ -21,13 +21,14 @@ class SearchMarkets extends React.Component {
       };
 
     render() {
+        console.log(this.state.search)
         return (
             <StyledContainer>
                 <TextField
                     id="search"
                     label="Search Markets"
-                    defaultValue="City, State or Zip Code"
                     name="search"
+                    placeholder="City, State or Zip Code"
                     value={this.state.search}
                     onChange={this.handleChange}
                     margin="normal"
