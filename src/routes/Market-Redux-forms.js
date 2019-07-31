@@ -11,28 +11,106 @@ import {
 import Button from "@material-ui/core/Button";
 import { green } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
+import RadioButtonGroup from "@material-ui/core/RadioGroup"
 import { withStyles } from "@material-ui/core/styles";
 import "../scss/CreateMarket.scss";
 import { createNewMarket, updateMarket } from "../redux/actions/marketData";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Field, reduxForm } from "redux-form";
+import {Redirect} from "react-router-dom";
+import FormControlLabel from '@material-ui/core/FormLabel'
 
-class CreateMarket extends React.Component {
+function validate (values) {
+  const errors = {};
+  const requiredFields = [
+    "Market Name",
+    "Market Description",
+    "market_type",
+    "Address",
+    "City",
+    "State",
+    "Zip Code"
+  ];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = `${field.charAt(0).toUpperCase() +
+        field.slice(1)} Is Required`;
+    }
+  });
+  if (values.Website && !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(values.Website)) 
+    errors.Website = "Invalid Website";
+    if(values.operation === "\"invalid hours\"") errors.operation = "Start cant be after End"
+    else try {if(!values.operation || JSON.parse(values.operation).filter(x=> x.start && x.end).length < 1) errors.operation = "Must define hours";}
+    catch {errors.operation = "Must define hours"}
+  return errors;
+}
+
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error },
+  ...custom
+}) => {
+  return(
+  <TextField
+  label={label}
+  margin="normal"
+  variant="outlined"
+  fullWidth={true}
+  autoComplete={true}
+  error={touched && error ? error : ""}
+  errorText={true}
+  {...input}
+  {...custom}
+/>
+)};
+
+const renderRadioGroup = ({ label, input, meta: { dirty, error }, ...rest}) => (
+  <RadioButtonGroup
+    label={label}
+    error={dirty && error ? error : ""}
+    errorText={true}
+    {...input}
+    {...rest}
+    valueSelected={input.value}
+    onChange={(event, value) => input.onChange(value)}
+    style={dirty && error ? {border: "solid red 2px"} : {}}
+  />
+);
+
+const renderButton = ({ input,
+  label, prefunc, Style, meta: { visited, error }, ...rest}) =>{
+  {
+    let witherror = {color: "red", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "-30px", transition: "margin 0.2s"};
+    let noerror = {marginTop: "-50px"}
+    return (
+    <div style={visited && error ? witherror : noerror} >
+    {error && visited ? error : ""}
+    <br/>
+    <Button
+      onClick={e => {let opp = prefunc(e); input.onChange(JSON.stringify(opp));}}
+      error={visited && error ? error : ""}
+      errorText={true}
+      {...input}
+      {...rest}
+      style={error && visited ? {color: "red"} : {...Style}}
+    >{label}</Button>
+    </div>
+  );}}
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+
+
+class CreateMarket extends React.Component
+{
   isUpdating = false;
-  constructor(props) {
+  constructor(props)
+  {
     super(props);
-    this.state = this.props.currentMarket;
-    if (!this.state)
     this.state = {
-      name: '',
-      description: '',
-      address: '',
       operation: [{ day: 'sunday', start: null, end: null }, { day: 'monday', start: null, end: null },{ day: 'tuesday', start: null, end: null }, { day: 'wednesday', start: null, end: null },{ day: 'thursday', start: null, end: null }, { day: 'friday', start: null, end: null }, { day: 'saturday', start: null, end: null }],
       market_type: 1, //(1 = private, 2=public)
-      website: '',
-      facebook: '',
-      image: '', 
-      twitter: '',
       daysHoursField: 1, //keeping total of how many days and times need to be displayed.
       monday: false,
       tuesday: false,
@@ -44,11 +122,31 @@ class CreateMarket extends React.Component {
       start: 1200,
       end: 1200,
       daysList: [],
-      radio: "Public Market",
-      instagram: '',
-      zipcode: ''
-  };
-    else this.isUpdating = true;
+      radio: "Public Market"
+    };
+    console.log("hello world")
+    console.log(this.props.market);
+    if(this.props.market)
+    {
+      this.isUpdating = true;
+      //this.state.operation = this.props.market.operation;
+      this.props.initialize(
+        {
+          "Market Name": this.props.market.name,
+          "Market Description": this.props.market.description,
+          Address: this.props.market.address,
+          City: this.props.market.city,
+          State: this.props.market.state,
+          "Zip Code": this.props.market.zipcode,
+          Website: this.props.market.website,
+          Facebook: this.props.market.facebook,
+          Twitter: this.props.market.twitter,
+          Instagram: this.props.market.instagram,
+          market_type: this.props.market.type,
+          operation: this.props.market.operation ? JSON.stringify(this.props.market.operation) : ""
+        }
+      )
+    }
   }
 
   handleChange = e => {
@@ -58,14 +156,7 @@ class CreateMarket extends React.Component {
     });
   };
 
-  onRadioChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
   changeDay = e => {
-    console.log(this.state.daysList);
     let number, newDaysList;
     if (e.currentTarget.value === "false") {
       this.setState({
@@ -89,7 +180,6 @@ class CreateMarket extends React.Component {
   };
     deleteTime = (e, day) => {
       e.preventDefault();
-      console.log(day)
       let newDays = this.state.operation;
       const newList = []
       for (let i = 0; i < newDays.length; i++){
@@ -107,6 +197,7 @@ class CreateMarket extends React.Component {
           ...this.state,
           operation: [...newList]
       })
+      return newList;
   }
 
    touched = false
@@ -175,27 +266,19 @@ class CreateMarket extends React.Component {
         saturday: false,
         sunday: false
       });
+      return sortOperation;
     } else {
-      alert('Please change the time to be accurate')
     }
+    return "invalid hours";
 };
-  save = e => {
-    e.preventDefault();
-    if (this.state.isUpdating) {
-      this.props.updateMarket(this.state);
-    } else {
-      this.props.createNewMarket(this.state);
-    }
-  };
 
   militaryConvert(time){
-    console.log('here ya go')
+    time = String(time);
     let hours = time.split('');
     let am = "am";
     let newHours, combined, subtractedHours, rest;
     if (hours[0] === "0"){
       combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
-      console.log(combined)
       return combined;
     } else if (hours[0] === "1" && hours[1] === "2") {
       return hours.join('') + "pm";
@@ -209,175 +292,109 @@ class CreateMarket extends React.Component {
     }
   }
 
-  render() {
-    if (this.props.checkMarketData.updated) {
-      this.props.history.push('/addbooths')
-  }
-  console.log(this.props)
-
+  render(){
+    const {handleSubmit, pristine, reset, submitting } = this.props;
+    if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="header">
-          <img src={Arrow} />
-          <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
+            <img src={Arrow} />
+            <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
         </div>
         {/* <div className="addPhoto">
-          <img />
-          <p className="add">ADD COVER PHOTO</p>
+            <img />
+            <p className="add">ADD COVER PHOTO</p>
         </div> */}
         <Container maxWidth="sm">
-          <TextField
-            error={this.touched && this.state.name == "" ? true : false}
+          <Field
+            component={renderTextField}
             required
             id="name"
             label="Market Name"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
-            autoComplete={true}
+            name="Market Name"
           />
-          <br />
-          <TextField
-            error={this.touched && this.state.description == "" ? true : false}
+        <br />
+        <Field
+            component={renderTextField}
             required
             id="description"
             label="Market Description"
-            name="description"
-            value={this.state.description}
-            onChange={this.handleChange}
-            margin="normal"
-            rows="3"
-            variant="outlined"
-            fullWidth={true}
-            multiline
+            name="Market Description"
           />
           <br />
-          <TextField
-            error={this.touched && this.state.address == "" ? true : false}
+        <Field
+            component={renderTextField}
             required
             id="address"
             label="Address"
-            name="address"
-            value={this.state.address}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
+            name="Address"
           />
-          <TextField
-            error={this.touched && this.state.city == "" ? true : false}
+        <Field
+            component={renderTextField}
             required
             id="city"
             label="City"
-            name="city"
-            value={this.state.city}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
+            name="City"
           />
-          </Container>
-          <StyledContainer>
-            <TextField
-              error={this.touched && this.state.state == "" ? true : false}            
+        </Container>
+        <StyledContainer>
+          <Field
+              component={renderTextField}
               required
               id="state"
               label="State"
-              name="state"
-              value={this.state.state}
-              onChange={this.handleChange}
-              margin="normal"
-              variant="outlined"
+              name="State"
               style={{ width: "44%" }}
             />
-            <TextField
-              error={this.touched && this.state.zipcode == "" ? true : false}
+            <Field
+              component={renderTextField}
               required
               id="zipcode"
               label="Zip Code"
-              name="zipcode"
-              value={this.state.zipcode}
-              onChange={this.handleChange}
-              margin="normal"
-              variant="outlined"
+              name="Zip Code"
               style={{ width: "44%", marginLeft: "8%" }}
-              fullWidth={true}
             />
-            </StyledContainer>
-            <Container maxWidth="sm">
-            <TextField
+        </StyledContainer>
+        <Container maxWidth="sm">
+        <Field
+            component={renderTextField}
             id="website"
             label="Website"
-            name="website"
-            value={this.state.website}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
+            name="Website"
           />
-
-          <br />
-
-          <TextField
+          <Field
+            component={renderTextField}
             id="facebook"
             label="Facebook"
-            name="facebook"
-            value={this.state.facebook}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
+            name="Facebook"
           />
-          <TextField
+          <Field
+            component={renderTextField}
             id="twitter"
             label="Twitter"
-            name="twitter"
-            value={this.state.twitter}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
+            name="Twitter"
           />
-          <TextField
+          <Field
+            component={renderTextField}
             id="instagram"
             label="Instagram"
-            name="instagram"
-            value={this.state.instagram}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
+            name="Instagram"
           />
-          
-        </Container>  
-       <StyleLeft>
-        <h6>Market Status</h6>
+        </Container>
+        <StyleLeft>
+        <h5>Market Status</h5>
         {/*Radio buttons, default to public market*/}
+      <Field name="market_type" component={renderRadioGroup}>
         <div style={{display: "flex"}}>
-        <Radio
-          style={{marginTop: "-23px"}}
-          name="radio"
-          value="Public Market"
-          checked={this.state.radio === "Public Market"}
-          onChange={e => this.onRadioChange(e)}
-        />
-        <div style={{marginTop: "-13px"}}>Public Market</div>
+          <Radio value="Public" label="Public" name="Public"/>
+          <div style={{marginTop: "8px"}}>Public Market</div>
         </div>
         <br />
         <div style={{display: "flex"}}>
-        <Radio
-          style={{marginTop: "-20px"}}
-          name="radio"
-          value="Private Market"
-          checked={this.state.radio === "Private Market"}
-          onChange={e => this.onRadioChange(e)}
-        />
-        <div style={{marginTop: "-8px", marginBottom: "10px"}}> Private Market</div>
+          <Radio id="Private" value="Private" label="Private" name="Private"/>
+          <div style={{marginTop: "8px", marginBottom: "10px"}}> Private Market</div>
         </div>
-        <hr style={{width: "90vw", marginLeft: "5px"}}></hr>
+      </Field>
         <h4>Market Days {'&'} Times Of Operation</h4>
         <StyledDiv>
   
@@ -452,6 +469,9 @@ class CreateMarket extends React.Component {
             type="time"
             onChange={this.handleChange}
             defaultValue="00:00"
+            InputLabelProps={{
+              shrink: true
+            }}
           />
           {/**This code just adds the hiphen between the time boxes */}
           {/* <span style={{marginTop: "30px"}}>&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;</span> */}
@@ -462,10 +482,13 @@ class CreateMarket extends React.Component {
             type="time"
             onChange={this.handleChange}
             defaultValue="00:00"
+            InputLabelProps={{
+              shrink: true
+            }}
           />
         </div>
         <StyledDiv>
-          <Button
+          {/* <Button
             variant="outlined"
             className="biggerButton"
             size="large"
@@ -474,7 +497,19 @@ class CreateMarket extends React.Component {
             style={{width: "80vw", marginTop: "-20px", height: "60px", marginBottom: "32px"}}
           >
             +ADD HOURS
-          </Button>
+          </Button> */}
+          <Field 
+            name="operation" 
+            component={renderButton}
+            label={"Add Hours"}
+            variant="outlined"
+            className="biggerButton"
+            size="large"
+            color="secondary"
+            prefunc={this.setHours}
+            operation={this.state}
+          >
+          </Field>
         </StyledDiv>    
         
       
@@ -483,20 +518,28 @@ class CreateMarket extends React.Component {
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
                         <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
-                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledP> 
+                          <Field 
+                            component={renderButton} name="operation" 
+                            label={"x"}  
+                            size="small"
+                            color="secondary" 
+                            Style={{marginTop: "25px"}}
+                            prefunc={(e) => this.deleteTime(e, item.day)}
+                          />
+                            </StyledP> 
                         : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP>
                     })}
         <br />
-        </StyleLeft>            
-        <SaveFix 
-            onClick={(e) => {this.save(e); this.touched = true }}>
-
-            <Typography variant="button"> Next</Typography>      
-        </SaveFix>
+        </StyleLeft>  
+        <div>
+          <Button type="submit" disabled={pristine || submitting}>
+            Submit
+          </Button>
+        </div>
       </form>
     );
   }
-}
+};
 
 const StyledDiv = styled.div`
   display: flex;
@@ -562,7 +605,8 @@ const StyledTypography = styled(Typography)`
 `;
 const StyleLeft = styled.div`
   text-align: left;
-  margin-left: 3%;
+  max-width: 600px;
+  margin: 0 auto;
 `;
 
 const StyledUp = styled.div`
@@ -580,13 +624,45 @@ const StyledP = styled.p`
 
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     ...state
   };
 };
 
+
+
+const ReduxForms = reduxForm({
+  form: "MaterialUiForm", // a unique identifier for this form
+  validate
+})(CreateMarket);
+
+
+class CreateMarketContainer extends React.Component
+{
+  init = {
+    name: '',
+    description: '',
+    address: '',
+    operation: [],
+    market_type: 1, //(1 = private, 2=public)
+    website: '',
+    facebook: '',
+    image: '', 
+    twitter: '',
+    instagram: '',
+    zipcode: ''
+  }
+  handleRedux = (values) =>
+  {
+    if (this.props.currentMarket) this.props.updateMarket(this.props.currentMarket.id, values)
+    else this.props.createNewMarket({...this.init, ...values});
+  }
+  render(){
+    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} market={this.props.currentMarket}/>);
+  }
+}
+
 export default connect(
   mapStateToProps,
   { createNewMarket, updateMarket }
-)(CreateMarket);
+)(CreateMarketContainer);

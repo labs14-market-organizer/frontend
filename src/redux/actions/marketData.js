@@ -15,26 +15,40 @@ export const ERROR_INVALID_TOKEN = "ERROR_INVALID_TOKEN";
 object schema
 market = 
 {
+    
+    address: string, //broken down at this point
+    description: string,
+    facebook: string
+    //image: string not in use
+    market_type(1,2): int (private,public),
 	name: string,
-	description: string,
-	address: string,
 	operation:
 	[{
 		name: string, //date type
 		start: 
 		end: 
-	}]
-	market_type(1,2): int (private,public),
+	}],
 	website: string,
-	facebook: string
-	image: string
 }
 
+
+{
+    "name": string,
+    "description": string,
+    "electricity": Bool,
+    "facebook": string,
+    "instagram": string,
+    "items": null,
+    "loud": Bool,
+    "other_special": string,
+    "twitter": string,
+    "ventilation": Bool,
+    "website": url
+  }
 */
 export const createNewMarket = (market) => dispatch => 
 {
     dispatch({ type: SET_MARKET_DATA_START });
-    console.log(market);
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     
@@ -42,7 +56,7 @@ export const createNewMarket = (market) => dispatch =>
     if(market.error) return dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: market.error} });
 
     return axiosWithAuth(token)
-    .post(`${HOST_URL}`)
+    .post(`${HOST_URL}/markets`, market)
     .then(res => {
         localStorage.removeItem("userData");//remove out of date data
         dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: res.data}}); //fire this first so we dont get GET_START fire before GET_END
@@ -50,6 +64,7 @@ export const createNewMarket = (market) => dispatch =>
         return
     })
     .catch(err =>{
+        console.error(err);
         //check if bad token if so clear local data
         dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: err} });
     })
@@ -107,25 +122,28 @@ function cleanData(market)
 {
     let clean = 
     {
-        address: market.address,
-        city: market.city,
-        description: market.description,
-        facebook: market.facebook,
-        image: market.image,
-        instagram: market.instagram,
-        market_type: market.market_type,
-        name: market.name,
-        operation: market.operation,
-        state: market.state,
-        twitter: market.twitter,
-        website: market.website,
-        zipcode: market.zipcode
+        address: market.Address,
+        city: market.City,
+        description: market["Market Description"],
+        facebook: market.Facebook ? market.Facebook : "",
+        //image: market.image,
+        instagram: market.Instagram ? market.Instagram : "",
+        type: market.market_type === "Public" ? 1 : 2,
+        name: market["Market Name"],
+        operation: JSON.parse(market.operation),
+        state: market.State,
+        twitter: market.Twitter ? market.Twitter : "",
+        zipcode: market["Zip Code"]
     }
+    console.log(clean)
+    if(market.website) clean.website = market.website;
     let required = ["address", "city", "description","state","zipcode"]
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
     if(test.length > 0) return {error: `${test[0]} is a required field`};
     if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
+    clean.operation = clean.operation.filter(x=> x.start && x.end);
+    if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
     if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
-
+    console.log(clean)
     return clean;
 }
