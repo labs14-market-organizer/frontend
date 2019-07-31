@@ -23,7 +23,6 @@ export const checkMarketData = (state = initalState, action) =>
     {
         case SET_MARKET_DATA_END:
         case GET_MARKET_DATA_END:
-            console.log('hey')
             return {
                 ...state,
                 ...action.payload,
