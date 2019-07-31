@@ -22,6 +22,8 @@ import TokenCollect from "./routes/TokenCollect";
 import MainPage from "./routes/MainPage";
 import UserList from "./routes/UserList";
 import CreateMarket from "./routes/CreateMarket";
+
+import AddBooths from "./routes/AddBooths";
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
 import CreateVendor from "./routes/CreateVendor";
@@ -76,6 +78,10 @@ class App extends React.Component {
             <Route
               path="/createmarket"
               render={props => <CreateMarket {...this.props} />}
+            />
+            <Route
+              path="/addbooths"
+              render={props => <AddBooths {...this.props} currentBooth={undefined} />}
             />
               <Route
               path="/useronboarding"
