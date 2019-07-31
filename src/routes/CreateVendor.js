@@ -135,8 +135,8 @@ class CreateVendor extends React.Component{
                     {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
                     {this.state.items.map((item, index) => 
                     <FlexContainer  key={index}>
-                       <button onClick={(e) => this.deleteItem(e,index)} style={{border: "none", backgroundColor: "white", fontSize: "18px", marginRight: "15px"}}>X</button>
-                       <p>{item}</p> 
+                       <StyledButton onClick={(e) => this.deleteItem(e,index)}>X</StyledButton>
+                       <StyledP1>{item}</StyledP1> 
                        
                     </FlexContainer>
                     )}
@@ -284,6 +284,12 @@ const StyledP = styled.p`
   line-height: 1.5;
 `;
 
+const StyledP1 = styled.p`
+font-family: Raleway;
+font-size: 16px;
+line-height: 1.2;
+`;
+
 
 const FlexColumn = styled.div`
   display: flex;
@@ -296,6 +302,15 @@ const FlexContainer = styled.div`
 const StyledContainer = styled.div`
   text-align: left;
 `;
+
+const StyledButton = styled.button`
+  border: none;
+  background-color: "white";
+  font-size: 18px;
+  margin-right: 15px;
+  font-family: Raleway;
+`
+
 
 const mapStateToProps = state => {
     return {
