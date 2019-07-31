@@ -14,7 +14,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioButtonGroup from "@material-ui/core/RadioGroup"
 import { withStyles } from "@material-ui/core/styles";
 import "../scss/CreateMarket.scss";
-import { createNewMarket, updateMarket } from "../redux/actions/marketData";
+import { createNewBooth, updateBooth } from "../redux/actions/boothData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
@@ -24,13 +24,6 @@ import FormControlLabel from '@material-ui/core/FormLabel'
 function validate (values) {
   const errors = {};
   const requiredFields = [
-    "Market Name",
-    "Market Description",
-    "market_type",
-    "Address",
-    "City",
-    "State",
-    "Zip Code"
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -38,11 +31,8 @@ function validate (values) {
         field.slice(1)} Is Required`;
     }
   });
-  if (values.Website && !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(values.Website)) 
-    errors.Website = "Invalid Website";
-    if(values.operation === "\"invalid hours\"") errors.operation = "Start cant be after End"
-    else try {if(!values.operation || JSON.parse(values.operation).filter(x=> x.start && x.end).length < 1) errors.operation = "Must define hours";}
-    catch {errors.operation = "Must define hours"}
+  console.log("errors: \n" + JSON.stringify(errors));
+  console.log("values:\n" + JSON.stringify(values));
   return errors;
 }
 
@@ -108,29 +98,29 @@ class CreateMarket extends React.Component
   constructor(props)
   {
     super(props);
+    if(this.props.currentBooth)
+        this.state = this.props.currentBooth;
+    else
+    this.state = {
+        boothtype: '',
+        numberofbooths: '',
+        boothprice: '',
+        length: '',
+        width: '',
+        boothdescription: '',
+    }
+    this.isUpdating = !!this.props.currentBooth
     if(this.props.market)
     {
       this.props.initialize(
-        {
-          "Market Name": this.props.market.name,
-          "Market Description": this.props.market.description,
-          Address: this.props.market.address,
-          City: this.props.market.city,
-          State: this.props.market.state,
-          "Zip Code": this.props.market.zipcode,
-          Website: this.props.market.website,
-          Facebook: this.props.market.facebook,
-          Twitter: this.props.market.twitter,
-          Instagram: this.props.market.instagram,
-          market_type: this.props.market.type,
-          operation: this.props.market.operation ? JSON.stringify(this.props.market.operation) : ""
-        }
+        this.state
       )
     }
   }
 
   render(){
-    return     <div/>
+    return <div/>
+
     {/* <Field
             component={renderTextField}
             required
@@ -177,7 +167,7 @@ class ReduxContainer extends React.Component
     else this.props.createNewMarket({...this.init, ...values});
   }
   render(){
-    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} market={this.props.currentMarket}/>);
+    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkBoothData.updated} market={this.props.currentMarket}/>);
   }
 }
 

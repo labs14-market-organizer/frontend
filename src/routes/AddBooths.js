@@ -22,7 +22,6 @@ class AddBooths extends React.Component {
             boothdescription: '',
         }
         this.isUpdating = !!this.props.currentBooth
-        console.log(this.isUpdating)
     }
 
     handleChange = e => {
