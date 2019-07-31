@@ -12,6 +12,8 @@ import {
   GridList
 } from "@material-ui/core";
 
+import footerCloud from "../assets/footerCloud.svg"
+
 
 const Footer = () => {
   return (
@@ -30,11 +32,15 @@ const Footer = () => {
 </StyledGridList>
       <Typography variant="body1">Copyright <span>©</span> 2019 Cloud Stands</Typography>
 
+    <img src={footerCloud} />
     </StyledContainer>
   );
 };
 
 const StyledContainer = styled(Container)`
+height: 212px;
+margin-top: 78px;
+
 .MuiTypography-subtitle1 {
 text-align: left;
 font-family: "Raleway";
@@ -44,12 +50,28 @@ font-weight: 600;
 margin-bottom: 12px;
 padding-left: 12px;
 }
-height: 212px;
+
+img {
+  position: relative;
+  /* height: 400px; */
+  display: inline-block;
+  text-align: left;
+  height: 280px;
+  width: 110.2%;
+  margin: 0;
+  /* margin-top: -200px; */
+  margin-left: -30px;
+  z-index: -10
+  /* min-width: 100%; */
+
+}
 
 
 .MuiTypography-body1 {
-  margin-left: -26px;
+  /* margin-left: -26px; */
   font-family: "Raleway";
+  margin-bottom: -240px;
+
   font-weight: normal;
   span {
     font-weight: bold;

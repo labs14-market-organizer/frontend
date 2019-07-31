@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: true,
+      menuOpen: false,
       }
   }
 
@@ -41,7 +41,11 @@ class Navbar extends React.Component {
     console.log("we changed it@")
   return (
     
-        <StyledPaper>
+        <StyledPaper elevation={4}>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         hi
     </StyledPaper>
       );
@@ -99,6 +103,10 @@ const StyledBox = styled(Box)`
 
   .menuIcon {
     padding: 0 16px;
+
+    :hover {
+      cursor: pointer;
+    }
     
     
 
@@ -136,6 +144,7 @@ position: absolute;
 left: 0;
 top: 0;
 border-radius: 10px;
+text-align: left;
 
 `
 

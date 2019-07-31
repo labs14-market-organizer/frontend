@@ -189,7 +189,7 @@ const StyledLink2 = styled(Link)`
     max-width: 424px;
     margin-left: 22px;
     height: 60px;
-    margin-bottom:78px;
+    /* margin-bottom:78px; */
     font-family: "Raleway";
     font-size: 18px;
     font-weight: bold;
