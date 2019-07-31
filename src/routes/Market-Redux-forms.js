@@ -66,9 +66,11 @@ const renderTextField = ({
 />
 )};
 
-const renderRadioGroup = ({ label, input, ...rest}) => (
+const renderRadioGroup = ({ label, input, meta: { touched, error }, ...rest}) => (
   <RadioButtonGroup
     label={label}
+    error={touched && error ? error : ""}
+    errorText={true}
     {...input}
     {...rest}
     valueSelected={input.value}
@@ -77,14 +79,25 @@ const renderRadioGroup = ({ label, input, ...rest}) => (
 );
 
 const renderButton = ({ input,
-  label, prefunc, ...rest}) =>{
-  return (
+  label, prefunc, meta: { visited, error }, ...rest}) =>{
+  {
+    console.log(visited)
+    let witherror = {color: "red", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "-30px", transition: "margin 0.2s"};
+    let noerror = {marginTop: "-50px"}
+    return (
+    <div style={visited && error ? witherror : noerror} >
+    {error && visited ? error : ""}
+    <br/>
     <Button
       onClick={e => {let opp = prefunc(e); input.onChange(JSON.stringify(opp));}}
+      error={visited && error ? error : ""}
+      errorText={true}
       {...input}
       {...rest}
+      style={error && visited ? {color: "red"} : {}}
     >{label}</Button>
-  );}
+    </div>
+  );}}
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
