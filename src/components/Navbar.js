@@ -6,7 +6,8 @@ import {
   ButtonBase,
   Typography,
   Container,
-  CssBaseline
+  CssBaseline,
+  Paper
 } from "@material-ui/core";
 import cloud from "../assets/cloud.svg";
 import { ThemeProvider } from "@material-ui/styles";
@@ -15,12 +16,47 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
 
 
-const Navbar = () => {
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuOpen: true,
+      }
+  }
+
+ toggle = () => {
+  if (this.state.menuOpen === true) {
+    this.setState({
+      menuOpen: false
+    })
+  } else {
+    this.setState({
+      menuOpen: true
+    })
+  }
+}
+ Menu = () => {
+  console.log(this.state.menuOpen)
+  if (this.state.menuOpen === true) {
+    console.log("we changed it@")
   return (
-    <StyledDiv>
+    
+        <StyledPaper>
+        hi
+    </StyledPaper>
+      );
+    } else {
+
+      };
+    }
+
+  render() { 
+    return ( 
+      <StyledDiv>
         <StyledImg src={cloud}  width="100%" height="87px" />
     <StyledBox >
-            <MenuIcon className="menuIcon" fontSize="large"/>
+            <MenuIcon onClick={this.toggle} className="menuIcon" fontSize="large"/>
+            {this.Menu()}
         
                 <CloudText>
                   CLOUD
@@ -33,8 +69,13 @@ const Navbar = () => {
 
     </StyledBox>
     </StyledDiv>
-  );
-};
+     );
+  }
+}
+ 
+export default Navbar;
+      
+
 
 
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
@@ -87,4 +128,14 @@ img {
 
 `
 
-export default Navbar;
+const StyledPaper = styled(Paper)`
+height: 99.8vh;
+width: 100%;
+z-index: -1;
+position: absolute;
+left: 0;
+top: 0;
+border-radius: 10px;
+
+`
+
