@@ -21,7 +21,6 @@ class SearchMarkets extends React.Component {
       };
 
     render() {
-        console.log(this.state.search)
         return (
             <StyledContainer>
                 <TextField
@@ -34,7 +33,6 @@ class SearchMarkets extends React.Component {
                     margin="normal"
                     variant="outlined"
                     fullWidth={true}
-                    autoComplete={true}
                     style={{marginTop: "60px"}}
                 />
             </StyledContainer>
