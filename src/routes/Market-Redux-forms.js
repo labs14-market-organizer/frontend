@@ -261,15 +261,9 @@ class CreateMarket extends React.Component
     }
   }
 
-
-  sleepDestroy = async function() {
-    await sleep(500); // simulate server latency
-    this.props.destroy();
-    this.props.history.push("/addbooth");
-  }
   render(){
     const {handleSubmit, pristine, reset, submitting } = this.props;
-    if(this.props.redirect) {this.sleepDestroy()}
+    if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
       <form onSubmit={handleSubmit}>
         <div className="header">
