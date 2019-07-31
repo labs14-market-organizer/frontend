@@ -72,6 +72,16 @@ const renderRadioGroup = ({ label, input, ...rest}) => (
     onChange={(event, value) => input.onChange(value)}
   />
 );
+
+const renderButton = ({ input,
+  label, prefunc, ...rest}) =>{
+  return (
+    <Button
+      onClick={e => {let opp = prefunc(e); input.onChange(JSON.stringify(opp));}}
+      {...input}
+      {...rest}
+    >{label}</Button>
+  );}
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
@@ -92,15 +102,21 @@ class CreateMarket extends React.Component
       friday: false,
       saturday: false,
       sunday: false,
-      start: 1200,
+      start: 100,
       end: 1200,
       daysList: [],
       radio: "Public Market"
     };
   }
 
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    });
+  };
+
   changeDay = e => {
-    console.log(this.state.daysList);
     let number, newDaysList;
     if (e.currentTarget.value === "false") {
       this.setState({
@@ -124,7 +140,6 @@ class CreateMarket extends React.Component
   };
     deleteTime = (e, day) => {
       e.preventDefault();
-      console.log(day)
       let newDays = this.state.operation;
       const newList = []
       for (let i = 0; i < newDays.length; i++){
@@ -142,6 +157,7 @@ class CreateMarket extends React.Component
           ...this.state,
           operation: [...newList]
       })
+      return newList;
   }
 
    touched = false
@@ -149,7 +165,6 @@ class CreateMarket extends React.Component
 
   setHours = e => {
     e.preventDefault();
-    console.log(this.state.start +  " " + this.state.end)
     if (this.state.start < this.state.end) {
       let startTime = this.state.start;
       let endTime = this.state.end;
@@ -211,9 +226,11 @@ class CreateMarket extends React.Component
         saturday: false,
         sunday: false
       });
+      return sortOperation;
     } else {
-      //alert('Please change the time to be accurate')
+      alert('Please change the time to be accurate')
     }
+    return null;
 };
   save = e => {
     e.preventDefault();
@@ -225,13 +242,12 @@ class CreateMarket extends React.Component
   };
 
   militaryConvert(time){
-    console.log('here ya go')
+    time = String(time);
     let hours = time.split('');
     let am = "am";
     let newHours, combined, subtractedHours, rest;
     if (hours[0] === "0"){
       combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
-      console.log(combined)
       return combined;
     } else if (hours[0] === "1" && hours[1] === "2") {
       return hours.join('') + "pm";
@@ -245,8 +261,10 @@ class CreateMarket extends React.Component
     }
   }
 
+
   sleepDestroy = async function() {
     await sleep(500); // simulate server latency
+    this.props.destroy();
     this.props.history.push("/addbooth");
   }
   render(){
@@ -445,7 +463,7 @@ class CreateMarket extends React.Component
           />
         </div>
         <StyledDiv>
-          <Button
+          {/* <Button
             variant="outlined"
             className="biggerButton"
             size="large"
@@ -454,7 +472,19 @@ class CreateMarket extends React.Component
             style={{width: "80vw", marginTop: "-20px", height: "60px", marginBottom: "32px"}}
           >
             +ADD HOURS
-          </Button>
+          </Button> */}
+          <Field 
+            name="operation" 
+            component={renderButton}
+            label={"Add Hours"}
+            variant="outlined"
+            className="biggerButton"
+            size="large"
+            color="secondary"
+            prefunc={this.setHours}
+            operation={this.state}
+          >
+          </Field>
         </StyledDiv>    
         
       
@@ -463,7 +493,7 @@ class CreateMarket extends React.Component
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
                         <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
-                          <button value={this.state[item.day]} style={{fontWeight: "600"}} onClick={(e) => this.deleteTime(e, item.day)}>X</button></StyledP> 
+                          <Field component={renderButton} name="operation" label={"x"} style={{fontWeight: "600"}} prefunc={(e) => this.deleteTime(e, item.day)}></Field></StyledP> 
                         : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP>
                     })}
         <br />
@@ -560,7 +590,6 @@ const StyledP = styled.p`
 
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     ...state
   };
