@@ -8,7 +8,11 @@ import {
   ButtonBase,
   Typography,
   Container,
-  Paper
+  Paper ,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
 } from "@material-ui/core";
 
 import lettuce from "../assets/lettuce.png";
@@ -125,21 +129,28 @@ const MarketingPage = () => {
       <TitleBox className="testimonial">
         <Typography  variant="subtitle1">CLOUD STANDS & YOU</Typography>
       </TitleBox>
-
-      <Box>
+      <TestimonialWrapper>
+      <Box6 />
+      <TestimonialCard>
+        <CardContent>
+        <CardMedia image={testimonial1} title="Dave Mustaine" />
         <img src={testimonial1} />
+        
         <Typography variant="subtitle2">Dave Mustaine</Typography>
         <Typography variant="span">Austin, TX</Typography>
         <Typography variant="body1">
           “I finally know what’s going with all the vendors in my market. Cloud
           Stands helps keep everyone organized and informed”
         </Typography>
-      </Box>
-      <StyledLink to="/signup">
-        <Button variant="contained" color="primary" label="CTA">
+        </CardContent>
+      </TestimonialCard>
+      <Box7/>
+      </TestimonialWrapper>
+      <StyledLink2 to="/signup">
+        <Button fullWidth="true" variant="contained" color="primary" label="CTA">
           JOIN CLOUD STANDS
         </Button>
-      </StyledLink>
+      </StyledLink2>
       <Footer />
     </>
   );
@@ -158,10 +169,37 @@ const StyledLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
+
+`;
+
+const StyledLink2 = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    
+  }
+  .MuiButton-fullWidth  {
+    max-width: 424px;
+    margin-left: 22px;
+    height: 60px;
+    margin-bottom:78px;
+    font-family: "Raleway";
+    font-size: 18px;
+    font-weight: bold;
+    
+  }
 `;
 const StyledDiv = styled.div`
   display: flex;
   margin: 0 auto;
+  padding-top: 112px;
 `;
 
 const BoxCol = styled.div`
@@ -250,10 +288,99 @@ const Box4 = styled(Box)`
 
 const Box5 = styled(Box)`
   height: 230px;
-  min-width: 50px;
+  width: 78px;
   background-color: #f6e7cc;
   border-radius: 10px 0px 0px 10px;
   margin-left: 12px;
+`;
+
+const Box6 = styled(Box)`
+  position: absolute;
+  box-sizing: border-box;
+  height: 352px;
+  width: 10px;
+  background-color: #ce8400;
+  position: absolute;
+
+  /* margin-top: 12px; */
+`;
+
+const Box7 = styled(Box)`
+  height: 352px;
+  width: 28px;
+  background-color: #044d4c;
+  
+`;
+
+const SmallMarkets = styled(Paper)`
+  margin-left: 16px;
+  background-color: #f6e7cc;
+  height: 230px;
+  display: flex;
+  box-shadow: none;
+  margin-top: 12px;
+  && .MuiTypography-subtitle1 {
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: bold;
+  }
+  .MuiTypography-root {
+    padding-left: 12px;
+    padding-top: 23px;
+    text-align: left;
+  }
+  .MuiTypography-body1 {
+    font-size: 18px;
+    line-height: 24px;
+    width: 80%;
+    font-family: Roboto;
+    font-weight: normal;
+    margin-top: -10px;
+    margin-right: 0px;
+    padding-right: 0px;
+  }
+
+  img {
+    height: 100%;
+  }
+`;
+
+const VenderWrapper = styled(Box)`
+  display: flex;
+`;
+
+const Vendors = styled(Paper)`
+  background-color: #f6e7cc;
+  height: 230px;
+  display: flex;
+  box-shadow: none;
+  margin-top: 12px;
+  margin-right: 12px;
+  padding-right: 14px;
+
+  && .MuiTypography-subtitle1 {
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: bold;
+  }
+  .MuiTypography-root {
+    padding-left: 12px;
+    padding-top: 23px;
+    text-align: right;
+  }
+  .MuiTypography-body1 {
+    font-size: 18px;
+    line-height: 24px;
+    font-family: Roboto;
+    font-weight: normal;
+    margin-top: -10px;
+    text-align: right;
+    padding-left: 20px;
+  }
+
+  img {
+    height: 100%;
+  }
 `;
 
 const Step1Container = styled(Box)`
@@ -447,74 +574,52 @@ const TitleBox = styled(Box)`
     /* padding-right: 24px; */
   }
 `;
+const TestimonialWrapper= styled(Box)`
+display: flex;
+width: 100%;
+padding-bottom: 12px;
+`
 
-const SmallMarkets = styled(Paper)`
-  margin-left: 12px;
-  background-color: #f6e7cc;
-  height: 230px;
-  display: flex;
-  box-shadow: none;
-  margin-top: 12px;
-  && .MuiTypography-subtitle1 {
-    font-size: 22px;
-    line-height: 32px;
-    font-weight: bold;
-  }
-  .MuiTypography-root {
-    padding-left: 12px;
-    padding-top: 23px;
-    text-align: left;
-  }
-  .MuiTypography-body1 {
-    font-size: 18px;
-    line-height: 24px;
-    width: 80%;
-    font-family: Roboto;
+const TestimonialCard = styled(Card)`
+width: 100%;
+margin-left: 22px;
+margin-right: 12px;
+padding-top: -100px;
+box-shadow: none;
+background-color: #edf3ea;
+
+.MuiTypography-subtitle2 {
+  font-size: 18px;
+  font-family: "Raleway";
+  font-weight: 600;
+}
+.MuiCardContent-root {
+  padding: 0;
+  
+  span {
+    color: green;
+    font-family: "Raleway";
+    font-size: 16px;
     font-weight: normal;
-    margin-top: -10px;
-    margin-right: 0px;
-    padding-right: 0px;
+    line-height: 1.5;
   }
 
-  img {
-    height: 100%;
-  }
-`;
-
-const VenderWrapper = styled(Box)`
-  display: flex;
-`;
-
-const Vendors = styled(Paper)`
-  background-color: #f6e7cc;
-  height: 230px;
-  display: flex;
-  box-shadow: none;
-  margin-top: 12px;
-  margin-right: 12px;
-  padding-right: 14px;
-
-  && .MuiTypography-subtitle1 {
-    font-size: 22px;
-    line-height: 32px;
-    font-weight: bold;
-  }
-  .MuiTypography-root {
-    padding-left: 12px;
-    padding-top: 23px;
-    text-align: right;
-  }
   .MuiTypography-body1 {
-    font-size: 18px;
-    line-height: 24px;
-    font-family: Roboto;
-    font-weight: normal;
-    margin-top: -10px;
-    text-align: right;
-    padding-left: 20px;
+    padding: 0 20px 27px; 
+    font-family: "Roboto";
   }
+}
 
-  img {
-    height: 100%;
-  }
-`;
+/* background-color: blue; */
+
+
+img {
+  width: 100%;
+  margin: 0;
+  max-width: 424px;
+  
+}
+
+
+`
+

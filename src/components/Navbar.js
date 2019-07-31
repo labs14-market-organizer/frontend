@@ -17,7 +17,7 @@ import styled from "styled-components";
 
 const Navbar = () => {
   return (
-    <div>
+    <StyledDiv>
         <StyledImg src={cloud}  width="100%" height="87px" />
     <StyledBox >
             <MenuIcon className="menuIcon" fontSize="large"/>
@@ -32,7 +32,7 @@ const Navbar = () => {
               </StandsText>
 
     </StyledBox>
-    </div>
+    </StyledDiv>
   );
 };
 
@@ -69,6 +69,22 @@ const StyledBox = styled(Box)`
 
 const StyledImg = styled.img`
 z-index: -10
+`
+
+const StyledDiv = styled.div`
+position: fixed;
+z-index: 5000;
+
+img {
+  margin-top: -25px;
+  height: 140px;
+  width: 100vw;
+  opacity: .985;
+  filter: blur(1px);
+
+  /* background-color: red; */
+}
+
 `
 
 export default Navbar;
