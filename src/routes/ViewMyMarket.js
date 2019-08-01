@@ -74,7 +74,9 @@ const ViewMyMarket = (props) => {
             { (market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.website}</Ltag></div>: null }
             { (market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
             <Flex>
-              <WhiteButton variant="outlined">Edit Booths</WhiteButton>
+              <Link to="/addbooths">
+                <WhiteButton variant="outlined">Edit Booths</WhiteButton>
+              </Link>
               <Link to="/createmarket" style={{ textDecoration: "none"}} >
                 <GreenButton variant="outlined">Edit Market</GreenButton>
               </Link>
