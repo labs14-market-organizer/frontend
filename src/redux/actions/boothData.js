@@ -13,36 +13,22 @@ export const ERROR_INVALID_TOKEN = "ERROR_INVALID_TOKEN";
 
 /*
 object schema
-booth = 
-{
-	name: string,
-	description: string,
-	address: string,
-	operation:
-	[{
-		name: string, //date type
-		start: 
-		end: 
-	}]
-	booth_type(1,2): int (private,public),
-	website: string,
-	facebook: string
-	image: string
-}
-
 */
 export const createNewBooth = (booth) => dispatch => 
 {
     dispatch({ type: SET_BOOTH_DATA_START });
-    console.log(booth);
+    
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_BOOTH_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     
-    booth = cleanData(booth);
+    //booth = cleanData(booth);
     if(booth.error) return dispatch({ type: ERROR_SET_BOOTH_DATA, payload: {error: booth.error} });
-
+    booth.id = 1;
+    console.log(booth);
+    dispatch({type: SET_BOOTH_DATA_END, payload: {boothData: booth}})
+    return;
     return axiosWithAuth(token)
-    .post(`${HOST_URL}/booth/`,booth)
+    .post(`${HOST_URL}/booths/`, booth)
     .then(res => {
         localStorage.removeItem("userData");//remove out of date data
         dispatch({type: SET_BOOTH_DATA_END, payload: {curentBooth: res.data}}); //fire this first so we dont get GET_START fire before GET_END

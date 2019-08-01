@@ -27,7 +27,7 @@ import AddBooths from "./routes/AddBooths";
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
 import CreateVendor from "./routes/CreateVendor";
-import MarketReduxForms from "./routes/Market-Redux-forms";
+import BoothReduxForms from "./routes/Booths-Redux-forms";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -97,7 +97,7 @@ class App extends React.Component {
               />
               <Route
               path="/test"
-              render={props => <MarketReduxForms />}
+              render={props => <BoothReduxForms />}
               />
           </div>
         </MuiThemeProvider>
