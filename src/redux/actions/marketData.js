@@ -135,7 +135,6 @@ function cleanData(market)
         twitter: market.Twitter ? market.Twitter : "",
         zipcode: market["Zip Code"]
     }
-    console.log(clean)
     if(market.website) clean.website = market.website;
     let required = ["address", "city", "description","state","zipcode"]
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);

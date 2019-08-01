@@ -10,6 +10,7 @@ import {
   } from "@material-ui/core";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import {Redirect} from "react-router-dom"
 import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 
 
@@ -82,7 +83,10 @@ class CreateVendor extends React.Component{
     }
   
     
-    render() {
+    render() 
+    {
+      console.log(this.props);
+      if(this.props.checkVendorData.updated) return <Redirect to="/" />
         return (
             <div>
                 <Header>
