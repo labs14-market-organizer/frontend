@@ -558,16 +558,16 @@ const TitleBox = styled(Box)`
     font-weight: 600;
   }
   &&.instructions {
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     background-color: #044d4c;
-    text-align: right;
+    /* text-align: right; */
     padding-right: 24px;
   }
 
   &&.testimonial {
-    justify-content: center;
+    /* justify-content: center; */
     background-color: #478529;
-    padding-left: 0px;
+    /* padding-left: 0px; */
     margin-bottom: 12px;
 
     /* text-align: right; */

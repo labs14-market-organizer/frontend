@@ -21,13 +21,14 @@ class Navbar extends React.Component {
     super(props);
     this.state = {
       menuOpen: false,
+      page: "Home"
       }
   }
 
  toggle = () => {
   if (this.state.menuOpen === true) {
     this.setState({
-      menuOpen: false
+      menuOpen: false,
     })
   } else {
     this.setState({
@@ -39,6 +40,10 @@ class Navbar extends React.Component {
   console.log(this.state.menuOpen)
   if (this.state.menuOpen === true) {
     console.log("we changed it@")
+    // could conditinally render based off 
+    // if data retreived from store to show
+    // the avatar and name/market name
+    
   return (
     
         <StyledPaper elevation={4}>
@@ -46,7 +51,22 @@ class Navbar extends React.Component {
         <br/>
         <br/>
         <br/>
-        hi
+        <div>
+          {/* <img src={} /> */}
+        </div>
+        {/* props name */}
+        {/* props market 15px/16px padding bottom then bottom border*/}
+
+        <ul>
+          <li><Button>Vendor History</Button></li>
+          <li><Button>Payment Methods</Button></li>
+          <li><Button>Account Settings</Button></li>
+          <li><Button>FAQ</Button></li>
+          <li><Button>Contact Us</Button></li>
+          <br/>
+          <br/>
+          <li><Button>Sign Out</Button></li> 
+        </ul>
     </StyledPaper>
       );
     } else {
@@ -145,6 +165,66 @@ left: 0;
 top: 0;
 border-radius: 10px;
 text-align: left;
+max-height: 99.8vh;
+overflow-y: hidden;
+overflow-x: hidden;
+/* padding-right: */
 
+ul {
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  justify-content: center;
+  text-align: center;
+  margin-left: 16px;
+  margin-right: -16px;
+  border-top: 1px solid black;
+  padding-top: 12.5px;
+  
+}
+li:first-child {
+  margin-top: 12.5px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  list-style: none;
+  font-family: "Raleway";
+  font-weight: normal;
+  font-size: 16px;
+  height: 40px;
+  border-radius: 5px; 
+  padding-top: 0px;
+  line-height: 1.5;
+  /* background-color: rgba(71, 133, 41, 0.4); */
+  margin-left: -41px;
+  /* padding-left: 8px; */
+  margin-bottom: 2px;
+}
+Button {
+  display: flex;
+  border-radius: 5px;
+  justify-content: flex-start;
+  background-color: rgba(71, 133, 41, 0.4);
+  width: 100%;
+  text-align: left;
+  text-transform: capitalize; 
+  height: 40px;
+
+  .MuiButton-root {
+  display: flex;
+  align-items: center;
+  text-align: center
+  }
+  
+
+ 
+
+  :hover {
+    background-color: rgba(71, 133, 41, 0.4);
+  }
+
+}
 `
 
