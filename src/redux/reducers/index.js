@@ -10,9 +10,6 @@ export default combineReducers({
     form: reduxFormReducer,
     checkUserData,
     checkMarketData,
-<<<<<<< HEAD
-    checkVendorData
-=======
+    checkVendorData,
     checkBoothData                               
->>>>>>> 06b64f3d4e52164a1613908021a5d935592007ef
 });
