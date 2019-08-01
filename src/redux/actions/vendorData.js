@@ -51,7 +51,7 @@ export const createNewVendor = (vendor) => dispatch =>
     dispatch({ type: SET_VENDOR_DATA_START });
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
-    console.log(vendor)
+
     vendor = cleanData(vendor);
     if(vendor.error) return dispatch({ type: ERROR_SET_VENDOR_DATA, payload: {error: vendor.error} });
 
@@ -126,10 +126,10 @@ function cleanData(vendor)
         name: vendor.name,
         description: vendor.description,
         items: vendor.items ? vendor.items : [],
-        electricity: vendor.electricty,
-        ventilation: vendor.ventilation,
-        loud: vendor.loud,
-        other_special: vendor.other_special ? vendor.other_special : [],
+        electricity: vendor.electricty ? true: false,
+        ventilation: vendor.ventilation ? true: false,
+        loud: vendor.loud ? true: false,
+        other_special: vendor.other_special ? vendor.other_special : "",
         facebook: vendor.Facebook ? vendor.Facebook : "",
         twitter: vendor.Twitter ? vendor.Twitter : "",
         instagram: vendor.Instagram ? vendor.Instagram : ""
@@ -142,6 +142,8 @@ function cleanData(vendor)
     let required = ["name", "description"]
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
     if(test.length > 0) return {error: `${test[0]} is a required field`}; //what is test?
-    console.log(clean)
+    
+    // clean = JSON.stringify(clean);
+    // console.log(clean)
     return clean;
 }
