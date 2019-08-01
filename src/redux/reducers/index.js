@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import {checkUserData } from "./userData";
+import {checkBoothData} from "./boothData"
 import {checkMarketData}from "./marketData";
 import {reducer as reduxFormReducer} from 'redux-form';
 import { checkVendorData } from "./vendorData";
@@ -9,5 +10,6 @@ export default combineReducers({
     form: reduxFormReducer,
     checkUserData,
     checkMarketData,
-    checkVendorData
+    checkVendorData.
+    checkBoothData
 });
