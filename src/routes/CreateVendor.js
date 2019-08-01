@@ -85,8 +85,8 @@ class CreateVendor extends React.Component{
     
     render() 
     {
-      console.log(this.props);
       if(this.props.checkVendorData.updated) return <Redirect to="/" />
+      if(this.props.checkVendorData.created) return <Redirect to="/" />
         return (
             <div>
                 <Header>

@@ -14,7 +14,8 @@ const initalState =
     vendorData: null,
     error: undefined,
     fetching: true,
-    updated: false
+    updated: false,
+    created: false
 }
 
 export const checkVendorData = (state = initalState, action) =>
@@ -23,6 +24,11 @@ export const checkVendorData = (state = initalState, action) =>
     switch(action.type)
     {
         case SET_VENDOR_DATA_END:
+            return {
+                ...state,
+                ...action.payload,
+                created: true
+            }
         case GET_VENDOR_DATA_END:
             return {
                 ...state,

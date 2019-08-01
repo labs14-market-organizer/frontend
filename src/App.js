@@ -77,10 +77,6 @@ class App extends React.Component {
             />
             <PrivateRoute path="/userslist" component={UserList} />
             <Route
-              path="/createmarket"
-              render={props => <CreateMarket {...this.props} />}
-            />
-            <Route
               path="/addbooths"
               render={props => <AddBooths {...this.props} currentBooth={undefined} />}
             />
@@ -101,7 +97,7 @@ class App extends React.Component {
               render={props => <SearchMarkets {...this.props} />}
               />
               <Route
-              path="/test"
+              path="/createmarket"
               render={props => <MarketReduxForms />}
               />
           </div>

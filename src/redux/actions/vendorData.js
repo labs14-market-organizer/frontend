@@ -59,7 +59,6 @@ export const createNewVendor = (vendor) => dispatch =>
     .post(`${HOST_URL}/vendors`, vendor)
     .then(res => {
         localStorage.removeItem("userData");//remove out of date data
-        console.log(res.data);
         dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
         getUserData(token); //fire another endpoint here so we can be quicker about gathering data
     })

@@ -29,9 +29,6 @@ class SearchMarkets extends React.Component {
 
 
     render() {
-        console.log('here')
-        console.log(this.props)
-        console.log('here')
         return (
             <StyledContainer>
                 <form onSubmit={this.startSearch}>
@@ -57,18 +54,7 @@ class SearchMarkets extends React.Component {
                     )
                     
                 }) : null }
-                {/* <StyleBox boxShadow={10} >
-                    <p style={{fontWeight: "600"}}>Lafayette Farmers Market</p>
-                    <p>Louisiana-proud, family owned farmers market</p>
-                </StyleBox> 
-                <StyleBox boxShadow={10} >
-                    <p style={{fontWeight: "600"}}>Lafayette Farmers Market</p>
-                    <p>Louisiana-proud, family owned farmers market</p>
-                </StyleBox> 
-                <StyleBox boxShadow={10} >
-                    <p style={{fontWeight: "600"}}>Lafayette Farmers Market</p>
-                    <p>Louisiana-proud, family owned farmers market</p>
-                </StyleBox>  */}
+                
             </StyledContainer>
         )
     }
