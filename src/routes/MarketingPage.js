@@ -13,7 +13,22 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-} from "@material-ui/core";
+
+
+import {spacing, positions } from "@material-ui/system"
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import MenuIcon from "@material-ui/icons/Menu";
+
+import logo from "../assets/standLogo.svg";
+import cloud from "../assets/topCloud.svg";
+
+import { Mixpanel } from '../redux/actions/mixpanel';
+
+const theme = {
+  spacing: 8,
+}
+
 
 import lettuce from "../assets/lettuce.png";
 import tomato from "../assets/tomato.png";
@@ -84,6 +99,7 @@ const MarketingPage = () => {
         <Box4 />
       </VenderWrapper>
 
+
       <TitleBox className="instructions">
         <Typography variant="subtitle1">HOW DOES IT WORK?</Typography>
       </TitleBox>
@@ -153,6 +169,32 @@ const MarketingPage = () => {
       </StyledLink2>
       <Footer />
     </>
+
+            <MenuIcon />
+
+            <Grid container justify="center">
+              <Typography variant="subtitle1">Small Markets Made</Typography>
+              <Typography component="span" variant="subtitle1">
+                "Simple."
+              </Typography>
+            </Grid>
+            <img src={logo} />
+            <Grid container justify="center">
+              <Typography variant="p">
+                Cloud Markets is a the best way to promote organization and
+                communication between vendors and small markets.
+              </Typography>
+              <Link to="/signup">
+                <Button bg="primary" label="CTA" onClick={() => Mixpanel.track('joined button clicked')}> 
+                  JOIN CLOUD STANDS
+                </Button>
+              </Link> 
+            </Grid>
+          </ThemeProvider>
+        </ThemeProvider>
+      </Grid>
+    </Container>
+
   );
 };
 

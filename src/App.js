@@ -22,6 +22,9 @@ import MainPage from "./routes/MainPage";
 import Navbar from "./components/Navbar";
 import { StylesProvider } from "@material-ui/styles";
 
+import UserList from "./routes/UserList";
+
+
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -40,6 +43,7 @@ class App extends React.Component {
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
     return (
+
       <StylesProvider injectFirst>
            <MuiThemeProvider theme={theme} >
         <div className="App">
@@ -67,9 +71,12 @@ class App extends React.Component {
               </div>
             )}
           />
+          <PrivateRoute path="/userslist" component={UserList} />
+
         </div>
       </MuiThemeProvider>
       </StylesProvider>
+
     );
   }
 }

@@ -45,8 +45,7 @@ class AuthenticatePage extends React.Component
               <p className="create-account">Create Account</p>
               <Button variant="contained"  label="Square" onClick={this.authenticate} className='company-buttons' style={{backgroundColor: "white", border: "1px solid black"}}>Sign Up with Square</Button>
               <Button variant="contained" label="Google" onClick={this.authenticate} className="company-buttons" style={{backgroundColor: '#3b5998'}}>Sign Up With Facebook</Button>
-                <a href="https://cloudstands-deploy.herokuapp.com/auth/google">
-                <Button variant="contained" label="Google"   className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button></a>
+              <Button variant="contained" label="Google" href="https://cloudstands-deploy.herokuapp.com/auth/google"  className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button>
               
               <p className="terms-of-service">By continuing, you agree to Cloud Stands<span className="bold">Terms of Service</span> and<span className="bold">Privacy Policy</span> </p>
               <p className="have-account">Already have an account?<span style={{ color: "green" , fontWeight: "bold"}}>Sign in</span> </p>
