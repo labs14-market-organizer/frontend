@@ -299,6 +299,7 @@ line-height: 1.2;
 `;
 
 
+
 const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
@@ -313,11 +314,11 @@ const StyledContainer = styled.div`
 
 const StyledButton = styled.button`
   border: none;
-  background-color: "white";
+  background-color: white;
   font-size: 18px;
   margin-right: 15px;
   font-family: Raleway;
-`
+`;
 
 
 const mapStateToProps = state => {

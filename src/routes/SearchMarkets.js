@@ -7,7 +7,9 @@ import {
     Box
   } from "@material-ui/core";
 import styled from "styled-components";
-import Place from '../assets/place.svg'
+import Place from '../assets/place.svg';
+import { searchMarkets } from '../redux/actions/searchMarkets';
+import { connect } from "react-redux";
 
 class SearchMarkets extends React.Component {
     state = {
@@ -19,12 +21,17 @@ class SearchMarkets extends React.Component {
           [e.target.name]: e.target.value
         });
       };
+    
+      startSearch = e => {
+          this.props.searchMarkets(this.state.search)
+      }
 
 
     render() {
+        console.log(this.props)
         return (
             <StyledContainer>
-                <form>
+                <form onSubmit={this.startSearch}>
                     <TextField
                         id="search"
                         label="Search Markets"
@@ -85,4 +92,15 @@ const StyleBox = styled(Box)`
   }
 `;
 
-export default SearchMarkets;
+
+
+const mapStateToProps = state => {
+    return {
+        ...state
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    { searchMarkets  }
+  )(SearchMarkets);
