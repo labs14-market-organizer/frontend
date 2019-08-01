@@ -19,6 +19,7 @@ const initalState =
 
 export const checkVendorData = (state = initalState, action) =>
 {
+    console.log(action.type);
     switch(action.type)
     {
         case SET_VENDOR_DATA_END:

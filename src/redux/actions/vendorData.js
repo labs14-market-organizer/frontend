@@ -59,9 +59,9 @@ export const createNewVendor = (vendor) => dispatch =>
     .post(`${HOST_URL}/vendors`, vendor)
     .then(res => {
         localStorage.removeItem("userData");//remove out of date data
-        dispatch({type: SET_VENDOR_DATA_END, payload: {curentVendor: res.data}}); //fire this first so we dont get GET_START fire before GET_END
+        console.log(res.data);
+        dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
         getUserData(token); //fire another endpoint here so we can be quicker about gathering data
-        return
     })
     .catch(err =>{
         console.error(err);
@@ -126,14 +126,13 @@ function cleanData(vendor)
         name: vendor.name,
         description: vendor.description,
         items: vendor.items ? vendor.items : [],
-        electricity: vendor.electricty,
-        ventilation: vendor.ventilation,
-        loud: vendor.loud,
-        other_special: vendor.other_special ? vendor.other_special : [],
+        electricity: vendor.electricty ? true : false,
+        ventilation: vendor.ventilation ? true : false,
+        loud: vendor.loud ? true : false,
+        other_special: vendor.other_special ? JSON.stringify(vendor.other_special).split("[").join("").split("]").join("").split(",").join(" ") : "",
         facebook: vendor.Facebook ? vendor.Facebook : "",
         twitter: vendor.Twitter ? vendor.Twitter : "",
         instagram: vendor.Instagram ? vendor.Instagram : ""
-        
     }
 
     
@@ -141,7 +140,8 @@ function cleanData(vendor)
     
     let required = ["name", "description"]
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
-    if(test.length > 0) return {error: `${test[0]} is a required field`}; //what is test?
+    if(test.length > 0) return {error: `${test[0]} is a required field`}; //
+    //This is a really complex way of seeing if any values in the clean that also live in required array (by key) are null undefined or "" " " "  " etc.
     console.log(clean)
     return clean;
 }
