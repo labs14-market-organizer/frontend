@@ -76,6 +76,10 @@ class CreateVendor extends React.Component{
         items: newItems
       })
     }
+    save = e => {
+    e.preventDefault();
+    (this.updating) ? this.props.updateVendor(this.state) : this.props.createNewVendor(this.state)
+    }
   
     
     render() {
@@ -241,7 +245,7 @@ class CreateVendor extends React.Component{
                         fullWidth={true}
                         variant="outlined"
                      />
-                     <GreenButton variant="outlined">Save</GreenButton>
+                     <GreenButton variant="outlined" onClick={(e) => this.save(e)}>Save</GreenButton>
                      </form>
                 </Container>
             </div>

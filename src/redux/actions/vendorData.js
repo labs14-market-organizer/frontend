@@ -120,10 +120,11 @@ export const deleteVendor = (vendorId) => dispatch =>
 
 function cleanData(vendor)
 {
+    console.log(vendor)
     let clean = 
     {   
-        name: vendor["Vendor Name"],
-        description: vendor["Vendor Description"],
+        name: vendor.name,
+        description: vendor.description,
         items: vendor.items ? vendor.items : [],
         electricity: vendor.electricty,
         ventilation: vendor.ventilation,
