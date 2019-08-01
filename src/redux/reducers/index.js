@@ -10,6 +10,6 @@ export default combineReducers({
     form: reduxFormReducer,
     checkUserData,
     checkMarketData,
-    checkVendorData.
+    checkVendorData,
     checkBoothData
 });
