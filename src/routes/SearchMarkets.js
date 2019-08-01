@@ -23,12 +23,15 @@ class SearchMarkets extends React.Component {
       };
     
       startSearch = e => {
+          e.preventDefault();
           this.props.searchMarkets(this.state.search)
       }
 
 
     render() {
+        console.log('here')
         console.log(this.props)
+        console.log('here')
         return (
             <StyledContainer>
                 <form onSubmit={this.startSearch}>
@@ -45,8 +48,16 @@ class SearchMarkets extends React.Component {
                         style={{marginTop: "60px"}}
                     />
                 </form>
-           
-                <StyleBox boxShadow={10} >
+                {(this.props.marketsBySearch !== undefined) ? this.props.marketsBySearch.map(location => {
+                    return (
+                        <StyleBox boxShadow={10} key={location.id}>
+                        <p style={{fontWeight: "600"}}>{location.name}</p>
+                        <p>{location.description}</p>
+                    </StyleBox>
+                    )
+                    
+                }) : null }
+                {/* <StyleBox boxShadow={10} >
                     <p style={{fontWeight: "600"}}>Lafayette Farmers Market</p>
                     <p>Louisiana-proud, family owned farmers market</p>
                 </StyleBox> 
@@ -57,7 +68,7 @@ class SearchMarkets extends React.Component {
                 <StyleBox boxShadow={10} >
                     <p style={{fontWeight: "600"}}>Lafayette Farmers Market</p>
                     <p>Louisiana-proud, family owned farmers market</p>
-                </StyleBox> 
+                </StyleBox>  */}
             </StyledContainer>
         )
     }
@@ -96,7 +107,7 @@ const StyleBox = styled(Box)`
 
 const mapStateToProps = state => {
     return {
-        ...state
+        ...state.checkMarketsByArea.marketsBySearch
     };
   };
   

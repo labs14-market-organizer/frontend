@@ -4,7 +4,8 @@ GET_MARKETS_BY_AREA__DATA_END,
 GET_MARKETS_BY_AREA__ERROR
 } from '../actions/searchMarkets';
 
-const initialState = {
+const initialState = 
+{
     marketsBySearch: [],
     searching: false,
     searchError: null
@@ -23,16 +24,19 @@ export const checkMarketsByArea = (state = initialState, action) =>
         case GET_MARKETS_BY_AREA__DATA_END:
             return {
                 ...state,
-                ...action.payload,
+                marketsBySearch: action.payload,
                 searchError: null,
                 searching: false
             }
         case GET_MARKETS_BY_AREA__ERROR:
             return {
                 ...state,
+                marketsBySearch: [],
                 searching: false,
-                searchError: action.payload.error
+                searchError: action.payload.err
             }
+        default:
+            return state;
     }
 
 }

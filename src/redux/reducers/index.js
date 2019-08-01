@@ -16,3 +16,4 @@ export default combineReducers({
     checkBoothData,
     checkMarketsByArea
 });
+
