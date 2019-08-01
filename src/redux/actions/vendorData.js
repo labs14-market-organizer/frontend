@@ -51,7 +51,7 @@ export const createNewVendor = (vendor) => dispatch =>
     dispatch({ type: SET_VENDOR_DATA_START });
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
-    console.log(vendor)
+
     vendor = cleanData(vendor);
     if(vendor.error) return dispatch({ type: ERROR_SET_VENDOR_DATA, payload: {error: vendor.error} });
 
@@ -126,9 +126,10 @@ function cleanData(vendor)
         name: vendor.name,
         description: vendor.description,
         items: vendor.items ? vendor.items : [],
-        electricity: vendor.electricty ? true : false,
+        electricity: vendor.electricty ? true: false,
         ventilation: vendor.ventilation ? true : false,
-        loud: vendor.loud ? true : false,
+        ventilation: vendor.ventilation ? true: false,
+ 		loud: vendor.loud ? true : false,
         other_special: vendor.other_special ? JSON.stringify(vendor.other_special).split("[").join("").split("]").join("").split(",").join(" ") : "",
         facebook: vendor.Facebook ? vendor.Facebook : "",
         twitter: vendor.Twitter ? vendor.Twitter : "",
@@ -142,6 +143,8 @@ function cleanData(vendor)
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
     if(test.length > 0) return {error: `${test[0]} is a required field`}; //
     //This is a really complex way of seeing if any values in the clean that also live in required array (by key) are null undefined or "" " " "  " etc.
-    console.log(clean)
+    
+    // clean = JSON.stringify(clean);
+    // console.log(clean)
     return clean;
 }
