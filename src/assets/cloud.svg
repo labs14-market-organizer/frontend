@@ -1,0 +1,20 @@
+<svg class="cloudImg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="60" viewBox="30 -10 300 100" preserveAspectRatio="none">
+    <defs>
+        <path id="a" d="M0 0h360v100H0z"/>
+        <path id="d" d="M150.716-103.455C168.741-118.768 192.048-128 217.5-128c30.23 0 57.433 13.023 76.356 33.79C306.884-101.1 321.736-105 337.5-105c51.639 0 93.5 41.861 93.5 93.5S389.139 82 337.5 82c-22.675 0-43.465-8.072-59.653-21.498C260.86 72.773 240.02 80 217.5 80c-28.747 0-54.756-11.776-73.511-30.79C129.426 58.57 112.097 64 93.5 64 41.861 64 0 22.139 0-29.5S41.861-123 93.5-123c21.553 0 41.402 7.292 57.216 19.545z"/>
+        <filter id="c" width="112.1%" height="124.8%" x="-6%" y="-10.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="3"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.737149004 0 0 0 0 0.737149004 0 0 0 0 0.737149004 0 0 0 0.5 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <g mask="url(#b)">
+            <use fill="#000" filter="url(#c)" xlink:href="#d"/>
+            <use fill="#fff" xlink:href="#d"/>
+        </g>
+    </g>
+</svg>

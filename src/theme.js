@@ -36,11 +36,11 @@ export default createMuiTheme({
       useNextVariants: true,
       // Use the system font instead of the default Roboto font.
       fontFamily: [
-		"Roboto",
         "Raleway",
         "-apple-system",
         "BlinkMacSystemFont",
         '"Segoe UI"',
+        "Roboto",
         '"Helvetica Neue"',
         "Arial",
         "sans-serif",
@@ -50,5 +50,4 @@ export default createMuiTheme({
         "Pacifico"
       ].join(",")
     }
-  
 });

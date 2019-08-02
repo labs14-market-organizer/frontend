@@ -9,20 +9,21 @@ import {
   withRouter
 } from "react-router-dom";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import theme from "./theme";
-import { StylesProvider } from "@material-ui/styles";
 
 import { setLocalData, getUserData } from "./redux/actions/userData";
 import "./App.scss";
-
+import CssBaseline from "@material-ui/core/CssBaseline";
+import theme from "./theme";
 import MarketingPage from "./routes/MarketingPage";
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
 import TokenCollect from "./routes/TokenCollect";
 import MainPage from "./routes/MainPage";
+import Navbar from "./components/Navbar";
+import { StylesProvider } from "@material-ui/styles";
+
 import UserList from "./routes/UserList";
 import CreateMarket from "./routes/CreateMarket";
-
 import AddBooths from "./routes/AddBooths";
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
@@ -30,6 +31,7 @@ import CreateVendor from "./routes/CreateVendor";
 import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
+
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -47,10 +49,11 @@ class App extends React.Component {
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
     return (
+
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-            {/* <NavBar/> */}
+            <Navbar />
 
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
@@ -107,6 +110,7 @@ class App extends React.Component {
           </div>
         </MuiThemeProvider>
       </StylesProvider>
+
     );
   }
 }
