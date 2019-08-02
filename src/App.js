@@ -53,7 +53,7 @@ class App extends React.Component {
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-            <Navbar />
+            {/* <Navbar /> */}
 
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
