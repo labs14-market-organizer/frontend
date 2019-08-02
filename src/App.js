@@ -1,4 +1,3 @@
-
 import React from "react";
 //import "./sass/global.scss";
 import { connect } from "react-redux";
@@ -9,16 +8,22 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
-import {setLocalData, getUserData} from "./redux/actions/userData";
-import './App.scss';
-
+import { setLocalData, getUserData } from "./redux/actions/userData";
+import "./App.scss";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import theme from "./theme";
 import MarketingPage from "./routes/MarketingPage";
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
-import TokenCollect from "./routes/TokenCollect"
+import TokenCollect from "./routes/TokenCollect";
 import MainPage from "./routes/MainPage";
+import Navbar from "./components/Navbar";
+import { StylesProvider } from "@material-ui/styles";
+
 import UserList from "./routes/UserList";
+
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -31,26 +36,46 @@ class App extends React.Component {
     this.props.getUserData(); //async check on second pass
   }
 
-
-  componentWillUpdate()
-  {
-  }
-  render() 
-  {
+  componentWillUpdate() {}
+  render() {
     console.log(this.props);
     let token = this.props.token;
-    if(this.props.fetching) return  (<div className="App"> {"<LoadingScreen/>"} </div>)
+    if (this.props.fetching)
+      return <div className="App"> {"<LoadingScreen/>"} </div>;
     return (
-    <div className="App">
-      
-      {/* <NavBar/> */}
-      <Route path="/landing" component={MarketingPage}/>
-      <PrivateRoute exact path="/" component={MainPage} props={this.props} />
-      <Route path="/auth/token" render={()=><TokenCollect {...this.props} />}/>
-      <Route path="/signup" render={()=> <AuthenticatePage signUp {...this.props}/>}/>
-      <Route path="/login" render={()=> <div><AuthenticatePage logIn {...this.props}/></div>}/>
-      <PrivateRoute path="/userslist" component={UserList} />
-    </div>
+
+      <StylesProvider injectFirst>
+           <MuiThemeProvider theme={theme} >
+        <div className="App">
+          <Navbar />
+          <Route path="/landing" component={MarketingPage} />
+          <PrivateRoute
+            exact
+            path="/"
+            component={MainPage}
+            props={this.props}
+          />
+          <Route
+            path="/auth/token"
+            render={() => <TokenCollect {...this.props} />}
+          />
+          <Route
+            path="/signup"
+            render={() => <AuthenticatePage signUp {...this.props} />}
+          />
+          <Route
+            path="/login"
+            render={() => (
+              <div>
+                <AuthenticatePage logIn {...this.props} />
+              </div>
+            )}
+          />
+          <PrivateRoute path="/userslist" component={UserList} />
+
+        </div>
+      </MuiThemeProvider>
+      </StylesProvider>
 
     );
   }
@@ -72,7 +97,11 @@ export default connect(
   }
 )(withRouter(App));
 
-const InPrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
+const InPrivateRoute = ({
+  component: Component,
+  props: userprops,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
@@ -87,7 +116,7 @@ const InPrivateRoute = ({ component: Component, props: userprops, ...rest }) => 
   );
 };
 
-const PrivateRoute = ({ component: Component,  props: userprops, ...rest }) => {
+const PrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
   console.log(userprops);
   return (
     <Route
@@ -103,7 +132,6 @@ const PrivateRoute = ({ component: Component,  props: userprops, ...rest }) => {
     />
 
     // test
-
   );
 };
 

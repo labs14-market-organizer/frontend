@@ -6,6 +6,7 @@ import {
     Redirect,
     withRouter
   } from "react-router-dom";
+  
 
 class LandingPage extends React.Component
 {
@@ -42,3 +43,4 @@ class LandingPage extends React.Component
   )(App); */
   
 export default LandingPage;
+
