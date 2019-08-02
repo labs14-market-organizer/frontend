@@ -33,7 +33,6 @@ export const createNewBooth = (marketid, booth) => dispatch =>
     //booth = cleanData(booth);
     if(booth.error) return dispatch({ type: ERROR_SET_BOOTH_DATA, payload: {error: booth.error} });
     booth = cleanData(booth);
-    console.log(booth);
     return axiosWithAuth(token)
     .post(`${HOST_URL}/markets/${marketid}/booths/`, booth)
     .then(res => {
@@ -115,6 +114,5 @@ function cleanData(booth)
         size: [numcheck(booth.length), numcheck(booth.width)], //always length x width
         description: booth.boothdescription ? booth.boothdescription : ""
     }
-    console.log(clean);
     return clean;
 }

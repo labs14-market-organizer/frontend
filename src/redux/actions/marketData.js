@@ -78,7 +78,6 @@ export const getMarketById = (marketId) => dispatch =>
     return axiosWithAuth(token)
     .get(`${HOST_URL}/markets/${marketId}`)
     .then(res => {
-        console.log(res.data)
         dispatch({type: GET_MARKET_DATA_END, payload: {marketData: res.data}});
     })
     .catch(err => {
@@ -144,6 +143,5 @@ function cleanData(market)
     clean.operation = clean.operation.filter(x=> x.start && x.end);
     if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
     if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
-    console.log(clean)
     return clean;
 }

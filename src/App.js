@@ -76,29 +76,31 @@ class App extends React.Component {
               )}
             />
             <PrivateRoute path="/userslist" component={UserList} />
-            <Route
+            {/* <Route
               path="/addbooths"
               render={props => <AddBooths {...this.props} currentBooth={undefined} />}
-            />
+            /> */}
               <Route
               path="/useronboarding"
-              render={props => <UserOnboarding {...this.props} />}
+              render={props => <UserOnboarding />}
               />
               <Route
               path="/viewmymarket"
-              render={props => <ViewMyMarket {...this.props} />}
+              render={props => <ViewMyMarket  />}
               />
                <Route
               path="/createvendor"
-              render={props => <CreateVendor {...this.props} />}
+              render={props => <CreateVendor  />}
               />
                <Route
               path="/searchmarkets"
-              render={props => <SearchMarkets {...this.props} />}
+              render={props => <SearchMarkets />}
               />
               <Route
-              path="/test"
+              path="/addbooths"
               render={props => <BoothReduxForms />}
+              />
+              <Route 
               path="/createmarket"
               render={props => <MarketReduxForms />}
               />
@@ -150,7 +152,6 @@ const PrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
       {...rest}
       render={props => {
         if (localStorage.getItem("token")) {
-          console.log(userprops);
           return <Component {...props} {...userprops} />;
         } else {
           return <Redirect to="/landing" />;

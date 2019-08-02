@@ -6,13 +6,11 @@ import { Button } from "@material-ui/core"
 import { Link } from "react-router-dom";
 
 const militaryConvert = (time) => {
-  console.log('here ya go')
   let hours = time.split('');
   let am = "am";
   let newHours, combined, subtractedHours, rest;
   if (hours[0] === "0"){
     combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
-    console.log(combined)
     return combined;
   } else if (hours[0] === "1" && hours[1] === "2") {
     return hours.join('') + "pm";
@@ -28,7 +26,6 @@ const militaryConvert = (time) => {
 
 const ViewMyMarket = (props) => {
   const sites = ["website", "facebook", "twitter", "instagram"];//going to use to check to see if obj contains when I loop over the obj.
-  console.log(props.checkMarketData.fetching)
   // if (props.checkMarketData.fetching) return  <Header>
   //           <ArrowImage src={Arrow} />
   //           <CreateHeader>View Market</CreateHeader>

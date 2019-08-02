@@ -119,7 +119,6 @@ export const deleteVendor = (vendorId) => dispatch =>
 
 function cleanData(vendor)
 {
-    console.log(vendor)
     let clean = 
     {   
         name: vendor.name,
@@ -144,6 +143,5 @@ function cleanData(vendor)
     //This is a really complex way of seeing if any values in the clean that also live in required array (by key) are null undefined or "" " " "  " etc.
     
     // clean = JSON.stringify(clean);
-    // console.log(clean)
     return clean;
 }
