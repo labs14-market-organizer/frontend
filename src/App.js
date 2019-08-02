@@ -23,7 +23,14 @@ import Navbar from "./components/Navbar";
 import { StylesProvider } from "@material-ui/styles";
 
 import UserList from "./routes/UserList";
-
+import CreateMarket from "./routes/CreateMarket";
+import AddBooths from "./routes/AddBooths";
+import UserOnboarding from "./routes/UserOnboarding";
+import ViewMyMarket from "./routes/ViewMyMarket";
+import CreateVendor from "./routes/CreateVendor";
+import BoothReduxForms from "./routes/Booths-Redux-forms";
+import SearchMarkets from "./routes/SearchMarkets";
+import MarketReduxForms from "./routes/Market-Redux-forms";
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -38,43 +45,70 @@ class App extends React.Component {
 
   componentWillUpdate() {}
   render() {
-    console.log(this.props);
     let token = this.props.token;
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
     return (
 
       <StylesProvider injectFirst>
-           <MuiThemeProvider theme={theme} >
-        <div className="App">
-          <Navbar />
-          <Route path="/landing" component={MarketingPage} />
-          <PrivateRoute
-            exact
-            path="/"
-            component={MainPage}
-            props={this.props}
-          />
-          <Route
-            path="/auth/token"
-            render={() => <TokenCollect {...this.props} />}
-          />
-          <Route
-            path="/signup"
-            render={() => <AuthenticatePage signUp {...this.props} />}
-          />
-          <Route
-            path="/login"
-            render={() => (
-              <div>
-                <AuthenticatePage logIn {...this.props} />
-              </div>
-            )}
-          />
-          <PrivateRoute path="/userslist" component={UserList} />
+        <MuiThemeProvider theme={theme}>
+          <div className="App">
+            <Navbar />
 
-        </div>
-      </MuiThemeProvider>
+            <Route path="/landing" component={MarketingPage} />
+            <PrivateRoute
+              exact
+              path="/"
+              component={MainPage}
+              props={this.props}
+            />
+            <Route
+              path="/auth/token"
+              render={() => <TokenCollect {...this.props} />}
+            />
+            <Route
+              path="/signup"
+              render={() => <AuthenticatePage signUp {...this.props} />}
+            />
+            <Route
+              path="/login"
+              render={() => (
+                <div>
+                  <AuthenticatePage logIn {...this.props} />
+                </div>
+              )}
+            />
+            <PrivateRoute path="/userslist" component={UserList} />
+            {/* <Route
+              path="/addbooths"
+              render={props => <AddBooths {...this.props} currentBooth={undefined} />}
+            /> */}
+              <Route
+              path="/useronboarding"
+              render={props => <UserOnboarding />}
+              />
+              <Route
+              path="/viewmymarket"
+              render={props => <ViewMyMarket  />}
+              />
+               <Route
+              path="/createvendor"
+              render={props => <CreateVendor  />}
+              />
+               <Route
+              path="/searchmarkets"
+              render={props => <SearchMarkets />}
+              />
+              <Route
+              path="/addbooths"
+              render={props => <BoothReduxForms />}
+              />
+              <Route 
+              path="/createmarket"
+              render={props => <MarketReduxForms />}
+              />
+          </div>
+        </MuiThemeProvider>
       </StylesProvider>
 
     );
@@ -117,13 +151,11 @@ const InPrivateRoute = ({
 };
 
 const PrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
-  console.log(userprops);
   return (
     <Route
       {...rest}
       render={props => {
         if (localStorage.getItem("token")) {
-          console.log(userprops);
           return <Component {...props} {...userprops} />;
         } else {
           return <Redirect to="/landing" />;

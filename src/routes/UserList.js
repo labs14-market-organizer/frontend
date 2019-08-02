@@ -10,7 +10,6 @@ class UserList extends React.Component{
     componentDidMount(){
         axios.get('https://cloudstands-staging.herokuapp.com/userlist')
         .then(res => {
-            console.log(res)
             this.setState({
                 users: res.data
             })

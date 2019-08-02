@@ -4,7 +4,7 @@ import {HOST_URL} from "./../utls/hostUrl";
 
 
 
-var token, data; //set globally so we can use them later for debuging;
+//var token, data; //set globally so we can use them later for debuging;
 //local data
 export const GET_LOCAL_DATA = "GET_LOCAL_DATA";
 export const SET_LOCAL_DATA = "SET_LOCAL_DATA";
@@ -18,7 +18,7 @@ export const getUserData = (token=null) => dispatch => {
     dispatch({ type: GET_USER_DATA_START });
     
     let dis = getLocalData(); //go get from local storage
-    console.log(dis);
+    
     if(!token) token =  dis.payload.token ? dis.payload.token : null; // if no token then assign from local storage
     if(!dis.payload.error)  return dispatch(dis); //if gathering local storage didnt error then just give back that info
     if(!token) return dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "Invalid Token"}}); //if we couldnt grab a token triger kick to landing
@@ -38,6 +38,7 @@ export const getUserData = (token=null) => dispatch => {
 
 const getLocalData = () =>
 {
+    let token, data;
     token = localStorage.getItem("token");
     if(!token) return{type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: { error: "could not find token"}}
     data = localStorage.getItem("userdata");

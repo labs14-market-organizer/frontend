@@ -14,10 +14,9 @@ import {
 class AuthenticatePage extends React.Component
 {
    authenticate = (e) => {
-     console.log(e);
     const authType = e.target.name;
     this.props.getUserData()
-    axios.get("https://cloudstands-staging.herokuapp.com/auth/google").then(console.log("did it"))
+    axios.get("https://cloudstands-staging.herokuapp.com/auth/google")
 
   }
 
