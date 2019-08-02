@@ -27,6 +27,7 @@ import AddBooths from "./routes/AddBooths";
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
 import CreateVendor from "./routes/CreateVendor";
+import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
 /* import LandingPage from './routes/LandingPage';
@@ -42,7 +43,6 @@ class App extends React.Component {
 
   componentWillUpdate() {}
   render() {
-    console.log(this.props);
     let token = this.props.token;
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
@@ -97,6 +97,8 @@ class App extends React.Component {
               render={props => <SearchMarkets {...this.props} />}
               />
               <Route
+              path="/test"
+              render={props => <BoothReduxForms />}
               path="/createmarket"
               render={props => <MarketReduxForms />}
               />
@@ -143,7 +145,6 @@ const InPrivateRoute = ({
 };
 
 const PrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
-  console.log(userprops);
   return (
     <Route
       {...rest}

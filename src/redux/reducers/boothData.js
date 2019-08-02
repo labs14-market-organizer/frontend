@@ -33,8 +33,7 @@ export const checkBoothData = (state = initalState, action) =>
         case ERROR_SET_BOOTH_DATA:
             return {...initalState, token: state.token,  error: action.payload.error, fetching: false, updated: false }
         case ERROR_INVALID_TOKEN: //this should nv trigger, we auto check data and request if data doesnt exist
-        return {...initalState,  error: action.payload.error, fetching: false}
-    
+            return {...initalState,  error: action.payload.error, fetching: false, updated: false}
         case SET_BOOTH_DATA_START:
         case GET_BOOTH_DATA_START:
             state.fetching = true;

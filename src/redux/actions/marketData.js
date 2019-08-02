@@ -59,7 +59,7 @@ export const createNewMarket = (market) => dispatch =>
     .post(`${HOST_URL}/markets`, market)
     .then(res => {
         localStorage.removeItem("userData");//remove out of date data
-        dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: res.data}}); //fire this first so we dont get GET_START fire before GET_END
+        dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
         getUserData(token); //fire another endpoint here so we can be quicker about gathering data
         return
     })
@@ -76,9 +76,10 @@ export const getMarketById = (marketId) => dispatch =>
     let token = localStorage.getItem("token");
     if(!token || !marketId || marketId < 1 || isNaN(marketId)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
-    .get(`${HOST_URL}/market/${marketId}`)
+    .get(`${HOST_URL}/markets/${marketId}`)
     .then(res => {
-        dispatch({type: GET_MARKET_DATA_END, payload: {curentMarket: res.data}});
+        console.log(res.data)
+        dispatch({type: GET_MARKET_DATA_END, payload: {marketData: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data

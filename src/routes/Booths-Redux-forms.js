@@ -1,11 +1,14 @@
 import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
+import Edit from "../assets/border-color-24-px.svg";
 import {
   TextField,
+  InputAdornment,
   MuiThemeProvider,
   createMuiTheme,
   Typography,
-  Container
+  Container,
+  Box
 } from "@material-ui/core";
 //import ToggleButton from '@material-ui/lab/ToggleButton';
 import Button from "@material-ui/core/Button";
@@ -20,10 +23,16 @@ import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
 import {Redirect} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel'
+import { maxWidth } from "@material-ui/system";
+import { checkMarketData } from "../redux/reducers/marketData";
+import MarketReduxForms from "./Market-Redux-forms";
+import {getMarketById} from "../redux/actions/marketData"
 
 function validate (values) {
   const errors = {};
   const requiredFields = [
+    "boothtype",
+    "numberofbooths"
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -31,8 +40,14 @@ function validate (values) {
         field.slice(1)} Is Required`;
     }
   });
-  console.log("errors: \n" + JSON.stringify(errors));
-  console.log("values:\n" + JSON.stringify(values));
+  values.length = parseInt(String(Math.abs(parseInt(values.length))).substring(2,0));
+  values.width = parseInt(String(Math.abs(parseInt(values.width))).substring(2,0));
+  values.numberofbooths = parseInt(String(Math.abs(parseInt(values.numberofbooths))).substring(3,0));
+  //values.width.length = 2;
+  values.boothprice = Math.abs(parseInt(values.boothprice * 100)/100); // cap it to 2 decimal places
+  if(values.boothprice <= 0) values.boothprice = "";
+/*   console.log("errors: \n" + JSON.stringify(errors));*/
+  //console.log(values); 
   return errors;
 }
 
@@ -56,70 +71,153 @@ const renderTextField = ({
 />
 )};
 
-const renderRadioGroup = ({ label, input, meta: { dirty, error }, ...rest}) => (
-  <RadioButtonGroup
-    label={label}
-    error={dirty && error ? error : ""}
-    errorText={true}
-    {...input}
-    {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-    style={dirty && error ? {border: "solid red 2px"} : {}}
-  />
-);
-
-const renderButton = ({ input,
-  label, prefunc, Style, meta: { visited, error }, ...rest}) =>{
-  {
-    let witherror = {color: "red", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "-30px", transition: "margin 0.2s"};
-    let noerror = {marginTop: "-50px"}
-    return (
-    <div style={visited && error ? witherror : noerror} >
-    {error && visited ? error : ""}
-    <br/>
-    <Button
-      onClick={e => {let opp = prefunc(e); input.onChange(JSON.stringify(opp));}}
-      error={visited && error ? error : ""}
-      errorText={true}
-      {...input}
-      {...rest}
-      style={error && visited ? {color: "red"} : {...Style}}
-    >{label}</Button>
-    </div>
-  );}}
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-
-
 class CreateMarket extends React.Component
 {
   isUpdating = false;
+  redirect = false;
+  currentBooths = []
+  currentMarket = null;
+  erase = false;
+  hasUpdated = true;
   constructor(props)
   {
     super(props);
     if(this.props.currentBooth)
-        this.state = this.props.currentBooth;
+      this.state = this.cleanData(this.props.currentBooth);
     else
-    this.state = {
-        boothtype: '',
-        numberofbooths: '',
-        boothprice: '',
-        length: '',
-        width: '',
-        boothdescription: '',
-    }
+      this.state = {
+          id: -1,
+          boothtype: '',
+          numberofbooths: '',
+          boothprice: '',
+          length: '',
+          width: '',
+          boothdescription: '',
+      }
+
     this.isUpdating = !!this.props.currentBooth
-    if(this.props.market)
-    {
       this.props.initialize(
         this.state
       )
+      if(this.props.market)
+      {
+        this.currentMarket = this.props.market;
+        this.currentBooths = this.props.market.booths.map(x=> this.cleanData(x));
+      }
+      else this.redirect = true;
+  }
+  cleanData(booth)
+  {
+    return {
+      id: booth.id ? booth.id : -1,
+      boothtype: booth.type,
+      numberofbooths: booth.number,
+      boothprice: booth.price ? booth.price : "",
+      length: booth.size && booth.size.length > 0 && booth.size[0] ? booth.size[0] : "",
+      width: booth.size && booth.size.length > 1 && booth.size[1] ? booth.size[1] : "",
+      boothdescription: booth.description ? booth.description : "",
     }
   }
-
+  changeCurrent(booth, update = true)
+  {
+    
+    this.isUpdating = update;
+    this.currentBooth = booth;
+    this.props.initialize(
+     booth
+    )
+  }
+  componentDidUpdate()
+  {
+     if(this.erase && this.props.valid && this.props.refresh)
+     {
+      this.currentBooth = null;
+      this.erase = false;
+      this.props.initialize(this.cleanData({}))
+     }
+    this.hasUpdated = true;
+    
+  }
+  componentWillUpdate()
+  { 
+    this.currentBooths = this.props.market.booths.map(x=> this.cleanData(x));
+  }
   render(){
-    return <div/>
+    const {handleSubmit, pristine, reset, submitting } = this.props;
+    if(this.props.clear && this.erase)
+    {
+      this.erase = false;
+      reset();
+    }
+    return (
+      <div>
+        <header 
+          className="header"
+        >
+            <img src={Arrow} />
+            <h4 
+            className="addbooths"
+            style={{
+                marginLeft: '5%',
+                }}>{this.isUpdating ? "Update" : "Add"} Booths</h4>
+        </header>
+        {/* Styled this div for the time being...will change later */}
+        
+        <body 
+          style={{
+              width:'95%',
+              height: '100%',
+              margin: '10px auto',
+              maxWidth: '624px',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+          }}
+        >
+          {this.isUpdating && !this.currentBooth ? "" : this.form() }
+         <div style={{display: "flex", flexDirection: "column"}}>
+            {this.currentBooths.map(x=> {
+              let flag =  this.props.form.BoothsForm.values && this.props.form.BoothsForm.values.id === x.id ;
+              let obj = flag ? this.props.form.BoothsForm.values : x;
+              return <StyleBox boxShadow={10}>
+              <div className="main-box">
+                <div className="price-text">{ obj.price && obj.price > 0 ? `$${Math.round(obj.price)}` : "free"}</div>
+                <div className="title-box">
+                  <div className="title-text">{obj.boothtype}</div>
+                  <div className="title-subtext">{`${obj.numberofbooths} ${obj.numberofbooths < 2 ? "booth":"booths"}`}</div>
+                </div>
+              </div>
+              <div className="edit-box" onClick={()=> {{this.changeCurrent(flag ? null : x);}}} style={flag ? {opacity: "0.5"}: {}} >
+                <img src={Edit}/>
+                <div className="edit-text">edit</div>
+              </div>
+            </StyleBox>
+            }
+            )}
+          </div>
+            {this.isUpdating ? 
+                <Button 
+                  variant="outlined"
+                  color="secondary"
+                  fullWidth
+                  onClick={() => {this.isUpdating = false; this.changeCurrent(null, false)}}
+                  style={{
+                      
+                      fontSize:'1.4em',
+                      margin: '4% 0',
+                      height: '80px',
+                      width: "65%"
+                  }}
+                >
+                  Add Group
+              </Button>
+              :
+              ""
+            }
+        </body>
+        
+      </div>
+    )
 
     {/* <Field
             component={renderTextField}
@@ -130,6 +228,160 @@ class CreateMarket extends React.Component
           /> */}
     
   }
+  form({handleSubmit, pristine,submitting}= this.props)
+  {
+    return <form onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+              }}
+          >
+          <Field
+            component={renderTextField}
+            required
+            id="name"
+            label="Market Name"
+            name="Market Name"
+            InputProps={{
+              startAdornment: <InputAdornment position="start"></InputAdornment>}}
+              style={{
+                margin: '2% 0',
+                marginBottom: "0px"
+              }}
+            id="boothtype"
+            label="Booth Type"
+            name="boothtype"
+          />
+          <h5 style={{
+                  margin: '10px 0px'
+              }}>
+              Ex. Standard Booths. Larger Booths. Corner Booths. etc.
+          </h5>
+          <div
+            style={{
+                display: 'flex',
+                justifyContent: 'space-evenly',
+          }}>
+            <Field
+            component={renderTextField}
+            required
+            id="numberofbooths"
+            label="Number of Booths"
+            name="numberofbooths"
+            type="number"
+            InputProps={{
+              startAdornment: <InputAdornment position="start"></InputAdornment>
+            }}
+            style={{
+                margin: '10px 0',
+                width: '45%'
+            }}
+            />
+            <Field
+              component={renderTextField}
+              id="boothprice"
+              label="Price per Booth"
+              name="boothprice"
+              type="number"
+              margin="normal"
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              }}
+              style={{
+                margin: '10px 0',
+                width: '45%'
+              }}
+            />
+          </div>
+          <h5
+            style={{
+                display: 'flex',
+                margin: '5px'
+            }}>Size of Booths
+          </h5>
+          <div
+            style={{
+                display: 'flex'
+            }}>
+            <Field
+            component={renderTextField}
+            id="length"
+            name="length"
+            type="number"
+            min="0"
+            max="99"
+            style={{
+                width: '80px',
+                marginBottom: '20px'
+            }}
+            InputProps={{
+            endAdornment: <InputAdornment position="end">ft</InputAdornment>
+            }}
+            />
+            <div style={{position: "relative", bottom: "-30px", margin: "0 10px"}}>X</div>
+            <Field
+              component={renderTextField}
+              id="width"
+              name="width"
+              type="number"
+              min="0"
+              max="99"
+              style={{
+                  width: '80px',
+                  marginBottom: '20px'
+              }}
+              InputProps={{
+              endAdornment: <InputAdornment position="end">ft</InputAdornment>
+              }}
+            />
+          </div>
+          <Field
+            component={renderTextField}
+            id="boothdescription"
+            name="boothdescription"
+            label="Booth Description"
+            multiline rows="4"
+            margin="normal"
+            style={{ marginBottom: "0px"}}
+          />
+          <div style={{display: "flex", minWidth: "100%"}} >
+        <Button 
+          type="submit" 
+          disabled={pristine || submitting}
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          onClick={() => {this.props.array.insert("redirecttype",0,1); this.erase = true; }}
+          style={{
+              
+              fontSize:'1.4em',
+              margin: '4% 0',
+              height: '80px'
+          }}
+        >
+            Add Group
+        </Button>
+        <div style={{margin: "0 10px"}}/>
+          <Button 
+          type="submit" 
+          disabled={pristine || submitting}
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
+          style={{
+              fontSize:'1.4em',
+              margin: '4% 0',
+              height: '80px'
+          }}
+          >
+            Save
+          </Button>
+        </div>
+        <hr/>
+        </form>
+  }
 };
 
 const mapStateToProps = state => {
@@ -138,40 +390,122 @@ const mapStateToProps = state => {
   };
 };
 
-
+const StyleBox = styled(Box)`
+ width: 90vw;
+ height: 60px;
+ border-radius: 10px;
+ box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.5);
+ background-color: #edf3ea;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ margin: 10px 0;
+ @media(min-width: 450px)
+ {
+   width: 450px;
+ }
+ .main-box
+ {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 10px;
+ }
+ .title-box
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+ .price-text
+ {
+  margin: 3px 20px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.89;
+  letter-spacing: normal;
+  color: #478529;
+ }
+ .title-subtext
+ {
+  margin: 0;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #484848;
+ }
+ .title-text
+ {
+  margin: 0;
+  font-family: Raleway;
+  font-size: 18px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #000000;
+ 
+ }
+ .edit-box
+ {
+   margin: 10px 10px;
+ }
+ .edit-text
+ {
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #000000;
+}
+`;
 
 const ReduxForms = reduxForm({
   form: "BoothsForm", // a unique identifier for this form
   validate
-})(CreateMarket);
+})(connect(mapStateToProps)(CreateMarket));
 
 
 class ReduxContainer extends React.Component
 {
-  init = {
-    name: '',
-    description: '',
-    address: '',
-    operation: [],
-    market_type: 1, //(1 = private, 2=public)
-    website: '',
-    facebook: '',
-    image: '', 
-    twitter: '',
-    instagram: '',
-    zipcode: ''
-  }
   handleRedux = (values) =>
   {
-    if (this.props.currentMarket) this.props.updateMarket(this.props.currentMarket.id, values)
-    else this.props.createNewMarket({...this.init, ...values});
+    this.wasfetching = true;
+    this.redirecttype = values.redirecttype && values.redirecttype.length > 0 ? values.redirecttype[values.redirecttype.length-1 ] : 0;
+    if (values.id > 0) this.props.updateBooth(this.props.checkMarketData.marketData.id, values)
+    else this.props.createNewBooth(77,{ ...values});
   }
+  wasfetching =false;
+  redirecttype= 0;
   render(){
-    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkBoothData.updated} market={this.props.currentMarket}/>);
+    if(!this.props.checkMarketData.marketData) 
+    //temp code so we can test
+    { if(!this.props.checkMarketData.fetching || !this.wasfetching) this.props.getMarketById(77); this.wasfetching = false; return <div>loading</div>}
+    if(this.redirecttype === 2) return <Redirect to="/"/>
+    let clear = this.redirecttype===1;
+    this.redirecttype = 0;
+    return <ReduxForms onSubmit={this.handleRedux} refresh={clear} market={this.props.checkMarketData.marketData} />
+   /*  let redirect = this.props.checkBoothData.updated && this.wasfetching;
+    if(this.wasfetching && !this.props.checkBoothData.fetching) this.wasfetching = false;
+    return (<ReduxForms onSubmit={this.handleRedux} refresh={""} redirect={redirect} market={this.props.checkMarketData.marketData}/>); */
+  }
+  componentDidUpdate()
+  {
   }
 }
 
 export default connect(
   mapStateToProps,
-  { createNewBooth, updateBooth }
+  { createNewBooth, updateBooth, getMarketById }
 )(ReduxContainer);
