@@ -28,6 +28,8 @@ import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
 import CreateVendor from "./routes/CreateVendor";
 import BoothReduxForms from "./routes/Booths-Redux-forms";
+import SearchMarkets from "./routes/SearchMarkets";
+import MarketReduxForms from "./routes/Market-Redux-forms";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -75,10 +77,6 @@ class App extends React.Component {
             />
             <PrivateRoute path="/userslist" component={UserList} />
             <Route
-              path="/createmarket"
-              render={props => <CreateMarket {...this.props} />}
-            />
-            <Route
               path="/addbooths"
               render={props => <AddBooths {...this.props} currentBooth={undefined} />}
             />
@@ -94,9 +92,15 @@ class App extends React.Component {
               path="/createvendor"
               render={props => <CreateVendor {...this.props} />}
               />
+               <Route
+              path="/searchmarkets"
+              render={props => <SearchMarkets {...this.props} />}
+              />
               <Route
               path="/test"
               render={props => <BoothReduxForms />}
+              path="/createmarket"
+              render={props => <MarketReduxForms />}
               />
           </div>
         </MuiThemeProvider>

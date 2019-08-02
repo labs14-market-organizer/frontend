@@ -10,24 +10,32 @@ import {
   } from "@material-ui/core";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import {Redirect} from "react-router-dom"
+import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
+
+
 
 class CreateVendor extends React.Component{
+    isUpdating = false;
     constructor(props){
         super(props);
+        this.state = this.props.currentVendor;
+        if (!this.state)
         this.state = {
             name: '',
             description: '',
             items: [],
-            electricty: false,
+            item: '',
+            electricity: false,
             ventilation: false,
             loud: false,
-            other_special: {},
+            other_special: '',
             website: '',
             facebook: '',
             twitter: '',
             instagram: ''
-
-        }
+        };
+        else this.isUpdating = true;
     }
     handleChange = e => {
         this.setState({
@@ -35,23 +43,59 @@ class CreateVendor extends React.Component{
           [e.target.name]: e.target.value
         });
       };
+      
+    checkChange = name => e => {
+      e.preventDefault()
+      this.setState({ ...this.state, [name]: e.target.checked });
+    };
 
-    checkChange = e => {
+    addItem = e => {
+      e.preventDefault();
+      if (this.state.item !== ''){
+        let item = this.state.item;
+        let itemList = [...this.state.items, item];
         this.setState({
-            ...this.state,
-            [e.target.name]: !e.target.value
+          ...this.state,
+          items: itemList,
+          item: ''
         })
+      }
     }
-    render() {
+    addCount = e => {
+      let newCount = [...this.state.count, this.state.count.length]
+          this.setState({
+            ...this.state,
+            count: newCount
+          })
+        }
+
+    deleteItem = (e, number) => {
+      e.preventDefault();
+      const newItems = this.state.items.filter((item, index) => index !== number);
+      this.setState({
+        ...this.state,
+        items: newItems
+      })
+    }
+    save = e => {
+    e.preventDefault();
+    (this.updating) ? this.props.updateVendor(this.state) : this.props.createNewVendor(this.state)
+    }
+  
+    
+    render() 
+    {
+      if(this.props.checkVendorData.updated) return <Redirect to="/" />
+      if(this.props.checkVendorData.created) return <Redirect to="/" />
         return (
             <div>
                 <Header>
                     <ArrowImage src={Arrow} />
-                    <CreateHeader>Create Vendor</CreateHeader>
+                    <CreateHeader>{(this.isUpdating) ? "Edit Vendor" : "Create Vendor" }</CreateHeader>
                 </Header>
                 <Container maxWidth="sm">
+                <form>
                     <TextField
-                        error={this.touched && this.state.name == "" ? true : false}
                         required
                         id="name"
                         label="Business Name"
@@ -65,7 +109,6 @@ class CreateVendor extends React.Component{
                         style={{marginTop: "20px"}}
                     />
                     <TextField
-                        error={this.touched && this.state.description == "" ? true : false}
                         required
                         id="description"
                         label="Business Description"
@@ -80,45 +123,71 @@ class CreateVendor extends React.Component{
                         rows="3"
                         multiline
                     />
-                    <p>What are the specific items you plan to sell?</p>
-                    <img src={Add} />
+                    <StyledContainer>
+                    
+                    <StyledP>What are the specific items you plan to sell?</StyledP>
+                    <FlexContainer>
+                    <img src={Add} onClick={this.addItem} />
                     <TextField
-                        id="items"
+                        id="item"
                         label="Add Item"
-                        name="items"
-                        value={this.state.items}
+                        name="item"
+                        value={this.state.item}
                         onChange={this.handleChange}
                         margin="normal"
                         fullWidth={true}
-                        autoComplete={true}
-                     />
-                     <p>
+                        style={{marginTop: "-20px"}}
+                  
+                    />
+                    </FlexContainer>
+                    {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
+                    {this.state.items.map((item, index) => 
+                    <FlexContainer  key={index}>
+                       <StyledButton onClick={(e) => this.deleteItem(e,index)}>X</StyledButton>
+                       <StyledP1>{item}</StyledP1> 
+                       
+                    </FlexContainer>
+                    )}
+                    
+                     <StyledP>
+
                          Special Considerations
-                     </p>
-                     <Checkbox
-                        checked={this.state.electricty}
-                        onChange={this.checkChange}
-                        value="electricty"
+                     </StyledP>
+                    <FlexColumn>
+                    <FlexContainer>
+                      <Checkbox
+                        name="electricity"
+                        checked={this.state.electricity}
+                        onChange={this.checkChange("electricity")}
+                        value={this.state.electricity}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /> <StyledP>Need Electricity</StyledP>
+                    </FlexContainer>
+                    <FlexContainer>
                     <Checkbox
+                        name="ventilation"
                         checked={this.state.ventilation}
-                        onChange={this.checkChange}
-                        value="ventilation"
+                        onChange={this.checkChange("ventilation")}
+                        value={this.state.ventilation}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /><StyledP>Need Ventilation</StyledP>
+                    </FlexContainer>
+                    <FlexContainer>
                     <Checkbox
+                        name="loud"
                         checked={this.state.loud}
-                        onChange={this.checkChange}
-                        value="loud"
+                        onChange={this.checkChange("loud")}
+                        value={this.state.loud}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /><StyledP>Have loud machinery</StyledP>
+                    </FlexContainer>
+                    <FlexContainer>
                     <Checkbox
                         checked={this.state.other_special}
                         onChange={this.checkChange}
@@ -126,7 +195,19 @@ class CreateVendor extends React.Component{
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    />
+                    /><TextField
+                        id="other_special" 
+                        label="Other"
+                        name="other_special"
+                        value={this.state.other_special}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        fullWidth={true}
+                        style={{marginTop: "-18px", fontFamily:"Raleway"}}
+                     />
+                    </FlexContainer>
+                    </FlexColumn>
+                    </StyledContainer>
                      <TextField
                         id="website"
                         label="Business Website"
@@ -168,7 +249,8 @@ class CreateVendor extends React.Component{
                         fullWidth={true}
                         variant="outlined"
                      />
-                     <GreenButton variant="outlined">Save</GreenButton>
+                     <GreenButton variant="outlined" onClick={(e) => this.save(e)}>Save</GreenButton>
+                     </form>
                 </Container>
             </div>
         )
@@ -202,16 +284,50 @@ const GreenButton = styled(Button)`
   @media(min-width: 600px){
     width: 400px;
   }
+`;
 
-`
+const StyledP = styled.p`
+  font-family: Raleway;
+  font-size: 16px;
+  line-height: 1.5;
+`;
+
+const StyledP1 = styled.p`
+font-family: Raleway;
+font-size: 16px;
+line-height: 1.2;
+`;
+
+
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+`;
+const StyledContainer = styled.div`
+  text-align: left;
+`;
+
+const StyledButton = styled.button`
+  border: none;
+  background-color: white;
+  font-size: 18px;
+  margin-right: 15px;
+  font-family: Raleway;
+`;
+
+
 const mapStateToProps = state => {
     return {
-      //states
-      ...state.checkUserData
+      ...state
     };
   };
   
   export default connect(
     mapStateToProps,
-    { }
+    { createNewVendor, updateVendor  }
   )(CreateVendor);
