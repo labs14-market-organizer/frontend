@@ -37,15 +37,17 @@ import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
 
 var user_type = localStorage.getItem("userType");
-
+let token = null;
 class App extends React.Component {
   componentWillMount() {
     this.props.getUserData(); //async check on second pass
   }
 
-  componentWillUpdate() {}
+  componentWillUpdate() {
+  }
   render() {
-    let token = this.props.token;
+     token = this.props.token;
+    let userData = this.props.userData;
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
     return (

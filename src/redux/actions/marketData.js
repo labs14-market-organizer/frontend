@@ -118,6 +118,13 @@ export const deleteMarket = (marketId) => dispatch =>
     })
 }
 
+export const localMarketSwitch = (market) => dispatch =>
+{
+    dispatch({ type: SET_MARKET_DATA_START });
+    //add varification here at some point;
+    dispatch({ type: SET_MARKET_DATA_END, payload: {marketData: market} });
+}
+
 function cleanData(market)
 {
     let clean = 
