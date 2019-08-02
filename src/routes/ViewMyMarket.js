@@ -62,9 +62,9 @@ const ViewMyMarket = (props) => {
             <Tag>Address</Tag>
             <Ltag>{market.address}</Ltag>
             <Tag>Hours</Tag>
-            {/* market.operation.map(opHours => {
+            { market.operation.map(opHours => {
               return (opHours.start !== null) ? <Ltag>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)} {militaryConvert(opHours.start)} - {(militaryConvert(opHours.end))}</Ltag> : null 
-            }) */}
+            }) }
             <Tag>Market Status</Tag>
             {(market.type === 1)? <Ltag>Public Market</Ltag> :<Ltag>Private Market</Ltag>  }
             { (market.website && market.website.length > 0) ?<div> <Tag>Website</Tag> <Ltag>{market.website}</Ltag> </div> : null } 
