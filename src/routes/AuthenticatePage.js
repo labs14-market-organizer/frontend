@@ -14,13 +14,12 @@ import styled from "styled-components";
 import facebook from "../assets/facebook.png";
 import google from "../assets/google.svg";
 import Navbar from "../components/Navbar";
-import facebookSymbol from "../assets/facebookSymbol.svg";
+
 
 class AuthenticatePage extends React.Component{
     state = {
       toggle: true //displays create account //false displays welcome back.
     }
-
 
     signIn = (e) => {
       e.preventDefault();
@@ -46,8 +45,8 @@ class AuthenticatePage extends React.Component{
           </Box> */}
           <MarginDiv>
           <Flexing>
-            {(this.state.toggle) ? <StyledP4 onClick={this.signUp}>Sign Up</StyledP4> : <StyledP3 onClick={this.signUp}>Sign Up</StyledP3>}
-            {(this.state.toggle) ? <StyledP3 onClick={this.signIn}>Sign In</StyledP3> : <StyledP4 onClick={this.signIn}>Sign In</StyledP4>}
+            {(this.state.toggle) ? <StyledP3 onClick={this.signUp}>Sign Up</StyledP3> : <StyledP4 onClick={this.signUp}>Sign Up</StyledP4>}
+            {(this.state.toggle) ? <StyledP4 onClick={this.signIn}>Sign In</StyledP4> : <StyledP3 onClick={this.signIn}>Sign In</StyledP3>}
           </Flexing>
           <StyledContainer>
             <StyledBox boxShadow={10}  display='flex' flexDirection='column'>
@@ -113,14 +112,10 @@ const StyledP = styled.p`
 `;
 
 const StyledP1 = styled.p`
+  text-align: center;
   font-size: 14px;
   margin-left: 8%;
   margin-right: 8%;
-  text-align: left;
-  @media (min-width: 500px) {
-    width: 300px;
-    margin: 0 auto;
-  }
 `
 const StyledP2 = styled.p`
   font-size: 14px;
