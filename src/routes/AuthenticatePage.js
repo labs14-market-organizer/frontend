@@ -45,8 +45,8 @@ class AuthenticatePage extends React.Component{
           </Box> */}
           <MarginDiv>
           <Flexing>
-            {(this.state.toggle) ? <StyledP3 onClick={this.signUp}>Sign Up</StyledP3> : <StyledP4 onClick={this.signUp}>Sign Up</StyledP4>}
-            {(this.state.toggle) ? <StyledP4 onClick={this.signIn}>Sign In</StyledP4> : <StyledP3 onClick={this.signIn}>Sign In</StyledP3>}
+            {(this.state.toggle) ? <StyledP4 onClick={this.signUp}>Sign Up</StyledP4> : <StyledP3 onClick={this.signUp}>Sign Up</StyledP3>}
+            {(this.state.toggle) ? <StyledP3 onClick={this.signIn}>Sign In</StyledP3> : <StyledP4 onClick={this.signIn}>Sign In</StyledP4>}
           </Flexing>
           <StyledContainer>
             <StyledBox boxShadow={10}  display='flex' flexDirection='column'>
@@ -61,7 +61,7 @@ class AuthenticatePage extends React.Component{
                 <Button variant="contained" label="Google" href="https://cloudstands-deploy.herokuapp.com/auth/google"  className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button>
                  */}
                  <StyledD>
-                <StyledP1>By continuing, you agree to Cloud Stands<span className="bold"> Terms of Service</span> and <span className="bold">Privacy Policy</span> </StyledP1></StyledD>
+                <StyledP1>By continuing, you agree to Cloud Stands<StyledSpan> Terms of Service</StyledSpan> and <StyledSpan>Privacy Policy</StyledSpan> </StyledP1></StyledD>
              
                 {(this.state.toggle) ? <StyledP2>Already have an account?<span style={{ color: "green" , fontWeight: "bold"}} onClick={this.signIn}>  Sign in</span> </StyledP2> : 
                 <StyledP2>Don't have an account?<span style={{ color: "green" , fontWeight: "bold"}} onClick={this.signUp}>  Sign up</span> </StyledP2>
@@ -74,6 +74,10 @@ class AuthenticatePage extends React.Component{
         )
     }
 }
+
+const StyledSpan = styled.span`
+  font-weight: bold;
+`;
 
 const StyledContainer = styled(Container)`
   max-width: 800px;
