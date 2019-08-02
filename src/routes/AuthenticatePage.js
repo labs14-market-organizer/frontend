@@ -33,7 +33,6 @@ class AuthenticatePage extends React.Component{
     }
 
     render(){
-        console.log(this.state.toggle)
         return (
         <>
           <Navbar />
