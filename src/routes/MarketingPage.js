@@ -12,7 +12,17 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
+  CardAction }
+from "@material-ui/core";
+import lettuce from "../assets/lettuce.png";
+import tomato from "../assets/tomato.png";
+import step1 from "../assets/step1.svg";
+import step2 from "../assets/step2.svg";
+import step3 from "../assets/step3.svg";
+import testimonial1 from "../assets/testimonial1.png";
+import Footer from "../components/Footer";
+
+
 
 
 import {spacing, positions } from "@material-ui/system"
@@ -30,14 +40,6 @@ const theme = {
 }
 
 
-import lettuce from "../assets/lettuce.png";
-import tomato from "../assets/tomato.png";
-import step1 from "../assets/step1.svg";
-import step2 from "../assets/step2.svg";
-import step3 from "../assets/step3.svg";
-import testimonial1 from "../assets/testimonial1.png";
-
-import Footer from "../components/Footer";
 
 const MarketingPage = () => {
   return (
@@ -170,30 +172,6 @@ const MarketingPage = () => {
       <Footer />
     </>
 
-            <MenuIcon />
-
-            <Grid container justify="center">
-              <Typography variant="subtitle1">Small Markets Made</Typography>
-              <Typography component="span" variant="subtitle1">
-                "Simple."
-              </Typography>
-            </Grid>
-            <img src={logo} />
-            <Grid container justify="center">
-              <Typography variant="p">
-                Cloud Markets is a the best way to promote organization and
-                communication between vendors and small markets.
-              </Typography>
-              <Link to="/signup">
-                <Button bg="primary" label="CTA" onClick={() => Mixpanel.track('joined button clicked')}> 
-                  JOIN CLOUD STANDS
-                </Button>
-              </Link> 
-            </Grid>
-          </ThemeProvider>
-        </ThemeProvider>
-      </Grid>
-    </Container>
 
   );
 };
