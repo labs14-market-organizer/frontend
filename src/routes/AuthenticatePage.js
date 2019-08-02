@@ -13,36 +13,39 @@ import '../scss/authenticationPage.scss';
 import styled from "styled-components";
 import facebook from "../assets/facebook.png";
 import google from "../assets/google.png";
+import Navbar from "../components/Navbar";
+
 
 class AuthenticatePage extends React.Component{
     state = {
-      toggle: true
+      toggle: true //displays create account //false displays welcome back.
     }
 
 
     signIn = (e) => {
       e.preventDefault();
-      return (this.state.toggle) ? this.setState({ toggle: false }) : null
+      return (this.state.toggle) ? this.setState({ toggle: false }) : null;
     }
 
-    signIn = (e) => {
+    signUp = (e) => {
       e.preventDefault();
-      return (!this.state.toggle) ? this.setState({ toggle: false }) : null
+      return (!this.state.toggle) ? this.setState({ toggle: true }) : null;
     }
 
-    render()
-    {
-
+    render(){
+        console.log(this.state.toggle)
         return (
         <>
-          <Box className="header-SignIn" display='flex'>
+          <Navbar />
+          {/* <Box className="header-SignIn" display='flex'>
             
               <span className="meet-the-team"><p>Meet the Team</p></span>
             
               <Button color="deault" label="Google" onClick={this.authenticate} style={{ background: "white", Color: "white", textDecoration: "none" }} >Sign Up</Button>
               <Button color="deault" label="Google" onClick={this.authenticate} style={{ background: "white", Color: "white", textDecoration: "none" }} >Sign In</Button>
                 
-          </Box>
+          </Box> */}
+          <MarginDiv>
           <Flexing>
             {(this.state.toogle) ? <StyledP3 onClick={this.signUp}>Sign Up</StyledP3> : <StyledP4 onClick={this.signUp}>Sign Up</StyledP4>}
             {(this.state.toggle) ? <StyledP4 onClick={this.signIn}>Sign In</StyledP4> : <StyledP3 onClick={this.signIn}>Sign In</StyledP3>}
@@ -60,11 +63,15 @@ class AuthenticatePage extends React.Component{
                 {/* <Button variant="contained" label="Google"  href="https://cloudstands-staging.herokuapp.com/auth/facebook" className="company-buttons" style={{backgroundColor: '#3b5998'}}>Sign Up With Facebook</Button>
                 <Button variant="contained" label="Google" href="https://cloudstands-deploy.herokuapp.com/auth/google"  className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button>
                  */}
-                <StyledP1>By continuing, you agree to Cloud Stands<span className="bold">Terms of Service</span> and <span className="bold">Privacy Policy</span> </StyledP1>
-                <StyledP2>Already have an account?<span style={{ color: "green" , fontWeight: "bold"}}>  Sign in</span> </StyledP2>
+                <StyledP1>By continuing, you agree to Cloud Stands<span className="bold"> Terms of Service</span> and <span className="bold">Privacy Policy</span> </StyledP1>
+             
+                {(this.state.toggle) ? <StyledP2>Already have an account?<span style={{ color: "green" , fontWeight: "bold"}} onClick={this.signIn}>  Sign in</span> </StyledP2> : 
+                <StyledP2>Don't have an account?<span style={{ color: "green" , fontWeight: "bold"}} onClick={this.signUp}>  Sign up</span> </StyledP2>
+                }
+               
             </StyledBox>
            </StyledContainer>
-
+          </MarginDiv>
         </>
         )
     }
@@ -72,14 +79,14 @@ class AuthenticatePage extends React.Component{
 
 const StyledContainer = styled(Container)`
   max-width: 800px;
-  margin: 100px auto;
+  margin: 0 auto;
 `;
 
 const StyledImg = styled.img`
   margin-top: 20px;
   width: 80%;
-  @media (min-width: 600px) {
-    width: 370px;
+  @media (min-width: 500px) {
+    width: 300px;
   }
 `;
 
@@ -103,7 +110,6 @@ const StyledP = styled.p`
   margin-bottom: 20px;
   font-family: Raleway;
   font-weight: bold;
-    }
 `;
 
 const StyledP1 = styled.p`
@@ -122,20 +128,23 @@ const StyledP3 = styled.p`
   font-family: Raleway;
   font-weight: 600;
   line-height: 1.33;
-  z-index: 5000;
+  z-index: 5001;
 `
 const StyledP4 = styled.p`
   font-size: 18px;
   font-family: Raleway;
   font-weight: bold;
   line-height: 1.33;
-  z-index: -20;
+  z-index: 5001;
 `
 const Flexing = styled.p`
   display: flex;
   justify-content: space-between;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 30%;
+  margin-right: 30%;
+`
+const MarginDiv = styled.div`
+  padding-top: 40px;
 `
 
 export default AuthenticatePage
