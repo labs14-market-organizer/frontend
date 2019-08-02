@@ -16,6 +16,9 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
 
 
+var user_type = localStorage.getItem("userType");
+
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -43,35 +46,63 @@ class Navbar extends React.Component {
     // could conditinally render based off 
     // if data retreived from store to show
     // the avatar and name/market name
+    if (user_type !== false) {
+      if (user_type == "marketOwner") {
+        return (
     
-  return (
-    
-        <StyledPaper elevation={4}>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div>
-          {/* <img src={} /> */}
-        </div>
-        {/* props name */}
-        {/* props market 15px/16px padding bottom then bottom border*/}
-
-        <ul>
-          <li><Button>Vendor History</Button></li>
-          <li><Button>Payment Methods</Button></li>
-          <li><Button>Account Settings</Button></li>
-          <li><Button>FAQ</Button></li>
-          <li><Button>Contact Us</Button></li>
+          <StyledPaper elevation={4}>
           <br/>
           <br/>
-          <li><Button>Sign Out</Button></li> 
-        </ul>
-    </StyledPaper>
-      );
+          <br/>
+          <br/>
+          <div>
+            {/* <img src={} /> */}
+          </div>
+          {/* props name */}
+          {/* props market 15px/16px padding bottom then bottom border*/}
+  
+          <ul>
+            <li><Button>Vendor History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <br/>
+            <br/>
+            <li><Button>Sign Out</Button></li> 
+          </ul>
+      </StyledPaper>
+        );
+      }
+      else if (user_type == "vendor") {}
     } else {
+      return (
 
-      };
+          <StyledPaper elevation={4}>
+    
+          <div>
+          <li><Button>Home</Button></li>
+          <li><Button>Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </div>
+          {/* props name */}
+          {/* props market 15px/16px padding bottom then bottom border*/}
+      
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+        
+      )
+    }
+ 
+    } 
     }
 
   render() { 
@@ -106,11 +137,27 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    @media (max-width: 390px) {
+      font-size: 40px;
+      
+    }
+    @media (max-width: 350px) {
+      font-size: 30px;
+      
+    }
 `;
 
 const StandsText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Raleway Dots";
     color: black;
+    @media (max-width: 390px) {
+      font-size: 40px;
+      
+    }
+    @media (max-width: 350px) {
+      font-size: 30px;
+      
+    }
 `;
 const StyledBox = styled(Box)`
   display: flex;

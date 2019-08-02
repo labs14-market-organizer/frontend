@@ -208,6 +208,8 @@ const StyledLink2 = styled(Link)`
   .MuiButton-fullWidth  {
     max-width: 424px;
     margin-left: 22px;
+    margin-right: 38px;
+    
     height: 60px;
     /* margin-bottom:78px; */
     font-family: "Raleway";
@@ -219,7 +221,7 @@ const StyledLink2 = styled(Link)`
 const StyledDiv = styled.div`
   display: flex;
   margin: 0 auto;
-  padding-top: 112px;
+  /* padding-top: 112px; */
 `;
 
 const BoxCol = styled.div`
@@ -271,6 +273,8 @@ const Hero = styled(Paper)`
     font-size: 18px;
     margin-left: -8px;
     height: 60px;
+    
+
   }
 `;
 

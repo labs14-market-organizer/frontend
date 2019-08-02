@@ -37,6 +37,7 @@ import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
 
 var user_type = localStorage.getItem("userType");
+console.log(user_type)
 
 class App extends React.Component {
   componentWillMount() {
@@ -54,7 +55,12 @@ class App extends React.Component {
         <MuiThemeProvider theme={theme}>
           <div className="App">
             <Navbar />
-
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
               exact
