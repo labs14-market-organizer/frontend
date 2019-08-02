@@ -27,11 +27,17 @@ export const getUserData = (token=null) => dispatch => {
         .get(`${HOST_URL}/user`)
         .then(res => {
             if(!res.data) throw "interal client error";
+            console.log(res.data);
             let userType = "undefined";
-            try { userType = res.data.markets.length > 0 ? "Market Owner" : res.data.vendors.length > 0 ? "Vendor" : "undefined" }catch{}
-            localStorage.setItem("userdata", JSON.stringify(res.data));
+            try { 
+                userType = res.data.markets.length > 0 ? "Market Owner" : res.data.vendors.length > 0 ? "Vendor" : "undefined" 
+                if(res.data.markets && res.data.markets.length > 0) dispatch({ type: "SET_MARKET_DATA_END", payload: {marketData: res.data.markets[0]} });
+                else if(res.data.vendors && res.data.vendors.length > 0) dispatch({ type: "SET_VENDOR_DATA_END", payload: {marketData: res.data.vendors[0]} });
+            }catch{}
+            //localStorage.setItem("userdata", JSON.stringify(res.data));
             localStorage.setItem("token", token);
-            localStorage.setItem("userType", userType);
+            //localStorage.setItem("userType", userType);
+            
             return dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}});
         })
         .catch(err => {

@@ -35,6 +35,7 @@ export const checkUserData = (state = initalState, action) =>
             return {...initalState, error: action.payload.error, fetching: false}
         
         case GET_USER_DATA_START:
+           
         default:
             return state;
     }

@@ -58,9 +58,10 @@ export const createNewVendor = (vendor) => dispatch =>
     return axiosWithAuth(token)
     .post(`${HOST_URL}/vendors`, vendor)
     .then(res => {
-        localStorage.removeItem("userData");//remove out of date data
+        //getUserData(token)(dispatch); //fire another endpoint here so we can be quicker about gathering data
+        dispatch({type: "GET_USER_DATA_END", payload: {userData: null, userType: "Vendor"}});
         dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
-        getUserData(token); //fire another endpoint here so we can be quicker about gathering data
+        
     })
     .catch(err =>{
         console.error(err);
