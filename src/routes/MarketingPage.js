@@ -31,7 +31,6 @@ import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import logo from "../assets/standLogo.svg";
-import cloud from "../assets/topCloud.svg";
 
 import { Mixpanel } from '../redux/actions/mixpanel';
 
@@ -59,6 +58,7 @@ const MarketingPage = () => {
               variant="contained"
               color="primary"
               label="CTA"
+              onClick={() => Mixpanel.track('joined button clicked')}
             >
               JOIN CLOUD STANDS
             </Button>
@@ -165,7 +165,7 @@ const MarketingPage = () => {
       <Box7/>
       </TestimonialWrapper>
       <StyledLink2 to="/signup">
-        <Button fullWidth="true" variant="contained" color="primary" label="CTA">
+        <Button fullWidth="true" variant="contained" color="primary" label="CTA" onClick={() => Mixpanel.track('joined button clicked')}>
           JOIN CLOUD STANDS
         </Button>
       </StyledLink2>
