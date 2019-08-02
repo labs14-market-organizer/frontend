@@ -41,7 +41,6 @@ class App extends React.Component {
 
   componentWillUpdate() {}
   render() {
-    console.log(this.props);
     let token = this.props.token;
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
@@ -142,7 +141,6 @@ const InPrivateRoute = ({
 };
 
 const PrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
-  console.log(userprops);
   return (
     <Route
       {...rest}
