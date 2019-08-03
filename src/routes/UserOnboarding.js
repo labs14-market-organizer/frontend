@@ -1,25 +1,27 @@
 import React from "react";
 import { Box, Shadows, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+import Navbar from "../components/Navbar";
 import styled from "styled-components";
 
 const UserOnboarding = () => {
     return (
         <div>
-        <Explain>
-            Cloud stands wants to provide you with the best possible experience. <br></br> Which best describes you roles?
-        </Explain>
-        <Link to="/createmarket" style={{textDecoration: "none"}} >
-                <StyleBox boxShadow={10} >
-                    <Selected > Market Owner </Selected>
-                </StyleBox>
-        </Link>
-        <Link to="/createvendor" style={{textDecoration: "none"}}>
-            <StyleBox boxShadow={10}>
-            <Selected >Vendor</Selected>
-           </StyleBox>
-        </Link>
+        <Navbar />
+
+            <Explain>
+                Cloud stands wants to provide you with the best possible experience. <br></br> Which best describes you roles?
+            </Explain>
+            <Link to="/createmarket" style={{textDecoration: "none"}} >
+                    <StyleBox boxShadow={10} >
+                        <Selected > Market Owner </Selected>
+                    </StyleBox>
+            </Link>
+            <Link to="/createvendor" style={{textDecoration: "none"}}>
+                <StyleBox boxShadow={10}>
+                <Selected >Vendor</Selected>
+            </StyleBox>
+            </Link>
         </div>
     )
 }
@@ -45,6 +47,7 @@ const Selected = styled.div`
 const Explain = styled.div`
         font-size: 16px;
         line-height: 24px;
+        padding-top: 130px;
 `;
 
 export default UserOnboarding;

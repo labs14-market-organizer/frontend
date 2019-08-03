@@ -7,13 +7,15 @@ import {
     Redirect,
     withRouter
   } from "react-router-dom";
-import { Button, Box, Grid, Shadows, Container } from '@material-ui/core';
+import { Button, Box, Grid, Shadows, Container, Icon } from '@material-ui/core';
 import '../scss/authenticationPage.scss';
   // import Box from '@material-ui/core/Box';
 import styled from "styled-components";
-import facebook from "../assets/facebook.png";
+import facebookSymbol from "../assets/facebookSymbol.svg";
 import google from "../assets/google.svg";
 import Navbar from "../components/Navbar";
+import facebook from "../assets/facebook.png";
+import googleIcon from "../assets/googleicon1.svg";
 
 
 class AuthenticatePage extends React.Component{
@@ -51,15 +53,9 @@ class AuthenticatePage extends React.Component{
           <StyledContainer>
             <StyledBox boxShadow={10}  display='flex' flexDirection='column'>
                 {(this.state.toggle) ? <StyledP>Create Account</StyledP> : <StyledP>Welcome Back</StyledP>}
-                <a href="https://cloudstands-staging.herokuapp.com/auth/facebook">
-                  <StyledImg src={facebook}></StyledImg> 
-                </a>
-                <a href="https://cloudstands-staging.herokuapp.com/auth/google">
-                  <StyledImg src={google}></StyledImg>
-                </a>
-                {/* <Button variant="contained" label="Google"  href="https://cloudstands-staging.herokuapp.com/auth/facebook" className="company-buttons" style={{backgroundColor: '#3b5998'}}>Sign Up With Facebook</Button>
-                <Button variant="contained" label="Google" href="https://cloudstands-deploy.herokuapp.com/auth/google"  className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button>
-                 */}
+               <StyledCompanyButtons variant="contained" label="Facebook"  href="https://cloudstands-staging.herokuapp.com/auth/facebook" style={{backgroundColor: '#3b5998'}}><i class="fa fa-facebook-square" style={{color: "white", marginLeft: "0%", height: "18px", width: "16px", textAlign: "left"}}></i><StyledSpan1>Sign In With Facebook</StyledSpan1></StyledCompanyButtons>
+               <StyledCompanyButtons variant="contained" style={{backgroundColor: 'white', color: "black"}} label="Facebook"  href="https://cloudstands-staging.herokuapp.com/auth/google"><img src={googleIcon} style={{marginLeft: "-10px"}}/><StyledSpan1>Sign In With Google</StyledSpan1></StyledCompanyButtons>
+
                  <StyledD>
                 <StyledP1>By continuing, you agree to Cloud Stands<StyledSpan> Terms of Service</StyledSpan> and <StyledSpan>Privacy Policy</StyledSpan> </StyledP1></StyledD>
              
@@ -74,6 +70,8 @@ class AuthenticatePage extends React.Component{
         )
     }
 }
+
+
 
 const StyledSpan = styled.span`
   font-weight: bold;
@@ -116,10 +114,10 @@ const StyledP = styled.p`
 `;
 
 const StyledP1 = styled.p`
-  text-align: center;
+  text-align: left;
   font-size: 14px;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin-left: 1%;
+  margin-right: 1%;
 `
 const StyledP2 = styled.p`
   font-size: 14px;
@@ -162,6 +160,43 @@ const StyledD = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+  }
+`
+
+
+const StyledCompanyButtons = styled(Button)`
+  margin-top: 5px;
+  height: 9vh;
+  width: 80%;
+  margin-left: 10%;
+  text-decoration: "none"; 
+  margin-top: "4px";
+  background-color: "white"; 
+  border-radius: 10px;
+  margin-bottom: 15px;
+  color: white;
+  text-transform: capitalize;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-around;
+  @media (min-width: 340px) {
+    font-size: 15px;
+  }
+  @media (min-width: 360px) {
+    font-size: 17px;
+  }
+  @media (min-width: 400px) {
+    font-size: 19px;
+    max-width: 320px;
+    margin: 10px auto;
+  }
+
+
+`
+const StyledSpan1 = styled.span`
+  marginL-left: 100px;
+  @media (min-width: 400) {
+    text-size: 5px;
   }
 `
 
