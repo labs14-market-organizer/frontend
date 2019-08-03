@@ -7,7 +7,7 @@ import {
     Redirect,
     withRouter
   } from "react-router-dom";
-import { Button, Box, Grid, Shadows, Container } from '@material-ui/core';
+import { Button, Box, Grid, Shadows, Container, Icon } from '@material-ui/core';
 import '../scss/authenticationPage.scss';
   // import Box from '@material-ui/core/Box';
 import styled from "styled-components";
@@ -57,9 +57,9 @@ class AuthenticatePage extends React.Component{
                 <a href="https://cloudstands-staging.herokuapp.com/auth/google">
                   <StyledImg src={google}></StyledImg>
                 </a>
-                {/* <Button variant="contained" label="Google"  href="https://cloudstands-staging.herokuapp.com/auth/facebook" className="company-buttons" style={{backgroundColor: '#3b5998'}}>Sign Up With Facebook</Button>
-                <Button variant="contained" label="Google" href="https://cloudstands-deploy.herokuapp.com/auth/google"  className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button>
-                 */}
+               {/* <Button variant="contained" label="Google"  href="https://cloudstands-staging.herokuapp.com/auth/facebook" className="company-buttons" style={{backgroundColor: '#3b5998'}}><icon>"facebook"</icon>Sign Up With Facebook</Button> */}
+                {/* <Button variant="contained" label="Google" href="https://cloudstands-deploy.herokuapp.com/auth/google"  className="company-buttons" style={{ backgroundColor: " #d3d3d3" }} >Sign Up with Google</Button>
+                 */} 
                  <StyledD>
                 <StyledP1>By continuing, you agree to Cloud Stands<StyledSpan> Terms of Service</StyledSpan> and <StyledSpan>Privacy Policy</StyledSpan> </StyledP1></StyledD>
              
