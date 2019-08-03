@@ -116,7 +116,7 @@ const StyledP = styled.p`
 `;
 
 const StyledP1 = styled.p`
-  text-align: center;
+  text-align: left;
   font-size: 14px;
   margin-left: 8%;
   margin-right: 8%;
