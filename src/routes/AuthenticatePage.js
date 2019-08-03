@@ -118,8 +118,8 @@ const StyledP = styled.p`
 const StyledP1 = styled.p`
   text-align: left;
   font-size: 14px;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin-left: 1%;
+  margin-right: 1%;
 `
 const StyledP2 = styled.p`
   font-size: 14px;
