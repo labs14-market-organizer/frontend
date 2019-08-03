@@ -108,7 +108,7 @@ function cleanData(booth)
     let numcheck = (a) => isNaN(a) || parseInt(a) < 0 ? 0.0 : parseInt(a)
     let clean = 
     {
-        type: booth.boothtype,
+        name: booth.boothtype,
         number: booth.numberofbooths,
         price: numcheck(booth.price*100)/100,
         size: [numcheck(booth.length), numcheck(booth.width)], //always length x width

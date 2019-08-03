@@ -16,7 +16,6 @@ export const searchMarkets = (query) => dispatch =>
     return axiosWithAuth(token)
         .get(`${HOST_URL}/markets/search?q=${query}`)
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: GET_MARKETS_BY_AREA__DATA_END, 
                 payload: {marketsBySearch: res.data}
