@@ -110,7 +110,7 @@ class CreateMarket extends React.Component
   {
     return {
       id: booth.id ? booth.id : -1,
-      boothtype: booth.type,
+      boothtype: booth.name,
       numberofbooths: booth.number,
       boothprice: booth.price ? booth.price : "",
       length: booth.size && booth.size.length > 0 && booth.size[0] ? booth.size[0] : "",

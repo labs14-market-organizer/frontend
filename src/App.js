@@ -37,19 +37,25 @@ import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
 
 var user_type = localStorage.getItem("userType");
-
+let token = null;
 class App extends React.Component {
   componentWillMount() {
-    this.props.getUserData(); //async check on second pass
+    //async check on second pass
+    this.props.getUserData();
   }
 
-  componentWillUpdate() {}
+  componentWillUpdate() 
+  {
+    if(!this.props.token || !this.props.userData)  this.props.getUserData();
+  }
+  componentWillUnmount()
+  {
+  }
   render() {
-    let token = this.props.token;
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
+      console.log(this.props);
     return (
-
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">

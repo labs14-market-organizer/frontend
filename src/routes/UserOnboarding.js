@@ -15,7 +15,7 @@ const UserOnboarding = () => {
                     <Selected > Market Owner </Selected>
                 </StyleBox>
         </Link>
-        <Link to="" style={{textDecoration: "none"}}>
+        <Link to="/createvendor" style={{textDecoration: "none"}}>
             <StyleBox boxShadow={10}>
             <Selected >Vendor</Selected>
            </StyleBox>
