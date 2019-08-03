@@ -3,12 +3,13 @@ import { Box, Shadows, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
+import { timingSafeEqual } from "crypto";
 
 const UserOnboarding = () => {
+
     return (
         <div>
         <Navbar />
-
             <Explain>
                 Cloud stands wants to provide you with the best possible experience. <br></br> Which best describes you roles?
             </Explain>
@@ -17,25 +18,33 @@ const UserOnboarding = () => {
                         <Selected > Market Owner </Selected>
                     </StyleBox>
             </Link>
-            <Link to="/createvendor" style={{textDecoration: "none"}}>
-                <StyleBox boxShadow={10}>
+            <Link to="/createvendor" style={{textDecoration: "none"}} >
+                <StyleBox boxShadow={10} >
                 <Selected >Vendor</Selected>
             </StyleBox>
             </Link>
         </div>
-    )
+        )
 }
 
 const StyleBox = styled(Box)`
-        height: 25vh;
-        width: 85vw; 
-        margin-left: 5%; 
-        margin-bottom: 20px; 
-        text-align: center; 
-        border-radius: 10px;
-        margin-top: 20px;
-        
-`;
+    height: 25vh;
+    width: 85vw; 
+    margin-left: 5%; 
+    margin-bottom: 20px; 
+    text-align: center; 
+    border-radius: 10px;
+    margin-top: 20px;
+    &:hover {
+    background-color: #edf3ea;
+  }
+
+    @media (min-width: 600px) {
+        width: 500px;
+        margin: 15px auto;
+  }
+ `; 
+
 const Selected = styled.div`
         font-size: 22px;
         color: black;
