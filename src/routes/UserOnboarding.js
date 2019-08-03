@@ -3,7 +3,7 @@ import { Box, Shadows, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import { timingSafeEqual } from "crypto";
+
 
 const UserOnboarding = () => {
 
