@@ -179,6 +179,7 @@ const StyledCompanyButtons = styled(Button)`
   font-size: 14px;
   display: flex;
   justify-content: space-around;
+  font-family: Roboto;
   @media (min-width: 340px) {
     font-size: 15px;
   }
