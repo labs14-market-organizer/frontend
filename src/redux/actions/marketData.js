@@ -58,9 +58,9 @@ export const createNewMarket = (market) => dispatch =>
     return axiosWithAuth(token)
     .post(`${HOST_URL}/markets`, market)
     .then(res => {
-        localStorage.removeItem("userData");//remove out of date data
+        dispatch({type: "GET_USER_DATA_END", payload: {userData: null}});
         dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
-        getUserData(token); //fire another endpoint here so we can be quicker about gathering data
+        //fire another endpoint here so we can be quicker about gathering data
         return
     })
     .catch(err =>{
@@ -78,7 +78,6 @@ export const getMarketById = (marketId) => dispatch =>
     return axiosWithAuth(token)
     .get(`${HOST_URL}/markets/${marketId}`)
     .then(res => {
-        console.log(res.data)
         dispatch({type: GET_MARKET_DATA_END, payload: {marketData: res.data}});
     })
     .catch(err => {
@@ -119,6 +118,13 @@ export const deleteMarket = (marketId) => dispatch =>
     })
 }
 
+export const localMarketSwitch = (market) => dispatch =>
+{
+    dispatch({ type: SET_MARKET_DATA_START });
+    //add varification here at some point;
+    dispatch({ type: SET_MARKET_DATA_END, payload: {marketData: market} });
+}
+
 function cleanData(market)
 {
     let clean = 
@@ -144,6 +150,5 @@ function cleanData(market)
     clean.operation = clean.operation.filter(x=> x.start && x.end);
     if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
     if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
-    console.log(clean)
     return clean;
 }

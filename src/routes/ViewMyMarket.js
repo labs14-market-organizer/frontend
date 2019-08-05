@@ -6,13 +6,11 @@ import { Button } from "@material-ui/core"
 import { Link } from "react-router-dom";
 
 const militaryConvert = (time) => {
-  console.log('here ya go')
   let hours = time.split('');
   let am = "am";
   let newHours, combined, subtractedHours, rest;
   if (hours[0] === "0"){
     combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
-    console.log(combined)
     return combined;
   } else if (hours[0] === "1" && hours[1] === "2") {
     return hours.join('') + "pm";
@@ -28,13 +26,13 @@ const militaryConvert = (time) => {
 
 const ViewMyMarket = (props) => {
   const sites = ["website", "facebook", "twitter", "instagram"];//going to use to check to see if obj contains when I loop over the obj.
-  console.log(props.checkMarketData.fetching)
   // if (props.checkMarketData.fetching) return  <Header>
   //           <ArrowImage src={Arrow} />
   //           <CreateHeader>View Market</CreateHeader>
   //       </Header>
   // let market = props.checkMarketData.marketData;
-  let market = {
+  console.log(props);
+  let market = props.marketData /* {
    
         "name": "Joplin Fresh Farmers Market",
         "description": "Joplins fresh market with local farmers",
@@ -49,7 +47,7 @@ const ViewMyMarket = (props) => {
         "instagram": "www.instagram.com",
         "operation": [{ day: "monday", start: "05:00", end: "13:00"}, { day: "tuesday", start: "05:00", end: "13:00"}, { day: "wednesday", start: "05:00", end: "13:00"}, { day: "friday", start: null, end: null }],
         "booths": []
-  }
+  } */
     return (
       <div>
         <Header>
@@ -64,15 +62,15 @@ const ViewMyMarket = (props) => {
             <Tag>Address</Tag>
             <Ltag>{market.address}</Ltag>
             <Tag>Hours</Tag>
-            {market.operation.map(opHours => {
+            { market.operation.map(opHours => {
               return (opHours.start !== null) ? <Ltag>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)} {militaryConvert(opHours.start)} - {(militaryConvert(opHours.end))}</Ltag> : null 
-            })}
+            }) }
             <Tag>Market Status</Tag>
             {(market.type === 1)? <Ltag>Public Market</Ltag> :<Ltag>Private Market</Ltag>  }
-            { (market.website.length > 0) ?<div> <Tag>Website</Tag> <Ltag>{market.website}</Ltag> </div> : null } 
-            { (market.facebook.length > 0) ? <div><Tag>Facebook</Tag> <Ltag>{market.facebook}</Ltag></div>: null }
-            { (market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.website}</Ltag></div>: null }
-            { (market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
+            { (market.website && market.website.length > 0) ?<div> <Tag>Website</Tag> <Ltag>{market.website}</Ltag> </div> : null } 
+            { (market.facebook && market.facebook.length > 0) ? <div><Tag>Facebook</Tag> <Ltag>{market.facebook}</Ltag></div>: null }
+            { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.website}</Ltag></div>: null }
+            { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
             <Flex>
               <Link to="/addbooths">
                 <WhiteButton variant="outlined">Edit Booths</WhiteButton>
@@ -170,7 +168,7 @@ const Ltag = styled.p`
 
 const mapStateToProps = state => {
     return {
-      ...state
+      ...state.checkMarketData
     };
   };
   

@@ -124,8 +124,6 @@ class CreateMarket extends React.Component
       daysList: [],
       radio: "Public Market"
     };
-    console.log("hello world")
-    console.log(this.props.market);
     if(this.props.market)
     {
       this.isUpdating = true;

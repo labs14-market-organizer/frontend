@@ -9,20 +9,21 @@ import {
   withRouter
 } from "react-router-dom";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import theme from "./theme";
-import { StylesProvider } from "@material-ui/styles";
 
 import { setLocalData, getUserData } from "./redux/actions/userData";
 import "./App.scss";
-
+import CssBaseline from "@material-ui/core/CssBaseline";
+import theme from "./theme";
 import MarketingPage from "./routes/MarketingPage";
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
 import TokenCollect from "./routes/TokenCollect";
 import MainPage from "./routes/MainPage";
+import Navbar from "./components/Navbar";
+import { StylesProvider } from "@material-ui/styles";
+
 import UserList from "./routes/UserList";
 import CreateMarket from "./routes/CreateMarket";
-
 import AddBooths from "./routes/AddBooths";
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
@@ -30,27 +31,35 @@ import CreateVendor from "./routes/CreateVendor";
 import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
+
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
 
 var user_type = localStorage.getItem("userType");
-
+let token = null;
 class App extends React.Component {
   componentWillMount() {
-    this.props.getUserData(); //async check on second pass
+    //async check on second pass
+    this.props.getUserData();
   }
 
-  componentWillUpdate() {}
+  componentWillUpdate() 
+  {
+    if(!this.props.token || !this.props.userData)  this.props.getUserData();
+  }
+  componentWillUnmount()
+  {
+  }
   render() {
-    let token = this.props.token;
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
+      console.log(this.props);
     return (
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-            {/* <NavBar/> */}
+            {/* <Navbar /> */}
 
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
@@ -76,35 +85,38 @@ class App extends React.Component {
               )}
             />
             <PrivateRoute path="/userslist" component={UserList} />
-            <Route
+            {/* <Route
               path="/addbooths"
               render={props => <AddBooths {...this.props} currentBooth={undefined} />}
-            />
+            /> */}
               <Route
               path="/useronboarding"
-              render={props => <UserOnboarding {...this.props} />}
+              render={props => <UserOnboarding />}
               />
               <Route
               path="/viewmymarket"
-              render={props => <ViewMyMarket {...this.props} />}
+              render={props => <ViewMyMarket  />}
               />
                <Route
               path="/createvendor"
-              render={props => <CreateVendor {...this.props} />}
+              render={props => <CreateVendor  />}
               />
                <Route
               path="/searchmarkets"
-              render={props => <SearchMarkets {...this.props} />}
+              render={props => <SearchMarkets />}
               />
               <Route
-              path="/test"
+              path="/addbooths"
               render={props => <BoothReduxForms />}
+              />
+              <Route 
               path="/createmarket"
               render={props => <MarketReduxForms />}
               />
           </div>
         </MuiThemeProvider>
       </StylesProvider>
+
     );
   }
 }
@@ -150,7 +162,6 @@ const PrivateRoute = ({ component: Component, props: userprops, ...rest }) => {
       {...rest}
       render={props => {
         if (localStorage.getItem("token")) {
-          console.log(userprops);
           return <Component {...props} {...userprops} />;
         } else {
           return <Redirect to="/landing" />;
