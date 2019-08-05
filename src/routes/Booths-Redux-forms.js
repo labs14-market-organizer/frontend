@@ -27,6 +27,8 @@ import { maxWidth } from "@material-ui/system";
 import { checkMarketData } from "../redux/reducers/marketData";
 import MarketReduxForms from "./Market-Redux-forms";
 import {getMarketById} from "../redux/actions/marketData"
+import "../scss/ReduxForm.scss";
+
 
 function validate (values) {
   const errors = {};
@@ -144,7 +146,6 @@ class CreateMarket extends React.Component
     let booths = this.props.market.booths;
     let current = this.currentBooth;
     let newBooths = booths.filter(item => item.id !== current.id);
-    // console.log(newBooths)
     return newBooths;
   }
 
@@ -379,6 +380,7 @@ class CreateMarket extends React.Component
               variant="outlined"
               fullWidth
               onClick={(e) => this.deleteBooth(e)}
+              className="redButton"
               style={{
                   color: 'red',
                   fontSize:'1.4em',
