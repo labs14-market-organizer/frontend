@@ -9,6 +9,7 @@ import {
   CssBaseline,
   Paper
 } from "@material-ui/core";
+import {Link} from "react-router-dom";
 import cloud from "../assets/cloud.svg";
 import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -16,17 +17,15 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
 
 
-var user_type = localStorage.getItem("userType");
-
-
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       menuOpen: false,
-      page: "Home"
+      page: "HOME"
       }
   }
+
 
  toggle = () => {
   if (this.state.menuOpen === true) {
@@ -39,25 +38,44 @@ class Navbar extends React.Component {
     })
   }
 }
+
  Menu = () => {
-  // console.log(this.state.menuOpen)
   if (this.state.menuOpen === true) {
-
-    
-      return (
-
-          <StyledPaper elevation={4}>
-    
+    switch(window.location.pathname) {
+      case "/landing":
+        return (
+          <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="landing"> <Button className="currentPage" >Home</Button></Link></li>
+          <li><Link to="signup"> <Button>Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
           </ul>
           </div>
-          {/* props name */}
-          {/* props market 15px/16px padding bottom then bottom border*/}
-      
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper> 
+      );
+
+      case "/signup": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button className="currentPage">Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
+          </ul>
+          </div>
+      <BorderSpacer />
           <ul>
             <li><Button>About</Button></li>
             <li><Button>Blog</Button></li>
@@ -68,52 +86,246 @@ class Navbar extends React.Component {
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
-        
+      );
+
+      case "/signin": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button className="currentPage">Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "/team": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>  
+      );
+
+      case "ABOUT": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Button>Home</Button></li>
+          <li><Button>Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button className="currentPage">About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "BLOG": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Button>Home</Button></li>
+          <li><Button >Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button className="currentPage">Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "CAREERS": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Button>Home</Button></li>
+          <li><Button>Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button className="currentPage">Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "SUPPORT": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Button>Home</Button></li>
+          <li><Button>Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button className="currentPage">Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "CONTACT": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Button>Home</Button></li>
+          <li><Button>Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button className="currentPage">Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "PRIVACY": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Button>Home</Button></li>
+          <li><Button>Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button className="currentPage">Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "TERMS": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Button>Home</Button></li>
+          <li><Button>Sign Up / Sign In</Button></li>
+          <li><Button>Meet the Team</Button></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button className="currentPage">Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
       );
     }
- 
-    } 
+    }
+  } 
   
-
+  
   render() { 
     return ( 
       <StyledDiv>
         <StyledImg src={cloud}  width="100%" height="87px" />
-    <StyledBox >
-            <MenuIcon onClick={this.toggle} className="menuIcon" fontSize="large"/>
-            {this.Menu()}
-        
-                <CloudText>
-                  CLOUD
-                </CloudText>
-
-
-              <StandsText>
-                STANDS
-              </StandsText>
-
-    </StyledBox>
-    </StyledDiv>
+        <StyledBox>
+          <MenuIcon onClick={this.toggle} className="menuIcon" fontSize="large"/>
+          {this.Menu()}      
+          <CloudText>CLOUD</CloudText>
+          <StandsText>STANDS</StandsText>
+        </StyledBox>
+      </StyledDiv>
      );
   }
 }
  
 export default Navbar;
       
-
-
-
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
     @media (max-width: 390px) {
-      font-size: 40px;
-      
+      font-size: 40px; 
     }
+
     @media (max-width: 350px) {
-      font-size: 30px;
-      
+      font-size: 30px;  
     }
 `;
 
@@ -122,13 +334,12 @@ const StandsText = styled(({ variant, ...otherProps}) => <Typography variant="h3
     color: black;
     @media (max-width: 390px) {
       font-size: 40px;
-      
     }
     @media (max-width: 350px) {
       font-size: 30px;
-      
     }
 `;
+
 const StyledBox = styled(Box)`
   display: flex;
   flex-wrap: nowrap;
@@ -144,6 +355,15 @@ const StyledBox = styled(Box)`
   }
 `;
 
+const BorderSpacer = styled.div`
+margin-top: 16px;
+margin-bottom: 16px;
+margin-left: 16px;
+margin-right: 26px;
+height: 1px;
+background-color: #484848;
+`
+
 const StyledImg = styled.img`
 z-index: -10
 `
@@ -151,7 +371,6 @@ z-index: -10
 const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
-/* overflow: hidden; */
 
 img {
   margin-top: -25px;
@@ -159,39 +378,40 @@ img {
   width: 100vw;
   opacity: .985;
   filter: blur(1px);
-
-  /* background-color: red; */
 }
 
 `
 
 const StyledPaper = styled(Paper)`
 /* background-color: black; */
-height: 99.8vh;
-width: 100%;
+height: 600px;
+width: 80%;
 z-index: -1;
 position: absolute;
 left: 0;
 top: 0;
-border-radius: 10px;
+border-radius: 10px 10px 10px 0px;
 text-align: left;
-padding-top: 300px;
+padding-top: 112px;
 max-height: 99.8vh;
 overflow-y: hidden;
 overflow-x: hidden;
-/* padding-right: */
 
 ul {
   flex-wrap: wrap;
-  /* flex-direction: column; */
   justify-content: center;
   text-align: center;
   margin-left: 16px;
   margin-right: -16px;
-  border-top: 1px solid black;
-  padding-top: 12.5px;
-  
 }
+
+ a {
+  text-decoration: none;
+  width: 100%;
+
+   
+ }
+
 li:first-child {
   margin-top: 12.5px;
 }
@@ -208,33 +428,33 @@ li {
   border-radius: 5px; 
   padding-top: 0px;
   line-height: 1.5;
-  /* background-color: rgba(71, 133, 41, 0.4); */
   margin-left: -41px;
-  /* padding-left: 8px; */
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 Button {
   display: flex;
   border-radius: 5px;
   justify-content: flex-start;
-  background-color: rgba(71, 133, 41, 0.4);
   width: 100%;
   text-align: left;
   text-transform: capitalize; 
-  height: 40px;
+  height: 36px;
 
   .MuiButton-root {
   display: flex;
   align-items: center;
   text-align: center
   }
-  
 
- 
+}
+
+.currentPage {
+  background-color: rgba(71, 133, 41, 0.4);
 
   :hover {
-    background-color: rgba(71, 133, 41, 0.4);
+    background-color: rgba(71, 133, 41, 0.5);
   }
+  
 
 }
 `
