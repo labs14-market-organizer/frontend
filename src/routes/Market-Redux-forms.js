@@ -335,14 +335,20 @@ class CreateMarket extends React.Component
             name="City"
           />
         </Container>
-        <StyledContainer>
+        <StyledContainer
+          style={{
+            display: 'inline-flex',
+            justifyContent: 'space-between'
+          }}>
           <Field
               component={renderTextField}
               required
               id="state"
               label="State"
               name="State"
-              style={{ width: "44%" }}
+              style={{ 
+                width: "48%" 
+              }}
             />
             <Field
               component={renderTextField}
@@ -350,7 +356,7 @@ class CreateMarket extends React.Component
               id="zipcode"
               label="Zip Code"
               name="Zip Code"
-              style={{ width: "44%", marginLeft: "8%" }}
+              style={{ width: "48%" }}
             />
         </StyledContainer>
         <Container maxWidth="sm">
@@ -530,9 +536,9 @@ class CreateMarket extends React.Component
         <br />
         </StyleLeft>  
         <div>
-          <Button type="submit" disabled={pristine || submitting}>
-            Submit
-          </Button>
+          <SaveFix type="submit" disabled={pristine || submitting}>
+            Next
+          </SaveFix>
         </div>
       </form>
     );
@@ -577,9 +583,10 @@ const StyledDays = styled(Button)`
 
 const SaveFix = styled.button`
   margin: 50px auto;
-  height: 60px;
+  height: 50px;
+  font-size: 16px;
   cursor: pointer;
-  width: 80vw;
+  width: 200px;
   border-radius: 5px;
   color: #fff;
   background-color: #478529;
@@ -587,9 +594,9 @@ const SaveFix = styled.button`
 `;
 
 const StyledContainer = styled(Container)`
-max-width: 623px;
-.MuiInputBase-input ,.MuiOutlinedInput-input {
-  width: 100%;
+  max-width: 600px;
+  .MuiInputBase-input ,.MuiOutlinedInput-input {
+    width: 100%;
 }
 
 
@@ -604,8 +611,13 @@ const StyledTypography = styled(Typography)`
 const StyleLeft = styled.div`
   text-align: left;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 4%;
+  @media (min-width: 600px){
+    margin: 0 auto;
+    padding-left: 4%;
+  }
 `;
+
 
 const StyledUp = styled.div`
   text-transform: capitalize;

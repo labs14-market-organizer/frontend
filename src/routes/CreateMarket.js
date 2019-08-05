@@ -358,7 +358,7 @@ class CreateMarket extends React.Component {
         {/*Radio buttons, default to public market*/}
         <div style={{display: "flex"}}>
         <Radio
-          style={{marginTop: "-23px"}}
+          style={{marginTop: "-023px"}}
           name="radio"
           value="Public Market"
           checked={this.state.radio === "Public Market"}
