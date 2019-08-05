@@ -28,7 +28,7 @@ import { checkMarketData } from "../redux/reducers/marketData";
 import MarketReduxForms from "./Market-Redux-forms";
 import {getMarketById} from "../redux/actions/marketData"
 import "../scss/ReduxForm.scss";
-
+import { Link } from 'react-router-dom';
 
 function validate (values) {
   const errors = {};
@@ -162,12 +162,14 @@ class CreateMarket extends React.Component
       <div>
         <header 
           className="header"
-        >
-            <img src={Arrow} />
+        >  <Link to="/">
+              <img src={Arrow} style={{marginLeft: "25px",
+               marginTop: "20px"}}/>
+            </Link>
             <h4 
             className="addbooths"
             style={{
-                marginLeft: '5%',
+                marginLeft: '2%',
                 }}>{this.isUpdating ? "Update" : "Add"} Booths</h4>
         </header>
         {/* Styled this div for the time being...will change later */}
