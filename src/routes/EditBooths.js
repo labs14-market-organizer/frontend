@@ -1,18 +1,10 @@
-import React from "react";
+import React, { Component } from 'react'
 import Arrow from "../assets/ic-arrow-back.svg";
 import { TextField, InputAdornment, Button } from '@material-ui/core';
-import { connect } from "react-redux";
-import { createNewBooth, updateBooth } from "../redux/actions/boothData";
 
-
-
-
-class AddBooths extends React.Component {
+export class EditBooths extends Component {
     constructor(props) {
         super(props);
-        if(this.props.currentBooth)
-            this.state = this.props.currentBooth;
-        else
         this.state = {
             boothtype: '',
             numberofbooths: '',
@@ -21,22 +13,19 @@ class AddBooths extends React.Component {
             width: '',
             boothdescription: '',
         }
-        this.isUpdating = !!this.props.currentBooth
     }
 
     handleChange = e => {
-        console.log(this.state.boothdescription)
-
         this.setState({
           ...this.state,
           [e.target.name]: e.target.value
         });
     };
 
-    handleSave = e => {
+    handleDelete = e => {
         e.preventDefault();
-        if(this.isUpdating) this.updateBooth(this.state);
-        else this.props.createNewBooth(this.state);
+        // this.props.delete(this.state);
+        // this.props.history.push('/addbooths');
     };
 
     handleAdd = e => {
@@ -52,12 +41,7 @@ class AddBooths extends React.Component {
         })
     };
 
-
     render() {
-        if (this.props.checkBoothData.updated){
-            this.props.history.push('/');
-        }
-
         return (
             <form>
                 <header 
@@ -65,16 +49,15 @@ class AddBooths extends React.Component {
                 >
                     <img src={Arrow} />
                     <h4 
-                    className="addbooths"
+                    className="EditBooths"
                     style={{
                         marginLeft: '5%',
-                        }}>{this.isUpdating ? "Update" : "Add"} Booths</h4>
+                        }}>Edit Booths</h4>
                 </header>
 
-            {/* Styled this div for the time being...will change later */}
                 <body 
                     style={{
-                        width:'98%',
+                        maxWidth: '600px',
                         height: '100%',
                         margin: 'auto'
                     }}
@@ -89,8 +72,7 @@ class AddBooths extends React.Component {
                         InputProps={{
                         startAdornment: <InputAdornment position="start"></InputAdornment>}}
                         style={{
-                            margin: '2% 0',
-                            marginBottom: "0px"
+                            marginTop: '2%',
                         }}
                         variant="outlined"
                         fullWidth={true}
@@ -103,7 +85,7 @@ class AddBooths extends React.Component {
                     <div
                     style={{
                         display: 'flex',
-                        justifyContent: 'space-evenly'
+                        justifyContent: 'space-between'
                     }}>
                         <TextField
                             type="number"
@@ -117,8 +99,7 @@ class AddBooths extends React.Component {
                             startAdornment: <InputAdornment position="start"></InputAdornment>}}
                             style={{
                                 margin: '10px',
-                                width: '45%',
-                                height: '80px'
+                                width: '44%',
                             }}
                             variant="outlined"
                             autoComplete={true}
@@ -137,8 +118,8 @@ class AddBooths extends React.Component {
                             }}
                             style={{
                                 margin: '10px',
-                                width: '45%',
-                                height: '80px'
+                                width: '44%',
+                                marginLeft: '8%',
                             }}
                         />
                     </div>
@@ -201,32 +182,43 @@ class AddBooths extends React.Component {
                         }}
                     />
 
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        style={{
-                            fontSize:'1.75em',
-                            margin: '2% auto',
-                            height: '80px'
-                        }}
-                        onClick={this.handleSave}
-                    >Save</Button>
-                    
+                    <div className="button div"
+                    style={{
+                        display: 'flex',
+                        margin: '6% 0',
+                        justifyContent: 'space-between'
+                        
+                    }}>
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            style={{
+                                fontSize:'1.75em',
+                                height: '80px',
+                                color: 'red',
+                                width: '44%'
+                            }}
+                            onClick={this.handleDelete}
+                        >Delete</Button>
+
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            style={{
+                                
+                                fontSize:'1.75em',
+                                height: '80px',
+                                width: '44%',
+                                marginLeft: '8%',
+                            }}
+                            onClick={this.handleSave}
+                        >Save</Button>
+                    </div>
+
                     <hr/>
 
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        fullWidth
-                        style={{
-                            
-                            fontSize:'1.75em',
-                            margin: '2% auto',
-                            height: '80px',
-                        }}
-                        /*onClick={this.handleAdd}*/
-                    >Add new booth type</Button>
+                    {this.state.currentBooth}
 
                 </body>
             </form>
@@ -234,14 +226,4 @@ class AddBooths extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    console.log(state);
-    return {
-        checkBoothData: state.checkBoothData
-    };
-  };
-  
-  export default connect(
-    mapStateToProps,
-    { createNewBooth, updateBooth }
-  )(AddBooths);
+export default EditBooths

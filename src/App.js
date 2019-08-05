@@ -25,6 +25,7 @@ import { StylesProvider } from "@material-ui/styles";
 import UserList from "./routes/UserList";
 import CreateMarket from "./routes/CreateMarket";
 import AddBooths from "./routes/AddBooths";
+import EditBooths from "./routes/EditBooths";
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
 import CreateVendor from "./routes/CreateVendor";
@@ -108,6 +109,10 @@ class App extends React.Component {
               <Route
               path="/addbooths"
               render={props => <BoothReduxForms />}
+              />
+              <Route
+              path="/editbooths"
+              render={props => <EditBooths />}
               />
               <Route 
               path="/createmarket"
