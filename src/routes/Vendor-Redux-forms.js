@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, FieldArray,  } from "redux-form";
 import {Redirect} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
 
@@ -193,7 +193,8 @@ function validate (values) {
                         name="item"
                         margin="normal"
                         component={renderTextField}
-                  
+                        prefunc={this.addItem}
+                        operation={this.state}
                     />
                     </FlexContainer>
                     {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
@@ -212,7 +213,8 @@ function validate (values) {
                     <FlexColumn>
                     <FlexContainer>
                       <Field
-                        component={renderTextField}
+                        component="input"
+                        type="checkbox"
                         name="electricity"
                         inputProps={{
                         'aria-label': 'primary checkbox',
@@ -222,7 +224,8 @@ function validate (values) {
                     <FlexContainer>
                     <Field
                         name="ventilation"
-                        component={renderTextField}
+                        component="input"
+                        type="checkbox"
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
@@ -231,21 +234,17 @@ function validate (values) {
                     <FlexContainer>
                     <Field
                         name="loud"
-                        component={renderTextField}
+                        type="checkbox"
+                        component="input"
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
                     /><StyledP>Have loud machinery</StyledP>
                     </FlexContainer>
                     <FlexContainer>
-                    <Field //other_special is a list of items.
-                        value="other_special"
-                        component={renderTextField}
-                        inputProps={{
-                        'aria-label': 'primary checkbox',
-                        }}
-                    /><Field
+                   <Field
                         id="other_special" 
+                        type="checkbox"
                         label="Other"
                         name="other_special"
                         component={renderTextField}
