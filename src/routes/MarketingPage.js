@@ -33,6 +33,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import logo from "../assets/standLogo.svg";
 
 import { Mixpanel } from '../redux/actions/mixpanel';
+import Navbar from "../components/Navbar";
 
 const theme = {
   spacing: 8,
@@ -43,6 +44,7 @@ const theme = {
 const MarketingPage = () => {
   return (
     <>
+    <Navbar />
       <StyledDiv>
         <Hero>
           <Typography variant="subtitle1">
@@ -221,7 +223,7 @@ const StyledLink2 = styled(Link)`
 const StyledDiv = styled.div`
   display: flex;
   margin: 0 auto;
-  /* padding-top: 112px; */
+  padding-top: 112px;
 `;
 
 const BoxCol = styled.div`

@@ -54,13 +54,8 @@ class App extends React.Component {
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-            <Navbar />
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+
+            <div>
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
               exact
@@ -113,6 +108,7 @@ class App extends React.Component {
               path="/createmarket"
               render={props => <MarketReduxForms />}
               />
+              </div>
           </div>
         </MuiThemeProvider>
       </StylesProvider>
