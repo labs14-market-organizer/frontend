@@ -30,11 +30,9 @@ function validate (values) {
           field.slice(1)} Is Required`;
       }
     });
+    console.log(values)
     if (values.Website && !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(values.Website)) 
     errors.Website = "Invalid Website";
-    if(values.operation === "\"invalid hours\"") errors.operation = "Start cant be after End"
-    else try {if(!values.operation || JSON.parse(values.operation).filter(x=> x.start && x.end).length < 1) errors.operation = "Must define hours";}
-    catch {errors.operation = "Must define hours"}
   return errors;
     
     return errors;
@@ -49,10 +47,6 @@ function validate (values) {
     return(
     <TextField
     label={label}
-    margin="normal"
-    variant="outlined"
-    fullWidth={true}
-    autoComplete={true}
     error={touched && error ? error : ""}
     errorText={true}
     {...input}
@@ -66,19 +60,25 @@ function validate (values) {
       let witherror = {color: "red", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "-30px", transition: "margin 0.2s"};
       let noerror = {marginTop: "-50px"}
       return (
-      <div style={visited && error ? witherror : noerror} >
-      {error && visited ? error : ""}
-      <br/>
-      <Button
+      <div
         onClick={e => {let opp = prefunc(e); input.onChange(JSON.stringify(opp));}}
         error={visited && error ? error : ""}
         errorText={true}
         {...input}
-        {...rest}
         style={error && visited ? {color: "red"} : {...Style}}
-      >{label}</Button>
+        {...rest}
+      >
+      
       </div>
     );}}
+
+    const renderCheckbox = ({ input, label }) => (
+      <Checkbox
+        label={label}
+        checked={input.value==="false" ? false : true}
+        onClick={() => {input.onChange(input.value==="false" ? "true" : "false")}}
+      />
+    );
 
   class CreateVendor extends React.Component{
     isUpdating = false;
@@ -91,9 +91,9 @@ function validate (values) {
             description: '',
             items: [],
             item: '',
-            electricity: false,
-            ventilation: false,
-            loud: false,
+            electricity: "false",
+            ventilation: "false",
+            loud: "false",
             other_special: '',
             website: '',
             facebook: '',
@@ -101,6 +101,7 @@ function validate (values) {
             instagram: ''
         };
         else this.isUpdating = true;
+        this.props.initialize(this.state);
     }
     handleChange = e => {
         this.setState({
@@ -116,15 +117,16 @@ function validate (values) {
 
     addItem = e => {
       e.preventDefault();
-      if (this.state.item !== ''){
-        let item = this.state.item;
-        let itemList = [...this.state.items, item];
-        this.setState({
-          ...this.state,
-          items: itemList,
-          item: ''
-        })
-      }
+      if (this.state.item === '') return this.state.items;
+
+      let item = this.state.item;
+      let itemList = [...this.state.items, item];
+      this.setState({
+        ...this.state,
+        items: itemList,
+        item: ''
+      })
+      return itemList;
     }
     addCount = e => {
       let newCount = [...this.state.count, this.state.count.length]
@@ -141,12 +143,17 @@ function validate (values) {
         ...this.state,
         items: newItems
       })
+      return newItems;
     }
     save = e => {
     e.preventDefault();
     (this.updating) ? this.props.updateVendor(this.state) : this.props.createNewVendor(this.state)
     }
-  
+    shouldCheck()
+    {
+      console.log(this.state.other_special);
+      return this.state.other_special !== "" && this.state.other_special;
+    }
     
     render() 
     {
@@ -168,6 +175,10 @@ function validate (values) {
                         name="name"
                         InputProps={{
                             startAdornment: <InputAdornment position="start"></InputAdornment>}}
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        autoComplete={true}
                        
                     />
                     <Field
@@ -181,26 +192,56 @@ function validate (values) {
                         style={{marginTop: "20px"}}
                         rows="3"
                         multiline
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        autoComplete={true}
                     />
                     <StyledContainer>
                     
                     <StyledP>What are the specific items you plan to sell?</StyledP>
+                    
                     <FlexContainer>
-                    <img src={Add} onClick={this.addItem} />
                     <Field
-                        id="item"
-                        label="Add Item"
-                        name="item"
-                        margin="normal"
-                        component={renderTextField}
+                        component={renderButton}
                         prefunc={this.addItem}
                         operation={this.state}
-                    />
-                    </FlexContainer>
+                        id="items"
+                        label="items"
+                        name="items"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        autoComplete={true}
+                    >
+                    <img src={Add} />  
+                    </Field>
+                    <TextField
+                          margin="normal"
+                          id="item"
+                          label="Add Item"
+                          name="item"
+                          onChange={this.handleChange}
+                          value={this.state.item}
+                          margin="normal"
+                          variant="outlined"
+                          fullWidth={true}
+                          autoComplete={true}
+                     />
+                     </FlexContainer>
                     {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
                     {this.state.items.map((item, index) => 
                     <FlexContainer  key={index}>
-                       <StyledButton onClick={(e) => this.deleteItem(e,index)}>X</StyledButton>
+                        <Field
+                          component={renderButton}
+                          prefunc={(e) => this.deleteItem(e,index)}
+                          operation={this.state}
+                          id="items"
+                          label="items"
+                          name="items"
+                        >
+                          <StyledButton>X</StyledButton>
+                        </Field>
                        <StyledP1>{item}</StyledP1> 
                        
                     </FlexContainer>
@@ -213,9 +254,8 @@ function validate (values) {
                     <FlexColumn>
                     <FlexContainer>
                       <Field
-                        component="input"
-                        type="checkbox"
                         name="electricity"
+                        component={renderCheckbox}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
@@ -224,8 +264,7 @@ function validate (values) {
                     <FlexContainer>
                     <Field
                         name="ventilation"
-                        component="input"
-                        type="checkbox"
+                        component={renderCheckbox}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
@@ -234,21 +273,21 @@ function validate (values) {
                     <FlexContainer>
                     <Field
                         name="loud"
-                        type="checkbox"
-                        component="input"
+                        component={renderCheckbox}
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
                     /><StyledP>Have loud machinery</StyledP>
                     </FlexContainer>
-                    <FlexContainer>
+                   <FlexContainer>
+                  <Checkbox checked={this.shouldCheck()}/>
                    <Field
                         id="other_special" 
-                        type="checkbox"
                         label="Other"
                         name="other_special"
                         component={renderTextField}
-                        style={{marginTop: "-18px", fontFamily:"Raleway"}}
+                        style={{fontFamily:"Raleway"}}
+                        onBlur={(e)=> this.setState({...this.state, other_special: e.target.value})}
                      />
                     </FlexContainer>
                     </FlexColumn>
@@ -257,27 +296,43 @@ function validate (values) {
                         component={renderTextField}
                         id="website"
                         label="Website"
-                        name="Website"
+                        name="website"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        autoComplete={true}
                     />
                     <Field
                         component={renderTextField}
                         id="facebook"
                         label="Facebook"
-                        name="Facebook"
+                        name="facebook"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        autoComplete={true}
                     />
                     <Field
                         component={renderTextField}
                         id="twitter"
                         label="Twitter"
-                        name="Twitter"
+                        name="twitter"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        autoComplete={true}
                     />
                     <Field
                         component={renderTextField}
                         id="instagram"
                         label="Instagram"
-                        name="Instagram"
+                        name="instagram"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        autoComplete={true}
                     />
-                     <GreenButton variant="outlined" disabled={pristine || submitting} onClick={(e) => this.save(e)}>Save</GreenButton>
+                     <GreenButton type="submit" variant="outlined" disabled={pristine || submitting} >Save</GreenButton>
                      </form>
                 </Container>
             </div>
@@ -349,18 +404,48 @@ const StyledButton = styled.button`
 `;
 
 
-// const mapStateToProps = state => {
-//     return {
-//       ...state
-//     };
-//   };
+const mapStateToProps = state => {
+    return {
+      ...state
+    };
+  };
   
 
-// const ReduxForms = reduxForm({
-//     form: "VendorForm", // a unique identifier for this form
-//     validate
-//   })(connect(mapStateToProps)(CreateVendor));
+const ReduxForms = reduxForm({
+    form: "VendorForm", // a unique identifier for this form
+    validate
+  })(connect(mapStateToProps)(CreateVendor));
 
+  
+  class ReduxContainer extends React.Component
+  {
+    handleRedux = (values) =>
+    {
+      console.log(values.items);
+      this.wasfetching = true;
+      this.redirecttype = 2;
+      console.log(values);
+      if (values.id > 0) this.props.updateVendor(this.props.checkVendorData.vendorData.id, values)
+      else this.props.createNewVendor({ ...values});
+    }
+    wasfetching =false;
+    redirecttype= 0;
+    render(){
+      if(this.redirecttype === 2)  return <Redirect to="/"/>
+      return <ReduxForms onSubmit={this.handleRedux} currentVendor={this.props.checkVendorData.vendorData} />
+     /*  let redirect = this.props.checkBoothData.updated && this.wasfetching;
+      if(this.wasfetching && !this.props.checkBoothData.fetching) this.wasfetching = false;
+      return (<ReduxForms onSubmit={this.handleRedux} refresh={""} redirect={redirect} market={this.props.checkMarketData.marketData}/>); */
+    }
+    componentDidUpdate()
+    {
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    { createNewVendor, updateVendor }
+  )(ReduxContainer);
   
 
 // export default connect(
@@ -368,7 +453,13 @@ const StyledButton = styled.button`
 //     { createNewVendor, updateVendor }
 //   )(ReduxForms);
 
-export default reduxForm({
+/* export default reduxForm({
     form: "VendorForm",
     validate
-})(CreateVendor);
+})(
+  connect(  
+    mapStateToProps,
+    { createNewVendor, updateVendor }
+   )(CreateVendor)
+  );
+ */

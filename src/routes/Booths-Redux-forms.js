@@ -484,14 +484,12 @@ class ReduxContainer extends React.Component
     this.wasfetching = true;
     this.redirecttype = values.redirecttype && values.redirecttype.length > 0 ? values.redirecttype[values.redirecttype.length-1 ] : 0;
     if (values.id > 0) this.props.updateBooth(this.props.checkMarketData.marketData.id, values)
-    else this.props.createNewBooth(77,{ ...values});
+    else this.props.createNewBooth(this.props.checkMarketData.marketData.id,values);
   }
   wasfetching =false;
   redirecttype= 0;
   render(){
-    if(!this.props.checkMarketData.marketData) 
     //temp code so we can test
-    { if(!this.props.checkMarketData.fetching || !this.wasfetching) this.props.getMarketById(77); this.wasfetching = false; return <div>loading</div>}
     if(this.redirecttype === 2) return <Redirect to="/"/>
     let clear = this.redirecttype===1;
     this.redirecttype = 0;

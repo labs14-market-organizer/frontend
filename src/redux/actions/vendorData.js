@@ -51,7 +51,7 @@ export const createNewVendor = (vendor) => dispatch =>
     dispatch({ type: SET_VENDOR_DATA_START });
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
-
+    console.log("hello")
     vendor = cleanData(vendor);
     if(vendor.error) return dispatch({ type: ERROR_SET_VENDOR_DATA, payload: {error: vendor.error} });
 
@@ -120,19 +120,20 @@ export const deleteVendor = (vendorId) => dispatch =>
 
 function cleanData(vendor)
 {
+    vendor.items = JSON.parse(vendor.items);
+    console.log(vendor.items)
     let clean = 
     {   
         name: vendor.name,
         description: vendor.description,
-        items: vendor.items ? vendor.items : [],
-        electricity: vendor.electricty ? true: false,
-        ventilation: vendor.ventilation ? true : false,
-        ventilation: vendor.ventilation ? true: false,
- 		loud: vendor.loud ? true : false,
-        other_special: vendor.other_special ? JSON.stringify(vendor.other_special).split("[").join("").split("]").join("").split(",").join(" ") : "",
-        facebook: vendor.Facebook ? vendor.Facebook : "",
-        twitter: vendor.Twitter ? vendor.Twitter : "",
-        instagram: vendor.Instagram ? vendor.Instagram : ""
+        items: vendor.items && vendor.items !== "" ? vendor.items : [],
+        electricity: vendor.electricty === "true" ? true: false,
+        ventilation: vendor.ventilation  === "true" ? true : false,
+ 		loud: vendor.loud  === "true" ? true : false,
+        other_special: vendor.other_special,
+        facebook: vendor.facebook ? vendor.facebook : "",
+        twitter: vendor.twitter ? vendor.twitter : "",
+        instagram: vendor.instagram ? vendor.instagram : ""
     }
 
     
