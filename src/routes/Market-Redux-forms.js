@@ -127,21 +127,22 @@ class CreateMarket extends React.Component
     if(this.props.market)
     {
       this.isUpdating = true;
-      //this.state.operation = this.props.market.operation;
+      let market = this.props.market;
+      this.state.operation = market.operation;
       this.props.initialize(
         {
-          "Market Name": this.props.market.name,
-          "Market Description": this.props.market.description,
-          Address: this.props.market.address,
-          City: this.props.market.city,
-          State: this.props.market.state,
-          "Zip Code": this.props.market.zipcode,
-          Website: this.props.market.website,
-          Facebook: this.props.market.facebook,
-          Twitter: this.props.market.twitter,
-          Instagram: this.props.market.instagram,
-          market_type: this.props.market.type,
-          operation: this.props.market.operation ? JSON.stringify(this.props.market.operation) : ""
+          "Market Name": market.name,
+          "Market Description": market.description,
+          Address: market.address,
+          City: market.city,
+          State: market.state,
+          "Zip Code": market.zipcode,
+          Website: market.website,
+          Facebook: market.facebook,
+          Twitter: market.twitter,
+          Instagram: market.instagram,
+          market_type: market.type,
+          operation: market.operation ? JSON.stringify(market.operation) : ""
         }
       )
     }
@@ -637,26 +638,23 @@ const ReduxForms = reduxForm({
 
 class CreateMarketContainer extends React.Component
 {
-  init = {
-    name: '',
-    description: '',
-    address: '',
-    operation: [],
-    market_type: 1, //(1 = private, 2=public)
-    website: '',
-    facebook: '',
-    image: '', 
-    twitter: '',
-    instagram: '',
-    zipcode: ''
+  hasUpdated = false;
+  componentWillMount()
+  {
+    this.hasUpdated = false;
   }
   handleRedux = (values) =>
   {
-    if (this.props.currentMarket) this.props.updateMarket(this.props.currentMarket.id, values)
-    else this.props.createNewMarket({...this.init, ...values});
+    console.log("hello")
+    this.hasUpdated = true;
+    console.log(this.props.checkMarketData.marketData)
+    console.log(values);
+    if (this.props.checkMarketData.marketData && this.props.checkMarketData.marketData.id > 0 ) this.props.updateMarket(values,this.props.checkMarketData.marketData.id)
+    else this.props.createNewMarket({ ...values});
   }
   render(){
-    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} market={this.props.currentMarket}/>);
+    let update = this.props.checkMarketData.update && this.hasUpdated;
+    return (<ReduxForms onSubmit={this.handleRedux} redirect={update} market={this.props.checkMarketData.marketData}/>);
   }
 }
 
