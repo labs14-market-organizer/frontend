@@ -47,7 +47,7 @@ function validate (values) {
   values.boothprice = Math.abs(parseInt(values.boothprice * 100)/100); // cap it to 2 decimal places
   if(values.boothprice <= 0) values.boothprice = "";
 /*   console.log("errors: \n" + JSON.stringify(errors));*/
-  //console.log(values); 
+  console.log(values); 
   return errors;
 }
 
@@ -60,9 +60,6 @@ const renderTextField = ({
   return(
   <TextField
   label={label}
-  margin="normal"
-  variant="outlined"
-  fullWidth={true}
   autoComplete={true}
   error={touched && error ? error : ""}
   errorText={true}
@@ -142,6 +139,15 @@ class CreateMarket extends React.Component
   { 
     this.currentBooths = this.props.market.booths.map(x=> this.cleanData(x));
   }
+
+  deleteBooth = (e) => {
+    let booths = this.props.market.booths;
+    let current = this.currentBooth;
+    let newBooths = booths.filter(item => item.id !== current.id);
+    // console.log(newBooths)
+    return newBooths;
+  }
+
   render(){
     const {handleSubmit, pristine, reset, submitting } = this.props;
     if(this.props.clear && this.erase)
@@ -149,6 +155,8 @@ class CreateMarket extends React.Component
       this.erase = false;
       reset();
     }
+    // console.log(this.props.market.booths)
+    console.log(this.currentBooth)
     return (
       <div>
         <header 
@@ -234,12 +242,18 @@ class CreateMarket extends React.Component
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
+                marginLeft: "3%",
+                marginRight: "4%"
               }}
           >
+          <StyledDiv>
           <Field
             component={renderTextField}
             required
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
             id="name"
             label="Market Name"
             name="Market Name"
@@ -266,6 +280,9 @@ class CreateMarket extends React.Component
             <Field
             component={renderTextField}
             required
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
             id="numberofbooths"
             label="Number of Booths"
             name="numberofbooths"
@@ -280,6 +297,9 @@ class CreateMarket extends React.Component
             />
             <Field
               component={renderTextField}
+              margin="normal"
+              variant="outlined"
+              fullWidth={true}
               id="boothprice"
               label="Price per Booth"
               name="boothprice"
@@ -297,12 +317,16 @@ class CreateMarket extends React.Component
           <h5
             style={{
                 display: 'flex',
-                margin: '5px'
+                margin: '5px',
+                width: "100vw",
+                textAlign: "left"
             }}>Size of Booths
           </h5>
           <div
             style={{
-                display: 'flex'
+                display: 'flex',
+                justifyContent: 'flex-start',
+                width: "100vw"
             }}>
             <Field
             component={renderTextField}
@@ -319,7 +343,7 @@ class CreateMarket extends React.Component
             endAdornment: <InputAdornment position="end">ft</InputAdornment>
             }}
             />
-            <div style={{position: "relative", bottom: "-30px", margin: "0 10px"}}>X</div>
+            <div style={{position: "relative", bottom: "-10px", margin: "0 10px"}}>X</div>
             <Field
               component={renderTextField}
               id="width"
@@ -338,6 +362,9 @@ class CreateMarket extends React.Component
           </div>
           <Field
             component={renderTextField}
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
             id="boothdescription"
             name="boothdescription"
             label="Booth Description"
@@ -345,7 +372,41 @@ class CreateMarket extends React.Component
             margin="normal"
             style={{ marginBottom: "0px"}}
           />
-          <div style={{display: "flex", minWidth: "100%"}} >
+          {(this.isUpdating ? 
+            <div style={{display: "flex", minWidth: "100%"}} >
+            <Button 
+              type="submit" 
+              variant="outlined"
+              fullWidth
+              onClick={(e) => this.deleteBooth(e)}
+              style={{
+                  color: 'red',
+                  fontSize:'1.4em',
+                  margin: '4% 0',
+                  height: '80px'
+              }}
+        >
+            Delete
+        </Button>
+        <div style={{margin: "0 10px"}}/>
+          <Button 
+            type="submit" 
+            disabled={pristine || submitting}
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
+            style={{
+                fontSize:'1.4em',
+                margin: '4% 0',
+                height: '80px'
+            }}
+          >
+            Save
+          </Button> 
+          </div>
+
+        : <div style={{display: "flex", minWidth: "100%"}} >
         <Button 
           type="submit" 
           disabled={pristine || submitting}
@@ -378,8 +439,10 @@ class CreateMarket extends React.Component
           >
             Save
           </Button>
-        </div>
+          </div> )}
+        
         <hr/>
+        </StyledDiv>
         </form>
   }
 };
@@ -389,6 +452,15 @@ const mapStateToProps = state => {
     ...state
   };
 };
+
+const StyledDiv = styled.div`
+  margin-left: 2%;
+  margin-right: 2%;
+  @media(min-width: 600px){
+    margin: 0 auto;
+    max-width: 600px;
+  }
+`
 
 const StyleBox = styled(Box)`
  width: 90vw;
