@@ -9,6 +9,9 @@ import {
   } from "react-router-dom";
   import { Button, Box, Grid, Shadows } from '@material-ui/core';
   import '../scss/authenticationPage.scss';
+  import styled from "styled-components";
+
+import Navbar from "../components/Navbar";
   // import Box from '@material-ui/core/Box';
 
 class AuthenticatePage extends React.Component
@@ -23,13 +26,15 @@ class AuthenticatePage extends React.Component
   // this.props.getUserData()
     render()
     {
-
-        return (
+      return (
+        <>
+        <Navbar />
+        <StyledDiv>
         <Grid container
         direction="column"
         justify="center"
         alignItems="center" >
-          <h1><span className="cloud">Cloud</span> <span className="Stands">Stands</span></h1>
+          {/* <h1><span className="cloud">Cloud</span> <span className="Stands">Stands</span></h1> */}
           <Box className="header-SignIn" display='flex'>
             
               <span className="meet-the-team"><p>Meet the Team</p></span>
@@ -51,9 +56,17 @@ class AuthenticatePage extends React.Component
 
            </Box>
 
-        </Grid>)
+        </Grid>
+        </StyledDiv>
+        </>)
     }
 }
+
+const StyledDiv = styled.div`
+  display: flex;
+  margin: 0 auto;
+  padding-top: 112px;
+`;
 /* const mapStateToProps = state => {
    return {
      //states

@@ -9,6 +9,7 @@ import {
   CssBaseline,
   Paper
 } from "@material-ui/core";
+import {Link} from "react-router-dom";
 import cloud from "../assets/cloud.svg";
 import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -24,6 +25,7 @@ class Navbar extends React.Component {
       page: "HOME"
       }
   }
+
 
  toggle = () => {
   if (this.state.menuOpen === true) {
@@ -45,9 +47,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button Link="SignUp" className="currentPage" >Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="landing"> <Button className="currentPage" >Home</Button></Link></li>
+          <li><Link to="signup"> <Button>Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -68,9 +70,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button className="currentPage">Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button className="currentPage">Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -91,9 +93,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button >Sign Up / Sign In</Button></li>
-          <li><Button className="currentPage">Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -378,6 +380,13 @@ ul {
   margin-left: 16px;
   margin-right: -16px;
 }
+
+ a {
+  text-decoration: none;
+  width: 100%;
+
+   
+ }
 
 li:first-child {
   margin-top: 12.5px;

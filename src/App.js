@@ -31,6 +31,7 @@ import CreateVendor from "./routes/CreateVendor";
 import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
+import MeetTheTeam from "./routes/MeetTheTeam";
 
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
@@ -107,6 +108,9 @@ class App extends React.Component {
               <Route 
               path="/createmarket"
               render={props => <MarketReduxForms />}
+              />
+              <Route path="/team"
+              render={props => <MeetTheTeam />} 
               />
               </div>
           </div>
