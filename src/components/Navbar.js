@@ -41,8 +41,8 @@ class Navbar extends React.Component {
 
  Menu = () => {
   if (this.state.menuOpen === true) {
-    switch(this.state.page) {
-      case "HOME":
+    switch(window.location.pathname) {
+      case "/landing":
         return (
           <StyledPaper elevation={10}>
           <div>
@@ -65,7 +65,7 @@ class Navbar extends React.Component {
         </StyledPaper> 
       );
 
-      case "SIGNUP": 
+      case "/signup": 
         return (
           <StyledPaper elevation={10}>
           <div>
@@ -88,7 +88,30 @@ class Navbar extends React.Component {
         </StyledPaper>
       );
 
-      case "TEAM": 
+      case "/signin": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button className="currentPage">Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Button>Privacy Policy</Button></li> 
+            <li><Button>Terms of Service</Button></li> 
+          </ul>
+        </StyledPaper>
+      );
+
+      case "/team": 
         return (
           <StyledPaper elevation={10}>
           <div>
@@ -274,6 +297,7 @@ class Navbar extends React.Component {
     }
     }
   } 
+  
   
   render() { 
     return ( 
