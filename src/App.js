@@ -31,7 +31,7 @@ import CreateVendor from "./routes/CreateVendor";
 import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
-
+import VendorReduxForms from "./routes/Vendor-Redux-forms";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
@@ -98,10 +98,6 @@ class App extends React.Component {
               render={props => <ViewMyMarket  />}
               />
                <Route
-              path="/createvendor"
-              render={props => <CreateVendor  />}
-              />
-               <Route
               path="/searchmarkets"
               render={props => <SearchMarkets />}
               />
@@ -112,6 +108,10 @@ class App extends React.Component {
               <Route 
               path="/createmarket"
               render={props => <MarketReduxForms />}
+              />
+                <Route 
+              path="/createvendor"
+              render={props => <VendorReduxForms />}
               />
           </div>
         </MuiThemeProvider>

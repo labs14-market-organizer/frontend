@@ -40,8 +40,7 @@ export const getUserData = (token=null) => dispatch => {
             
             return dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}});
         })
-        .catch(err => {
-            console.log("data");
+    .catch(err => {
             dispatch({ type: ERROR_GET_USER_DATA, payload: {error: err} });
         })
 };
