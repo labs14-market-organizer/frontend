@@ -17,7 +17,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioButtonGroup from "@material-ui/core/RadioGroup"
 import { withStyles } from "@material-ui/core/styles";
 import "../scss/CreateMarket.scss";
-import { createNewBooth, updateBooth } from "../redux/actions/boothData";
+import { createNewBooth, updateBooth, deleteBooth } from "../redux/actions/boothData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
@@ -142,12 +142,6 @@ class CreateMarket extends React.Component
     this.currentBooths = this.props.market.booths.map(x=> this.cleanData(x));
   }
 
-  deleteBooth = (e) => {
-    let booths = this.props.market.booths;
-    let current = this.currentBooth;
-    let newBooths = booths.filter(item => item.id !== current.id);
-    return newBooths;
-  }
 
   render(){
     const {handleSubmit, pristine, reset, submitting } = this.props;
@@ -378,10 +372,12 @@ class CreateMarket extends React.Component
           {(this.isUpdating ? 
             <div style={{display: "flex", minWidth: "100%"}} >
             <Button 
-              type="submit" 
               variant="outlined"
               fullWidth
-              onClick={(e) => this.deleteBooth(e)}
+              onClick={() => { this.props.deleteBooth(this.currentBooth.id, this.props.market.id); 
+              // this.currentBooths = this.currentBooths.filter(booth => booth.id !== this.currentBooth.id)
+              this.currentBooth = null }} 
+             
               className="redButton"
               style={{
                   color: 'red',
@@ -394,7 +390,7 @@ class CreateMarket extends React.Component
         </Button>
         <div style={{margin: "0 10px"}}/>
           <Button 
-            type="submit" 
+            type="submit"
             disabled={pristine || submitting}
             variant="contained"
             color="primary"
@@ -550,15 +546,16 @@ const StyleBox = styled(Box)`
 const ReduxForms = reduxForm({
   form: "BoothsForm", // a unique identifier for this form
   validate
-})(connect(mapStateToProps)(CreateMarket));
+})(connect(mapStateToProps, { deleteBooth })(CreateMarket));
 
 
 class ReduxContainer extends React.Component
 {
   handleRedux = (values) =>
-  {
+  { 
+    this.redirecttype = values.redirecttype && values.redirecttype.length > 0 ?         values.redirecttype[values.redirecttype.length-1 ] : 0;
     this.wasfetching = true;
-    this.redirecttype = values.redirecttype && values.redirecttype.length > 0 ? values.redirecttype[values.redirecttype.length-1 ] : 0;
+    
     if (values.id > 0) this.props.updateBooth(this.props.checkMarketData.marketData.id, values)
     else this.props.createNewBooth(this.props.checkMarketData.marketData.id,values);
   }

@@ -87,14 +87,15 @@ export const updateBooth = (marketId, booth) => dispatch =>
     })
 }
 
-export const deleteBooth = (boothId) => dispatch => 
+export const deleteBooth = (boothId, marketId) => dispatch => 
 {
     dispatch({ type: SET_BOOTH_DATA_START });
     let token = localStorage.getItem("token");
     if(!token || !boothId || boothId < 1 || isNaN(boothId)) {localStorage.clear(); return dispatch({ type: SET_BOOTH_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
-    .put(`${HOST_URL}/booth/${boothId}`)
+    .delete(`${HOST_URL}/markets/${marketId}/booths/${boothId}`)
     .then(res => {
+        dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}});
         dispatch({type: SET_BOOTH_DATA_END, payload: {curentBooth: undefined}});
     })
     .catch(err => {
