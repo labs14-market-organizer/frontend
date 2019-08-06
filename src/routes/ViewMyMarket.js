@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
-import { Button } from "@material-ui/core"
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const militaryConvert = (time) => {
