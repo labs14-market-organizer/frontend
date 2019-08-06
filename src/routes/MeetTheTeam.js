@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
 import { Typography } from "@material-ui/core";
 
 import teamcloud from "../assets/teamcloud.svg"
@@ -106,18 +108,18 @@ class MeetTheTeam extends Component {
       <>
         <Navbar />
         <StyledDiv>
-          <div>
-            <img src={teamcloud}/>
+            <CloudContainer>
             <Typography variant="h2">Meet the Team</Typography>
+            </CloudContainer>
+          <div>
           </div>
-          <Typography variant="body1">
+          <Typography className="intro" variant="body1">
             Cloud Stands was created in response to small markets with a need
             for an easier way to organize and communicate with their vendors.
             This is the awesome team that answered the call.
           </Typography>
 		  	
 		  {this.team.map(member => (
-        <div>
         <Raindrop>
         <ImageWrapper>
           <img src={member.img} />
@@ -129,10 +131,13 @@ class MeetTheTeam extends Component {
           </Label>
           </LabelWrapper>
           </ImageWrapper>
+        <Github/>
+        <Linkedin/>
+        <Twitter/>
         </Raindrop>
-        </div>
       ))}
         </StyledDiv>
+      <Footer/>
       </>
     );
   }
@@ -143,13 +148,60 @@ export default MeetTheTeam;
 const StyledDiv = styled.div`
   display: flex;
   margin: 0 auto;
-  padding-top: 112px;
+  padding-top: 116px;
   flex-direction: column;
   align-items: center;
+
+  .intro {
+    /* color: red; */
+    font-family: "Roboto";
+    margin-top: 6px;
+    margin-bottom: 20px;
+    padding: 0px 34px;
+    color: #484848;
+  }
 `;
 
+const CloudContainer = styled.div`
+background-image: url(${teamcloud});
+width: 100%;
+height: 170px;
+background-repeat: no-repeat;
+display: flex;
+align-items: center;
+justify-content: center;
+background-position: center;
+ 
+@media (max-width: 390px) {
+      width: 300px;
+    }
+
+
+
+
+
+.MuiTypography-h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+`
+
 const Raindrop = styled.div`
-background-image: url(${raindrop})
+background-image: url(${raindrop});
+background-repeat: no-repeat;
+display: flex;
+align-items: center;
+justify-content: center;
+background-position: center;
+padding: 47px;
+margin: 8px auto;
+/* width: 500px; */
+background-size: 100% 100%;
+
+ 
 
 `
 
@@ -157,9 +209,9 @@ const ImageWrapper = styled.div`
 width: 200px;
 height: 200px;
 overflow: hidden;
-margin-top: 12px;
-margin-bottom: 12px;
-margin-left: 20px;
+margin-top: 60px;
+/* margin-bottom: 12px; */
+/* margin-left: 20px; */
 img {
   width: 100%;
   
@@ -189,13 +241,27 @@ opacity: .93;
 `
 
 const LabelWrapper = styled.div`
-height: 120px;
+height: 126px;
 display: flex;
 align-items: flex-end;
 
 `
 
-const Contact = styled.div`
+const Github = styled.div`
+
+
+`
+
+const Linkedin = styled.div`
+
+
+`
+
+const Twitter = styled.div`
+
+
+`
+const Portfolio = styled.div`
 
 
 `
