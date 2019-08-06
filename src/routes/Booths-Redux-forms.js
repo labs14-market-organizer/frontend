@@ -184,7 +184,7 @@ class CreateMarket extends React.Component
               let obj = flag ? this.props.form.BoothsForm.values : x;
               return <StyleBox boxShadow={10}>
               <div className="main-box">
-                <div className="price-text">{ obj.price && obj.price > 0 ? `$${Math.round(obj.price)}` : "free"}</div>
+                <div className="price-text">{ obj.boothprice && obj.boothprice > 0 ? `$${Math.round(obj.boothprice)}` : "free"}</div>
                 <div className="title-box">
                   <div className="title-text">{obj.boothtype}</div>
                   <div className="title-subtext">{`${obj.numberofbooths} ${obj.numberofbooths < 2 ? "booth":"booths"}`}</div>
