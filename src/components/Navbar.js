@@ -320,6 +320,9 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    @media (max-width: 410px) {
+      font-size: 40px;
+    }
     @media (max-width: 390px) {
       font-size: 40px; 
     }
@@ -332,8 +335,11 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
 const StandsText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Raleway Dots";
     color: black;
-    @media (max-width: 390px) {
+    @media (max-width: 410px) {
       font-size: 40px;
+    }
+    @media (max-width: 390px) {
+      font-size: 38px;
     }
     @media (max-width: 350px) {
       font-size: 30px;
