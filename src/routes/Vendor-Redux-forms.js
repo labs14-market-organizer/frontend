@@ -411,14 +411,15 @@ const ReduxForms = reduxForm({
     handleRedux = (values) =>
     {
       this.wasfetching = true;
-      this.redirecttype = 2;
+      window.setTimeout( ()=> {this.redirecttype = 2}, 100);
       if (values.id > 0) this.props.updateVendor(values, values.id)
       else this.props.createNewVendor({ ...values});
     }
     wasfetching =false;
     redirecttype= 0;
+
     render(){
-      if(this.redirecttype === 2 && !this.props.checkVendorData.fetching)  return <Redirect to="/"/>
+      if(this.redirecttype === 2)  return <Redirect to="/"/>
       return <ReduxForms onSubmit={this.handleRedux} currentVendor={this.props.checkVendorData.vendorData} />
      /*  let redirect = this.props.checkBoothData.updated && this.wasfetching;
       if(this.wasfetching && !this.props.checkBoothData.fetching) this.wasfetching = false;
