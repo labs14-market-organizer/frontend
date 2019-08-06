@@ -118,9 +118,9 @@ class MeetTheTeam extends Component {
           <img src={member.img} />
           <LabelWrapper>
           <Label>
-          <Typography variant="body1">{member.name}</Typography>
-          <Typography variant="body1">{member.title}</Typography>
-          <Typography variant="body1">{member.location}</Typography>
+          <Typography className="name" variant="body1">{member.name}</Typography>
+          <Typography className="role" variant="body1">{member.title}</Typography>
+          <Typography className="location" variant="body1">{member.location}</Typography>
           </Label>
           </LabelWrapper>
           </ImageWrapper>
@@ -161,12 +161,25 @@ width: 200px;
 height: 200px;
 border-radius: 100;
 background-color: white;
-opacity: .93
+opacity: .93;
+
+.name {
+ font-weight: 600;
+}
+.role {
+ font-size: 14px;
+ color: #478529;
+}
+.location {
+ font-size: 12px;
+ color: #484848;
+}
+
 
 `
 
 const LabelWrapper = styled.div`
-height: 110px;
+height: 120px;
 display: flex;
 align-items: flex-end;
 
