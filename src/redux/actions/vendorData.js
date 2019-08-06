@@ -78,7 +78,7 @@ export const getVendorById = (vendorId) => dispatch =>
     return axiosWithAuth(token)
     .get(`${HOST_URL}/market/${vendorId}`)
     .then(res => {
-        dispatch({type: GET_VENDOR_DATA_END, payload: {curentVendor: res.data}});
+        dispatch({type: GET_VENDOR_DATA_END, payload: {vendorData: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data
@@ -94,7 +94,7 @@ export const updateVendor = (vendor) => dispatch =>
     return axiosWithAuth(token)
     .put(`${HOST_URL}/market/${vendor.id}`)
     .then(res => {
-        dispatch({type: SET_VENDOR_DATA_END, payload: {curentVendor: res.data}});
+        dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data
@@ -110,7 +110,7 @@ export const deleteVendor = (vendorId) => dispatch =>
     return axiosWithAuth(token)
     .put(`${HOST_URL}/market/${vendorId}`)
     .then(res => {
-        dispatch({type: SET_VENDOR_DATA_END, payload: {curentVendor: undefined}});
+        dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: undefined}});
     })
     .catch(err => {
         //check if bad token if so clear local data

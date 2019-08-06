@@ -107,7 +107,8 @@ export const updateMarket = (market, marketId) => dispatch =>
         dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}});
     })
     .catch(err => {
-        console.log(err)
+        console.error(err);
+        if(err.message) console.log(err.message);
         //check if bad token if so clear local data
         dispatch({type: ERROR_GET_MARKET_DATA,  payload: {error: err}});
     })
@@ -138,6 +139,9 @@ export const localMarketSwitch = (market) => dispatch =>
 
 function cleanData(market)
 {
+    market.operation = JSON.parse(market.operation);
+    let cleanopp = null;
+    if(market.operation && market.operation.length) cleanopp = market.operation.map(x=> {return {day: x.day, start: x.start, end: x.end}});
     let clean = 
     {
         address: market.Address,
@@ -148,12 +152,12 @@ function cleanData(market)
         instagram: market.Instagram ? market.Instagram : "",
         type: market.market_type === "Public" ? 1 : 2,
         name: market["Market Name"],
-        operation: JSON.parse(market.operation),
+        operation: cleanopp ? cleanopp : [],
         state: market.State,
         twitter: market.Twitter ? market.Twitter : "",
         zipcode: market["Zip Code"]
     }
-    if(market.website) clean.website = market.website;
+    if(market.Website && market.Website!=="") clean.website = market.Website;
     let required = ["address", "city", "description","state","zipcode"]
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
     if(test.length > 0) return {error: `${test[0]} is a required field`};

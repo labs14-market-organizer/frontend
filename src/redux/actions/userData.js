@@ -32,7 +32,7 @@ export const getUserData = (token=null) => dispatch => {
             try { 
                 userType = res.data.markets.length > 0 ? "Market Owner" : res.data.vendors.length > 0 ? "Vendor" : "undefined" 
                 if(res.data.markets && res.data.markets.length > 0) dispatch({ type: "SET_MARKET_DATA_END", payload: {marketData: res.data.markets[0]} });
-                else if(res.data.vendors && res.data.vendors.length > 0) dispatch({ type: "SET_VENDOR_DATA_END", payload: {marketData: res.data.vendors[0]} });
+                else if(res.data.vendors && res.data.vendors.length > 0) dispatch({ type: "SET_VENDOR_DATA_END", payload: {vendorData: res.data.vendors[0]} });
             }catch{}
             //localStorage.setItem("userdata", JSON.stringify(res.data));
             localStorage.setItem("token", token);
