@@ -86,17 +86,28 @@ export const getMarketById = (marketId) => dispatch =>
     })
 }
 
-export const updateMarket = (market) => dispatch => 
+export const updateMarket = (market, marketId) => dispatch => 
 {
     dispatch({ type: GET_MARKET_DATA_START });
+    
     let token = localStorage.getItem("token");
-    if(!token || !market.id || market.id < 1 || isNaN(market.id)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    if(!token || !marketId || marketId < 1 || isNaN(marketId)) {
+        localStorage.clear(); 
+        console.log("error")
+        return dispatch({ type: ERROR_GET_MARKET_DATA, payload: { error: "Must have token to be on this page"} });
+    } //this is probably an intruder
+
+    market = cleanData(market);
+    if(market.error){console.log("error"); return dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: market.error} });}
+    console.log(market);
+
     return axiosWithAuth(token)
-    .put(`${HOST_URL}/market/${market.id}`)
+    .put(`${HOST_URL}/markets/${marketId}`, market)
     .then(res => {
-        dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: res.data}});
+        dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}});
     })
     .catch(err => {
+        console.log(err)
         //check if bad token if so clear local data
         dispatch({type: ERROR_GET_MARKET_DATA,  payload: {error: err}});
     })

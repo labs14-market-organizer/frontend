@@ -127,21 +127,40 @@ class CreateMarket extends React.Component
     if(this.props.market)
     {
       this.isUpdating = true;
-      //this.state.operation = this.props.market.operation;
+      let market = this.props.market;
+      let opp = this.state.operation.map(x=> {let r = market.operation.filter(z=> x.day === z.day); return r && r.length && r.length > 0 ? { day: r[0].day, start: r[0].start, end: r[0].end} : x })
+      opp = opp.map(x=> 
+        {
+          if(!x) return x; 
+          let f = (b)=> 
+          {
+            if(!b) return b;
+            b = b.split(":");
+            b.length = 2; 
+            return b.join(":")
+          }
+          x.start = f(x.start);
+          x.end = f(x.end);
+          return x;
+        }) 
+      console.log(opp);
+      this.state.operation = opp;
+      console.log(opp);
       this.props.initialize(
         {
-          "Market Name": this.props.market.name,
-          "Market Description": this.props.market.description,
-          Address: this.props.market.address,
-          City: this.props.market.city,
-          State: this.props.market.state,
-          "Zip Code": this.props.market.zipcode,
-          Website: this.props.market.website,
-          Facebook: this.props.market.facebook,
-          Twitter: this.props.market.twitter,
-          Instagram: this.props.market.instagram,
-          market_type: this.props.market.type,
-          operation: this.props.market.operation ? JSON.stringify(this.props.market.operation) : ""
+          id: market.id,
+          "Market Name": market.name,
+          "Market Description": market.description,
+          Address: market.address,
+          City: market.city,
+          State: market.state,
+          "Zip Code": market.zipcode,
+          Website: market.website,
+          Facebook: market.facebook,
+          Twitter: market.twitter,
+          Instagram: market.instagram,
+          market_type: market.type,
+          operation: market.operation ? JSON.stringify(market.operation) : ""
         }
       )
     }
@@ -649,26 +668,23 @@ const ReduxForms = reduxForm({
 
 class CreateMarketContainer extends React.Component
 {
-  init = {
-    name: '',
-    description: '',
-    address: '',
-    operation: [],
-    market_type: 1, //(1 = private, 2=public)
-    website: '',
-    facebook: '',
-    image: '', 
-    twitter: '',
-    instagram: '',
-    zipcode: ''
+  hasUpdated = false;
+  componentWillMount()
+  {
+    this.hasUpdated = false;
+    this.isUpdating = !!this.props.checkMarketData.marketData
   }
   handleRedux = (values) =>
   {
-    if (this.props.currentMarket) this.props.updateMarket(this.props.currentMarket.id, values)
-    else this.props.createNewMarket({...this.init, ...values});
+    this.hasUpdated = true;
+    
+    if (values.id && values.id > 0 ) this.props.updateMarket(values,values.id)
+    else this.props.createNewMarket({ ...values});
   }
   render(){
-    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} market={this.props.currentMarket}/>);
+    if(this.props.checkMarketData.updated && this.hasUpdated) return <Redirect to={`${this.isUpdating ? "/" : "/addbooths"}`}/>
+    this.hasUpdated = false;
+    return (<ReduxForms onSubmit={this.handleRedux} market={this.props.checkMarketData.marketData}/>);
   }
 }
 
