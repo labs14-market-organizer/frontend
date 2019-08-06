@@ -4,15 +4,17 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { Typography } from "@material-ui/core";
 
+import teamcloud from "../assets/teamcloud.svg"
+import raindrop from "../assets/raindrop.svg"
 import lajawanti from "../assets/lajawanti.png"
-import kayla from "../assets/lajawanti.png"
-import dwayne from "../assets/lajawanti.png"
-import mindy from "../assets/lajawanti.png"
-import matt from "../assets/lajawanti.png"
-import todd from "../assets/lajawanti.png"
-import justin from "../assets/lajawanti.png"
-import leigh from "../assets/lajawanti.png"
-import chase from "../assets/lajawanti.png"
+import kayla from "../assets/kayla.png"
+import dwayne from "../assets/dwayne.png"
+import mindy from "../assets/mindy.png"
+import matt from "../assets/matt.png"
+import todd from "../assets/todd.png"
+import justin from "../assets/justin.png"
+import leigh from "../assets/leigh.png"
+import chase from "../assets/chase.png"
 
 class MeetTheTeam extends Component {
   constructor(props) {
@@ -83,17 +85,20 @@ class MeetTheTeam extends Component {
   },
   {
     img: leigh,
-    name: "Lajawanti Dhake",
-    title: "Team Lead",
-    location: "Edison, NJ",
-    github: "https://github.com/lajawanti",
+    name: "Leigh Martin",
+    title: "Full Stack Developer",
+    location: "Columbia, SC",
+    github: "https://github.com/LTM888",
+    linkedin: "linkedin.com/leighmartin"
   },
   {
     img: chase,
-    name: "Lajawanti Dhake",
-    title: "Team Lead",
-    location: "Edison, NJ",
-    github: "https://github.com/lajawanti"
+    name: "Chase Wenner",
+    title: "Full Stack Developer",
+    location: "Ohio, USA",
+    github: "https://github.com/chasester",
+    linkedin: "https://www.linkedin.com/in/chase-wenner-5395b6190/"
+
   }];
 
   render() {
@@ -102,7 +107,7 @@ class MeetTheTeam extends Component {
         <Navbar />
         <StyledDiv>
           <div>
-            <img />
+            <img src={teamcloud}/>
             <Typography variant="h2">Meet the Team</Typography>
           </div>
           <Typography variant="body1">
@@ -113,7 +118,7 @@ class MeetTheTeam extends Component {
 		  	
 		  {this.team.map(member => (
         <div>
-        <div>
+        <Raindrop>
         <ImageWrapper>
           <img src={member.img} />
           <LabelWrapper>
@@ -124,8 +129,7 @@ class MeetTheTeam extends Component {
           </Label>
           </LabelWrapper>
           </ImageWrapper>
-
-        </div>
+        </Raindrop>
         </div>
       ))}
         </StyledDiv>
@@ -144,12 +148,18 @@ const StyledDiv = styled.div`
   align-items: center;
 `;
 
+const Raindrop = styled.div`
+background-image: url(${raindrop})
+
+`
+
 const ImageWrapper = styled.div`
 width: 200px;
 height: 200px;
 overflow: hidden;
 margin-top: 12px;
 margin-bottom: 12px;
+margin-left: 20px;
 img {
   width: 100%;
   
