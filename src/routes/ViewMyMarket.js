@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
-import { Button } from "@material-ui/core"
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const militaryConvert = (time) => {
@@ -69,7 +69,7 @@ const ViewMyMarket = (props) => {
             {(market.type === 1)? <Ltag>Public Market</Ltag> :<Ltag>Private Market</Ltag>  }
             { (market.website && market.website.length > 0) ?<div> <Tag>Website</Tag> <Ltag>{market.website}</Ltag> </div> : null } 
             { (market.facebook && market.facebook.length > 0) ? <div><Tag>Facebook</Tag> <Ltag>{market.facebook}</Ltag></div>: null }
-            { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.website}</Ltag></div>: null }
+            { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
             <Flex>
               <Link to="/addbooths">

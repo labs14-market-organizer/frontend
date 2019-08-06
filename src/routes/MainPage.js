@@ -8,8 +8,8 @@ import {
   } from "react-router-dom";
   import {connect} from "react-redux";
   import MarketPage from "./ViewMyMarket";
-  import VendorPage from "./SearchMarkets";
-  import OnBoarding from "./UserOnboarding"
+  import VendorPage from "./VendorProfile";
+  import OnBoarding from "./UserOnboarding";
 
 class LandingPage extends React.Component
 {
