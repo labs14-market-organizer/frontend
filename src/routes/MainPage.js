@@ -6,16 +6,27 @@ import {
     Redirect,
     withRouter
   } from "react-router-dom";
-  
+  import {connect} from "react-redux";
+  import MarketPage from "./ViewMyMarket";
+  import VendorPage from "./VendorProfile";
+  import OnBoarding from "./UserOnboarding";
 
 class LandingPage extends React.Component
 {
+  componentWillMount()
+  {
+    this.props.getUserData();
+  }
     render()
     {
+      if (this.props.fetching && !this.props.updated || !this.props.userData) return <div/>
+      if(this.props.userType === "undefined") return <OnBoarding/>
+      return this.props.userType === "Market Owner" ? <MarketPage/> : <VendorPage/>
         return(
-        <div>
-          <div>Welcome Market Owner</div>
-          <button onClick={()=> this.logout()}>Logout</button>
+        <div style={{paddingTop: "120px"}}>
+
+          <div>Welcome {this.props.userType}</div>
+          
         </div>
         )
     }
@@ -27,7 +38,7 @@ class LandingPage extends React.Component
     
 }
 
-/* const mapStateToProps = state => {
+const mapStateToProps = state => {
     return {
       //states
       ...state.checkUserData
@@ -37,10 +48,10 @@ class LandingPage extends React.Component
   export default connect(
     mapStateToProps,
     { //actions
-      setLocalData
+      //setLocalData
      // getUserData 
     }
-  )(App); */
+  )(withRouter(LandingPage));
   
-export default LandingPage;
+//export default LandingPage;
 

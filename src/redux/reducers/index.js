@@ -12,8 +12,7 @@ export default combineReducers({
     checkUserData,
     checkMarketData,
     checkVendorData,
-    checkBoothData,                               
-    checkBoothData,
+    checkBoothData,                   
     checkMarketsByArea
 });
 

@@ -17,7 +17,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioButtonGroup from "@material-ui/core/RadioGroup"
 import { withStyles } from "@material-ui/core/styles";
 import "../scss/CreateMarket.scss";
-import { createNewBooth, updateBooth } from "../redux/actions/boothData";
+import { createNewBooth, updateBooth, deleteBooth } from "../redux/actions/boothData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
@@ -27,6 +27,8 @@ import { maxWidth } from "@material-ui/system";
 import { checkMarketData } from "../redux/reducers/marketData";
 import MarketReduxForms from "./Market-Redux-forms";
 import {getMarketById} from "../redux/actions/marketData"
+import "../scss/ReduxForm.scss";
+import { Link } from 'react-router-dom';
 
 function validate (values) {
   const errors = {};
@@ -47,7 +49,7 @@ function validate (values) {
   values.boothprice = Math.abs(parseInt(values.boothprice * 100)/100); // cap it to 2 decimal places
   if(values.boothprice <= 0) values.boothprice = "";
 /*   console.log("errors: \n" + JSON.stringify(errors));*/
-  //console.log(values); 
+
   return errors;
 }
 
@@ -60,9 +62,6 @@ const renderTextField = ({
   return(
   <TextField
   label={label}
-  margin="normal"
-  variant="outlined"
-  fullWidth={true}
   autoComplete={true}
   error={touched && error ? error : ""}
   errorText={true}
@@ -110,7 +109,7 @@ class CreateMarket extends React.Component
   {
     return {
       id: booth.id ? booth.id : -1,
-      boothtype: booth.type,
+      boothtype: booth.name,
       numberofbooths: booth.number,
       boothprice: booth.price ? booth.price : "",
       length: booth.size && booth.size.length > 0 && booth.size[0] ? booth.size[0] : "",
@@ -142,6 +141,8 @@ class CreateMarket extends React.Component
   { 
     this.currentBooths = this.props.market.booths.map(x=> this.cleanData(x));
   }
+
+
   render(){
     const {handleSubmit, pristine, reset, submitting } = this.props;
     if(this.props.clear && this.erase)
@@ -153,12 +154,14 @@ class CreateMarket extends React.Component
       <div>
         <header 
           className="header"
-        >
-            <img src={Arrow} />
+        >  <Link to="/">
+              <img src={Arrow} style={{marginLeft: "25px",
+               marginTop: "20px"}}/>
+            </Link>
             <h4 
             className="addbooths"
             style={{
-                marginLeft: '5%',
+                marginLeft: '2%',
                 }}>{this.isUpdating ? "Update" : "Add"} Booths</h4>
         </header>
         {/* Styled this div for the time being...will change later */}
@@ -181,7 +184,7 @@ class CreateMarket extends React.Component
               let obj = flag ? this.props.form.BoothsForm.values : x;
               return <StyleBox boxShadow={10}>
               <div className="main-box">
-                <div className="price-text">{ obj.price && obj.price > 0 ? `$${Math.round(obj.price)}` : "free"}</div>
+                <div className="price-text">{ obj.boothprice && obj.boothprice > 0 ? `$${Math.round(obj.boothprice)}` : "free"}</div>
                 <div className="title-box">
                   <div className="title-text">{obj.boothtype}</div>
                   <div className="title-subtext">{`${obj.numberofbooths} ${obj.numberofbooths < 2 ? "booth":"booths"}`}</div>
@@ -234,12 +237,18 @@ class CreateMarket extends React.Component
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
+                marginLeft: "3%",
+                marginRight: "4%"
               }}
           >
+          <StyledDiv>
           <Field
             component={renderTextField}
             required
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
             id="name"
             label="Market Name"
             name="Market Name"
@@ -266,6 +275,9 @@ class CreateMarket extends React.Component
             <Field
             component={renderTextField}
             required
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
             id="numberofbooths"
             label="Number of Booths"
             name="numberofbooths"
@@ -280,6 +292,9 @@ class CreateMarket extends React.Component
             />
             <Field
               component={renderTextField}
+              margin="normal"
+              variant="outlined"
+              fullWidth={true}
               id="boothprice"
               label="Price per Booth"
               name="boothprice"
@@ -297,12 +312,16 @@ class CreateMarket extends React.Component
           <h5
             style={{
                 display: 'flex',
-                margin: '5px'
+                margin: '5px',
+                width: "100vw",
+                textAlign: "left"
             }}>Size of Booths
           </h5>
           <div
             style={{
-                display: 'flex'
+                display: 'flex',
+                justifyContent: 'flex-start',
+                width: "100vw"
             }}>
             <Field
             component={renderTextField}
@@ -319,7 +338,7 @@ class CreateMarket extends React.Component
             endAdornment: <InputAdornment position="end">ft</InputAdornment>
             }}
             />
-            <div style={{position: "relative", bottom: "-30px", margin: "0 10px"}}>X</div>
+            <div style={{position: "relative", bottom: "-10px", margin: "0 10px"}}>X</div>
             <Field
               component={renderTextField}
               id="width"
@@ -338,6 +357,9 @@ class CreateMarket extends React.Component
           </div>
           <Field
             component={renderTextField}
+            margin="normal"
+            variant="outlined"
+            fullWidth={true}
             id="boothdescription"
             name="boothdescription"
             label="Booth Description"
@@ -345,7 +367,44 @@ class CreateMarket extends React.Component
             margin="normal"
             style={{ marginBottom: "0px"}}
           />
-          <div style={{display: "flex", minWidth: "100%"}} >
+          {(this.isUpdating ? 
+            <div style={{display: "flex", minWidth: "100%"}} >
+            <Button 
+              variant="outlined"
+              fullWidth
+              onClick={() => { this.props.deleteBooth(this.currentBooth.id, this.props.market.id); 
+              // this.currentBooths = this.currentBooths.filter(booth => booth.id !== this.currentBooth.id)
+              this.currentBooth = null }} 
+             
+              className="redButton"
+              style={{
+                  color: 'red',
+                  fontSize:'1.4em',
+                  margin: '4% 0',
+                  height: '80px'
+              }}
+        >
+            Delete
+        </Button>
+        <div style={{margin: "0 10px"}}/>
+          <Button 
+            type="submit"
+            disabled={pristine || submitting}
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
+            style={{
+                fontSize:'1.4em',
+                margin: '4% 0',
+                height: '80px'
+            }}
+          >
+            Save
+          </Button> 
+          </div>
+
+        : <div style={{display: "flex", minWidth: "100%"}} >
         <Button 
           type="submit" 
           disabled={pristine || submitting}
@@ -378,8 +437,10 @@ class CreateMarket extends React.Component
           >
             Save
           </Button>
-        </div>
+          </div> )}
+        
         <hr/>
+        </StyledDiv>
         </form>
   }
 };
@@ -389,6 +450,15 @@ const mapStateToProps = state => {
     ...state
   };
 };
+
+const StyledDiv = styled.div`
+  margin-left: 2%;
+  margin-right: 2%;
+  @media(min-width: 600px){
+    margin: 0 auto;
+    max-width: 600px;
+  }
+`
 
 const StyleBox = styled(Box)`
  width: 90vw;
@@ -474,24 +544,23 @@ const StyleBox = styled(Box)`
 const ReduxForms = reduxForm({
   form: "BoothsForm", // a unique identifier for this form
   validate
-})(connect(mapStateToProps)(CreateMarket));
+})(connect(mapStateToProps, { deleteBooth })(CreateMarket));
 
 
 class ReduxContainer extends React.Component
 {
   handleRedux = (values) =>
-  {
+  { 
+    this.redirecttype = values.redirecttype && values.redirecttype.length > 0 ?         values.redirecttype[values.redirecttype.length-1 ] : 0;
     this.wasfetching = true;
-    this.redirecttype = values.redirecttype && values.redirecttype.length > 0 ? values.redirecttype[values.redirecttype.length-1 ] : 0;
+    
     if (values.id > 0) this.props.updateBooth(this.props.checkMarketData.marketData.id, values)
-    else this.props.createNewBooth(77,{ ...values});
+    else this.props.createNewBooth(this.props.checkMarketData.marketData.id,values);
   }
   wasfetching =false;
   redirecttype= 0;
   render(){
-    if(!this.props.checkMarketData.marketData) 
     //temp code so we can test
-    { if(!this.props.checkMarketData.fetching || !this.wasfetching) this.props.getMarketById(77); this.wasfetching = false; return <div>loading</div>}
     if(this.redirecttype === 2) return <Redirect to="/"/>
     let clear = this.redirecttype===1;
     this.redirecttype = 0;

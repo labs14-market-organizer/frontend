@@ -58,9 +58,9 @@ export const createNewMarket = (market) => dispatch =>
     return axiosWithAuth(token)
     .post(`${HOST_URL}/markets`, market)
     .then(res => {
-        localStorage.removeItem("userData");//remove out of date data
+        dispatch({type: "GET_USER_DATA_END", payload: {userData: null}});
         dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
-        getUserData(token); //fire another endpoint here so we can be quicker about gathering data
+        //fire another endpoint here so we can be quicker about gathering data
         return
     })
     .catch(err =>{
@@ -86,17 +86,29 @@ export const getMarketById = (marketId) => dispatch =>
     })
 }
 
-export const updateMarket = (market) => dispatch => 
+export const updateMarket = (market, marketId) => dispatch => 
 {
     dispatch({ type: GET_MARKET_DATA_START });
+    
     let token = localStorage.getItem("token");
-    if(!token || !market.id || market.id < 1 || isNaN(market.id)) {localStorage.clear(); return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    if(!token || !marketId || marketId < 1 || isNaN(marketId)) {
+        localStorage.clear(); 
+        console.log("error")
+        return dispatch({ type: ERROR_GET_MARKET_DATA, payload: { error: "Must have token to be on this page"} });
+    } //this is probably an intruder
+
+    market = cleanData(market);
+    if(market.error){console.log("error"); return dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: market.error} });}
+    console.log(market);
+
     return axiosWithAuth(token)
-    .put(`${HOST_URL}/market/${market.id}`)
+    .put(`${HOST_URL}/markets/${marketId}`, market)
     .then(res => {
-        dispatch({type: SET_MARKET_DATA_END, payload: {curentMarket: res.data}});
+        dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}});
     })
     .catch(err => {
+        console.error(err);
+        if(err.message) console.log(err.message);
         //check if bad token if so clear local data
         dispatch({type: ERROR_GET_MARKET_DATA,  payload: {error: err}});
     })
@@ -118,8 +130,18 @@ export const deleteMarket = (marketId) => dispatch =>
     })
 }
 
+export const localMarketSwitch = (market) => dispatch =>
+{
+    dispatch({ type: SET_MARKET_DATA_START });
+    //add varification here at some point;
+    dispatch({ type: SET_MARKET_DATA_END, payload: {marketData: market} });
+}
+
 function cleanData(market)
 {
+    market.operation = JSON.parse(market.operation);
+    let cleanopp = null;
+    if(market.operation && market.operation.length) cleanopp = market.operation.map(x=> {return {day: x.day, start: x.start, end: x.end}});
     let clean = 
     {
         address: market.Address,
@@ -130,12 +152,12 @@ function cleanData(market)
         instagram: market.Instagram ? market.Instagram : "",
         type: market.market_type === "Public" ? 1 : 2,
         name: market["Market Name"],
-        operation: JSON.parse(market.operation),
+        operation: cleanopp ? cleanopp : [],
         state: market.State,
         twitter: market.Twitter ? market.Twitter : "",
         zipcode: market["Zip Code"]
     }
-    if(market.website) clean.website = market.website;
+    if(market.Website && market.Website!=="") clean.website = market.Website;
     let required = ["address", "city", "description","state","zipcode"]
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
     if(test.length > 0) return {error: `${test[0]} is a required field`};
@@ -143,5 +165,6 @@ function cleanData(market)
     clean.operation = clean.operation.filter(x=> x.start && x.end);
     if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
     if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
+    console.log(clean)
     return clean;
 }

@@ -127,21 +127,40 @@ class CreateMarket extends React.Component
     if(this.props.market)
     {
       this.isUpdating = true;
-      //this.state.operation = this.props.market.operation;
+      let market = this.props.market;
+      let opp = this.state.operation.map(x=> {let r = market.operation.filter(z=> x.day === z.day); return r && r.length && r.length > 0 ? { day: r[0].day, start: r[0].start, end: r[0].end} : x })
+      opp = opp.map(x=> 
+        {
+          if(!x) return x; 
+          let f = (b)=> 
+          {
+            if(!b) return b;
+            b = b.split(":");
+            b.length = 2; 
+            return b.join(":")
+          }
+          x.start = f(x.start);
+          x.end = f(x.end);
+          return x;
+        }) 
+      console.log(opp);
+      this.state.operation = opp;
+      console.log(opp);
       this.props.initialize(
         {
-          "Market Name": this.props.market.name,
-          "Market Description": this.props.market.description,
-          Address: this.props.market.address,
-          City: this.props.market.city,
-          State: this.props.market.state,
-          "Zip Code": this.props.market.zipcode,
-          Website: this.props.market.website,
-          Facebook: this.props.market.facebook,
-          Twitter: this.props.market.twitter,
-          Instagram: this.props.market.instagram,
-          market_type: this.props.market.type,
-          operation: this.props.market.operation ? JSON.stringify(this.props.market.operation) : ""
+          id: market.id,
+          "Market Name": market.name,
+          "Market Description": market.description,
+          Address: market.address,
+          City: market.city,
+          State: market.state,
+          "Zip Code": market.zipcode,
+          Website: market.website,
+          Facebook: market.facebook,
+          Twitter: market.twitter,
+          Instagram: market.instagram,
+          market_type: market.type,
+          operation: market.operation ? JSON.stringify(market.operation) : ""
         }
       )
     }
@@ -335,14 +354,20 @@ class CreateMarket extends React.Component
             name="City"
           />
         </Container>
-        <StyledContainer>
+        <StyledContainer
+          style={{
+            display: 'inline-flex',
+            justifyContent: 'space-between'
+          }}>
           <Field
               component={renderTextField}
               required
               id="state"
               label="State"
               name="State"
-              style={{ width: "44%" }}
+              style={{ 
+                width: "48%" 
+              }}
             />
             <Field
               component={renderTextField}
@@ -350,7 +375,7 @@ class CreateMarket extends React.Component
               id="zipcode"
               label="Zip Code"
               name="Zip Code"
-              style={{ width: "44%", marginLeft: "8%" }}
+              style={{ width: "48%" }}
             />
         </StyledContainer>
         <Container maxWidth="sm">
@@ -530,9 +555,9 @@ class CreateMarket extends React.Component
         <br />
         </StyleLeft>  
         <div>
-          <Button type="submit" disabled={pristine || submitting}>
-            Submit
-          </Button>
+          <SaveFix type="submit" disabled={pristine || submitting}>
+            Next
+          </SaveFix>
         </div>
       </form>
     );
@@ -577,9 +602,10 @@ const StyledDays = styled(Button)`
 
 const SaveFix = styled.button`
   margin: 50px auto;
-  height: 60px;
+  height: 50px;
+  font-size: 16px;
   cursor: pointer;
-  width: 80vw;
+  width: 200px;
   border-radius: 5px;
   color: #fff;
   background-color: #478529;
@@ -587,9 +613,9 @@ const SaveFix = styled.button`
 `;
 
 const StyledContainer = styled(Container)`
-max-width: 623px;
-.MuiInputBase-input ,.MuiOutlinedInput-input {
-  width: 100%;
+  max-width: 600px;
+  .MuiInputBase-input ,.MuiOutlinedInput-input {
+    width: 100%;
 }
 
 
@@ -604,8 +630,13 @@ const StyledTypography = styled(Typography)`
 const StyleLeft = styled.div`
   text-align: left;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 4%;
+  @media (min-width: 600px){
+    margin: 0 auto;
+    padding-left: 4%;
+  }
 `;
+
 
 const StyledUp = styled.div`
   text-transform: capitalize;
@@ -637,26 +668,23 @@ const ReduxForms = reduxForm({
 
 class CreateMarketContainer extends React.Component
 {
-  init = {
-    name: '',
-    description: '',
-    address: '',
-    operation: [],
-    market_type: 1, //(1 = private, 2=public)
-    website: '',
-    facebook: '',
-    image: '', 
-    twitter: '',
-    instagram: '',
-    zipcode: ''
+  hasUpdated = false;
+  componentWillMount()
+  {
+    this.hasUpdated = false;
+    this.isUpdating = !!this.props.checkMarketData.marketData
   }
   handleRedux = (values) =>
   {
-    if (this.props.currentMarket) this.props.updateMarket(this.props.currentMarket.id, values)
-    else this.props.createNewMarket({...this.init, ...values});
+    this.hasUpdated = true;
+    
+    if (values.id && values.id > 0 ) this.props.updateMarket(values,values.id)
+    else this.props.createNewMarket({ ...values});
   }
   render(){
-    return (<ReduxForms onSubmit={this.handleRedux} redirect={this.props.checkMarketData.updated} market={this.props.currentMarket}/>);
+    if(this.props.checkMarketData.updated && this.hasUpdated) return <Redirect to={`${this.isUpdating ? "/" : "/addbooths"}`}/>
+    this.hasUpdated = false;
+    return (<ReduxForms onSubmit={this.handleRedux} market={this.props.checkMarketData.marketData}/>);
   }
 }
 

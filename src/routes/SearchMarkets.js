@@ -10,6 +10,8 @@ import styled from "styled-components";
 import Place from '../assets/place.svg';
 import { searchMarkets } from '../redux/actions/searchMarkets';
 import { connect } from "react-redux";
+import Navbar from "../components/Navbar";
+
 
 class SearchMarkets extends React.Component {
     state = {
@@ -29,8 +31,11 @@ class SearchMarkets extends React.Component {
 
 
     render() {
-        return (
+        return ( 
+            <div>
+            <Navbar />
             <StyledContainer>
+           
                 <form onSubmit={this.startSearch}>
                     <TextField
                         id="search"
@@ -56,6 +61,7 @@ class SearchMarkets extends React.Component {
                 }) : null }
                 
             </StyledContainer>
+            </div>
         )
     }
 }
@@ -64,8 +70,10 @@ class SearchMarkets extends React.Component {
 const StyledContainer = styled(Container)`
     margin: 0 auto;
     max-width: 95vw;
+    padding-top: 100px;
     @media(min-width: 600px){
     width: 600px;
+    padding-top: 100px;
   }
 `;
 const StyleBox = styled(Box)`

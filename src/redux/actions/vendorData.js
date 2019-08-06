@@ -51,16 +51,17 @@ export const createNewVendor = (vendor) => dispatch =>
     dispatch({ type: SET_VENDOR_DATA_START });
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
-
+    console.log("hello")
     vendor = cleanData(vendor);
     if(vendor.error) return dispatch({ type: ERROR_SET_VENDOR_DATA, payload: {error: vendor.error} });
 
     return axiosWithAuth(token)
     .post(`${HOST_URL}/vendors`, vendor)
     .then(res => {
-        localStorage.removeItem("userData");//remove out of date data
+        //getUserData(token)(dispatch); //fire another endpoint here so we can be quicker about gathering data
+        dispatch({type: "GET_USER_DATA_END", payload: {userData: null, userType: "Vendor"}});
         dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
-        getUserData(token); //fire another endpoint here so we can be quicker about gathering data
+        
     })
     .catch(err =>{
         console.error(err);
@@ -77,7 +78,7 @@ export const getVendorById = (vendorId) => dispatch =>
     return axiosWithAuth(token)
     .get(`${HOST_URL}/market/${vendorId}`)
     .then(res => {
-        dispatch({type: GET_VENDOR_DATA_END, payload: {curentVendor: res.data}});
+        dispatch({type: GET_VENDOR_DATA_END, payload: {vendorData: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data
@@ -93,7 +94,7 @@ export const updateVendor = (vendor) => dispatch =>
     return axiosWithAuth(token)
     .put(`${HOST_URL}/market/${vendor.id}`)
     .then(res => {
-        dispatch({type: SET_VENDOR_DATA_END, payload: {curentVendor: res.data}});
+        dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data
@@ -109,7 +110,7 @@ export const deleteVendor = (vendorId) => dispatch =>
     return axiosWithAuth(token)
     .put(`${HOST_URL}/market/${vendorId}`)
     .then(res => {
-        dispatch({type: SET_VENDOR_DATA_END, payload: {curentVendor: undefined}});
+        dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: undefined}});
     })
     .catch(err => {
         //check if bad token if so clear local data
@@ -119,19 +120,20 @@ export const deleteVendor = (vendorId) => dispatch =>
 
 function cleanData(vendor)
 {
+    vendor.items = JSON.parse(vendor.items);
+    console.log(vendor.items)
     let clean = 
     {   
         name: vendor.name,
         description: vendor.description,
-        items: vendor.items ? vendor.items : [],
-        electricity: vendor.electricty ? true: false,
-        ventilation: vendor.ventilation ? true : false,
-        ventilation: vendor.ventilation ? true: false,
- 		loud: vendor.loud ? true : false,
-        other_special: vendor.other_special ? JSON.stringify(vendor.other_special).split("[").join("").split("]").join("").split(",").join(" ") : "",
-        facebook: vendor.Facebook ? vendor.Facebook : "",
-        twitter: vendor.Twitter ? vendor.Twitter : "",
-        instagram: vendor.Instagram ? vendor.Instagram : ""
+        items: vendor.items && vendor.items !== "" ? vendor.items : [],
+        electricity: vendor.electricty === "true" ? true: false,
+        ventilation: vendor.ventilation  === "true" ? true : false,
+ 		loud: vendor.loud  === "true" ? true : false,
+        other_special: vendor.other_special,
+        facebook: vendor.facebook ? vendor.facebook : "",
+        twitter: vendor.twitter ? vendor.twitter : "",
+        instagram: vendor.instagram ? vendor.instagram : ""
     }
 
     

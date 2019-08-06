@@ -33,25 +33,32 @@ import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
 import MeetTheTeam from "./routes/MeetTheTeam";
 
+import VendorReduxForms from "./routes/Vendor-Redux-forms";
+import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
 
 var user_type = localStorage.getItem("userType");
-console.log(user_type)
-
+let token = null;
 class App extends React.Component {
   componentWillMount() {
-    this.props.getUserData(); //async check on second pass
+    //async check on second pass
+    this.props.getUserData();
   }
 
-  componentWillUpdate() {}
+  componentWillUpdate() 
+  {
+    if(!this.props.token || !this.props.userData)  this.props.getUserData();
+  }
+  componentWillUnmount()
+  {
+  }
   render() {
-    let token = this.props.token;
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
+      console.log(this.props);
     return (
-
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
@@ -94,10 +101,6 @@ class App extends React.Component {
               render={props => <ViewMyMarket  />}
               />
                <Route
-              path="/createvendor"
-              render={props => <CreateVendor  />}
-              />
-               <Route
               path="/searchmarkets"
               render={props => <SearchMarkets />}
               />
@@ -113,6 +116,14 @@ class App extends React.Component {
               render={props => <MeetTheTeam />} 
               />
               </div>
+                <Route 
+              path="/createvendor"
+              render={props => <VendorReduxForms />}
+              />
+              <Route 
+              path="/vendorprofile"
+              render={props => <VendorPage />}
+              />
           </div>
         </MuiThemeProvider>
       </StylesProvider>
