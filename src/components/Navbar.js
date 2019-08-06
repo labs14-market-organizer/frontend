@@ -61,6 +61,7 @@ class Navbar extends React.Component {
             <li><Button>Contact Us</Button></li>
             <li><Button>Privacy Policy</Button></li> 
             <li><Button>Terms of Service</Button></li> 
+            <li><Button variant="outlined" className="jimmy" ></Button></li>
           </ul>
         </StyledPaper> 
       );
@@ -445,7 +446,6 @@ Button {
   align-items: center;
   text-align: center
   }
-
 }
 
 .currentPage {
@@ -454,7 +454,6 @@ Button {
   :hover {
     background-color: rgba(71, 133, 41, 0.5);
   }
-  
 
 }
 `
