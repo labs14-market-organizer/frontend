@@ -128,9 +128,27 @@ class CreateMarket extends React.Component
     {
       this.isUpdating = true;
       let market = this.props.market;
-      this.state.operation = market.operation;
+      let opp = this.state.operation.map(x=> {let r = market.operation.filter(z=> x.day === z.day); return r && r.length && r.length > 0 ? { day: r[0].day, start: r[0].start, end: r[0].end} : x })
+      opp = opp.map(x=> 
+        {
+          if(!x) return x; 
+          let f = (b)=> 
+          {
+            if(!b) return b;
+            b = b.split(":");
+            b.length = 2; 
+            return b.join(":")
+          }
+          x.start = f(x.start);
+          x.end = f(x.end);
+          return x;
+        }) 
+      console.log(opp);
+      this.state.operation = opp;
+      console.log(opp);
       this.props.initialize(
         {
+          id: market.id,
           "Market Name": market.name,
           "Market Description": market.description,
           Address: market.address,
@@ -642,19 +660,19 @@ class CreateMarketContainer extends React.Component
   componentWillMount()
   {
     this.hasUpdated = false;
+    this.isUpdating = !!this.props.checkMarketData.marketData
   }
   handleRedux = (values) =>
   {
-    console.log("hello")
     this.hasUpdated = true;
-    console.log(this.props.checkMarketData.marketData)
-    console.log(values);
-    if (this.props.checkMarketData.marketData && this.props.checkMarketData.marketData.id > 0 ) this.props.updateMarket(values,this.props.checkMarketData.marketData.id)
+    
+    if (values.id && values.id > 0 ) this.props.updateMarket(values,values.id)
     else this.props.createNewMarket({ ...values});
   }
   render(){
-    let update = this.props.checkMarketData.update && this.hasUpdated;
-    return (<ReduxForms onSubmit={this.handleRedux} redirect={update} market={this.props.checkMarketData.marketData}/>);
+    if(this.props.checkMarketData.updated && this.hasUpdated) return <Redirect to={`${this.isUpdating ? "/" : "/addbooths"}`}/>
+    this.hasUpdated = false;
+    return (<ReduxForms onSubmit={this.handleRedux} market={this.props.checkMarketData.marketData}/>);
   }
 }
 

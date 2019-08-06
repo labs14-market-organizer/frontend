@@ -94,7 +94,7 @@ export const updateMarket = (market, marketId) => dispatch =>
     if(!token || !marketId || marketId < 1 || isNaN(marketId)) {
         localStorage.clear(); 
         console.log("error")
-        return dispatch({ type: SET_MARKET_DATA_START, payload: { error: "Must have token to be on this page"} });
+        return dispatch({ type: ERROR_GET_MARKET_DATA, payload: { error: "Must have token to be on this page"} });
     } //this is probably an intruder
 
     market = cleanData(market);
@@ -102,9 +102,8 @@ export const updateMarket = (market, marketId) => dispatch =>
     console.log(market);
 
     return axiosWithAuth(token)
-    .put(`${HOST_URL}/markets/${marketId}`)
+    .put(`${HOST_URL}/markets/${marketId}`, market)
     .then(res => {
-        console.log(res.data);
         dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}});
     })
     .catch(err => {
