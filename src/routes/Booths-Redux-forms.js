@@ -49,7 +49,7 @@ function validate (values) {
   values.boothprice = Math.abs(parseInt(values.boothprice * 100)/100); // cap it to 2 decimal places
   if(values.boothprice <= 0) values.boothprice = "";
 /*   console.log("errors: \n" + JSON.stringify(errors));*/
-  console.log(values); 
+
   return errors;
 }
 
@@ -150,8 +150,6 @@ class CreateMarket extends React.Component
       this.erase = false;
       reset();
     }
-    // console.log(this.props.market.booths)
-    console.log(this.currentBooth)
     return (
       <div>
         <header 
