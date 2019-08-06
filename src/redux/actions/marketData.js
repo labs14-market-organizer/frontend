@@ -161,5 +161,6 @@ function cleanData(market)
     clean.operation = clean.operation.filter(x=> x.start && x.end);
     if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
     if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
+    console.log(clean)
     return clean;
 }
