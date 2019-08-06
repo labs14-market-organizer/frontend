@@ -98,10 +98,6 @@ class App extends React.Component {
               render={props => <ViewMyMarket  />}
               />
                <Route
-              path="/createvendor"
-              render={props => <CreateVendor  />}
-              />
-               <Route
               path="/searchmarkets"
               render={props => <SearchMarkets />}
               />
@@ -114,7 +110,7 @@ class App extends React.Component {
               render={props => <MarketReduxForms />}
               />
                 <Route 
-              path="/test"
+              path="/createvendor"
               render={props => <VendorReduxForms />}
               />
           </div>
