@@ -65,7 +65,6 @@ class CreateMarket extends React.Component {
   };
 
   changeDay = e => {
-    console.log(this.state.daysList);
     let number, newDaysList;
     if (e.currentTarget.value === "false") {
       this.setState({
@@ -89,7 +88,6 @@ class CreateMarket extends React.Component {
   };
     deleteTime = (e, day) => {
       e.preventDefault();
-      console.log(day)
       let newDays = this.state.operation;
       const newList = []
       for (let i = 0; i < newDays.length; i++){
@@ -189,13 +187,11 @@ class CreateMarket extends React.Component {
   };
 
   militaryConvert(time){
-    console.log('here ya go')
     let hours = time.split('');
     let am = "am";
     let newHours, combined, subtractedHours, rest;
     if (hours[0] === "0"){
       combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
-      console.log(combined)
       return combined;
     } else if (hours[0] === "1" && hours[1] === "2") {
       return hours.join('') + "pm";
@@ -213,7 +209,6 @@ class CreateMarket extends React.Component {
     if (this.props.checkMarketData.updated) {
       this.props.history.push('/addbooths')
   }
-  console.log(this.props)
 
     return (
       <form>
@@ -580,7 +575,6 @@ const StyledP = styled.p`
 
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     ...state
   };

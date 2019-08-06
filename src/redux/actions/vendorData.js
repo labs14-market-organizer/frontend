@@ -51,7 +51,6 @@ export const createNewVendor = (vendor) => dispatch =>
     dispatch({ type: SET_VENDOR_DATA_START });
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
-    console.log("hello")
     vendor = cleanData(vendor);
     if(vendor.error) return dispatch({ type: ERROR_SET_VENDOR_DATA, payload: {error: vendor.error} });
 
@@ -124,7 +123,6 @@ export const deleteVendor = (vendorId) => dispatch =>
 
 function cleanData(vendor)
 {
-    console.log(vendor.items)
     vendor.items = Array.isArray(vendor.items) ? vendor.items : JSON.parse(vendor.items);
     let clean = 
     {   

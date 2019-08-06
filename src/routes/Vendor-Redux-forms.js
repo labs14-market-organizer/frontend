@@ -30,7 +30,6 @@ function validate (values) {
           field.slice(1)} Is Required`;
       }
     });
-    console.log(values)
     if (values.Website && !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(values.Website)) 
     errors.Website = "Invalid Website";
   return errors;
@@ -47,8 +46,8 @@ function validate (values) {
     return(
     <TextField
     label={label}
-    error={touched && error ? error : ""}
-    errorText={true}
+    error={touched && error}
+
     {...input}
     {...custom}
   />
@@ -154,7 +153,6 @@ function validate (values) {
     }
     shouldCheck()
     {
-      console.log(this.state.other_special);
       return this.state.other_special !== "" && this.state.other_special;
     }
     
@@ -176,12 +174,9 @@ function validate (values) {
                         id="name"
                         label="Business Name"
                         name="name"
-                        InputProps={{
-                            startAdornment: <InputAdornment position="start"></InputAdornment>}}
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                        
                     />
                     <Field
@@ -190,15 +185,12 @@ function validate (values) {
                         id="description"
                         label="Business Description"
                         name="description"
-                        InputProps={{
-                            startAdornment: <InputAdornment position="start"></InputAdornment>}}
                         style={{marginTop: "20px"}}
                         rows="3"
                         multiline
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                     />
                     <StyledContainer>
                     
@@ -215,7 +207,6 @@ function validate (values) {
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                     >
                     <img src={Add} />  
                     </Field>
@@ -229,7 +220,6 @@ function validate (values) {
                           margin="normal"
                           variant="outlined"
                           fullWidth={true}
-                          autoComplete={true}
                      />
                      </FlexContainer>
                     {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
@@ -303,7 +293,6 @@ function validate (values) {
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                     />
                     <Field
                         component={renderTextField}
@@ -313,7 +302,6 @@ function validate (values) {
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                     />
                     <Field
                         component={renderTextField}
@@ -323,7 +311,6 @@ function validate (values) {
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                     />
                     <Field
                         component={renderTextField}
@@ -333,7 +320,6 @@ function validate (values) {
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                     />
                      <GreenButton type="submit" variant="outlined" disabled={pristine || submitting} >Save</GreenButton>
                      </form>
@@ -424,17 +410,15 @@ const ReduxForms = reduxForm({
   {
     handleRedux = (values) =>
     {
-      console.log(values.items);
       this.wasfetching = true;
       this.redirecttype = 2;
-      console.log(values);
       if (values.id > 0) this.props.updateVendor(values, values.id)
       else this.props.createNewVendor({ ...values});
     }
     wasfetching =false;
     redirecttype= 0;
     render(){
-      if(this.redirecttype === 2)  return <Redirect to="/"/>
+      if(this.redirecttype === 2 && !this.props.checkVendorData.fetching)  return <Redirect to="/"/>
       return <ReduxForms onSubmit={this.handleRedux} currentVendor={this.props.checkVendorData.vendorData} />
      /*  let redirect = this.props.checkBoothData.updated && this.wasfetching;
       if(this.wasfetching && !this.props.checkBoothData.fetching) this.wasfetching = false;

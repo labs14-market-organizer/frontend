@@ -48,7 +48,6 @@ function validate (values) {
   //values.width.length = 2;
   values.boothprice = Math.abs(parseInt(values.boothprice * 100)/100); // cap it to 2 decimal places
   if(values.boothprice <= 0) values.boothprice = "";
-/*   console.log("errors: \n" + JSON.stringify(errors));*/
 
   return errors;
 }
@@ -62,7 +61,6 @@ const renderTextField = ({
   return(
   <TextField
   label={label}
-  autoComplete={true}
   error={touched && error ? error : ""}
   errorText={true}
   {...input}

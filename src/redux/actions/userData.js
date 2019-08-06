@@ -27,7 +27,6 @@ export const getUserData = (token=null) => dispatch => {
         .get(`${HOST_URL}/user`)
         .then(res => {
             if(!res.data) throw "interal client error";
-            console.log(res.data);
             let userType = "undefined";
             try { 
                 userType = res.data.markets.length > 0 ? "Market Owner" : res.data.vendors.length > 0 ? "Vendor" : "undefined" 
@@ -59,7 +58,6 @@ const getLocalData = () =>
 }
 
 export const setLocalData = (token, data) => dispatch => { //data should be an object of the user profile info
-    console.log("data");
     dispatch({ type: GET_USER_DATA_START });
     
     if(token) localStorage.setItem("token", token); else dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "token invalid" }});

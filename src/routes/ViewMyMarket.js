@@ -31,7 +31,6 @@ const ViewMyMarket = (props) => {
   //           <CreateHeader>View Market</CreateHeader>
   //       </Header>
   // let market = props.checkMarketData.marketData;
-  console.log(props);
   let market = props.marketData /* {
    
         "name": "Joplin Fresh Farmers Market",

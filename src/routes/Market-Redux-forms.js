@@ -58,7 +58,6 @@ const renderTextField = ({
   margin="normal"
   variant="outlined"
   fullWidth={true}
-  autoComplete={true}
   error={touched && error ? error : ""}
   errorText={true}
   {...input}
@@ -143,9 +142,7 @@ class CreateMarket extends React.Component
           x.end = f(x.end);
           return x;
         }) 
-      console.log(opp);
       this.state.operation = opp;
-      console.log(opp);
       this.props.initialize(
         {
           id: market.id,

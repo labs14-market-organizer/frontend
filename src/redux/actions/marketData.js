@@ -98,8 +98,7 @@ export const updateMarket = (market, marketId) => dispatch =>
     } //this is probably an intruder
 
     market = cleanData(market);
-    if(market.error){console.log("error"); return dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: market.error} });}
-    console.log(market);
+    if(market.error){ return dispatch({ type: ERROR_SET_MARKET_DATA, payload: {error: market.error} });}
 
     return axiosWithAuth(token)
     .put(`${HOST_URL}/markets/${marketId}`, market)
@@ -108,7 +107,6 @@ export const updateMarket = (market, marketId) => dispatch =>
     })
     .catch(err => {
         console.error(err);
-        if(err.message) console.log(err.message);
         //check if bad token if so clear local data
         dispatch({type: ERROR_GET_MARKET_DATA,  payload: {error: err}});
     })
@@ -165,6 +163,5 @@ function cleanData(market)
     clean.operation = clean.operation.filter(x=> x.start && x.end);
     if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
     if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
-    console.log(clean)
     return clean;
 }

@@ -115,6 +115,5 @@ function cleanData(booth)
         size: [numcheck(booth.length), numcheck(booth.width)], //always length x width
         description: booth.boothdescription ? booth.boothdescription : ""
     }
-    // console.log(clean)
     return clean;
 }

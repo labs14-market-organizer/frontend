@@ -94,7 +94,6 @@ class AddBooths extends React.Component {
                         }}
                         variant="outlined"
                         fullWidth={true}
-                        autoComplete={true}
                     />
                     <h5 style={{
                             margin: '10px 0px'
@@ -121,7 +120,6 @@ class AddBooths extends React.Component {
                                 height: '80px'
                             }}
                             variant="outlined"
-                            autoComplete={true}
                         />
                         <TextField
                             id="boothprice"
@@ -234,7 +232,6 @@ class AddBooths extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         checkBoothData: state.checkBoothData
     };

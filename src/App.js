@@ -57,7 +57,6 @@ class App extends React.Component {
   render() {
     if (this.props.fetching)
       return <div className="App"> {"<LoadingScreen/>"} </div>;
-      console.log(this.props);
     return (
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
