@@ -64,7 +64,7 @@ export const createNewVendor = (vendor) => dispatch =>
         
     })
     .catch(err =>{
-        console.error(err);
+        console.log(err);
         //check if bad token if so clear local data
         dispatch({ type: ERROR_SET_VENDOR_DATA, payload: {error: err} });
     })
@@ -74,25 +74,28 @@ export const getVendorById = (vendorId) => dispatch =>
 {
     dispatch({ type: GET_VENDOR_DATA_START });    
     let token = localStorage.getItem("token");
-    if(!token || !vendorId || vendorId < 1 || isNaN(vendorId)) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    if(!token || !vendorId || vendorId < 1 || isNaN(vendorId)) {return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
-    .get(`${HOST_URL}/market/${vendorId}`)
+    .get(`${HOST_URL}/vendors/${vendorId}`)
     .then(res => {
         dispatch({type: GET_VENDOR_DATA_END, payload: {vendorData: res.data}});
     })
     .catch(err => {
         //check if bad token if so clear local data
+        console.error(err);
         dispatch({type: ERROR_GET_VENDOR_DATA,  payload: {error: err}});
     })
 }
 
-export const updateVendor = (vendor) => dispatch => 
+export const updateVendor = (vendor, vendorId) => dispatch => 
 {
     dispatch({ type: GET_VENDOR_DATA_START });
     let token = localStorage.getItem("token");
-    if(!token || !vendor.id || vendor.id < 1 || isNaN(vendor.id)) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    if(!token || !vendorId || vendorId < 1 || isNaN(vendor.id)) {return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+
+    vendor = cleanData(vendor);
     return axiosWithAuth(token)
-    .put(`${HOST_URL}/market/${vendor.id}`)
+    .put(`${HOST_URL}/vendors/${vendorId}`, vendor)
     .then(res => {
         dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}});
     })
@@ -106,22 +109,23 @@ export const deleteVendor = (vendorId) => dispatch =>
 {
     dispatch({ type: SET_VENDOR_DATA_START });
     let token = localStorage.getItem("token");
-    if(!token || !vendorId || vendorId < 1 || isNaN(vendorId)) {localStorage.clear(); return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    if(!token || !vendorId || vendorId < 1 || isNaN(vendorId)) {return dispatch({ type: SET_VENDOR_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
     return axiosWithAuth(token)
-    .put(`${HOST_URL}/market/${vendorId}`)
+    .put(`${HOST_URL}/vendors/${vendorId}`)
     .then(res => {
         dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: undefined}});
     })
     .catch(err => {
         //check if bad token if so clear local data
+        console.error(err);
         dispatch({type: ERROR_GET_VENDOR_DATA,  payload: {error: err}});
     })
 }
 
 function cleanData(vendor)
 {
-    vendor.items = JSON.parse(vendor.items);
     console.log(vendor.items)
+    vendor.items = Array.isArray(vendor.items) ? vendor.items : JSON.parse(vendor.items);
     let clean = 
     {   
         name: vendor.name,

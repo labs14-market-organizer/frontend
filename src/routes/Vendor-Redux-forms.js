@@ -101,6 +101,9 @@ function validate (values) {
             instagram: ''
         };
         else this.isUpdating = true;
+        this.state.electricity = String(this.state.electricity)
+        this.state.ventilation = String(this.state.ventilation)
+        this.state.loud = String(this.state.loud)
         this.props.initialize(this.state);
     }
     handleChange = e => {
@@ -425,7 +428,7 @@ const ReduxForms = reduxForm({
       this.wasfetching = true;
       this.redirecttype = 2;
       console.log(values);
-      if (values.id > 0) this.props.updateVendor(this.props.checkVendorData.vendorData.id, values)
+      if (values.id > 0) this.props.updateVendor(values, values.id)
       else this.props.createNewVendor({ ...values});
     }
     wasfetching =false;
