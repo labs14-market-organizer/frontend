@@ -31,6 +31,8 @@ import CreateVendor from "./routes/CreateVendor";
 import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
+import MeetTheTeam from "./routes/MeetTheTeam";
+
 import VendorReduxForms from "./routes/Vendor-Redux-forms";
 import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
@@ -60,8 +62,8 @@ class App extends React.Component {
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-            {/* <Navbar /> */}
 
+            <div>
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
               exact
@@ -110,6 +112,10 @@ class App extends React.Component {
               path="/createmarket"
               render={props => <MarketReduxForms />}
               />
+              <Route path="/team"
+              render={props => <MeetTheTeam />} 
+              />
+              </div>
                 <Route 
               path="/createvendor"
               render={props => <VendorReduxForms />}

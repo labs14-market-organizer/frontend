@@ -33,6 +33,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import logo from "../assets/standLogo.svg";
 
 import { Mixpanel } from '../redux/actions/mixpanel';
+import Navbar from "../components/Navbar";
 
 const theme = {
   spacing: 8,
@@ -43,6 +44,7 @@ const theme = {
 const MarketingPage = () => {
   return (
     <>
+    <Navbar />
       <StyledDiv>
         <Hero>
           <Typography variant="subtitle1">
@@ -208,6 +210,8 @@ const StyledLink2 = styled(Link)`
   .MuiButton-fullWidth  {
     max-width: 424px;
     margin-left: 22px;
+    margin-right: 38px;
+    
     height: 60px;
     /* margin-bottom:78px; */
     font-family: "Raleway";
@@ -271,6 +275,8 @@ const Hero = styled(Paper)`
     font-size: 18px;
     margin-left: -8px;
     height: 60px;
+    
+
   }
 `;
 

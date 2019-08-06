@@ -7,13 +7,15 @@ import {
     Redirect,
     withRouter
   } from "react-router-dom";
-import { Button, Box, Grid, Shadows, Container, Icon } from '@material-ui/core';
+  import { Button, Box, Grid, Shadows, Container, Icon } from '@material-ui/core';
+  import '../scss/authenticationPage.scss';
+  import styled from "styled-components";
+
+import Navbar from "../components/Navbar";
 import '../scss/authenticationPage.scss';
-  // import Box from '@material-ui/core/Box';
-import styled from "styled-components";
+// import Box from '@material-ui/core/Box';
 import facebookSymbol from "../assets/facebookSymbol.svg";
 import google from "../assets/google.svg";
-import Navbar from "../components/Navbar";
 import facebook from "../assets/facebook.png";
 import googleIcon from "../assets/googleicon1.svg";
 
