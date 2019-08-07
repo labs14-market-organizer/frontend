@@ -21,8 +21,7 @@ class PrivacyPolicy extends Component {
           <CloudContainer>
             <Typography variant="h2">Privacy Policy</Typography>
           </CloudContainer>
-          <div>
-
+          <div className="wrapper">
             <Typography className="bold1" variant="body1">
               Welcome to our Privacy Policy
             </Typography>
@@ -140,6 +139,10 @@ const StyledDiv = styled.div`
   align-items: center;
   text-align: left;
   max-width: 623px;
+
+  .wrapper {
+    width: 100%;
+  }
 
   .paragraph {
     font-family: "Roboto";
