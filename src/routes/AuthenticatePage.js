@@ -18,7 +18,7 @@ import facebookSymbol from "../assets/facebookSymbol.svg";
 import google from "../assets/google.svg";
 import facebook from "../assets/facebook.png";
 import googleIcon from "../assets/googleicon1.svg";
-
+import {HOST_URL} from "./../redux/utls/hostUrl"
 
 class AuthenticatePage extends React.Component{
     state = {
@@ -55,8 +55,8 @@ class AuthenticatePage extends React.Component{
           <StyledContainer>
             <StyledBox boxShadow={10}  display='flex' flexDirection='column'>
                 {(this.state.toggle) ? <StyledP>Create Account</StyledP> : <StyledP>Welcome Back</StyledP>}
-               <StyledCompanyButtons variant="contained" label="Facebook"  href="https://cloudstands-staging.herokuapp.com/auth/facebook" style={{backgroundColor: '#3b5998'}}><i class="fa fa-facebook-square" style={{color: "white", marginLeft: "0%", height: "18px", width: "16px", textAlign: "left"}}></i><StyledSpan1>Sign In With Facebook</StyledSpan1></StyledCompanyButtons>
-               <StyledCompanyButtons variant="contained" style={{backgroundColor: 'white', color: "black"}} label="Facebook"  href="https://cloudstands-staging.herokuapp.com/auth/google"><img src={googleIcon} style={{marginLeft: "-10px"}}/><StyledSpan1>Sign In With Google</StyledSpan1></StyledCompanyButtons>
+               <StyledCompanyButtons variant="contained" label="Facebook"  href={`${HOST_URL}/auth/facebook`} style={{backgroundColor: '#3b5998'}}><i class="fa fa-facebook-square" style={{color: "white", marginLeft: "0%", height: "18px", width: "16px", textAlign: "left"}}></i><StyledSpan1>Sign In With Facebook</StyledSpan1></StyledCompanyButtons>
+               <StyledCompanyButtons variant="contained" style={{backgroundColor: 'white', color: "black"}} label="Facebook"  href={`${HOST_URL}/auth/google`}><img src={googleIcon} style={{marginLeft: "-10px"}}/><StyledSpan1>Sign In With Google</StyledSpan1></StyledCompanyButtons>
 
                  <StyledD>
                 <StyledP1>By continuing, you agree to Cloud Stands<StyledSpan> Terms of Service</StyledSpan> and <StyledSpan>Privacy Policy</StyledSpan> </StyledP1></StyledD>
