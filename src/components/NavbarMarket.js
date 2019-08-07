@@ -51,8 +51,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">Dave Mustaine</li>
-          <li><Typography variant="caption"> Lafayette Farmets Market</Typography></li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />

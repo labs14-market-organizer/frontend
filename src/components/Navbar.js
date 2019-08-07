@@ -15,6 +15,9 @@ import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import NavMarket from "./NavbarMarket";
+import NavVendor from "./NavbarVendor";
 
 
 class Navbar extends React.Component {
@@ -22,7 +25,8 @@ class Navbar extends React.Component {
     super(props);
     this.state = {
       menuOpen: false,
-      page: "HOME"
+      page: "HOME",
+      usertype: this.props.checkUserData.usertype
       }
   }
 
@@ -301,21 +305,37 @@ class Navbar extends React.Component {
   
   
   render() { 
-    return ( 
+    let usertype = this.props.checkUserData.userType;
+    let userName = this.props.checkUserData.userData.email;
+    let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
+    console.log(userName);
+      
+        
+         
+    if(usertype === "Market Owner")
+      return <NavMarket userName={userName} marketName={objName}/>
+    else if (usertype === "Vendor")
+        return <NavVendor name={userName} vendorName={objName}/>
+    return(
       <StyledDiv>
         <StyledImg src={cloud}  width="100%" height="87px" />
-        <StyledBox>
-          <MenuIcon onClick={this.toggle} className="menuIcon" fontSize="large"/>
-          {this.Menu()}      
-          <CloudText>CLOUD</CloudText>
-          <StandsText>STANDS</StandsText>
-        </StyledBox>
-      </StyledDiv>
-     );
+          <StyledBox>
+            <MenuIcon onClick={this.toggle} className="menuIcon" fontSize="large"/>
+            {this.Menu()}
+            <CloudText>CLOUD</CloudText>
+            <StandsText>STANDS</StandsText>
+            </StyledBox>
+        </StyledDiv>
+    )
   }
 }
- 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+export default connect(mapStateToProps, {/* actions */})(Navbar);
       
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Luckiest Guy";
