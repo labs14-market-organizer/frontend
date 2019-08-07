@@ -22,7 +22,7 @@ export const searchMarkets = (query) => dispatch =>
             })
         })
         .catch(err => {
-            console.error(err);
-            dispatch({ type: GET_MARKETS_BY_AREA__ERROR, payload: {error: err }})
+            console.log(err.response);
+            dispatch({ type: GET_MARKETS_BY_AREA__ERROR, payload: {error: err.response.data.message }})
         })
 }

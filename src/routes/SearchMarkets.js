@@ -31,6 +31,7 @@ class SearchMarkets extends React.Component {
 
 
     render() {
+        console.log(this.props);
         return ( 
             <div>
             <Navbar />
@@ -50,6 +51,7 @@ class SearchMarkets extends React.Component {
                         style={{marginTop: "60px"}}
                     />
                 </form>
+                <StyledError>{this.props.searchError ? this.props.searchError : "" }</StyledError>
                 {(this.props.marketsBySearch !== undefined) ? this.props.marketsBySearch.map(location => {
                     return (
                         <StyleBox boxShadow={10} key={location.id}>
@@ -76,6 +78,15 @@ const StyledContainer = styled(Container)`
     padding-top: 100px;
   }
 `;
+
+const StyledError = styled.div`
+    margin 0 auto;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-size: 18px;
+    font-family: Raleway;
+    color: #b21b2d;
+`
 const StyleBox = styled(Box)`
         min-height: 108px;
         width: 85vw; 
@@ -101,7 +112,7 @@ const StyleBox = styled(Box)`
 
 const mapStateToProps = state => {
     return {
-        ...state.checkMarketsByArea.marketsBySearch
+        ...state.checkMarketsByArea
     };
   };
   
