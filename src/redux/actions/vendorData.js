@@ -129,7 +129,7 @@ function cleanData(vendor)
         name: vendor.name,
         description: vendor.description,
         items: vendor.items && vendor.items !== "" ? vendor.items : [],
-        electricity: vendor.electricty === "true" ? true: false,
+        electricity: vendor.electricity === "true" ? true: false,
         ventilation: vendor.ventilation  === "true" ? true : false,
  		loud: vendor.loud  === "true" ? true : false,
         other_special: vendor.other_special,
