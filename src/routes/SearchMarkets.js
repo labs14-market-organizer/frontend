@@ -43,7 +43,7 @@ class SearchMarkets extends React.Component {
                         id="search"
                         label="Search Markets"
                         name="search"
-                        placeholder="&#xf002; City, State or ZIP Code"
+                        placeholder="City, State or ZIP Code"
                         value={this.state.search}
                         onChange={this.handleChange}
                         margin="normal"
