@@ -32,7 +32,7 @@ class PrivacyPolicy extends Component {
             <Typography className="paragraph" variant="body1">
             Cloud Stands is located at:<br />
             921 Crescent Ct. San Ramon, CA 94582<br />
-            United States
+            United States<br />
             (800) 883-1943
             </Typography>
             <Typography className="paragraph" variant="body1">
