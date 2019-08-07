@@ -13,9 +13,8 @@ const initalState =
     token: null,
     vendorData: null,
     error: undefined,
-    fetching: true,
-    updated: false,
-    created: false
+    fetching: false,
+    updated: false
 }
 
 export const checkVendorData = (state = initalState, action) =>
@@ -26,7 +25,8 @@ export const checkVendorData = (state = initalState, action) =>
             return {
                 ...state,
                 ...action.payload,
-                created: true
+                fetching: false,
+                updated: true
             }
         case GET_VENDOR_DATA_END:
             return {

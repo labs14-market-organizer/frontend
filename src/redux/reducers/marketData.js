@@ -13,7 +13,7 @@ const initalState =
     token: null,
     marketData: null,
     error: undefined,
-    fetching: true,
+    fetching: false,
     updated: false
 }
 
