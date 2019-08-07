@@ -8,6 +8,7 @@ import { Mixpanel } from '../redux/actions/mixpanel';
 
 const VendorProfile = (props) => {
         let vendor = props.vendorData;
+        console.log(vendor)
         return (
             <div>
                 <Header>
