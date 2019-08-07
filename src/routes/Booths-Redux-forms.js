@@ -29,6 +29,7 @@ import MarketReduxForms from "./Market-Redux-forms";
 import {getMarketById} from "../redux/actions/marketData"
 import "../scss/ReduxForm.scss";
 import { Link } from 'react-router-dom';
+import { Mixpanel } from '../redux/actions/mixpanel';
 
 function validate (values) {
   const errors = {};
@@ -372,8 +373,8 @@ class CreateMarket extends React.Component
               fullWidth
               onClick={() => { this.props.deleteBooth(this.currentBooth.id, this.props.market.id); 
               // this.currentBooths = this.currentBooths.filter(booth => booth.id !== this.currentBooth.id)
+              Mixpanel.track('User deleted a booth');
               this.currentBooth = null }} 
-             
               className="redButton"
               style={{
                   color: 'red',

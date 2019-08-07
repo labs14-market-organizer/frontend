@@ -10,7 +10,7 @@ export const SET_VENDOR_DATA_END = "SET_VENDOR_DATA_END";
 export const ERROR_GET_VENDOR_DATA = "ERROR_GET_VENDOR_DATA";
 export const ERROR_SET_VENDOR_DATA = "ERROR_SET_VENDOR_DATA";
 export const ERROR_INVALID_TOKEN = "ERROR_INVALID_TOKEN";
-
+export const SEND_MIXPANEL_VENDOR_CREATE = "SEND_MIXPANEL_VENDOR_CREATE";
 /*
 object schema
 vendor = 
@@ -60,7 +60,7 @@ export const createNewVendor = (vendor) => dispatch =>
         //getUserData(token)(dispatch); //fire another endpoint here so we can be quicker about gathering data
         dispatch({type: "GET_USER_DATA_END", payload: {userData: null, userType: "Vendor"}});
         dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
-        
+
     })
     .catch(err =>{
         console.log(err);
@@ -129,7 +129,7 @@ function cleanData(vendor)
         name: vendor.name,
         description: vendor.description,
         items: vendor.items && vendor.items !== "" ? vendor.items : [],
-        electricity: vendor.electricty === "true" ? true: false,
+        electricity: vendor.electricity === "true" ? true: false,
         ventilation: vendor.ventilation  === "true" ? true : false,
  		loud: vendor.loud  === "true" ? true : false,
         other_special: vendor.other_special,

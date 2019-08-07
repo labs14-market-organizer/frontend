@@ -4,7 +4,7 @@ import Arrow from "../assets/ic-arrow-back.svg";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-
+import { Mixpanel } from '../redux/actions/mixpanel';
 
 const VendorProfile = (props) => {
         let vendor = props.vendorData;
@@ -13,7 +13,7 @@ const VendorProfile = (props) => {
                 <Header>
                 <Link to="/">
                   <img src={Arrow} style={{marginLeft: "25px",
-                  marginTop: "20px"}}/>
+                  marginTop: "18px"}}/>
                 </Link>
                 <CreateHeader>View Profile</CreateHeader>
                 </Header>
@@ -37,10 +37,10 @@ const VendorProfile = (props) => {
                 <p>Other Needs: </p> {(vendor.electricity)? <p>Yes </p>: <p>No</p>}
                 </Flex>
                 <Flex>
-                <Link to="/createvendor">
+                <Link to="/createvendor" style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to edit vendor')}>
                     <WhiteButton variant="outlined">Edit Profile</WhiteButton>
                 </Link>
-                <Link to="/searchmarkets" style={{ textDecoration: "none"}} >
+                <Link to="/searchmarkets" style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to search markets')}>
                     <GreenButton variant="outlined">Search Markets</GreenButton>
                 </Link>
                 </Flex> 
