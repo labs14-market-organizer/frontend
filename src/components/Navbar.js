@@ -83,7 +83,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -106,7 +106,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -129,7 +129,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>  
@@ -152,7 +152,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -175,7 +175,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -198,7 +198,7 @@ class Navbar extends React.Component {
             <li><Button className="currentPage">Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -221,7 +221,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button className="currentPage">Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -244,7 +244,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button className="currentPage">Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -267,7 +267,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button className="currentPage">Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button className="currentPage">Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
@@ -290,7 +290,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button className="currentPage">Terms of Service</Button></li> 
           </ul>
         </StyledPaper>
