@@ -18,7 +18,7 @@ import { createNewMarket, updateMarket } from "../redux/actions/marketData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel'
 
 function validate (values) {
@@ -312,7 +312,11 @@ class CreateMarket extends React.Component
     return (
       <form onSubmit={handleSubmit}>
         <div className="header">
-            <img src={Arrow} />
+            <Link to="/">
+              <img src={Arrow} style={{marginLeft: "25px",
+               marginTop: "17px"}}/>
+            </Link>
+        
             <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
         </div>
         {/* <div className="addPhoto">

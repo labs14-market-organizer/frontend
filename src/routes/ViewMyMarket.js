@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const militaryConvert = (time) => {
   let hours = time.split('');
@@ -24,35 +24,25 @@ const militaryConvert = (time) => {
   }
 }
 
-const ViewMyMarket = (props) => {
-  const sites = ["website", "facebook", "twitter", "instagram"];//going to use to check to see if obj contains when I loop over the obj.
-  // if (props.checkMarketData.fetching) return  <Header>
-  //           <ArrowImage src={Arrow} />
-  //           <CreateHeader>View Market</CreateHeader>
-  //       </Header>
-  // let market = props.checkMarketData.marketData;
-  let market = props.marketData /* {
-   
-        "name": "Joplin Fresh Farmers Market",
-        "description": "Joplins fresh market with local farmers",
-        "address": "Joplin St.",
-        "city": "Joplin",
-        "state": "MO",
-        "zipcode": "63152",
-        "type": 1,
-        "website": "www.joplinfarmersmarket.com",
-        "facebook": "www.facebook.com",
-        "twitter": "www.twitter.com",
-        "instagram": "www.instagram.com",
-        "operation": [{ day: "monday", start: "05:00", end: "13:00"}, { day: "tuesday", start: "05:00", end: "13:00"}, { day: "wednesday", start: "05:00", end: "13:00"}, { day: "friday", start: null, end: null }],
-        "booths": []
-  } */
-    return (
+class ViewMyMarket extends React.Component{
+  constructor(props){
+  super(props);
+
+}
+
+
+
+  render() {
+  let market = this.props.marketData
+  return (
       <div>
-        <Header>
-            <ArrowImage src={Arrow} />
-            <CreateHeader>View Market</CreateHeader>
-        </Header>
+          <Header>
+                <Link to="/">
+                  <img src={Arrow} style={{marginLeft: "25px",
+                  marginTop: "18px"}}/>
+                </Link>
+                 <CreateHeader>View Market</CreateHeader>
+                </Header>
         
       
         <Container>
@@ -62,7 +52,7 @@ const ViewMyMarket = (props) => {
             <Ltag>{market.address}</Ltag>
             <Tag>Hours</Tag>
             { market.operation.map(opHours => {
-              return (opHours.start !== null) ? <Ltag>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)} {militaryConvert(opHours.start)} - {(militaryConvert(opHours.end))}</Ltag> : null 
+              return (opHours.start !== null) ? <Ltag key={market.id}>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)} {militaryConvert(opHours.start)} - {(militaryConvert(opHours.end))}</Ltag> : null 
             }) }
             <Tag>Market Status</Tag>
             {(market.type === 1)? <Ltag>Public Market</Ltag> :<Ltag>Private Market</Ltag>  }
@@ -82,7 +72,7 @@ const ViewMyMarket = (props) => {
         </div>
     )
     }
-
+  }
 
 const Header = styled.div`
   display: flex;
@@ -174,7 +164,7 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { }
-  )(ViewMyMarket);
+  )(withRouter(ViewMyMarket));
   
 //   {
 //     "id": 77,
