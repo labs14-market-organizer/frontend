@@ -2,6 +2,7 @@ import axios from "axios";
 import { axiosWithAuth } from "./../utls/axiosWithAuth";
 import {HOST_URL} from "./../utls/hostUrl";
 import {getUserData} from "./userData";
+import { Mixpanel } from './mixpanel';
 
 export const GET_VENDOR_DATA_START = "GET_VENDOR_DATA_START";
 export const GET_VENDOR_DATA_END = "GET_VENDOR_DATA_END";
@@ -10,7 +11,7 @@ export const SET_VENDOR_DATA_END = "SET_VENDOR_DATA_END";
 export const ERROR_GET_VENDOR_DATA = "ERROR_GET_VENDOR_DATA";
 export const ERROR_SET_VENDOR_DATA = "ERROR_SET_VENDOR_DATA";
 export const ERROR_INVALID_TOKEN = "ERROR_INVALID_TOKEN";
-
+export const SEND_MIXPANEL_VENDOR_CREATE = "SEND_MIXPANEL_VENDOR_CREATE";
 /*
 object schema
 vendor = 
@@ -58,9 +59,10 @@ export const createNewVendor = (vendor) => dispatch =>
     .post(`${HOST_URL}/vendors`, vendor)
     .then(res => {
         //getUserData(token)(dispatch); //fire another endpoint here so we can be quicker about gathering data
+        Mixpanel.track("Vendor Profile Created");
         dispatch({type: "GET_USER_DATA_END", payload: {userData: null, userType: "Vendor"}});
         dispatch({type: SET_VENDOR_DATA_END, payload: {vendorData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
-        
+
     })
     .catch(err =>{
         console.log(err);

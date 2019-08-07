@@ -13,7 +13,7 @@ const VendorProfile = (props) => {
                 <Header>
                 <Link to="/">
                   <img src={Arrow} style={{marginLeft: "25px",
-                  marginTop: "20px"}}/>
+                  marginTop: "18px"}}/>
                 </Link>
                 <CreateHeader>View Profile</CreateHeader>
                 </Header>
