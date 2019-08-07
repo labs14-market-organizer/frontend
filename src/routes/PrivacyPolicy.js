@@ -10,7 +10,7 @@ import teamcloud from "../assets/teamcloud.svg"
 class PrivacyPolicy extends Component {
   constructor(props) {
     super(props);
-    // this.state = { page: "PRIVACY" };
+    this.state = { page: "PRIVACY" };
   }
 
   render() {
@@ -181,12 +181,13 @@ justify-content: center;
 background-position: center;
  
 @media (max-width: 390px) {
-      width: 300px;
-    }
+  max-width: 100vw;
+}
 
 .MuiTypography-h2 {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
+  padding: 0px 34px;
 }
 `
