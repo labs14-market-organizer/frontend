@@ -26,13 +26,12 @@ class SearchMarkets extends React.Component {
     
       startSearch = e => {
           e.preventDefault();
-          Mixpanel.track(`User searched for markets in ${this.state.search}`);
-          this.props.searchMarkets(this.state.search);
+          Mixpanel.track(`User searched for markets in ${e.target.value}`);
+          this.props.searchMarkets(e.target.value);
       }
 
 
     render() {
-        console.log(this.props);
         return ( 
             <div>
             <Navbar />
