@@ -33,6 +33,7 @@ import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
 import MeetTheTeam from "./routes/MeetTheTeam";
 import PrivacyPolicy from "./routes/PrivacyPolicy";
+import TermsAndConditions from "./routes/TermsAndConditions";
 
 import VendorReduxForms from "./routes/Vendor-Redux-forms";
 import VendorPage from "./routes/VendorProfile";
@@ -117,6 +118,9 @@ class App extends React.Component {
               />
               <Route path="/privacy"
               render={props => <PrivacyPolicy />} 
+              />
+              <Route path="/terms"
+              render={props => <TermsAndConditions />} 
               />
               </div>
                 <Route 

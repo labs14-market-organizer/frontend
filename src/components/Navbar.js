@@ -60,7 +60,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
             <li><Button variant="outlined" className="jimmy" ></Button></li>
           </ul>
         </StyledPaper> 
@@ -84,7 +84,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -107,7 +107,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -130,7 +130,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>  
       );
@@ -153,7 +153,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -176,7 +176,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -199,7 +199,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -222,7 +222,7 @@ class Navbar extends React.Component {
             <li><Button className="currentPage">Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -245,7 +245,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button className="currentPage">Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -268,7 +268,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button className="currentPage">Privacy Policy</Button></Link></li>
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
@@ -291,7 +291,7 @@ class Navbar extends React.Component {
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Button className="currentPage">Terms of Service</Button></li> 
+            <li><Link to="terms"><Button className="currentPage">Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>
       );
