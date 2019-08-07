@@ -21,8 +21,7 @@ class PrivacyPolicy extends Component {
           <CloudContainer>
             <Typography variant="h2">Privacy Policy</Typography>
           </CloudContainer>
-          <div>
-
+          <div className="wrapper">
             <Typography className="bold1" variant="body1">
               Welcome to our Privacy Policy
             </Typography>
@@ -141,12 +140,17 @@ const StyledDiv = styled.div`
   text-align: left;
   max-width: 623px;
 
+  .wrapper {
+    width: 100%;
+  }
+
   .paragraph {
     font-family: "Roboto";
     // margin-top: 6px;
     margin-bottom: 20px;
     padding: 0px 34px;
     color: #484848;
+    border: 1px solid red;
   }
 
   .bold1 {
@@ -156,6 +160,7 @@ const StyledDiv = styled.div`
     margin-bottom: 20px;
     padding: 0px 34px;
     color: #484848;
+    border: 1px solid red;
   }
 
   .bold2 {
@@ -164,6 +169,7 @@ const StyledDiv = styled.div`
     margin-top: 6px;
     padding: 0px 34px;
     color: #484848;
+    border: 1px solid red;
   }
 `;
 
