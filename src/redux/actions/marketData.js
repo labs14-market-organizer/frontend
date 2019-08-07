@@ -2,7 +2,6 @@ import axios from "axios";
 import { axiosWithAuth } from "./../utls/axiosWithAuth";
 import {HOST_URL} from "./../utls/hostUrl";
 import {getUserData} from "./userData";
-import { Mixpanel } from './mixpanel';
 
 export const GET_MARKET_DATA_START = "GET_MARKET_DATA_START";
 export const GET_MARKET_DATA_END = "GET_MARKET_DATA_END";
@@ -59,7 +58,6 @@ export const createNewMarket = (market) => dispatch =>
     return axiosWithAuth(token)
     .post(`${HOST_URL}/markets`, market)
     .then(res => {
-        Mixpanel.track("New Market Created");
         dispatch({type: "GET_USER_DATA_END", payload: {userData: null}});
         dispatch({type: SET_MARKET_DATA_END, payload: {marketData: res.data}}); //fire this first so we dont get GET_START fire before GET_END
         //fire another endpoint here so we can be quicker about gathering data

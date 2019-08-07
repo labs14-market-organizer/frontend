@@ -13,12 +13,12 @@ const UserOnboarding = () => {
             <Explain>
                 Cloud stands wants to provide you with the best possible experience. <br></br> Which best describes you roles?
             </Explain>
-            <Link to="/createmarket" style={{textDecoration: "none"}} onClick={() => Mixpanel.track('Customer chose create market')}>
+            <Link to="/createmarket" style={{textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked create market')}>
                     <StyleBox boxShadow={10} >
                         <Selected > Market Owner </Selected>
                     </StyleBox>
             </Link>
-            <Link to="/createvendor" style={{textDecoration: "none"}} onClick={() => Mixpanel.track('Customer chose create vendor')}>
+            <Link to="/createvendor" style={{textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked create vendor')}>
                 <StyleBox boxShadow={10} >
                 <Selected >Vendor</Selected>
             </StyleBox>

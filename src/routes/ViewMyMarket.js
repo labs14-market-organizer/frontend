@@ -4,6 +4,8 @@ import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Mixpanel } from '../redux/actions/mixpanel';
+
 
 const militaryConvert = (time) => {
   let hours = time.split('');
@@ -61,10 +63,10 @@ class ViewMyMarket extends React.Component{
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
             <Flex>
-              <Link to="/addbooths">
+              <Link to="/addbooths"  onClick={() => Mixpanel.track('User clicked to edit booths')}>
                 <WhiteButton variant="outlined">Edit Booths</WhiteButton>
               </Link>
-              <Link to="/createmarket" style={{ textDecoration: "none"}} >
+              <Link to="/createmarket" style={{ textDecoration: "none"}}  onClick={() => Mixpanel.track('User clicked to edit market')}>
                 <GreenButton variant="outlined">Edit Market</GreenButton>
               </Link>
             </Flex> 
