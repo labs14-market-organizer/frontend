@@ -556,8 +556,8 @@ class CreateMarket extends React.Component
         <br />
         </StyleLeft>  
         <div>
-          <SaveFix type="submit" disabled={pristine || submitting}>
-            Next
+          <SaveFix type="submit" disabled={pristine || submitting || this.props.checkMarketData.fetching }>
+            {this.props.checkMarketData.fetching ? "Loading..." : "Next"}
           </SaveFix>
         </div>
       </form>
@@ -611,6 +611,12 @@ const SaveFix = styled.button`
   color: #fff;
   background-color: #478529;
   border: none;
+  :disabled
+  {
+    background-color: #fff;
+    color: #999;
+    border: 2px #478529 solid;
+  }
 `;
 
 const StyledContainer = styled(Container)`
@@ -664,7 +670,7 @@ const mapStateToProps = state => {
 const ReduxForms = reduxForm({
   form: "MaterialUiForm", // a unique identifier for this form
   validate
-})(CreateMarket);
+})(connect(mapStateToProps, {})(CreateMarket));
 
 
 class CreateMarketContainer extends React.Component
@@ -672,8 +678,8 @@ class CreateMarketContainer extends React.Component
   hasUpdated = false;
   componentWillMount()
   {
-    this.hasUpdated = false;
     this.isUpdating = !!this.props.checkMarketData.marketData
+    this.hasUpdated = false;
   }
   handleRedux = (values) =>
   {
@@ -683,8 +689,7 @@ class CreateMarketContainer extends React.Component
     else this.props.createNewMarket({ ...values});
   }
   render(){
-    if(this.props.checkMarketData.updated && this.hasUpdated) return <Redirect to={`${this.isUpdating ? "/" : "/addbooths"}`}/>
-    this.hasUpdated = false;
+    if(!this.props.checkMarketData.fetching && this.hasUpdated) return <Redirect to={`${this.isUpdating ? "/" : "/addbooths"}`}/>
     return (<ReduxForms onSubmit={this.handleRedux} market={this.props.checkMarketData.marketData}/>);
   }
 }

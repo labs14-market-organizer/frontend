@@ -33,7 +33,7 @@ export const checkMarketsByArea = (state = initialState, action) =>
                 ...state,
                 marketsBySearch: [],
                 searching: false,
-                searchError: action.payload.err
+                searchError: action.payload.error
             }
         default:
             return state;

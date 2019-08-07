@@ -325,7 +325,9 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                     <GreenButton type="submit" variant="outlined" disabled={pristine || submitting} >Save</GreenButton>
+                     <GreenButton type="submit" variant="outlined" disabled={pristine || submitting || this.props.checkVendorData.fetching} >
+                     {this.props.checkVendorData.fetching ? "Loading..." : "Save"}
+                     </GreenButton>
                      </form>
                 </Container>
             </div>
@@ -359,6 +361,12 @@ const GreenButton = styled(Button)`
   border-radius: 10px;
   @media(min-width: 600px){
     width: 400px;
+  }
+  :disabled
+  {
+    background-color: #fff;
+    color: #999;
+    border: 2px #478529 solid;
   }
 `;
 
@@ -408,23 +416,26 @@ const mapStateToProps = state => {
 const ReduxForms = reduxForm({
     form: "VendorForm", // a unique identifier for this form
     validate
-  })(connect(mapStateToProps)(CreateVendor));
+  })(connect(mapStateToProps,{})(CreateVendor));
 
   
   class ReduxContainer extends React.Component
   {
+    componentWillMount()
+    {
+      this.isUpdating = !!this.props.checkMarketData.marketData
+      this.hasUpdated = false;
+    }
     handleRedux = (values) =>
     {
-      this.wasfetching = true;
-      window.setTimeout( ()=> {this.redirecttype = 2}, 100);
-      if (values.id > 0) this.props.updateVendor(values, values.id)
+      this.hasUpdated = true;
+      if (values.id && values.id > 0) this.props.updateVendor(values, values.id)
       else this.props.createNewVendor({ ...values});
     }
     wasfetching =false;
-    redirecttype= 0;
 
     render(){
-      if(this.redirecttype === 2)  return <Redirect to="/"/>
+      if(!this.props.checkVendorData.fetching && this.hasUpdated)  return <Redirect to="/"/>
       return <ReduxForms onSubmit={this.handleRedux} currentVendor={this.props.checkVendorData.vendorData} />
      /*  let redirect = this.props.checkBoothData.updated && this.wasfetching;
       if(this.wasfetching && !this.props.checkBoothData.fetching) this.wasfetching = false;
