@@ -32,6 +32,7 @@ import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
 import MeetTheTeam from "./routes/MeetTheTeam";
+import PrivacyPolicy from "./routes/PrivacyPolicy";
 
 import VendorReduxForms from "./routes/Vendor-Redux-forms";
 import VendorPage from "./routes/VendorProfile";
@@ -113,6 +114,9 @@ class App extends React.Component {
               />
               <Route path="/team"
               render={props => <MeetTheTeam />} 
+              />
+              <Route path="/privacy"
+              render={props => <PrivacyPolicy />} 
               />
               </div>
                 <Route 

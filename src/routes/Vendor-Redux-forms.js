@@ -14,7 +14,7 @@ import styled from "styled-components";
 import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 
 import { Field, reduxForm, FieldArray,  } from "redux-form";
-import {Redirect} from "react-router-dom";
+import {Redirect, withRouter, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
 
 function validate (values) {
@@ -162,7 +162,10 @@ function validate (values) {
         return (
             <div>
                 <Header>
-                    <ArrowImage src={Arrow} />
+                  <Link to="/">
+                    <img src={Arrow} style={{marginLeft: "25px",
+                    marginTop: "20px"}}/>
+                  </Link>
                     <CreateHeader>{(this.isUpdating) ? "Edit Vendor" : "Create Vendor" }</CreateHeader>
                 </Header>
                 <Container maxWidth="sm">
@@ -208,7 +211,7 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     >
-                    <img src={Add} />  
+                    <img src={Add} style={{marginTop: "10px"}}/>  
                     </Field>
                     <TextField
                           margin="normal"
@@ -220,6 +223,7 @@ function validate (values) {
                           margin="normal"
                           variant="outlined"
                           fullWidth={true}
+                          style={{marginTop: "-5px"}}
                      />
                      </FlexContainer>
                     {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
@@ -376,6 +380,7 @@ const StyledP1 = styled.p`
 font-family: Raleway;
 font-size: 16px;
 line-height: 1.2;
+margin-top: 2px;
 `;
 
 
