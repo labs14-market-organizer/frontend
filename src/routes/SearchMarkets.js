@@ -26,6 +26,7 @@ class SearchMarkets extends React.Component {
     
       startSearch = e => {
           e.preventDefault();
+          if (this.state.search === '') return null;
           Mixpanel.track(`User searched for markets in ${this.state.search}`);
           this.props.searchMarkets(this.state.search);
       }
