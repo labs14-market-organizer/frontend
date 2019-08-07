@@ -52,7 +52,7 @@ class SearchMarkets extends React.Component {
                     />
                 </form>
                 <StyledError>{this.props.searchError ? this.props.searchError : "" }</StyledError>
-                {(this.props.marketsBySearch !== undefined) ? this.props.marketsBySearch.map(location => {
+                {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map(location => {
                     return (
                         <StyleBox boxShadow={10} key={location.id}>
                         <p style={{fontWeight: "600"}}>{location.name}</p>
