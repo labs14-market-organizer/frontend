@@ -10,7 +10,7 @@ import teamcloud from "../assets/teamcloud.svg"
 class TermsAndConditions extends Component {
   constructor(props) {
     super(props);
-    // this.state = { page: "TERMS" };
+    this.state = { page: "TERMS" };
   }
 
   render() {
@@ -214,4 +214,4 @@ background-position: center;
   font-weight: bold;
   text-align: center;
 }
-`
+`;

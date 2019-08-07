@@ -10,7 +10,7 @@ import teamcloud from "../assets/teamcloud.svg"
 class PrivacyPolicy extends Component {
   constructor(props) {
     super(props);
-    // this.state = { page: "PRIVACY" };
+    this.state = { page: "PRIVACY" };
   }
 
   render() {
