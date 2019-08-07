@@ -3,7 +3,7 @@ import { Box, Shadows, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-
+import { Mixpanel } from '../redux/actions/mixpanel';
 
 const UserOnboarding = () => {
 
@@ -13,12 +13,12 @@ const UserOnboarding = () => {
             <Explain>
                 Cloud stands wants to provide you with the best possible experience. <br></br> Which best describes you roles?
             </Explain>
-            <Link to="/createmarket" style={{textDecoration: "none"}} >
+            <Link to="/createmarket" style={{textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked create market')}>
                     <StyleBox boxShadow={10} >
                         <Selected > Market Owner </Selected>
                     </StyleBox>
             </Link>
-            <Link to="/createvendor" style={{textDecoration: "none"}} >
+            <Link to="/createvendor" style={{textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked create vendor')}>
                 <StyleBox boxShadow={10} >
                 <Selected >Vendor</Selected>
             </StyleBox>

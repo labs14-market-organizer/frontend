@@ -11,7 +11,7 @@ import Place from '../assets/place.svg';
 import { searchMarkets } from '../redux/actions/searchMarkets';
 import { connect } from "react-redux";
 import Navbar from "../components/Navbar";
-
+import { Mixpanel } from '../redux/actions/mixpanel';
 
 class SearchMarkets extends React.Component {
     state = {
@@ -26,12 +26,13 @@ class SearchMarkets extends React.Component {
     
       startSearch = e => {
           e.preventDefault();
-          this.props.searchMarkets(this.state.search)
+          if (this.state.search === '') return null;
+          Mixpanel.track(`User searched for markets in ${this.state.search}`);
+          this.props.searchMarkets(this.state.search);
       }
 
 
     render() {
-        console.log(this.props);
         return ( 
             <div>
             <Navbar />
@@ -42,7 +43,7 @@ class SearchMarkets extends React.Component {
                         id="search"
                         label="Search Markets"
                         name="search"
-                        placeholder="&#xf002; City, State or ZIP Code"
+                        placeholder="City, State or ZIP Code"
                         value={this.state.search}
                         onChange={this.handleChange}
                         margin="normal"
@@ -52,7 +53,7 @@ class SearchMarkets extends React.Component {
                     />
                 </form>
                 <StyledError>{this.props.searchError ? this.props.searchError : "" }</StyledError>
-                {(this.props.marketsBySearch !== undefined) ? this.props.marketsBySearch.map(location => {
+                {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map(location => {
                     return (
                         <StyleBox boxShadow={10} key={location.id}>
                         <p style={{fontWeight: "600"}}>{location.name}</p>

@@ -82,24 +82,44 @@ Our mission is to streamline the on-boarding process of joining a market.
 
 #### React w/Redux
 
-🚫 Why did you choose this framework?
 
 -    Familiarity
--    point two
--    point three
--    point four
+-    Popularity
+-    Works with our styling framework
+-    Single source of state with redux store
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
+<!-- 🚫List the rest of the front end features and libraries in the same format as the framework above. -->
 
-#### Front end deployed to `🚫insert service here`
+#### Redux Forms
 
-#### [Back end](🚫link to back end repo here) built using:
 
-#### 🚫 back end framework goes here
+-    Error state handling/Validation
+-    Works with redux well
+-    Keeps track of form data
 
--    point one
--    point two
--    point three
+#### Material UI
+
+
+-    Theming
+-    Prebuilt components that are externally consistent with apps that they are familiar with
+-    fancy buttons/radios
+
+#### Styled Components
+
+
+-    Conponent based styling
+-    Familiar with it
+-    Plays nice with material with some tweaks
+
+#### Front end deployed to `Netlify`
+
+#### [Back end](https://github.com/labs14-market-organizer/backend) built using:
+
+#### Postgres
+
+-    Don't have to convert from sqlite3 for production
+-    Ability to work with Passport and Postgis
+-    familiarity 
 
 🚫 List the rest of the back end end features and libraries in the same format as the framework above
 
@@ -107,21 +127,17 @@ Our mission is to streamline the on-boarding process of joining a market.
 
 ## 2️⃣ Authentication API here
 
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Passport oAuth supporting Google & Facebook 
 
 ## 2️⃣ Payment API here
 
-🚫Replace text below with a description of the API
+Square
 
-This is the way you take out your frustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
+
 
 ## 3️⃣ Misc API here
 
-🚫Replace text below with a description of the API
 
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
 
 ## 3️⃣ Misc API here
 
@@ -169,6 +185,7 @@ In order for the app to function correctly, the user must set up their own envir
 
 🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
 
+from root run `yarn` and run `yarn start`to get this up and running on your system. Alternatively we are live at http://cloudstands.com
 ## Other Scripts
 
 🚫replace these examples with your own
@@ -216,4 +233,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/labs14-market-organizer/backend) for details on the backend of our project.
