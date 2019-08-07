@@ -37,7 +37,7 @@ const VendorProfile = (props) => {
                 <p>Other Needs: </p> {(vendor.electricity)? <p>Yes </p>: <p>No</p>}
                 </Flex>
                 <Flex>
-                <Link to="/createvendor" onClick={() => Mixpanel.track('User clicked to edit vendor')}>
+                <Link to="/createvendor" style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to edit vendor')}>
                     <WhiteButton variant="outlined">Edit Profile</WhiteButton>
                 </Link>
                 <Link to="/searchmarkets" style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to search markets')}>
