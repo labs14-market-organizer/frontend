@@ -1,0 +1,39 @@
+.header {
+    display: flex;
+    background-color:#478529;
+    color: white;
+    height: 60px;
+    .createHeader {
+        margin-left: 15px;
+        margin-top: 20px;
+    }
+    img {
+        margin-left: 2%;
+    }
+}
+.flexes {
+    display: flex;
+}
+
+.addPhoto {
+    height: 120px;
+    background-color: lightgray;
+    font-size: 18px;
+}
+
+.regularButton {
+    font-size: 5vw;
+    height: 12.5vw;
+    width: 12.5vw;
+    margin-left: 1vw;
+    border-radius: 10px;
+}
+
+.colorButton {
+    font-size: 5vw;
+    height: 12.5vw;
+    width: 12.5vw;
+    background-color: green;
+    margin-left: 1vw;
+    border-radius: 10px;
+}

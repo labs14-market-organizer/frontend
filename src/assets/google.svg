@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="44" viewBox="0 0 200 44">
+    <defs>
+        <rect id="b" width="196" height="40" rx="10"/>
+        <filter id="a" width="103.6%" height="117.5%" x="-1.8%" y="-6.2%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.24 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <text fill="#080808" font-family="Roboto-Regular, Roboto" font-size="14" transform="translate(2 1)">
+            <tspan x="37" y="25">Sign up with Google</tspan>
+        </text>
+        <g transform="translate(2 1)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#FFF" xlink:href="#b"/>
+        </g>
+        <g fill-rule="nonzero">
+            <path fill="#4285F4" d="M31.533 21.187c0-.82-.067-1.417-.21-2.037h-9.357v3.698h5.492c-.11.92-.709 2.303-2.038 3.233l-.018.124 2.958 2.292.205.02c1.882-1.738 2.968-4.296 2.968-7.33"/>
+            <path fill="#34A853" d="M21.966 30.931c2.69 0 4.95-.886 6.6-2.414l-3.146-2.436c-.841.587-1.97.997-3.454.997-2.636 0-4.872-1.739-5.67-4.141l-.117.01-3.076 2.38-.04.112a9.958 9.958 0 0 0 8.903 5.492"/>
+            <path fill="#FBBC05" d="M16.296 22.937a6.135 6.135 0 0 1-.332-1.971c0-.687.122-1.351.321-1.971l-.005-.132-3.115-2.42-.102.05A9.975 9.975 0 0 0 12 20.965c0 1.605.388 3.122 1.063 4.473l3.233-2.502"/>
+            <path fill="#EB4335" d="M21.966 14.853c1.87 0 3.133.809 3.853 1.484l2.813-2.746C26.904 11.985 24.656 11 21.966 11a9.958 9.958 0 0 0-8.903 5.492l3.222 2.503c.809-2.403 3.045-4.142 5.68-4.142"/>
+        </g>
+        <text fill="#757575" font-family="Roboto-Medium, Roboto" font-size="14" font-weight="400" letter-spacing=".4" transform="translate(2 1)">
+            <tspan x="50" y="26">Sign in with Google</tspan>
+        </text>
+    </g>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="106" viewBox="0 0 360 106">
+    <defs>
+        <path id="a" d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#F4F4F4" d="M127.199-92.926C143.196-103.106 162.163-109 182.5-109c31.88 0 60.395 14.484 79.38 37.26C274.165-77.674 287.945-81 302.5-81c51.639 0 93.5 41.861 93.5 93.5S354.139 106 302.5 106c-24.199 0-46.25-9.193-62.853-24.277C223.271 92.641 203.625 99 182.5 99c-34.825 0-65.633-17.283-84.393-43.779C86.081 60.853 72.657 64 58.5 64 6.861 64-35 22.139-35-29.5S6.861-123 58.5-123c27.16 0 51.616 11.581 68.699 30.074z"/>
+        <g font-size="38">
+            <text fill="#000" font-family="RalewayDots-Regular, Raleway Dots" transform="translate(16 8)">
+                <tspan x="111" y="44">STANDS</tspan>
+            </text>
+            <text fill="#7F817E" font-family="LuckiestGuy-Regular, Luckiest Guy" transform="translate(16 8)">
+                <tspan x="0" y="41">CLOUD</tspan>
+            </text>
+        </g>
+        <g transform="translate(320 16)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <g fill="#000" mask="url(#b)">
+                <path d="M0 0h24v24H0z"/>
+            </g>
+        </g>
+    </g>
+</svg>
