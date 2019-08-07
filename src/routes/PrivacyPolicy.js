@@ -150,7 +150,6 @@ const StyledDiv = styled.div`
     margin-bottom: 20px;
     padding: 0px 34px;
     color: #484848;
-    border: 1px solid red;
   }
 
   .bold1 {
@@ -160,7 +159,6 @@ const StyledDiv = styled.div`
     margin-bottom: 20px;
     padding: 0px 34px;
     color: #484848;
-    border: 1px solid red;
   }
 
   .bold2 {
@@ -169,7 +167,6 @@ const StyledDiv = styled.div`
     margin-top: 6px;
     padding: 0px 34px;
     color: #484848;
-    border: 1px solid red;
   }
 `;
 
