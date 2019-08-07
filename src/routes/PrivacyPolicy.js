@@ -120,7 +120,7 @@ class PrivacyPolicy extends Component {
             Credit & Contact Information
             </Typography>
             <Typography className="paragraph" variant="body1">
-            This privacy policy was created at https://termsandconditionstemplate.com/privacy-policy-generator/. If you have any questions about this Privacy Policy, please contact us via or phone.
+            This privacy policy was created at https://termsandconditionstemplate.com/privacy-policy-generator/. If you have any questions about this Privacy Policy, please contact us via email or phone.
             </Typography>
           </div>
         </StyledDiv>
