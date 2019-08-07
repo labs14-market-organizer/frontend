@@ -53,29 +53,19 @@ class TermsAndConditions extends Component {
             Unless otherwise stated, Cloud Stands and/or it's licensors own the intellectual property rights for all material on Cloud Stands. All intellectual property rights are reserved. You may view and/or print pages from https://www.cloudstands.com/ for your own personal use subject to restrictions set in these terms and conditions.
             </Typography>
             <Typography className="paragraph" variant="body1">
-            You must not:<br />
-            Republish material from https://www.cloudstands.com/<br />
-            Sell, rent or sub-license material from https://<br />www.cloudstands.com/<br />
-            Reproduce, duplicate or copy material from https://www.cloudstands.com/<br />
-            Redistribute content from Cloud Stands (unless content is specifically made for redistribution).
+            You must not: Republish material from https://www.cloudstands.com/; Sell, rent or sub-license material from https://www.cloudstands.com/; Reproduce, duplicate or copy material from https://www.cloudstands.com/; Redistribute content from Cloud Stands (unless content is specifically made for redistribution).
             </Typography>
             <Typography className="bold2" variant="body1">
             Hyperlinking to our Content
             </Typography>
             <Typography className="paragraph" variant="body1">
-            The following organizations may link to our Web site without prior written approval:<br />
-            Government agencies;<br />
-            Search engines;<br />
-            News organizations;<br />
-            Online directory distributors when they list us in the directory may link to our Web site in the same manner as they hyperlink to the Web sites of other listed businesses; and<br />
-            Systemwide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.
+            The following organizations may link to our Web site without prior written approval: Government agencies; Search engines; News organizations; Online directory distributors when they list us in the directory may link to our Web site in the same manner as they hyperlink to the Web sites of other listed businesses; and Systemwide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.
             </Typography>
             <Typography className="paragraph" variant="body1">
             These organizations may link to our home page, to publications or to other Web site information so long as the link: (a) is not in any way misleading; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party's site.
             </Typography>
             <Typography className="paragraph" variant="body1">
-            We may consider and approve in our sole discretion other link requests from the following types of organizations:
-            commonly-known consumer and/or business information sources such as Chambers of Commerce, American Automobile Association, AARP and Consumers Union; dot.com community sites; associations or other groups representing charities, including charity giving sites, online directory distributors; internet portals; accounting, law and consulting firms whose primary clients are businesses; and educational institutions and trade associations.
+            We may consider and approve in our sole discretion other link requests from the following types of organizations: commonly-known consumer and/or business information sources such as Chambers of Commerce, American Automobile Association, AARP and Consumers Union; dot.com community sites; associations or other groups representing charities, including charity giving sites, online directory distributors; internet portals; accounting, law and consulting firms whose primary clients are businesses; and educational institutions and trade associations.
             </Typography>
             <Typography className="paragraph" variant="body1">
             We will approve link requests from these organizations if we determine that: (a) the link would not reflect unfavorably on us or our accredited businesses (for example, trade associations or other organizations representing inherently suspect types of business, such as work-at-home opportunities, shall not be allowed to link); (b)the organization does not have an unsatisfactory record with us; (c) the benefit to us from the visibility associated with the hyperlink outweighs the absence of ; and (d) where the link is in the context of general resource information or is otherwise consistent with editorial content in a newsletter or similar product furthering the mission of the organization.
@@ -90,12 +80,9 @@ class TermsAndConditions extends Component {
             Please include your name, your organization name, contact information (such as a phone number and/or e-mail address) as well as the URL of your site, a list of any URLs from which you intend to link to our Web site, and a list of the URL(s) on our site to which you would like to link. Allow 2-3 weeks for a response.
             </Typography>
             <Typography className="paragraph" variant="body1">
-            Approved organizations may hyperlink to our Web site as follows:
-
-            By use of our corporate name; or
-            By use of the uniform resource locator (Web address) being linked to; or
-            By use of any other description of our Web site or material being linked to that makes sense within the context and format of content on the linking party's site.
-              
+            Approved organizations may hyperlink to our Web site as follows: By use of our corporate name; or By use of the uniform resource locator (Web address) being linked to; or By use of any other description of our Web site or material being linked to that makes sense within the context and format of content on the linking party's site.
+            </Typography>
+            <Typography className="paragraph" variant="body1">
             No use of Cloud Stands's logo or other artwork will be allowed for linking absent a trademark license agreement.
             </Typography>
             <Typography className="bold2" variant="body1">
@@ -129,10 +116,7 @@ class TermsAndConditions extends Component {
             Disclaimer
             </Typography>
             <Typography className="paragraph" variant="body1">
-            To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website (including, without limitation, any warranties implied by law in respect of satisfactory quality, fitness for purpose and/or the use of reasonable care and skill). Nothing in this disclaimer will:
-            limit or exclude our or your liability for death or personal injury resulting from negligence;
-            limit or exclude our or your liability for fraud or fraudulent misrepresentation;
-            limit any of our or your liabilities in any way that is not permitted under applicable law; or exclude any of our or your liabilities that may not be excluded under applicable law.
+            To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website (including, without limitation, any warranties implied by law in respect of satisfactory quality, fitness for purpose and/or the use of reasonable care and skill). Nothing in this disclaimer will: limit or exclude our or your liability for death or personal injury resulting from negligence; limit or exclude our or your liability for fraud or fraudulent misrepresentation; limit any of our or your liabilities in any way that is not permitted under applicable law; or exclude any of our or your liabilities that may not be excluded under applicable law.
             </Typography>
             <Typography className="paragraph" variant="body1">
             The limitations and exclusions of liability set out in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer or in relation to the subject matter of this disclaimer, including liabilities arising in contract, in tort (including negligence) and for breach of statutory duty.
@@ -206,12 +190,13 @@ justify-content: center;
 background-position: center;
  
 @media (max-width: 390px) {
-      width: 300px;
-    }
+  max-width: 100vw;
+}
 
 .MuiTypography-h2 {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
+  padding: 0px 34px;
 }
 `;
