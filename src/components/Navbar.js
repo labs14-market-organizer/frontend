@@ -59,7 +59,7 @@ class Navbar extends React.Component {
             <li><Button>Careers</Button></li>
             <li><Button>Support</Button></li>
             <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Button>Terms of Service</Button></li> 
             <li><Button variant="outlined" className="jimmy" ></Button></li>
           </ul>
