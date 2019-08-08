@@ -398,6 +398,7 @@ const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
 pointer-events: none;
+
 img {
   margin-top: -25px;
   height: 140px;

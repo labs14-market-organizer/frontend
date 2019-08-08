@@ -25,8 +25,6 @@ class Navbar extends React.Component {
     this.state = {
       menuOpen: false,
       page: "HOME",
-
-
       }
   }
 
@@ -71,6 +69,7 @@ class Navbar extends React.Component {
         </StyledPaper> 
       );
 
+
       case "/vendorprofile": 
         return (
           <StyledPaper elevation={10}>
@@ -101,6 +100,7 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
+
           <li className="avatar-wrapper"><div></div>
           </li>
           <li className="username">{this.props.userName}</li>
@@ -382,7 +382,7 @@ const StyledBox = styled(Box)`
 `;
 
 const BorderSpacer = styled.div`
-margin-top: -16px;
+margin-top: 16px;
 margin-bottom: 16px;
 margin-left: 16px;
 margin-right: 26px;
