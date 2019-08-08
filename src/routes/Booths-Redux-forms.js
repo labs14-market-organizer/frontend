@@ -475,7 +475,7 @@ const StyledBody = styled.body`
     flexDirection: column;
     alignItems: center;
     @media(min-width:600px){
-      margin: 10px auto;
+      margin: 10px 0;
     }
     `
 
