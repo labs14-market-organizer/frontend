@@ -318,10 +318,10 @@ class Navbar extends React.Component {
         return <NavVendor name={userName} vendorName={objName}/>
     return(
       <StyledDiv>
-        <StyledImg src={cloud}  width="100%" height="87px" />
+        <StyledImg src={cloud} width="100%" height="87px" />
           <StyledBox>
-            <MenuIcon onClick={this.toggle} className="menuIcon" fontSize="large"/>
-            {this.Menu()}
+            <MenuIcon style={{pointerEvents: "auto"}} onClick={this.toggle} className="menuIcon" fontSize="large"/>
+            <div style={{pointerEvents: "auto"}}>{this.Menu()}</div>
             <CloudText>CLOUD</CloudText>
             <StandsText>STANDS</StandsText>
             </StyledBox>
@@ -392,13 +392,13 @@ background-color: #484848;
 `
 
 const StyledImg = styled.img`
-z-index: -10
+z-index: -100;
 `
 
 const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
-
+pointer-events: none;
 img {
   margin-top: -25px;
   height: 140px;
