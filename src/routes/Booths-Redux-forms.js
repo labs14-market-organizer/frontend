@@ -153,6 +153,7 @@ class CreateMarket extends React.Component
       <div>
         <header 
           className="header"
+          style={{width: "100%"}}
         >  <Link to="/">
               <img src={Arrow} style={{marginLeft: "25px",
                marginTop: "18px"}}/>
@@ -164,18 +165,8 @@ class CreateMarket extends React.Component
                 }}>{this.isUpdating ? "Update" : "Add"} Booths</h4>
         </header>
         {/* Styled this div for the time being...will change later */}
-        
-        <body 
-          style={{
-              width:'95%',
-              height: '100%',
-              margin: '10px auto',
-              maxWidth: '624px',
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center"
-          }}
-        >
+    
+        <StyledBody>
           {this.isUpdating && !this.currentBooth ? "" : this.form() }
          <div style={{display: "flex", flexDirection: "column"}}>
             {this.currentBooths.map(x=> {
@@ -216,8 +207,7 @@ class CreateMarket extends React.Component
               :
               ""
             }
-        </body>
-        
+        </StyledBody>
       </div>
     )
 
@@ -234,35 +224,39 @@ class CreateMarket extends React.Component
   {
     return <form onSubmit={handleSubmit}
               style={{
+                width: "100vw",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
-                marginLeft: "3%",
-                marginRight: "4%"
+                alignItems: "center"
               }}
           >
+   
           <StyledDiv>
           <Field
             component={renderTextField}
             required
             margin="normal"
             variant="outlined"
-            fullWidth={true}
             id="name"
             label="Market Name"
             name="Market Name"
             InputProps={{
               startAdornment: <InputAdornment position="start"></InputAdornment>}}
               style={{
-                margin: '2% 0',
-                marginBottom: "0px"
+                width: "88vw",
+                margin: '20px 1% 1% 1%',
+                marginLeft: '0',
+                marginBottom: "0px",
+                maxWidth: "560px"
               }}
             id="boothtype"
             label="Booth Type"
             name="boothtype"
           />
           <h5 style={{
-                  margin: '10px 0px'
+                  marginTop: '15px',
+                  marginBottom: '10px',
+                  marginLeft: '2%'
               }}>
               Ex. Standard Booths. Larger Booths. Corner Booths. etc.
           </h5>
@@ -313,14 +307,16 @@ class CreateMarket extends React.Component
                 display: 'flex',
                 margin: '5px',
                 width: "100vw",
-                textAlign: "left"
+                textAlign: "left",
+                marginLeft: "3%"
             }}>Size of Booths
           </h5>
           <div
             style={{
                 display: 'flex',
                 justifyContent: 'flex-start',
-                width: "100vw"
+                width: "100%",
+                marginLeft: "3%"
             }}>
             <Field
             component={renderTextField}
@@ -358,16 +354,15 @@ class CreateMarket extends React.Component
             component={renderTextField}
             margin="normal"
             variant="outlined"
-            fullWidth={true}
             id="boothdescription"
             name="boothdescription"
             label="Booth Description"
             multiline rows="4"
             margin="normal"
-            style={{ marginBottom: "0px"}}
+            style={{ marginBottom: "0px", marginLeft: "2%", marginRight: "2%", width: "90vw", maxWidth: "570px"}}
           />
           {(this.isUpdating ? 
-            <div style={{display: "flex", minWidth: "100%"}} >
+            <div style={{display: "flex", marginRight: "3%", width: "90vw"}} >
             <Button 
               variant="outlined"
               fullWidth
@@ -378,9 +373,10 @@ class CreateMarket extends React.Component
               className="redButton"
               style={{
                   color: 'red',
-                  fontSize:'1.4em',
+                  fontSize:'18px',
                   margin: '4% 0',
-                  height: '80px'
+                  height: '60px',
+                  marginLeft: "2%"
               }}
         >
             Delete
@@ -394,9 +390,10 @@ class CreateMarket extends React.Component
             fullWidth
             onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
             style={{
-                fontSize:'1.4em',
+                fontSize:'18px',
                 margin: '4% 0',
-                height: '80px'
+                height: '60px',
+                marginLeft: "2%"
             }}
           >
             Save
@@ -413,9 +410,10 @@ class CreateMarket extends React.Component
           onClick={() => {this.props.array.insert("redirecttype",0,1); this.erase = true; }}
           style={{
               
-              fontSize:'1.4em',
+              fontSize:'18px',
               margin: '4% 0',
-              height: '80px'
+              height: '60px',
+              marginLeft: "2%"
           }}
         >
             Add Group
@@ -429,9 +427,10 @@ class CreateMarket extends React.Component
           fullWidth
           onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
           style={{
-              fontSize:'1.4em',
+              fontSize:'18px',
               margin: '4% 0',
-              height: '80px'
+              height: '60px',
+              marginRight: "2%"
           }}
           >
             Save
@@ -440,6 +439,7 @@ class CreateMarket extends React.Component
         
         <hr/>
         </StyledDiv>
+       
         </form>
   }
 };
@@ -450,14 +450,34 @@ const mapStateToProps = state => {
   };
 };
 
+
+// const StyledContainer = styled(Container)`
+//   max-width: 50vw;
+//   .MuiInputBase-input ,.MuiOutlinedInput-input {
+//     width: 100%;
+// }
+
+
+// `;
+
 const StyledDiv = styled.div`
-  margin-left: 2%;
-  margin-right: 2%;
+  max-width: 92vw;
   @media(min-width: 600px){
     margin: 0 auto;
     max-width: 600px;
+    margin-left: auto;
   }
 `
+const StyledBody = styled.body`
+    width: 84vw;
+    height: 100%;
+    maxWidth: 624px;
+    flexDirection: column;
+    alignItems: center;
+    @media(min-width:600px){
+      margin: 10px auto;
+    }
+    `
 
 const StyleBox = styled(Box)`
  width: 90vw;
@@ -468,10 +488,12 @@ const StyleBox = styled(Box)`
  display: flex;
  flex-direction: row;
  justify-content: space-between;
- margin: 10px 0;
+ margin: 10px;
+ margin-left: 5%;
  @media(min-width: 450px)
  {
    width: 450px;
+   margin: 10px auto;
  }
  .main-box
  {
