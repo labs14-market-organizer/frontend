@@ -253,7 +253,7 @@ class Navbar extends React.Component {
         </StyledPaper>
       );
 
-      case "PRIVACY": 
+      case "/privacy": 
         return (
           <StyledPaper elevation={10}>
           <div>
@@ -276,7 +276,7 @@ class Navbar extends React.Component {
         </StyledPaper>
       );
 
-      case "TERMS": 
+      case "./terms": 
         return (
           <StyledPaper elevation={10}>
           <div>
