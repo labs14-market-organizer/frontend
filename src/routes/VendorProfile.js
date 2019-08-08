@@ -1,19 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { Mixpanel } from '../redux/actions/mixpanel';
 
-const VendorProfile = (props) => {
-        let vendor = props.vendorData;
+class VendorProfile extends React.Component {
+    constructor(props){
+      super(props);
+
+    }
+       
+        goBack = () => {
+          return this.props.history.goBack();
+        }
+ 
+        render() {
+
+        
+        let vendor = this.props.vendorData;
         return (
             <div>
                 <Header>
                 <Link to="/">
                   <img src={Arrow} style={{marginLeft: "25px",
-                  marginTop: "18px"}}/>
+               marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack}/>
                 </Link>
                 <CreateHeader>View Profile</CreateHeader>
                 </Header>
@@ -47,8 +59,9 @@ const VendorProfile = (props) => {
                 </Container>
             </div>
         )
-
+  }
 }
+
 const Header = styled.div`
   display: flex;
   background-color: #478529;
@@ -140,7 +153,7 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { }
-  )(VendorProfile);
+  )(withRouter(VendorProfile));
   
    // let vendor = {
     //     name: "Todds Fruits",

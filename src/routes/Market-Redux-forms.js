@@ -18,7 +18,7 @@ import { createNewMarket, updateMarket } from "../redux/actions/marketData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import {Redirect, Link} from "react-router-dom";
+import {Redirect, Link, withRouter } from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel'
 
 function validate (values) {
@@ -305,6 +305,10 @@ class CreateMarket extends React.Component
       return (subtractedHours.toString() + rest + "pm");
     }
   }
+  goBack = () => {
+    return this.props.history.goBack();
+  }
+
 
   render(){
     const {handleSubmit, pristine, reset, submitting } = this.props;
@@ -312,10 +316,8 @@ class CreateMarket extends React.Component
     return (
       <form onSubmit={handleSubmit}>
         <div className="header">
-            <Link to="/">
               <img src={Arrow} style={{marginLeft: "25px",
-               marginTop: "17px"}}/>
-            </Link>
+               marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack}/>
         
             <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
         </div>
@@ -670,7 +672,7 @@ const mapStateToProps = state => {
 const ReduxForms = reduxForm({
   form: "MaterialUiForm", // a unique identifier for this form
   validate
-})(connect(mapStateToProps, {})(CreateMarket));
+})(connect(mapStateToProps, {})(withRouter(CreateMarket)));
 
 
 class CreateMarketContainer extends React.Component

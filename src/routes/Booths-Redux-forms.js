@@ -21,7 +21,7 @@ import { createNewBooth, updateBooth, deleteBooth } from "../redux/actions/booth
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import {Redirect} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel'
 import { maxWidth } from "@material-ui/system";
 import { checkMarketData } from "../redux/reducers/marketData";
@@ -140,6 +140,9 @@ class CreateMarket extends React.Component
   { 
     this.currentBooths = this.props.market.booths.map(x=> this.cleanData(x));
   }
+  goBack = () => {
+    return this.props.history.goBack();
+  }
 
 
   render(){
@@ -154,10 +157,10 @@ class CreateMarket extends React.Component
         <header 
           className="header"
           style={{width: "100%"}}
-        >  <Link to="/">
+        >  
               <img src={Arrow} style={{marginLeft: "25px",
-               marginTop: "18px"}}/>
-            </Link>
+               marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack} />
+           
             <h4 
             className="addbooths"
             style={{
@@ -565,7 +568,7 @@ const StyleBox = styled(Box)`
 const ReduxForms = reduxForm({
   form: "BoothsForm", // a unique identifier for this form
   validate
-})(connect(mapStateToProps, { deleteBooth })(CreateMarket));
+})(connect(mapStateToProps, { deleteBooth })(withRouter(CreateMarket)));
 
 
 class ReduxContainer extends React.Component
