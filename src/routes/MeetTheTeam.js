@@ -167,6 +167,7 @@ const StyledDiv = styled.div`
     padding: 0px 34px;
     color: #484848;
   }
+  
 `;
 
 const CloudContainer = styled.div`
@@ -178,6 +179,11 @@ const CloudContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-position: center;
+  @media (max-width: 370px) {
+
+  background-size: 350px 138px;
+  }
+
 
   @media (max-width: 390px) {
     width: 300px;
