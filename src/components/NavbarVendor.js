@@ -71,7 +71,7 @@ class Navbar extends React.Component {
         </StyledPaper> 
       );
 
-      case "/signup": 
+      case "/vendorprofile": 
         return (
           <StyledPaper elevation={10}>
           <div>
@@ -85,7 +85,7 @@ class Navbar extends React.Component {
       <BorderSpacer />
       <ul>
             <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button className="currentPage">Vendor Profile</Button></Link></li>
             <li><Button>Market History</Button></li>
             <li><Button>Payment Methods</Button></li>
             <li><Button>Account Settings</Button></li>
