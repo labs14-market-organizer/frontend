@@ -311,20 +311,19 @@ class CreateMarket extends React.Component
     if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
       <form onSubmit={handleSubmit}>
-        <div className="header">
+        <Header>
             <Link to="/">
               <img src={Arrow} style={{marginLeft: "25px",
                marginTop: "17px"}}/>
             </Link>
-        
-            <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
-        </div>
+        <CreateHeader>{(this.isUpdating) ? "Edit Market" : "Create Market" }</CreateHeader>
+        </Header>
         {/* <div className="addPhoto">
             <img />
             <p className="add">ADD COVER PHOTO</p>
         </div> */}
         <Container maxWidth="sm">
-          <Field
+          <StyledField
             component={renderTextField}
             required
             id="name"
@@ -332,7 +331,7 @@ class CreateMarket extends React.Component
             name="Market Name"
           />
         <br />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="description"
@@ -340,14 +339,14 @@ class CreateMarket extends React.Component
             name="Market Description"
           />
           <br />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="address"
             label="Address"
             name="Address"
           />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="city"
@@ -360,7 +359,7 @@ class CreateMarket extends React.Component
             display: 'inline-flex',
             justifyContent: 'space-between'
           }}>
-          <Field
+          <StyledField
               component={renderTextField}
               required
               id="state"
@@ -370,7 +369,7 @@ class CreateMarket extends React.Component
                 width: "48%" 
               }}
             />
-            <Field
+            <StyledField
               component={renderTextField}
               required
               id="zipcode"
@@ -380,25 +379,25 @@ class CreateMarket extends React.Component
             />
         </StyledContainer>
         <Container maxWidth="sm">
-        <Field
+        <StyledField
             component={renderTextField}
             id="website"
             label="Website"
             name="Website"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="facebook"
             label="Facebook"
             name="Facebook"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="twitter"
             label="Twitter"
             name="Twitter"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="instagram"
             label="Instagram"
@@ -406,21 +405,22 @@ class CreateMarket extends React.Component
           />
         </Container>
         <StyleLeft>
-        <h5>Market Status</h5>
+        <h5 style={{fontFamily: "Raleway"}}>Market Status</h5>
         {/*Radio buttons, default to public market*/}
       <Field name="market_type" component={renderRadioGroup}>
-        <div style={{display: "flex"}}>
+        <div style={{display: "flex", marginTop: '-20px'}}>
           <Radio value="Public" label="Public" name="Public"/>
-          <div style={{marginTop: "8px"}}>Public Market</div>
+          <div style={{marginTop: "12px", fontFamily: "Raleway"}}>Public Market</div>
         </div>
         <br />
-        <div style={{display: "flex"}}>
+        <div style={{display: "flex", marginTop: "-30px"}}>
           <Radio id="Private" value="Private" label="Private" name="Private"/>
-          <div style={{marginTop: "8px", marginBottom: "10px"}}> Private Market</div>
+          <div style={{marginTop: "13px", marginBottom: "10px", fontFamily: "Raleway"}}> Private Market</div>
         </div>
       </Field>
-        <h4>Market Days {'&'} Times Of Operation</h4>
-        <StyledDiv>
+      <hr></hr>
+        <h4 style={{fontFamily: "Raleway"}}>Market Days {'&'} Times Of Operation</h4>
+        <StyledDiv2>
   
             <StyledDays
               variant={this.state.sunday ? "contained" : "outlined"}
@@ -485,7 +485,7 @@ class CreateMarket extends React.Component
             >
               Sa
             </StyledDays>
-          </StyledDiv>
+          </StyledDiv2>
           <div style={{display: "flex"}}>
           <TextField
             style={{marginLeft: "23%", marginTop: "25px"}}
@@ -541,9 +541,11 @@ class CreateMarket extends React.Component
         
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
-                        <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
+                        <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp2>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp2>
                           <Field 
-                            component={renderButton} name="operation" 
+                            component={renderButton} 
+                            name="operation" 
+                            className="xButton"
                             label={"x"}  
                             size="small"
                             color="secondary" 
@@ -565,10 +567,16 @@ class CreateMarket extends React.Component
   }
 };
 
+const StyledField = styled(Field)`
+.MuiInputBase-input{
+  font-family: Roboto;
+}
+  
+`;
 const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 50px 10px auto;
+  margin: 30px 10px auto;
   max-width: 520px;
   .MuiButton-root {
     height: 40px;
@@ -580,33 +588,68 @@ const StyledDiv = styled.div`
     
   }
   .MuiButton-label{
-    text-transform: capitalize;
-    font-family: Raleway;
     font-size: 16px;
-    font-weight: 500;
+    
   }
-
   .biggerButton {
-    width: 200px;
+      font-family: Raleway;
+      width: 300px;
+      height: 60px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 5px;
   }
-
   .MuiButton-outlined {
     border: 1.5px solid;
   }
 
+ `;
+ const StyledDiv2 = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 10px auto;
+  max-width: 520px;
+  .MuiButton-root {
+    height: 40px;
+    width: 13vh;
+    margin-left: 1%;
+    margin: 0 auto;
+    cursor: pointer;
+    min-width: 0;
+    
+  }
+  .MuiButton-label{
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+  .MuiButton-outlined {
+    border: 1.5px solid;
+  }
 
+ `;
+ const CreateHeader = styled.h4`
+  margin-left: 15px;
+  margin-top: 20px;
+  font-family: Raleway;
 `;
 const StyledDays = styled(Button)`
   width: 14vw;
   margin-left: 1%;
 `;
+const Header = styled.div`
+  display: flex;
+  background-color: #478529;
+  color: white;
+  height: 60px;
+`;
+
 
 const SaveFix = styled.button`
   margin: 50px auto;
-  height: 50px;
+  height: 60px;
   font-size: 16px;
   cursor: pointer;
-  width: 200px;
+  width: 300px;
   border-radius: 5px;
   color: #fff;
   background-color: #478529;
@@ -647,7 +690,14 @@ const StyleLeft = styled.div`
 
 const StyledUp = styled.div`
   text-transform: capitalize;
-  width: 150px;
+  width: 35%;
+  font-size: 18px;
+  font-family: Raleway;
+`;
+
+const StyledUp2 = styled.div`
+  text-transform: capitalize;
+  width: 55%;
   font-size: 18px;
   font-family: Raleway;
 `;
@@ -656,6 +706,9 @@ const StyledP = styled.p`
   display: flex;
   font-size: 18px;
   font-family: Raleway;
+  .xButton {
+    mix-width: 2px;
+  }
 `
 
 

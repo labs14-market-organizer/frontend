@@ -19,7 +19,6 @@ import google from "../assets/google.svg";
 import facebook from "../assets/facebook.png";
 import googleIcon from "../assets/googleicon1.svg";
 
-
 class AuthenticatePage extends React.Component{
     state = {
       toggle: true //displays create account //false displays welcome back.

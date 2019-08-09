@@ -44,7 +44,7 @@ class Navbar extends React.Component {
  Menu = () => {
   if (this.state.menuOpen === true) {
     switch(window.location.pathname) {
-      case "/landing":
+      case "/":
         return (
           <StyledPaper elevation={10}>
           <div>
@@ -57,7 +57,7 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>Home</Button></li>
+            <li><Button className="currentPage">Home</Button></li>
             <li><Button>Vendor History</Button></li>
             <li><Button>Payment Methods</Button></li>
             <li><Button>Account Settings</Button></li>
