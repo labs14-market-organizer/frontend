@@ -315,22 +315,12 @@ class CreateMarket extends React.Component
     if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
       <form onSubmit={handleSubmit}>
-<<<<<<< HEAD
-        <Header>
-            <Link to="/">
-              <img src={Arrow} style={{marginLeft: "16px",
-               marginTop: "17px"}}/>
-            </Link>
-        <CreateHeader>{(this.isUpdating) ? "Edit Market" : "Create Market" }</CreateHeader>
-        </Header>
-=======
         <div className="header">
               <img src={Arrow} style={{marginLeft: "25px",
                marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack}/>
         
             <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
         </div>
->>>>>>> 2161c5bb8e3662bcfe2a70cffb2f94a68c3be9a9
         {/* <div className="addPhoto">
             <img />
             <p className="add">ADD COVER PHOTO</p>
