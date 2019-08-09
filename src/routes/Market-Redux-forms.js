@@ -323,7 +323,7 @@ class CreateMarket extends React.Component
             <p className="add">ADD COVER PHOTO</p>
         </div> */}
         <Container maxWidth="sm">
-          <Field
+          <StyledField
             component={renderTextField}
             required
             id="name"
@@ -331,7 +331,7 @@ class CreateMarket extends React.Component
             name="Market Name"
           />
         <br />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="description"
@@ -339,14 +339,14 @@ class CreateMarket extends React.Component
             name="Market Description"
           />
           <br />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="address"
             label="Address"
             name="Address"
           />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="city"
@@ -359,7 +359,7 @@ class CreateMarket extends React.Component
             display: 'inline-flex',
             justifyContent: 'space-between'
           }}>
-          <Field
+          <StyledField
               component={renderTextField}
               required
               id="state"
@@ -369,7 +369,7 @@ class CreateMarket extends React.Component
                 width: "48%" 
               }}
             />
-            <Field
+            <StyledField
               component={renderTextField}
               required
               id="zipcode"
@@ -379,25 +379,25 @@ class CreateMarket extends React.Component
             />
         </StyledContainer>
         <Container maxWidth="sm">
-        <Field
+        <StyledField
             component={renderTextField}
             id="website"
             label="Website"
             name="Website"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="facebook"
             label="Facebook"
             name="Facebook"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="twitter"
             label="Twitter"
             name="Twitter"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="instagram"
             label="Instagram"
@@ -405,20 +405,21 @@ class CreateMarket extends React.Component
           />
         </Container>
         <StyleLeft>
-        <h5>Market Status</h5>
+        <h5 style={{fontFamily: "Raleway"}}>Market Status</h5>
         {/*Radio buttons, default to public market*/}
       <Field name="market_type" component={renderRadioGroup}>
         <div style={{display: "flex", marginTop: '-20px'}}>
           <Radio value="Public" label="Public" name="Public"/>
-          <div style={{marginTop: "12px"}}>Public Market</div>
+          <div style={{marginTop: "12px", fontFamily: "Raleway"}}>Public Market</div>
         </div>
         <br />
         <div style={{display: "flex", marginTop: "-30px"}}>
           <Radio id="Private" value="Private" label="Private" name="Private"/>
-          <div style={{marginTop: "13px", marginBottom: "10px"}}> Private Market</div>
+          <div style={{marginTop: "13px", marginBottom: "10px", fontFamily: "Raleway"}}> Private Market</div>
         </div>
       </Field>
-        <h4>Market Days {'&'} Times Of Operation</h4>
+      <hr></hr>
+        <h4 style={{fontFamily: "Raleway"}}>Market Days {'&'} Times Of Operation</h4>
         <StyledDiv2>
   
             <StyledDays
@@ -566,6 +567,12 @@ class CreateMarket extends React.Component
   }
 };
 
+const StyledField = styled(Field)`
+.MuiInputBase-input{
+  font-family: Roboto;
+}
+  
+`;
 const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
