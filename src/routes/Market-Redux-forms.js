@@ -315,12 +315,10 @@ class CreateMarket extends React.Component
     if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
       <form onSubmit={handleSubmit}>
-        <div className="header">
-              <img src={Arrow} style={{marginLeft: "25px",
-               marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack}/>
-        
-            <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
-        </div>
+        <Header>
+          <StyledImg src={Arrow} onClick={this.goBack} />
+          <CreateHeader>{(this.isUpdating) ? "Edit Market" : "Create Market" }</CreateHeader>
+        </Header>
         {/* <div className="addPhoto">
             <img />
             <p className="add">ADD COVER PHOTO</p>
@@ -570,6 +568,25 @@ class CreateMarket extends React.Component
   }
 };
 
+const Header = styled.div`
+  display: flex;
+  background-color: #478529;
+  color: white;
+  height: 60px;
+`;
+
+const StyledImg = styled.img`
+  margin-left: 16px;
+  margin-top: 0;
+  cursor: pointer; 
+  margin-right: 16px; 
+
+`;
+const CreateHeader = styled.h4`
+  margin-top: 20px;
+  font-family: Raleway;
+  font-size: 18px;
+`;
 
 const StyledField = styled(Field)`
 .MuiInputBase-input{
@@ -631,21 +648,12 @@ const StyledDiv = styled.div`
   }
 
  `;
- const CreateHeader = styled.h4`
-  margin-left: 15px;
-  margin-top: 20px;
-  font-family: Raleway;
-`;
+
 const StyledDays = styled(Button)`
   width: 14vw;
   margin-left: 1%;
 `;
-const Header = styled.div`
-  display: flex;
-  background-color: #478529;
-  color: white;
-  height: 60px;
-`;
+
 
 
 const SaveFix = styled.button`
