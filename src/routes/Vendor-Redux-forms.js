@@ -155,6 +155,10 @@ function validate (values) {
     {
       return this.state.other_special !== "" && this.state.other_special;
     }
+
+    goBack= () => {
+      return this.props.history.goBack();
+    }
     
     render() 
     {
@@ -164,7 +168,7 @@ function validate (values) {
                 <Header>
                   <Link to="/">
                     <img src={Arrow} style={{marginLeft: "25px",
-                    marginTop: "18px"}}/>
+               marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack} />
                   </Link>
                     <CreateHeader>{(this.isUpdating) ? "Edit Vendor" : "Create Vendor" }</CreateHeader>
                 </Header>
@@ -416,7 +420,7 @@ const mapStateToProps = state => {
 const ReduxForms = reduxForm({
     form: "VendorForm", // a unique identifier for this form
     validate
-  })(connect(mapStateToProps,{})(CreateVendor));
+  })(connect(mapStateToProps,{})(withRouter(CreateVendor)));
 
   
   class ReduxContainer extends React.Component
