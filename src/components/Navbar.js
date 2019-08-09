@@ -143,9 +143,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -166,9 +166,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button >Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -189,9 +189,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -212,9 +212,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -235,9 +235,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -258,9 +258,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -281,9 +281,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="/landing"><Button>Home</Button></Link></li>
+          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
