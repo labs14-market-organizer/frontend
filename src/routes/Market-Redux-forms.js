@@ -18,7 +18,7 @@ import { createNewMarket, updateMarket } from "../redux/actions/marketData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import {Redirect, Link} from "react-router-dom";
+import {Redirect, Link, withRouter } from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel'
 
 function validate (values) {
@@ -305,12 +305,17 @@ class CreateMarket extends React.Component
       return (subtractedHours.toString() + rest + "pm");
     }
   }
+  goBack = () => {
+    return this.props.history.goBack();
+  }
+
 
   render(){
     const {handleSubmit, pristine, reset, submitting } = this.props;
     if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
       <form onSubmit={handleSubmit}>
+<<<<<<< HEAD
         <Header>
             <Link to="/">
               <img src={Arrow} style={{marginLeft: "16px",
@@ -318,6 +323,14 @@ class CreateMarket extends React.Component
             </Link>
         <CreateHeader>{(this.isUpdating) ? "Edit Market" : "Create Market" }</CreateHeader>
         </Header>
+=======
+        <div className="header">
+              <img src={Arrow} style={{marginLeft: "25px",
+               marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack}/>
+        
+            <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
+        </div>
+>>>>>>> 2161c5bb8e3662bcfe2a70cffb2f94a68c3be9a9
         {/* <div className="addPhoto">
             <img />
             <p className="add">ADD COVER PHOTO</p>
@@ -737,7 +750,7 @@ const mapStateToProps = state => {
 const ReduxForms = reduxForm({
   form: "MaterialUiForm", // a unique identifier for this form
   validate
-})(connect(mapStateToProps, {})(CreateMarket));
+})(connect(mapStateToProps, {})(withRouter(CreateMarket)));
 
 
 class CreateMarketContainer extends React.Component
