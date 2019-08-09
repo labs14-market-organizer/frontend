@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Mixpanel } from '../redux/actions/mixpanel';
 
 
@@ -32,17 +32,17 @@ class ViewMyMarket extends React.Component{
 
 }
 
-
+goBack = () => {
+  return this.props.history.goBack();
+}
 
   render() {
   let market = this.props.marketData
   return (
       <div>
           <Header>
-                <Link to="/">
                   <img src={Arrow} style={{marginLeft: "25px",
-                  marginTop: "18px"}}/>
-                </Link>
+               marginTop: "0px", cursor: "pointer", marginRight: "5px", fontFamily: "Raleway"}} onClick={this.goBack} />
                  <CreateHeader>View Market</CreateHeader>
                 </Header>
         
@@ -63,7 +63,7 @@ class ViewMyMarket extends React.Component{
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
             <Flex>
-              <Link to="/addbooths"  onClick={() => Mixpanel.track('User clicked to edit booths')}>
+              <Link to="/addbooths"  style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to edit booths')}>
                 <WhiteButton variant="outlined">Edit Booths</WhiteButton>
               </Link>
               <Link to="/createmarket" style={{ textDecoration: "none"}}  onClick={() => Mixpanel.track('User clicked to edit market')}>
@@ -130,6 +130,7 @@ const WhiteButton = styled(Button)`
   height: 60px;
   font-size: 16px;
   border-radius: 10px;
+  
   @media(min-width: 600px){
     width: 300px;
     
@@ -166,7 +167,7 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { }
-  )(ViewMyMarket);
+  )(withRouter(ViewMyMarket));
   
 //   {
 //     "id": 77,
