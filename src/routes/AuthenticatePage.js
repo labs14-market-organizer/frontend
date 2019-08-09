@@ -54,7 +54,7 @@ class AuthenticatePage extends React.Component{
                <StyledCompanyButtons variant="contained" style={{backgroundColor: 'white', color: "black"}} label="Facebook"  href="https://cloudstands-staging.herokuapp.com/auth/google"><img src={googleIcon} style={{marginLeft: "-10px"}}/><StyledSpan1>Sign In With Google</StyledSpan1></StyledCompanyButtons>
 
                  <StyledD>
-                <StyledP1>By continuing, you agree to Cloud Stands<Link to="/terms" style={{textDecoration: "none"}}><StyledSpan> Terms of Service</StyledSpan></Link> and <Link to="/privacy" style={{textDecoration: "none"}}><StyledSpan>Privacy Policy</StyledSpan></Link> </StyledP1></StyledD>
+                <StyledP1>By continuing, you agree to Cloud Stands<Link to="/terms" style={{textDecoration: "none", color: "black"}}><StyledSpan> Terms of Service</StyledSpan></Link> and <Link to="/privacy" style={{textDecoration: "none", color: "black"}}><StyledSpan>Privacy Policy</StyledSpan></Link> </StyledP1></StyledD>
              
                 {(this.state.toggle) ? <StyledP2>Already have an account?<span style={{ color: "green" , fontWeight: "bold"}} onClick={this.signIn}>  Sign in</span> </StyledP2> : 
                 <StyledP2>Don't have an account?<span style={{ color: "green" , fontWeight: "bold"}} onClick={this.signUp}>  Sign up</span> </StyledP2>
