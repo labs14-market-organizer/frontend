@@ -313,7 +313,7 @@ class CreateMarket extends React.Component
       <form onSubmit={handleSubmit}>
         <Header>
             <Link to="/">
-              <img src={Arrow} style={{marginLeft: "25px",
+              <img src={Arrow} style={{marginLeft: "16px",
                marginTop: "17px"}}/>
             </Link>
         <CreateHeader>{(this.isUpdating) ? "Edit Market" : "Create Market" }</CreateHeader>
