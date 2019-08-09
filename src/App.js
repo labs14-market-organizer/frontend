@@ -2,9 +2,9 @@ import React from "react";
 //import "./sass/global.scss";
 import { connect } from "react-redux";
 import {
-  BrowserRouter as Router,
+
   Route,
-  Link,
+
   Redirect,
   withRouter
 } from "react-router-dom";
@@ -12,22 +12,22 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 import { setLocalData, getUserData } from "./redux/actions/userData";
 import "./App.scss";
-import CssBaseline from "@material-ui/core/CssBaseline";
+
 import theme from "./theme";
 import MarketingPage from "./routes/MarketingPage";
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
 import TokenCollect from "./routes/TokenCollect";
 import MainPage from "./routes/MainPage";
-import Navbar from "./components/Navbar";
+
 import { StylesProvider } from "@material-ui/styles";
 
 import UserList from "./routes/UserList";
-import CreateMarket from "./routes/CreateMarket";
-import AddBooths from "./routes/AddBooths";
+
+
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
-import CreateVendor from "./routes/CreateVendor";
+
 import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";

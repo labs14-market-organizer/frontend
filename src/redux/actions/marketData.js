@@ -1,7 +1,6 @@
-import axios from "axios";
 import { axiosWithAuth } from "./../utls/axiosWithAuth";
 import {HOST_URL} from "./../utls/hostUrl";
-import {getUserData} from "./userData";
+// import {getUserData} from "./userData";
 
 export const GET_MARKET_DATA_START = "GET_MARKET_DATA_START";
 export const GET_MARKET_DATA_END = "GET_MARKET_DATA_END";

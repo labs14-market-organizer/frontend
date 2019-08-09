@@ -4,31 +4,17 @@ import Edit from "../assets/border-color-24-px.svg";
 import {
   TextField,
   InputAdornment,
-  MuiThemeProvider,
-  createMuiTheme,
-  Typography,
-  Container,
   Box
 } from "@material-ui/core";
-//import ToggleButton from '@material-ui/lab/ToggleButton';
 import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
-import Radio from "@material-ui/core/Radio";
-import RadioButtonGroup from "@material-ui/core/RadioGroup"
-import { withStyles } from "@material-ui/core/styles";
 import "../scss/CreateMarket.scss";
 import { createNewBooth, updateBooth, deleteBooth } from "../redux/actions/boothData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
 import {Redirect, withRouter} from "react-router-dom";
-import FormControlLabel from '@material-ui/core/FormLabel'
-import { maxWidth } from "@material-ui/system";
-import { checkMarketData } from "../redux/reducers/marketData";
-import MarketReduxForms from "./Market-Redux-forms";
 import {getMarketById} from "../redux/actions/marketData"
 import "../scss/ReduxForm.scss";
-import { Link } from 'react-router-dom';
 import { Mixpanel } from '../redux/actions/mixpanel';
 
 function validate (values) {

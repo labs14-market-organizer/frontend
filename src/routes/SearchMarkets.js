@@ -1,13 +1,11 @@
 import React from "react";
 import {
     TextField,
-    Button,
-    Typography,
     Container,
     Box
   } from "@material-ui/core";
 import styled from "styled-components";
-import Place from '../assets/place.svg';
+// import Place from '../assets/place.svg';
 import { searchMarkets } from '../redux/actions/searchMarkets';
 import { connect } from "react-redux";
 import Navbar from "../components/Navbar";

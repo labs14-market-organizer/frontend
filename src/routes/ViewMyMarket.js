@@ -10,7 +10,7 @@ import { Mixpanel } from '../redux/actions/mixpanel';
 const militaryConvert = (time) => {
   let hours = time.split('');
   let am = "am";
-  let newHours, combined, subtractedHours, rest;
+  let combined, subtractedHours, rest;
   if (hours[0] === "0"){
     combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
     return combined;
@@ -27,10 +27,7 @@ const militaryConvert = (time) => {
 }
 
 class ViewMyMarket extends React.Component{
-  constructor(props){
-  super(props);
 
-}
 
 goBack = () => {
   return this.props.history.goBack();

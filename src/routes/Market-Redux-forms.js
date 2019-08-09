@@ -2,24 +2,24 @@ import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
 import {
   TextField,
-  MuiThemeProvider,
-  createMuiTheme,
+
+
   Typography,
   Container
 } from "@material-ui/core";
 //import ToggleButton from '@material-ui/lab/ToggleButton';
 import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
+
 import Radio from "@material-ui/core/Radio";
 import RadioButtonGroup from "@material-ui/core/RadioGroup"
-import { withStyles } from "@material-ui/core/styles";
+
 import "../scss/CreateMarket.scss";
 import { createNewMarket, updateMarket } from "../redux/actions/marketData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import {Redirect, Link, withRouter } from "react-router-dom";
-import FormControlLabel from '@material-ui/core/FormLabel'
+import {Redirect,  withRouter } from "react-router-dom";
+
 
 function validate (values) {
   const errors = {};
@@ -171,7 +171,7 @@ class CreateMarket extends React.Component
   };
 
   changeDay = e => {
-    let number, newDaysList;
+    let newDaysList;
     if (e.currentTarget.value === "false") {
       this.setState({
         ...this.state,
@@ -290,7 +290,7 @@ class CreateMarket extends React.Component
     time = String(time);
     let hours = time.split('');
     let am = "am";
-    let newHours, combined, subtractedHours, rest;
+    let combined, subtractedHours, rest;
     if (hours[0] === "0"){
       combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
       return combined;
@@ -311,7 +311,7 @@ class CreateMarket extends React.Component
 
 
   render(){
-    const {handleSubmit, pristine, reset, submitting } = this.props;
+    const {handleSubmit, pristine, submitting } = this.props;
     if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
       <form onSubmit={handleSubmit}>
@@ -406,19 +406,19 @@ class CreateMarket extends React.Component
           />
         </Container>
         <StyleLeft>
-        <h5 style={{fontFamily: "Raleway"}}>Market Status</h5>
+        <h5 style={{fontFamily: "Raleway", marginBottom: "10px"}}>Market Status</h5>
         {/*Radio buttons, default to public market*/}
-      <Field name="market_type" component={renderRadioGroup}>
-        <div style={{display: "flex", marginTop: '-20px'}}>
+      <StyledRadioField name="market_type" component={renderRadioGroup}>
+        <StyledRadioDiv>
           <Radio value="Public" label="Public" name="Public"/>
-          <div style={{marginTop: "12px", fontFamily: "Raleway"}}>Public Market</div>
-        </div>
+          <StyledRadioDiv2>Public Market</StyledRadioDiv2>
+        </StyledRadioDiv>
         <br />
-        <div style={{display: "flex", marginTop: "-30px"}}>
+        <StyledRadioDiv>
           <Radio id="Private" value="Private" label="Private" name="Private"/>
-          <div style={{marginTop: "13px", marginBottom: "10px", fontFamily: "Raleway"}}> Private Market</div>
-        </div>
-      </Field>
+          <StyledRadioDiv2 > Private Market</StyledRadioDiv2>
+        </StyledRadioDiv>
+      </StyledRadioField>
       <hr></hr>
         <h4 style={{fontFamily: "Raleway"}}>Market Days {'&'} Times Of Operation</h4>
         <StyledDiv2>
@@ -588,6 +588,23 @@ const CreateHeader = styled.h4`
   font-size: 18px;
 `;
 
+const StyledRadioDiv = styled.div`
+  display: flex;
+  height: 25px;
+`;
+
+const StyledRadioDiv2 = styled.div`
+  font-family: Raleway;
+  margin-top: 5px;
+  align-text: center;
+`;
+
+const StyledRadioField = styled(Field)`
+  height: 70px;
+  margin-bottom: 20px;
+`;
+
+
 const StyledField = styled(Field)`
 .MuiInputBase-input{
   font-family: Roboto;
@@ -685,13 +702,13 @@ const StyledContainer = styled(Container)`
 
 
 `;
-const StyledTypography = styled(Typography)`
-  text-transform: capitalize;
-  .MuiTypography-body1 {
-    width: 300px;
-    color: blue;
-  }
-`;
+// const StyledTypography = styled(Typography)`
+//   text-transform: capitalize;
+//   .MuiTypography-body1 {
+//     width: 300px;
+//     color: blue;
+//   }
+// `;
 const StyleLeft = styled.div`
   text-align: left;
   max-width: 600px;
@@ -717,14 +734,14 @@ const StyledUp2 = styled.div`
   font-family: Raleway;
 `;
 
-const StyledP = styled.p`
-  display: flex;
-  font-size: 18px;
-  font-family: Raleway;
+// const StyledP = styled.p`
+//   display: flex;
+//   font-size: 18px;
+//   font-family: Raleway;
 
-`
+// `
 
-const StyledP5 = styled.p`
+const StyledP5 = styled.div`
   display: flex;
   font-size: 18px;
   font-family: Raleway;

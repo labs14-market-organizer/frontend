@@ -7,10 +7,7 @@ import { Button } from "@material-ui/core";
 import { Mixpanel } from '../redux/actions/mixpanel';
 
 class VendorProfile extends React.Component {
-    constructor(props){
-      super(props);
-
-    }
+  
        
         goBack = () => {
           return this.props.history.goBack();
