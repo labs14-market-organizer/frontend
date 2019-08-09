@@ -489,7 +489,7 @@ class CreateMarket extends React.Component
               Sa
             </StyledDays>
           </StyledDiv2>
-          <div style={{display: "flex"}}>
+          <div style={{display: "flex", paddingBottom: "32px"}}>
           <TextField
             style={{marginLeft: "23%", marginTop: "25px"}}
             name="start"
@@ -544,7 +544,7 @@ class CreateMarket extends React.Component
         
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
-                        <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp2>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp2>
+                        <StyledP5><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp2>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp2>
                           <Field 
                             component={renderButton} 
                             name="operation" 
@@ -555,8 +555,8 @@ class CreateMarket extends React.Component
                             Style={{marginTop: "25px"}}
                             prefunc={(e) => this.deleteTime(e, item.day)}
                           />
-                            </StyledP> 
-                        : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP>
+                            </StyledP5> 
+                        : <StyledP5> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP5>
                     })}
         <br />
         </StyleLeft>  
@@ -569,6 +569,7 @@ class CreateMarket extends React.Component
     );
   }
 };
+
 
 const StyledField = styled(Field)`
 .MuiInputBase-input{
@@ -649,14 +650,17 @@ const Header = styled.div`
 
 const SaveFix = styled.button`
   margin: 50px auto;
+  text-transform: uppercase;
   height: 60px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   width: 300px;
   border-radius: 5px;
   color: #fff;
   background-color: #478529;
   border: none;
+  margin-top: 10px;
   :disabled
   {
     background-color: #fff;
@@ -693,7 +697,7 @@ const StyleLeft = styled.div`
 
 const StyledUp = styled.div`
   text-transform: capitalize;
-  width: 35%;
+  width: 38%;
   font-size: 18px;
   font-family: Raleway;
 `;
@@ -709,11 +713,21 @@ const StyledP = styled.p`
   display: flex;
   font-size: 18px;
   font-family: Raleway;
-  .xButton {
-    mix-width: 2px;
-  }
+
 `
 
+const StyledP5 = styled.p`
+  display: flex;
+  font-size: 18px;
+  font-family: Raleway;
+  margin-top: 32px;
+  .xButton {
+    min-width: 2px;
+  }
+  @media(min-width: 450px){
+    max-width: 450px;
+  }
+`
 
 const mapStateToProps = state => {
   return {
