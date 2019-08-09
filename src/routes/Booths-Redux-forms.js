@@ -246,7 +246,7 @@ class CreateMarket extends React.Component
             InputProps={{
               startAdornment: <InputAdornment position="start"></InputAdornment>}}
               style={{
-                width: "88vw",
+                width: "92vw",
                 margin: '20px 1% 1% 1%',
                 marginLeft: '0',
                 marginBottom: "0px",
@@ -362,10 +362,10 @@ class CreateMarket extends React.Component
             label="Booth Description"
             multiline rows="4"
             margin="normal"
-            style={{ marginBottom: "0px", marginLeft: "2%", marginRight: "2%", width: "90vw", maxWidth: "570px"}}
+            style={{ marginBottom: "0px", marginLeft: "2%", marginRight: "3%", width: "91vw", maxWidth: "570px"}}
           />
           {(this.isUpdating ? 
-            <div style={{display: "flex", marginRight: "3%", width: "90vw"}} >
+            <div style={{display: "flex", minWidth: "100%"}}  >
             <Button 
               variant="outlined"
               fullWidth
@@ -375,6 +375,7 @@ class CreateMarket extends React.Component
               this.currentBooth = null }} 
               className="redButton"
               style={{
+                  width: "46%",
                   color: 'red',
                   fontSize:'18px',
                   margin: '4% 0',
@@ -390,9 +391,9 @@ class CreateMarket extends React.Component
             disabled={pristine || submitting}
             variant="contained"
             color="primary"
-            fullWidth
             onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
             style={{
+                width: "46%",
                 fontSize:'18px',
                 margin: '4% 0',
                 height: '60px',
@@ -409,10 +410,9 @@ class CreateMarket extends React.Component
           disabled={pristine || submitting}
           variant="outlined"
           color="secondary"
-          fullWidth
           onClick={() => {this.props.array.insert("redirecttype",0,1); this.erase = true; }}
           style={{
-              
+              width: "47%",
               fontSize:'18px',
               margin: '4% 0',
               height: '60px',
@@ -427,9 +427,9 @@ class CreateMarket extends React.Component
           disabled={pristine || submitting}
           variant="contained"
           color="primary"
-          fullWidth
           onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
           style={{
+              width: "46%",
               fontSize:'18px',
               margin: '4% 0',
               height: '60px',
@@ -453,15 +453,6 @@ const mapStateToProps = state => {
   };
 };
 
-
-// const StyledContainer = styled(Container)`
-//   max-width: 50vw;
-//   .MuiInputBase-input ,.MuiOutlinedInput-input {
-//     width: 100%;
-// }
-
-
-// `;
 
 const StyledDiv = styled.div`
   max-width: 92vw;
@@ -493,9 +484,10 @@ const StyleBox = styled(Box)`
  justify-content: space-between;
  margin: 10px;
  margin-left: 5%;
- @media(min-width: 450px)
+ @media(min-width: 570px)
  {
-   width: 450px;
+   max-width: 570px;
+   width: 100%;
    margin: 10px auto;
  }
  .main-box
@@ -504,6 +496,7 @@ const StyleBox = styled(Box)`
   flex-direction: row;
   align-items: flex-start;
   margin-top: 10px;
+
  }
  .title-box
   {
