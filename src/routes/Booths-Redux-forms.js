@@ -168,7 +168,7 @@ class CreateMarket extends React.Component
     
         <StyledBody>
           {this.isUpdating && !this.currentBooth ? "" : this.form() }
-         <div style={{display: "flex", flexDirection: "column"}}>
+         <BoothContainer >
             {this.currentBooths.map(x=> {
               let flag =  this.props.form.BoothsForm.values && this.props.form.BoothsForm.values.id === x.id ;
               let obj = flag ? this.props.form.BoothsForm.values : x;
@@ -187,7 +187,7 @@ class CreateMarket extends React.Component
             </StyleBox>
             }
             )}
-          </div>
+          </BoothContainer>
             {this.isUpdating ? 
                 <Button 
                   variant="outlined"
@@ -227,7 +227,8 @@ class CreateMarket extends React.Component
                 width: "100vw",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
+                
               }}
           >
    
@@ -247,7 +248,7 @@ class CreateMarket extends React.Component
                 margin: '20px 1% 1% 1%',
                 marginLeft: '0',
                 marginBottom: "0px",
-                maxWidth: "560px"
+                maxWidth: "560px",
               }}
             id="boothtype"
             label="Booth Type"
@@ -451,6 +452,7 @@ const mapStateToProps = state => {
 };
 
 
+
 // const StyledContainer = styled(Container)`
 //   max-width: 50vw;
 //   .MuiInputBase-input ,.MuiOutlinedInput-input {
@@ -467,17 +469,24 @@ const StyledDiv = styled.div`
     max-width: 600px;
     margin-left: auto;
   }
+   .MuiOutlinedInput-root  .MuiOutlinedInput-adornedStart {
+    background-color: red;
+  }
 `
 const StyledBody = styled.body`
-    width: 84vw;
+
+    @media(max-width:447) {
+      width: 84vw;
     height: 100%;
-    maxWidth: 624px;
-    flexDirection: column;
-    alignItems: center;
+    }
     @media(min-width:600px){
-      margin: 10px auto;
+    
     }
     `
+
+const BoothContainer = styled.div`
+color: red;
+`
 
 const StyleBox = styled(Box)`
  width: 90vw;
