@@ -156,7 +156,7 @@ class CreateMarket extends React.Component
       <div>
         <Header>
           <StyledImg src={Arrow} onClick={this.goBack} />
-          <CreateHeader>{this.isUpdating ? "Update" : "Add"} Booths</CreateHeader>
+          <CreateHeader>{this.isUpdating ? "Edit" : "Add"} Booths</CreateHeader>
         </Header>
         {/* Styled this div for the time being...will change later */}
     
