@@ -172,7 +172,7 @@ function validate (values) {
                 <Container maxWidth="sm">
                 <form onSubmit={handleSubmit}>
                 
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         reuired
                         id="name"
@@ -183,7 +183,7 @@ function validate (values) {
                         fullWidth={true}
                        
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         required
                         id="description"
@@ -201,7 +201,7 @@ function validate (values) {
                     <StyledP>What are the specific items you plan to sell?</StyledP>
                     
                     <FlexContainer>
-                    <Field
+                    <StyledField
                         component={renderButton}
                         prefunc={this.addItem}
                         operation={this.state}
@@ -213,7 +213,7 @@ function validate (values) {
                         fullWidth={true}
                     >
                     <img src={Add} style={{marginTop: "10px"}}/>  
-                    </Field>
+                    </StyledField>
                     <TextField
                           margin="normal"
                           id="item"
@@ -230,7 +230,7 @@ function validate (values) {
                     {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
                     {this.state.items.map((item, index) => 
                     <FlexContainer  key={index}>
-                        <Field
+                        <StyledField
                           component={renderButton}
                           prefunc={(e) => this.deleteItem(e,index)}
                           operation={this.state}
@@ -239,7 +239,7 @@ function validate (values) {
                           name="items"
                         >
                           <StyledButton>X</StyledButton>
-                        </Field>
+                        </StyledField>
                        <StyledP1>{item}</StyledP1> 
                        
                     </FlexContainer>
@@ -290,7 +290,7 @@ function validate (values) {
                     </FlexContainer>
                     </FlexColumn>
                     </StyledContainer>
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="website"
                         label="Website"
@@ -299,7 +299,7 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="facebook"
                         label="Facebook"
@@ -308,7 +308,7 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="twitter"
                         label="Twitter"
@@ -317,7 +317,7 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="instagram"
                         label="Instagram"
@@ -336,6 +336,14 @@ function validate (values) {
     }
     
 }
+
+
+const StyledField = styled(Field)`
+  .MuiInputBase-input{
+  font-family: Roboto;
+  font-size: 16px;
+}
+`
 const Header = styled.div`
   display: flex;
   background-color: #478529;
