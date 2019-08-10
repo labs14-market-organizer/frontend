@@ -45,7 +45,7 @@ class VendorProfile extends React.Component {
 
                 {(vendor.twitter && vendor.twitter.length > 0) ? <div><StyledP>Twitter</StyledP><StyledVendor>{vendor.twitter}</StyledVendor></div> : null}
                </Container> 
-               <Link to="/createprofile">
+               <Link to="/createvendor">
                 <StyledButton>Edit Profile</StyledButton>
                </Link>
             </div>
