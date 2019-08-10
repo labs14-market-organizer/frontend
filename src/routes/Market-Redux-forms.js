@@ -410,12 +410,12 @@ class CreateMarket extends React.Component
         {/*Radio buttons, default to public market*/}
       <StyledRadioField name="market_type" component={renderRadioGroup}>
         <StyledRadioDiv>
-          <Radio value="Public" label="Public" name="Public"/>
+          <RadioStyled value="Public" label="Public" name="Public"/>
           <StyledRadioDiv2>Public Market</StyledRadioDiv2>
         </StyledRadioDiv>
         <br />
         <StyledRadioDiv>
-          <Radio id="Private" value="Private" label="Private" name="Private"/>
+          <RadioStyled id="Private" value="Private" label="Private" name="Private"/>
           <StyledRadioDiv2 > Private Market</StyledRadioDiv2>
         </StyledRadioDiv>
       </StyledRadioField>
@@ -589,14 +589,17 @@ const CreateHeader = styled.h4`
 `;
 
 const StyledRadioDiv = styled.div`
-  display: flex;
   height: 25px;
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 const StyledRadioDiv2 = styled.div`
   font-family: Raleway;
   margin-top: 5px;
   align-text: center;
+
 `;
 
 const StyledRadioField = styled(Field)`
@@ -604,6 +607,10 @@ const StyledRadioField = styled(Field)`
   margin-bottom: 20px;
 `;
 
+const RadioStyled = styled(Radio)`
+  margin-bottom: 0;
+  margin-top: 0;
+`
 
 const StyledField = styled(Field)`
 .MuiInputBase-input{

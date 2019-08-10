@@ -167,7 +167,7 @@ function validate (values) {
             <div>
                 <Header>
                   <StyledImg src={Arrow} onClick={this.goBack} />
-                  <CreateHeader>{(this.isUpdating) ? "Edit Vendor" : "Create Vendor" }</CreateHeader>
+                  <CreateHeader>{(this.isUpdating) ? "Edit Vendor Profile" : "Create Vendor Profile" }</CreateHeader>
                 </Header>
                 <Container maxWidth="sm">
                 <form onSubmit={handleSubmit}>
