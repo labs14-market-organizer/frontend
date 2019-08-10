@@ -61,6 +61,9 @@ const StyledButton = styled(Button)`
   border-radius: 8px;
   border: solide 2px rgba(0, 0, 0, 0.1);
   margin-top: 24px;
+  .MuiButton-label {
+    font-size: 18px;
+  }
 
 `
 
