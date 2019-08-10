@@ -14,21 +14,8 @@ class VendorProfile extends React.Component {
         }
  
         render() {
-            let vendor = {
-        name: "Todds Fruits",
-        description: "Fresh fruit grown from local farms. Fresh fruit grown from local farms. Fresh fruit grown from local farms. Fresh fruit grown from local farms.",
-        items: [ "Apples", "Oranges", "Peaches"],
-        electricity: true,
-        ventilation: true,
-        loud: true,
-        other_special: "peace and quite",
-        website: "www.website.com",
-        facebook: "www.facebook.com",
-        instagram: "www.instagram.com",
-        twitter: "www.twitter"
-    }
         
-        // let vendor = this.props.vendorData;
+        let vendor = this.props.vendorData;
         return (
             <div>
                 <Header>
@@ -190,3 +177,17 @@ const mapStateToProps = state => {
   )(withRouter(VendorProfile));
   
  
+
+      //         let vendor = {
+    //     name: "Todds Fruits",
+    //     description: "Fresh fruit grown from local farms. Fresh fruit grown from local farms. Fresh fruit grown from local farms. Fresh fruit grown from local farms.",
+    //     items: [ "Apples", "Oranges", "Peaches"],
+    //     electricity: true,
+    //     ventilation: true,
+    //     loud: true,
+    //     other_special: "peace and quite",
+    //     website: "www.website.com",
+    //     facebook: "www.facebook.com",
+    //     instagram: "www.instagram.com",
+    //     twitter: "www.twitter"
+    // }
