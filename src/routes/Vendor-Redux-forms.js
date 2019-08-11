@@ -217,13 +217,13 @@ function validate (values) {
                     <TextField
                           margin="normal"
                           id="item"
-                          label="Add Item"
+                          label="Add New Item"
                           name="item"
                           onChange={this.handleChange}
                           value={this.state.item}
                           margin="normal"
                           fullWidth={true}
-                          style={{marginTop: "-5px", marginLeft: "30px"}}
+                          style={{marginTop: "-5px", marginLeft: "30px", marginRight: "5px"}}
                      />
                       <StyledField
                         component={renderButton}
