@@ -201,7 +201,7 @@ function validate (values) {
                     <StyledP>What are the specific items you plan to sell?</StyledP>
                     
                     <FlexContainer>
-                    <StyledField
+                    {/* <StyledField
                         component={renderButton}
                         prefunc={this.addItem}
                         operation={this.state}
@@ -212,8 +212,8 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     >
-                    <img src={Add} style={{marginTop: "10px"}}/>  
-                    </StyledField>
+                    <img src={Add} style={{marginTop: "10px"}}/>   
+                    </StyledField>*/}
                     <TextField
                           margin="normal"
                           id="item"
@@ -222,11 +222,24 @@ function validate (values) {
                           onChange={this.handleChange}
                           value={this.state.item}
                           margin="normal"
-                          variant="outlined"
                           fullWidth={true}
-                          style={{marginTop: "-5px"}}
+                          style={{marginTop: "-5px", marginLeft: "30px"}}
                      />
+                      <StyledField
+                        component={renderButton}
+                        prefunc={this.addItem}
+                        operation={this.state}
+                        id="items"
+                        label="items"
+                        name="items"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        >
+                          <AddButton>Add Item</AddButton>
+                        </StyledField>
                      </FlexContainer>
+
                     {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
                     {this.state.items.map((item, index) => 
                     <FlexContainer  key={index}>
@@ -337,6 +350,16 @@ function validate (values) {
     
 }
 
+const AddButton = styled(Button)`
+  border: 1px solid #044d4c;
+  width: 87px;
+  height: 40px;
+  text-transform: capitalize;
+  border-radius: 5px;
+  color: #044d4c;
+  font-family: Raleway;
+  font-size: 16px;
+`;
 
 const StyledField = styled(Field)`
   .MuiInputBase-input{
