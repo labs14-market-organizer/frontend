@@ -309,6 +309,9 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    @media   (min-resolution: 200dpi) {
+      margin-top: 8px;
+    }
     @media (max-width: 410px) {
       font-size: 40px;
     }
