@@ -270,7 +270,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /> <StyledP1>Need Electricity</StyledP1>
+                    /> <StyledP2>Need Electricity</StyledP2>
                     </FlexContainer>
                     <FlexContainer>
                     <Field
@@ -279,7 +279,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /><StyledP1>Need Ventilation</StyledP1>
+                    /><StyledP2>Need Ventilation</StyledP2>
                     </FlexContainer>
                     <FlexContainer>
                     <Field
@@ -288,7 +288,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /><StyledP1>Have loud machinery</StyledP1>
+                    /><StyledP2>Have loud machinery</StyledP2>
                     </FlexContainer>
                    <FlexContainer>
                   <Checkbox checked={this.shouldCheck()}/>
@@ -421,6 +421,12 @@ line-height: 1.2;
 margin-top: 2px;
 `;
 
+const StyledP2 = styled.p`
+font-family: Raleway;
+font-size: 16px;
+line-height: 1.2;
+margin-top: 15px;
+`;
 
 
 const FlexColumn = styled.div`
