@@ -1,11 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
-  Button,
-  Box,
-  Grid,
-  ButtonBase,
   Typography,
   Container,
   ListItem,
@@ -32,7 +27,7 @@ const Footer = () => {
 </StyledGridList>
       <Typography variant="body1">Copyright <span>©</span> 2019 Cloud Stands</Typography>
 
-    <img src={footerCloud} />
+    <img src={footerCloud} alt="cloud"/>
     </StyledContainer>
   );
 };

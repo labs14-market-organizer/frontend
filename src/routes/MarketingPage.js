@@ -302,6 +302,18 @@ const Box3 = styled(Box)`
   background-color: #044d4c;
   border-radius: 0px 10px 10px 0px;
   margin-top: 12px;
+  @media(max-width: 380px) {
+    height: 250px;
+  }
+  @media(max-width: 367px) {
+    height: 270px;
+  }
+
+  @media(max-width: 360px) {
+    height: 300px;
+
+
+  }
 `;
 
 const Box4 = styled(Box)`
@@ -310,6 +322,18 @@ const Box4 = styled(Box)`
   background-color: #478529;
   border-radius: 10px 0px 0px 10px;
   margin-top: 12px;
+  @media(max-width: 380px) {
+    height: 250px;
+  }
+  @media(max-width: 367px) {
+    height: 270px;
+  }
+
+  @media(max-width: 360px) {
+    height: 300px;
+
+
+  }
 `;
 
 const Box5 = styled(Box)`
@@ -345,6 +369,27 @@ const SmallMarkets = styled(Paper)`
   display: flex;
   box-shadow: none;
   margin-top: 12px;
+  max-height: 600px;
+  
+  @media(max-width: 380px) {
+    height: 250px;
+  }
+  @media(max-width: 367px) {
+    height: 270px;
+  }
+
+  @media(max-width: 360px) {
+    height: 300px;
+
+
+  }
+  @media(max-width: 340px) {
+    img {
+      display: none;
+    }
+  }
+
+
   && .MuiTypography-subtitle1 {
     font-size: 22px;
     line-height: 32px;
@@ -373,6 +418,7 @@ const SmallMarkets = styled(Paper)`
 
 const VenderWrapper = styled(Box)`
   display: flex;
+  padding-bottom: 16px;
 `;
 
 const Vendors = styled(Paper)`
@@ -383,6 +429,26 @@ const Vendors = styled(Paper)`
   margin-top: 12px;
   margin-right: 12px;
   padding-right: 14px;
+  @media(max-width: 380px) {
+    height: 250px;
+  }
+  @media(max-width: 367px) {
+    height: 270px;
+  }
+
+  @media(max-width: 360px) {
+    height: 300px;
+
+
+    @media(max-width: 340px) {
+    img {
+      display: none;
+    }
+  }
+
+  }
+
+
 
   && .MuiTypography-subtitle1 {
     font-size: 22px;
@@ -520,6 +586,19 @@ const Step3Container = styled(Box)`
   margin-top: 12px;
   align-items: center;
   height: 230px;
+  @media(max-width: 360px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+
+  }
+
+  @media(max-width: 340px) {
+    img {
+      display: none;
+    }
+  }
+  
 `;
 
 const Step3Label = styled(Box)`
@@ -536,6 +615,11 @@ const Step3Label = styled(Box)`
   justify-content: flex-end;
   align-items: center;
   position: absolute;
+  @media(max-width: 360px) {
+    height: 250px;
+
+
+  }
 
   .MuiTypography-subtitle2 {
     font-size: 22px;
@@ -556,6 +640,12 @@ const Step3Paper = styled(Paper)`
   box-sizing: border-box;
   width: 100%;
   margin-left: 132px;
+
+  @media(max-width: 360px) {
+    height: 250px;
+
+
+  }
 
   .MuiTypography-body1 {
     margin-top: 2px;

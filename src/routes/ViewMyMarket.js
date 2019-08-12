@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Mixpanel } from '../redux/actions/mixpanel';
 
 
 const militaryConvert = (time) => {
   let hours = time.split('');
   let am = "am";
-  let newHours, combined, subtractedHours, rest;
+  let combined, subtractedHours, rest;
   if (hours[0] === "0"){
     combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
     return combined;
@@ -27,24 +27,20 @@ const militaryConvert = (time) => {
 }
 
 class ViewMyMarket extends React.Component{
-  constructor(props){
-  super(props);
 
+
+goBack = () => {
+  return this.props.history.goBack();
 }
-
-
 
   render() {
   let market = this.props.marketData
   return (
       <div>
           <Header>
-                <Link to="/">
-                  <img src={Arrow} style={{marginLeft: "25px",
-                  marginTop: "18px"}}/>
-                </Link>
-                 <CreateHeader>View Market</CreateHeader>
-                </Header>
+            <StyledImg src={Arrow} onClick={this.goBack} />
+            <CreateHeader>View Market</CreateHeader>
+          </Header>
         
       
         <Container>
@@ -63,7 +59,7 @@ class ViewMyMarket extends React.Component{
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
             <Flex>
-              <Link to="/addbooths"  onClick={() => Mixpanel.track('User clicked to edit booths')}>
+              <Link to="/addbooths"  style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to edit booths')}>
                 <WhiteButton variant="outlined">Edit Booths</WhiteButton>
               </Link>
               <Link to="/createmarket" style={{ textDecoration: "none"}}  onClick={() => Mixpanel.track('User clicked to edit market')}>
@@ -76,6 +72,8 @@ class ViewMyMarket extends React.Component{
     }
   }
 
+
+
 const Header = styled.div`
   display: flex;
   background-color: #478529;
@@ -83,13 +81,17 @@ const Header = styled.div`
   height: 60px;
 `;
 
-const CreateHeader = styled.h4`
-  margin-left: 15px;
-  margin-top: 20px;
-`;
+const StyledImg = styled.img`
+  margin-left: 16px;
+  margin-top: 0;
+  cursor: pointer; 
+  margin-right: 16px; 
 
-const ArrowImage = styled.img`
-  margin-left: 2%;
+`;
+const CreateHeader = styled.h4`
+  margin-top: 20px;
+  font-family: Raleway;
+  font-size: 18px;
 `;
 
 const Container = styled.div`
@@ -130,6 +132,7 @@ const WhiteButton = styled(Button)`
   height: 60px;
   font-size: 16px;
   border-radius: 10px;
+  
   @media(min-width: 600px){
     width: 300px;
     
@@ -166,7 +169,7 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { }
-  )(ViewMyMarket);
+  )(withRouter(ViewMyMarket));
   
 //   {
 //     "id": 77,

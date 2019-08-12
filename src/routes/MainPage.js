@@ -1,14 +1,10 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Redirect,
     withRouter
   } from "react-router-dom";
   import {connect} from "react-redux";
   import MarketPage from "./ViewMyMarket";
-  import VendorPage from "./VendorProfile";
+  import SearchMarkets from "./SearchMarkets";
   import OnBoarding from "./UserOnboarding";
 
 class LandingPage extends React.Component
@@ -21,7 +17,7 @@ class LandingPage extends React.Component
     {
       if (this.props.fetching && !this.props.updated || !this.props.userData) return <div/>
       if(this.props.userType === "undefined") return <OnBoarding/>
-      return this.props.userType === "Market Owner" ? <MarketPage/> : <VendorPage/>
+      return this.props.userType === "Market Owner" ? <MarketPage/> : <SearchMarkets/>
         return(
         <div style={{paddingTop: "120px"}}>
 

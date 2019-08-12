@@ -44,7 +44,7 @@ class Navbar extends React.Component {
  Menu = () => {
   if (this.state.menuOpen === true) {
     switch(window.location.pathname) {
-      case "/landing":
+      case "/":
         return (
           <StyledPaper elevation={10}>
           <div>

@@ -2,24 +2,24 @@ import React from "react";
 import Arrow from "../assets/ic-arrow-back.svg";
 import {
   TextField,
-  MuiThemeProvider,
-  createMuiTheme,
+
+
   Typography,
   Container
 } from "@material-ui/core";
 //import ToggleButton from '@material-ui/lab/ToggleButton';
 import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
+
 import Radio from "@material-ui/core/Radio";
 import RadioButtonGroup from "@material-ui/core/RadioGroup"
-import { withStyles } from "@material-ui/core/styles";
+
 import "../scss/CreateMarket.scss";
 import { createNewMarket, updateMarket } from "../redux/actions/marketData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import {Redirect, Link} from "react-router-dom";
-import FormControlLabel from '@material-ui/core/FormLabel'
+import {Redirect,  withRouter } from "react-router-dom";
+
 
 function validate (values) {
   const errors = {};
@@ -171,7 +171,7 @@ class CreateMarket extends React.Component
   };
 
   changeDay = e => {
-    let number, newDaysList;
+    let newDaysList;
     if (e.currentTarget.value === "false") {
       this.setState({
         ...this.state,
@@ -290,7 +290,7 @@ class CreateMarket extends React.Component
     time = String(time);
     let hours = time.split('');
     let am = "am";
-    let newHours, combined, subtractedHours, rest;
+    let combined, subtractedHours, rest;
     if (hours[0] === "0"){
       combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
       return combined;
@@ -305,26 +305,26 @@ class CreateMarket extends React.Component
       return (subtractedHours.toString() + rest + "pm");
     }
   }
+  goBack = () => {
+    return this.props.history.goBack();
+  }
+
 
   render(){
-    const {handleSubmit, pristine, reset, submitting } = this.props;
+    const {handleSubmit, pristine, submitting } = this.props;
     if(this.props.redirect) {return <Redirect to="/addbooths"/>}
     return (
       <form onSubmit={handleSubmit}>
-        <div className="header">
-            <Link to="/">
-              <img src={Arrow} style={{marginLeft: "25px",
-               marginTop: "17px"}}/>
-            </Link>
-        
-            <h4 className="createHeader">{(this.isUpdating) ? "Edit Market" : "Create Market" }</h4>
-        </div>
+        <Header>
+          <StyledImg src={Arrow} onClick={this.goBack} />
+          <CreateHeader>{(this.isUpdating) ? "Edit Market" : "Create Market" }</CreateHeader>
+        </Header>
         {/* <div className="addPhoto">
             <img />
             <p className="add">ADD COVER PHOTO</p>
         </div> */}
         <Container maxWidth="sm">
-          <Field
+          <StyledField
             component={renderTextField}
             required
             id="name"
@@ -332,7 +332,7 @@ class CreateMarket extends React.Component
             name="Market Name"
           />
         <br />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="description"
@@ -340,14 +340,14 @@ class CreateMarket extends React.Component
             name="Market Description"
           />
           <br />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="address"
             label="Address"
             name="Address"
           />
-        <Field
+        <StyledField
             component={renderTextField}
             required
             id="city"
@@ -360,7 +360,7 @@ class CreateMarket extends React.Component
             display: 'inline-flex',
             justifyContent: 'space-between'
           }}>
-          <Field
+          <StyledField
               component={renderTextField}
               required
               id="state"
@@ -370,7 +370,7 @@ class CreateMarket extends React.Component
                 width: "48%" 
               }}
             />
-            <Field
+            <StyledField
               component={renderTextField}
               required
               id="zipcode"
@@ -380,25 +380,25 @@ class CreateMarket extends React.Component
             />
         </StyledContainer>
         <Container maxWidth="sm">
-        <Field
+        <StyledField
             component={renderTextField}
             id="website"
             label="Website"
             name="Website"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="facebook"
             label="Facebook"
             name="Facebook"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="twitter"
             label="Twitter"
             name="Twitter"
           />
-          <Field
+          <StyledField
             component={renderTextField}
             id="instagram"
             label="Instagram"
@@ -406,21 +406,22 @@ class CreateMarket extends React.Component
           />
         </Container>
         <StyleLeft>
-        <h5>Market Status</h5>
+        <h5 style={{fontFamily: "Raleway", marginBottom: "10px"}}>Market Status</h5>
         {/*Radio buttons, default to public market*/}
-      <Field name="market_type" component={renderRadioGroup}>
-        <div style={{display: "flex"}}>
-          <Radio value="Public" label="Public" name="Public"/>
-          <div style={{marginTop: "8px"}}>Public Market</div>
-        </div>
+      <StyledRadioField name="market_type" component={renderRadioGroup}>
+        <StyledRadioDiv>
+          <RadioStyled value="Public" label="Public" name="Public"/>
+          <StyledRadioDiv2>Public Market</StyledRadioDiv2>
+        </StyledRadioDiv>
         <br />
-        <div style={{display: "flex"}}>
-          <Radio id="Private" value="Private" label="Private" name="Private"/>
-          <div style={{marginTop: "8px", marginBottom: "10px"}}> Private Market</div>
-        </div>
-      </Field>
-        <h4>Market Days {'&'} Times Of Operation</h4>
-        <StyledDiv>
+        <StyledRadioDiv>
+          <RadioStyled id="Private" value="Private" label="Private" name="Private"/>
+          <StyledRadioDiv2 > Private Market</StyledRadioDiv2>
+        </StyledRadioDiv>
+      </StyledRadioField>
+      <hr></hr>
+        <h4 style={{fontFamily: "Raleway"}}>Market Days {'&'} Times Of Operation</h4>
+        <StyledDiv2>
   
             <StyledDays
               variant={this.state.sunday ? "contained" : "outlined"}
@@ -485,8 +486,8 @@ class CreateMarket extends React.Component
             >
               Sa
             </StyledDays>
-          </StyledDiv>
-          <div style={{display: "flex"}}>
+          </StyledDiv2>
+          <div style={{display: "flex", paddingBottom: "32px"}}>
           <TextField
             style={{marginLeft: "23%", marginTop: "25px"}}
             name="start"
@@ -541,17 +542,19 @@ class CreateMarket extends React.Component
         
         {this.state.operation.map(item => {
                         return (item.start !== null) ? 
-                        <StyledP><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp>
+                        <StyledP5><StyledUp style={{fontWeight: "600"}}> {item.day}:</StyledUp> <StyledUp2>{this.militaryConvert(item.start)} - {this.militaryConvert(item.end)}</StyledUp2>
                           <Field 
-                            component={renderButton} name="operation" 
+                            component={renderButton} 
+                            name="operation" 
+                            className="xButton"
                             label={"x"}  
                             size="small"
                             color="secondary" 
                             Style={{marginTop: "25px"}}
                             prefunc={(e) => this.deleteTime(e, item.day)}
                           />
-                            </StyledP> 
-                        : <StyledP> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP>
+                            </StyledP5> 
+                        : <StyledP5> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP5>
                     })}
         <br />
         </StyleLeft>  
@@ -565,10 +568,60 @@ class CreateMarket extends React.Component
   }
 };
 
+const Header = styled.div`
+  display: flex;
+  background-color: #478529;
+  color: white;
+  height: 60px;
+`;
+
+const StyledImg = styled.img`
+  margin-left: 16px;
+  margin-top: 0;
+  cursor: pointer; 
+  margin-right: 16px; 
+
+`;
+const CreateHeader = styled.h4`
+  margin-top: 20px;
+  font-family: Raleway;
+  font-size: 18px;
+`;
+
+const StyledRadioDiv = styled.div`
+  height: 25px;
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+`;
+
+const StyledRadioDiv2 = styled.div`
+  font-family: Raleway;
+  margin-top: 5px;
+  align-text: center;
+
+`;
+
+const StyledRadioField = styled(Field)`
+  height: 70px;
+  margin-bottom: 20px;
+`;
+
+const RadioStyled = styled(Radio)`
+  margin-bottom: 0;
+  margin-top: 0;
+`
+
+const StyledField = styled(Field)`
+.MuiInputBase-input{
+  font-family: Roboto;
+}
+  
+`;
 const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 50px 10px auto;
+  margin: 30px 10px auto;
   max-width: 520px;
   .MuiButton-root {
     height: 40px;
@@ -580,37 +633,66 @@ const StyledDiv = styled.div`
     
   }
   .MuiButton-label{
-    text-transform: capitalize;
-    font-family: Raleway;
     font-size: 16px;
-    font-weight: 500;
+    
   }
-
   .biggerButton {
-    width: 200px;
+      font-family: Raleway;
+      width: 300px;
+      height: 60px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 5px;
   }
-
   .MuiButton-outlined {
     border: 1.5px solid;
   }
 
+ `;
+ const StyledDiv2 = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 10px auto;
+  max-width: 520px;
+  .MuiButton-root {
+    height: 40px;
+    width: 13vh;
+    margin-left: 1%;
+    margin: 0 auto;
+    cursor: pointer;
+    min-width: 0;
+    
+  }
+  .MuiButton-label{
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+  .MuiButton-outlined {
+    border: 1.5px solid;
+  }
 
-`;
+ `;
+
 const StyledDays = styled(Button)`
   width: 14vw;
   margin-left: 1%;
 `;
 
+
+
 const SaveFix = styled.button`
   margin: 50px auto;
-  height: 50px;
-  font-size: 16px;
+  text-transform: uppercase;
+  height: 60px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
-  width: 200px;
+  width: 300px;
   border-radius: 5px;
   color: #fff;
   background-color: #478529;
   border: none;
+  margin-top: 10px;
   :disabled
   {
     background-color: #fff;
@@ -627,13 +709,13 @@ const StyledContainer = styled(Container)`
 
 
 `;
-const StyledTypography = styled(Typography)`
-  text-transform: capitalize;
-  .MuiTypography-body1 {
-    width: 300px;
-    color: blue;
-  }
-`;
+// const StyledTypography = styled(Typography)`
+//   text-transform: capitalize;
+//   .MuiTypography-body1 {
+//     width: 300px;
+//     color: blue;
+//   }
+// `;
 const StyleLeft = styled.div`
   text-align: left;
   max-width: 600px;
@@ -647,17 +729,37 @@ const StyleLeft = styled.div`
 
 const StyledUp = styled.div`
   text-transform: capitalize;
-  width: 150px;
+  width: 38%;
   font-size: 18px;
   font-family: Raleway;
 `;
 
-const StyledP = styled.p`
+const StyledUp2 = styled.div`
+  text-transform: capitalize;
+  width: 55%;
+  font-size: 18px;
+  font-family: Raleway;
+`;
+
+// const StyledP = styled.p`
+//   display: flex;
+//   font-size: 18px;
+//   font-family: Raleway;
+
+// `
+
+const StyledP5 = styled.div`
   display: flex;
   font-size: 18px;
   font-family: Raleway;
+  margin-top: 32px;
+  .xButton {
+    min-width: 2px;
+  }
+  @media(min-width: 450px){
+    max-width: 450px;
+  }
 `
-
 
 const mapStateToProps = state => {
   return {
@@ -670,7 +772,7 @@ const mapStateToProps = state => {
 const ReduxForms = reduxForm({
   form: "MaterialUiForm", // a unique identifier for this form
   validate
-})(connect(mapStateToProps, {})(CreateMarket));
+})(connect(mapStateToProps, {})(withRouter(CreateMarket)));
 
 
 class CreateMarketContainer extends React.Component
