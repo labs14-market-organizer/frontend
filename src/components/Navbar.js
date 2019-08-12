@@ -253,14 +253,14 @@ class Navbar extends React.Component {
         </StyledPaper>
       );
 
-      case "PRIVACY": 
+      case "/privacy": 
         return (
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -276,14 +276,14 @@ class Navbar extends React.Component {
         </StyledPaper>
       );
 
-      case "TERMS": 
+      case "/terms": 
         return (
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -320,7 +320,7 @@ class Navbar extends React.Component {
         <StyledImg src={cloud} width="100%" height="87px" />
           <StyledBox>
             <MenuIcon style={{pointerEvents: "auto"}} onClick={this.toggle} className="menuIcon" fontSize="large"/>
-            <div style={{pointerEvents: "auto"}}>{this.Menu()}</div>
+            <div>{this.Menu()}</div>
             <CloudText>CLOUD</CloudText>
             <StandsText>STANDS</StandsText>
             </StyledBox>
@@ -375,6 +375,7 @@ const StyledBox = styled(Box)`
   align-items: center;
   .menuIcon {
     padding: 0 16px;
+    pointer-events: auto;
     :hover {
       cursor: pointer;
     }
@@ -398,6 +399,10 @@ const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
 pointer-events: none;
+
+div {
+  pointer-events: auto;
+}
 
 img {
   margin-top: -25px;

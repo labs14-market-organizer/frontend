@@ -90,7 +90,7 @@ class Navbar extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><Button onClick={localStorage.clear()}>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -375,6 +375,7 @@ const StyledBox = styled(Box)`
   align-items: center;
   .menuIcon {
     padding: 0 16px;
+    pointer-events: auto;
     :hover {
       cursor: pointer;
     }
@@ -391,12 +392,16 @@ background-color: #484848;
 `
 
 const StyledImg = styled.img`
-z-index: -10
+z-index: -100
 `
 
 const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
+pointer-events: none;
+div {
+  pointer-events: auto;
+}
 
 img {
   margin-top: -25px;
