@@ -342,8 +342,23 @@ class CreateMarket extends React.Component
             id="description"
             label="Market Description"
             name="Market Description"
+            rows="3"
+            multiline
           />
-          <br /><StyledField
+          <StyledField
+            component={renderTextField}
+            required
+            id="rules"
+            label="Market Rules"
+            name="Market Rules"
+            rows="5"
+            multiline
+          />
+          <StyledRules>Rules, Code of Conduct, or anything the vendors need to acknowledge before they can join your market</StyledRules>
+          
+          <hr></hr>
+          <StyledContact>Contact Information</StyledContact>
+          <StyledField
             component={renderTextField}
             required
             id="email"
@@ -397,7 +412,13 @@ class CreateMarket extends React.Component
               name="Zip Code"
               style={{ width: "48%" }}
             />
+            
         </StyledContainer>
+        <Container>
+        <hr></hr>
+        
+        <StyledContact>Social Media</StyledContact>
+        </Container>
         <Container maxWidth="sm">
         <StyledField
             component={renderTextField}
@@ -587,6 +608,21 @@ class CreateMarket extends React.Component
   }
 };
 
+const StyledContact = styled.p`
+  font-family: Raleway;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.33;
+  text-align: left;
+`
+
+const StyledRules = styled.p`
+  font-family: Raleway;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #3a3a3a;
+  text-align: left;
+`;
 const Header = styled.div`
   display: flex;
   background-color: #478529;

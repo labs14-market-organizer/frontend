@@ -5,7 +5,6 @@ const normalizePhone = (value, previousValue) => {
     }
     const onlyNums = value.replace(/[^\d]/g, '')
     if (!previousValue || value.length > previousValue.length) {
-      console.log('hi')
       if (onlyNums.length === 3) {
         return onlyNums + '-'
       }

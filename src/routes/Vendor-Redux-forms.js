@@ -101,6 +101,7 @@ function validate (values) {
             facebook: '',
             twitter: '',
             instagram: ''
+            // email: this.props.checkUserData.userData.email
         };
         else this.isUpdating = true;
         this.state.electricity = String(this.state.electricity)
@@ -207,6 +208,7 @@ function validate (values) {
                         name="email"
                         margin="normal"
                         variant="outlined"
+                        value={this.state.email}
                         fullWidth={true}
                        
                     /><br></br>
@@ -223,7 +225,7 @@ function validate (values) {
                         normalize={normalizePhone}
                     />
                     <StyledContainer>
-                    
+                    <br></br>
                     <StyledP>What are the specific items you plan to sell?</StyledP>
                     
                     <FlexContainer>

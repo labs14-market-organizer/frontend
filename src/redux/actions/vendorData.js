@@ -123,6 +123,7 @@ export const deleteVendor = (vendorId) => dispatch =>
 function cleanData(vendor)
 {
     vendor.items = Array.isArray(vendor.items) ? vendor.items : JSON.parse(vendor.items);
+    let phoneNumber = vendor.phone.split('').filter(item => item !== "-"); //removed the dashes in the number.
     let clean = 
     {   
         name: vendor.name,
@@ -134,7 +135,9 @@ function cleanData(vendor)
         other_special: vendor.other_special,
         facebook: vendor.facebook ? vendor.facebook : "",
         twitter: vendor.twitter ? vendor.twitter : "",
-        instagram: vendor.instagram ? vendor.instagram : ""
+        instagram: vendor.instagram ? vendor.instagram : "",
+        phone: phoneNumber.join(''),
+        email: vendor.email
     }
 
     
@@ -144,7 +147,7 @@ function cleanData(vendor)
     let test = required.filter(x=> !clean[x] || clean[x].split(" ").join("") === "" || clean[x] === null);
     if(test.length > 0) return {error: `${test[0]} is a required field`}; //
     //This is a really complex way of seeing if any values in the clean that also live in required array (by key) are null undefined or "" " " "  " etc.
-    
+    console.log(clean)
     // clean = JSON.stringify(clean);
     return clean;
 }
