@@ -208,7 +208,6 @@ function validate (values) {
                         name="email"
                         margin="normal"
                         variant="outlined"
-                        value={this.state.email}
                         fullWidth={true}
                        
                     /><br></br>

@@ -155,6 +155,7 @@ function cleanData(market)
         twitter: market.Twitter ? market.Twitter : "",
         zipcode: market["Zip Code"],
         phone: phoneNumber.join(''),
+        rules: market.rules,
         email: market.email
     }
     if(market.Website && market.Website!=="") clean.website = market.Website;

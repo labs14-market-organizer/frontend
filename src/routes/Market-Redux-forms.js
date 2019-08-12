@@ -32,7 +32,8 @@ function validate (values) {
     "State",
     "Zip Code",
     "phone",
-    "email"
+    "email",
+    "rules"
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -161,6 +162,7 @@ class CreateMarket extends React.Component
           market_type: market.type,
           email: market.email,
           phone: market.phone,
+          rules: market.rules,
           operation: market.operation ? JSON.stringify(market.operation) : ""
         }
       )
@@ -350,7 +352,7 @@ class CreateMarket extends React.Component
             required
             id="rules"
             label="Market Rules"
-            name="Market Rules"
+            name="rules"
             rows="5"
             multiline
           />
@@ -414,7 +416,7 @@ class CreateMarket extends React.Component
             />
             
         </StyledContainer>
-        <Container>
+        <Container maxWidth="sm">
         <hr></hr>
         
         <StyledContact>Social Media</StyledContact>
