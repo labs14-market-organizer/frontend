@@ -258,9 +258,9 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -276,14 +276,14 @@ class Navbar extends React.Component {
         </StyledPaper>
       );
 
-      case "./terms": 
+      case "/terms": 
         return (
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li><Link to="landing"><Button>Home</Button></Link></li>
+          <li><Link to="signup"><Button >Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -320,7 +320,7 @@ class Navbar extends React.Component {
         <StyledImg src={cloud} width="100%" height="87px" />
           <StyledBox>
             <MenuIcon style={{pointerEvents: "auto"}} onClick={this.toggle} className="menuIcon" fontSize="large"/>
-            <div style={{pointerEvents: "auto"}}>{this.Menu()}</div>
+            <div>{this.Menu()}</div>
             <CloudText>CLOUD</CloudText>
             <StandsText>STANDS</StandsText>
             </StyledBox>
@@ -340,6 +340,9 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    @media   (min-resolution: 200dpi) {
+      margin-top: 8px;
+    }
     @media (max-width: 410px) {
       font-size: 40px;
     }
@@ -372,9 +375,10 @@ const StyledBox = styled(Box)`
   position: absolute;
   top: 0;
   margin-top: 2px;
-  align-items: center;
+  -webkit-align-items:center;
   .menuIcon {
     padding: 0 16px;
+    pointer-events: auto;
     :hover {
       cursor: pointer;
     }
@@ -398,6 +402,10 @@ const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
 pointer-events: none;
+
+div {
+  pointer-events: auto;
+}
 
 img {
   margin-top: -25px;

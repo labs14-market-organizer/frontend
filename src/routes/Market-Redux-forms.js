@@ -674,8 +674,8 @@ const StyledDiv = styled.div`
  `;
 
 const StyledDays = styled(Button)`
-  width: 14vw;
-  margin-left: 1%;
+  width: 10vw;
+  margin-left: 0 auto;
 `;
 
 
