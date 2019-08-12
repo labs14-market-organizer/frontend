@@ -30,7 +30,9 @@ function validate (values) {
     "Address",
     "City",
     "State",
-    "Zip Code"
+    "Zip Code",
+    "phone",
+    "email"
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -157,6 +159,8 @@ class CreateMarket extends React.Component
           Twitter: market.twitter,
           Instagram: market.instagram,
           market_type: market.type,
+          email: market.email,
+          phone: market.phone,
           operation: market.operation ? JSON.stringify(market.operation) : ""
         }
       )
@@ -339,7 +343,21 @@ class CreateMarket extends React.Component
             label="Market Description"
             name="Market Description"
           />
-          <br />
+          <br /><StyledField
+            component={renderTextField}
+            required
+            id="email"
+            label="Market Email Address"
+            name="email"
+          />
+          <StyledField
+            component={renderTextField}
+            required
+            id="phone"
+            type="number"
+            label="Market Phone Number"
+            name="phone"
+          />
         <StyledField
             component={renderTextField}
             required
