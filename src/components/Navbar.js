@@ -372,7 +372,7 @@ const StyledBox = styled(Box)`
   position: absolute;
   top: 0;
   margin-top: 2px;
-  align-items: center;
+  -webkit-align-items:center;
   .menuIcon {
     padding: 0 16px;
     pointer-events: auto;
