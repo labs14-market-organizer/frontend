@@ -554,7 +554,7 @@ class CreateMarket extends React.Component
                             prefunc={(e) => this.deleteTime(e, item.day)}
                           />
                             </StyledP5> 
-                        : <StyledP5> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP5>
+                        : <StyledP5> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> CLOSED </StyledP5>
                     })}
         <br />
         </StyleLeft>  
