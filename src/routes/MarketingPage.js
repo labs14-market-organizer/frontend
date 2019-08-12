@@ -244,6 +244,10 @@ const Hero = styled(Paper)`
   max-height: 450px;
   box-sizing: border-box;
   text-align: left;
+  @media(max-width: 380px) {
+    height: 500px;
+    max-height: 500px;
+  }
   .MuiButton-fullWidth {
     max-width: 400px;
   }
@@ -293,6 +297,9 @@ const Box2 = styled(Box)`
   width: 30px;
   background-color: #478529;
   border-radius: 10px 0px 0px 10px;
+  @media(max-width: 380px) {
+    height: 280px;
+  }
 `;
 
 const Box3 = styled(Box)`
@@ -480,6 +487,10 @@ const Step1Container = styled(Box)`
   margin-top: 12px;
   align-items: center;
   height: 230px;
+  @media(max-width: 321px) {
+    margin-bottom: 22px;  
+    }
+
 `;
 
 const Step1Label = styled(Box)`
@@ -534,6 +545,9 @@ const Step2Container = styled(Box)`
   margin-top: 12px;
   align-items: center;
   height: 230px;
+  @media(max-width: 321px) {
+    margin-bottom: 22px;  
+    }
 `;
 
 const Step2Label = styled(Box)`
@@ -550,7 +564,9 @@ const Step2Label = styled(Box)`
   justify-content: flex-end;
   align-items: center;
   position: absolute;
-
+  @media(max-width: 321px) {
+  height: 250px;
+  }
   .MuiTypography-subtitle2 {
     font-size: 22px;
     margin-right: -12px;
@@ -571,6 +587,9 @@ const Step2Paper = styled(Paper)`
   box-sizing: border-box;
   width: 100%;
   margin-left: 104px;
+  @media(max-width: 321px) {
+  height: 250px;
+  }
   .MuiTypography-body1 {
     margin-top: 24px;
     font-size: 16px;
@@ -587,7 +606,15 @@ const Step3Container = styled(Box)`
   align-items: center;
   height: 230px;
   @media(max-width: 360px) {
-    margin-top: 20px;
+    margin-top: 18px;
+
+    margin-bottom: 20px;
+
+
+  }
+
+  @media(max-width: 321px) {
+    margin-top: 30px;
     margin-bottom: 20px;
 
 
@@ -615,11 +642,12 @@ const Step3Label = styled(Box)`
   justify-content: flex-end;
   align-items: center;
   position: absolute;
-  @media(max-width: 360px) {
-    height: 250px;
-
+  @media(max-width: 368px) {
+    height: 262px;
+    margin-top: 8px;
 
   }
+
 
   .MuiTypography-subtitle2 {
     font-size: 22px;
@@ -641,9 +669,9 @@ const Step3Paper = styled(Paper)`
   width: 100%;
   margin-left: 132px;
 
-  @media(max-width: 360px) {
-    height: 250px;
-
+  @media(max-width: 368px) {
+    height: 260px;
+    margin-top: 16px;
 
   }
 
@@ -685,6 +713,10 @@ const TitleBox = styled(Box)`
     background-color: #478529;
     /* padding-left: 0px; */
     margin-bottom: 12px;
+    @media(max-width: 368px) {
+    margin-top: 34px;
+
+  }
 
     /* text-align: right; */
     /* padding-right: 24px; */
