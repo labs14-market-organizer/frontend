@@ -68,6 +68,30 @@ class Navbar extends React.Component {
         </StyledPaper> 
       );
 
+      case "/landing":
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Link to="/"><Button>Home</Button></Link></li>
+            <li><Button>Vendor History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li>
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button onClick={localStorage.clear()}>Sign Out</Button></li> 
+          </ul>
+        </StyledPaper> 
+      );
+
      
       case "/team": 
       return (
@@ -317,7 +341,8 @@ const StyledBox = styled(Box)`
   position: absolute;
   top: 0;
   margin-top: 2px;
-  align-items: center;
+  /* align-items: center; */
+  -webkit-align-items:center;
 
   .menuIcon {
     padding: 0 16px;
