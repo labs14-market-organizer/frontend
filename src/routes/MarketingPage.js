@@ -706,6 +706,7 @@ const TitleBox = styled(Box)`
     background-color: #044d4c;
     /* text-align: right; */
     padding-right: 24px;
+    margin-top: -5px;
   }
 
   &&.testimonial {
