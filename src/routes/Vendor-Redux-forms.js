@@ -270,7 +270,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /> <StyledP>Need Electricity</StyledP>
+                    /> <StyledP1>Need Electricity</StyledP1>
                     </FlexContainer>
                     <FlexContainer>
                     <Field
@@ -279,7 +279,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /><StyledP>Need Ventilation</StyledP>
+                    /><StyledP1>Need Ventilation</StyledP1>
                     </FlexContainer>
                     <FlexContainer>
                     <Field
@@ -288,7 +288,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /><StyledP>Have loud machinery</StyledP>
+                    /><StyledP1>Have loud machinery</StyledP1>
                     </FlexContainer>
                    <FlexContainer>
                   <Checkbox checked={this.shouldCheck()}/>
@@ -297,7 +297,7 @@ function validate (values) {
                         label="Other"
                         name="other_special"
                         component={renderTextField}
-                        style={{fontFamily:"Raleway"}}
+                        style={{fontFamily:"Raleway", marginTop: "-12px"}}
                         onBlur={(e)=> this.setState({...this.state, other_special: e.target.value})}
                      />
                     </FlexContainer>
@@ -359,6 +359,7 @@ const AddButton = styled(Button)`
   color: #044d4c;
   font-family: Raleway;
   font-size: 16px;
+  margin-top: 5px;
 `;
 
 const StyledField = styled(Field)`
@@ -408,7 +409,8 @@ const GreenButton = styled(Button)`
 
 const StyledP = styled.p`
   font-family: Raleway;
-  font-size: 16px;
+  font-size: 12px;
+  font-weight: bold;
   line-height: 1.5;
 `;
 
@@ -416,7 +418,7 @@ const StyledP1 = styled.p`
 font-family: Raleway;
 font-size: 16px;
 line-height: 1.2;
-margin-top: 2px;
+
 `;
 
 
@@ -428,6 +430,7 @@ const FlexColumn = styled.div`
 
 const FlexContainer = styled.div`
   display: flex;
+  margin-top: -10px;
 `;
 const StyledContainer = styled.div`
   text-align: left;
