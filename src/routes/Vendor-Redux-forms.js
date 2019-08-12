@@ -418,7 +418,7 @@ const StyledP1 = styled.p`
 font-family: Raleway;
 font-size: 16px;
 line-height: 1.2;
-
+margin-top: 2px;
 `;
 
 
