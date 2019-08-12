@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
 import {Redirect,  withRouter } from "react-router-dom";
-
+import normalizePhone from "./NormalizePhone";
 
 function validate (values) {
   const errors = {};
@@ -354,9 +354,10 @@ class CreateMarket extends React.Component
             component={renderTextField}
             required
             id="phone"
-            type="number"
+            type="text"
             label="Market Phone Number"
             name="phone"
+            normalize={normalizePhone}
           />
         <StyledField
             component={renderTextField}
