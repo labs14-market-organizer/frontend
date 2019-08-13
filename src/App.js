@@ -47,6 +47,7 @@ class App extends React.Component {
   componentWillMount() {
     //async check on second pass
     this.props.getUserData();
+  
   }
 
   componentWillUpdate() 

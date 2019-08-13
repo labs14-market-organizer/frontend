@@ -148,7 +148,7 @@ function cleanData(market)
         facebook: market.Facebook ? market.Facebook : "",
         //image: market.image,
         instagram: market.Instagram ? market.Instagram : "",
-        type: market.market_type === "Public" ? 1 : 2,
+        type: market.market_type === "Public" ? 1 : 1,
         name: market["Market Name"],
         operation: cleanopp ? cleanopp : [],
         state: market.State,

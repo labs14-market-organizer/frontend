@@ -124,7 +124,8 @@ class CreateMarket extends React.Component
       start: 1200,
       end: 1200,
       daysList: [],
-      radio: "Public Market"
+      radio: "Public Market",
+      email: this.props.checkUserData.userData.email
     };
     if(this.props.market)
     {
@@ -166,6 +167,8 @@ class CreateMarket extends React.Component
           operation: market.operation ? JSON.stringify(market.operation) : ""
         }
       )
+    } else {
+      this.props.initialize(this.state)
     }
   }
 

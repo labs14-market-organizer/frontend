@@ -12,7 +12,7 @@ export const ERROR_LOCAL_DATA_BAD_DATA = "ERROR_LOCAL_DATA_BAD_DATA";
 export const GET_USER_DATA_START = "GET_USER_DATA_START";
 export const GET_USER_DATA_END = "GET_USER_DATA_END";
 export const ERROR_GET_USER_DATA = "ERROR_GET_USER_DATA";
-
+let count = 0;
 export const getUserData = (token=null) => dispatch => {
     dispatch({ type: GET_USER_DATA_START });
     
@@ -25,6 +25,8 @@ export const getUserData = (token=null) => dispatch => {
     return axiosWithAuth(token)
         .get(`${HOST_URL}/user`)
         .then(res => {
+            console.log(res.data)
+            count = 0;
             if(!res.data) throw "interal client error";
             let userType = "undefined";
             try { 
@@ -39,7 +41,11 @@ export const getUserData = (token=null) => dispatch => {
             return dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}});
         })
     .catch(err => {
+            count++;
             dispatch({ type: ERROR_GET_USER_DATA, payload: {error: err} });
+            if (count > 10){
+                localStorage.clear();
+            }
         })
 };
 

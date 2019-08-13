@@ -100,8 +100,8 @@ function validate (values) {
             website: '',
             facebook: '',
             twitter: '',
-            instagram: ''
-            // email: this.props.checkUserData.userData.email
+            instagram: '',
+            email: this.props.checkUserData.userData.email
         };
         else this.isUpdating = true;
         this.state.electricity = String(this.state.electricity)
