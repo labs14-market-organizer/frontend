@@ -458,7 +458,7 @@ class CreateMarket extends React.Component
         <br />
         <StyledRadioDiv>
           <RadioStyled id="Private" value="Private" label="Private" name="Private" disabled={true}/>
-          <StyledRadioDiv2 > Private Market</StyledRadioDiv2>
+          <StyledRadioDiv2 > <span style={{color: "gray"}}> Private Market</span> <span style={{fontStyle: "italic"}}>(Coming Soon)</span></StyledRadioDiv2>
         </StyledRadioDiv>
       </StyledRadioField>
       <hr></hr>
