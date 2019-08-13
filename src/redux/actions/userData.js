@@ -25,7 +25,6 @@ export const getUserData = (token=null) => dispatch => {
     return axiosWithAuth(token)
         .get(`${HOST_URL}/user`)
         .then(res => {
-            console.log(res.data)
             count = 0;
             if(!res.data) throw "interal client error";
             let userType = "undefined";
