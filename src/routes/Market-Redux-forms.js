@@ -624,6 +624,10 @@ const StyledRules = styled.p`
   line-height: 1.5;
   color: #3a3a3a;
   text-align: left;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: -5px;
+  margin-bottom: 10px;
 `;
 const Header = styled.div`
   display: flex;

@@ -137,7 +137,7 @@ export const localMarketSwitch = (market) => dispatch =>
 function cleanData(market)
 {
     market.operation = JSON.parse(market.operation);
-    let phoneNumber = market.phone.split('').filter(item => item !== "-"); //removed the dashes in the number.
+    // let phoneNumber = market.phone.split('').filter(item => item !== "-"); //removed the dashes in the number.
     let cleanopp = null;
     if(market.operation && market.operation.length) cleanopp = market.operation.map(x=> {return {day: x.day, start: x.start, end: x.end}});
     let clean = 
@@ -154,7 +154,7 @@ function cleanData(market)
         state: market.State,
         twitter: market.Twitter ? market.Twitter : "",
         zipcode: market["Zip Code"],
-        phone: phoneNumber.join(''),
+        phone: market.phone,
         rules: market.rules,
         email: market.email
     }
