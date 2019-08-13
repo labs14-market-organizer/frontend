@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Mixpanel } from '../redux/actions/mixpanel';
 
 
@@ -35,20 +35,29 @@ class ViewMyMarket extends React.Component{
 
 
   render() {
-  let market = this.props.marketData
+  let market = this.props.marketData;
+  if(!market) return <Redirect to={this.props.back ? this.props.back : "/"} />;
+  let editing = this.props.userData.id === this.props.marketData.admin_id;
   return (
       <div>
           <Header>
-                <Link to="/">
-                  <img src={Arrow} style={{marginLeft: "25px",
-                  marginTop: "18px"}}/>
-                </Link>
-                 <CreateHeader>View Market</CreateHeader>
-                </Header>
+            {this.props.backcb ?
+              <div onClick={this.props.backcb}>
+                <img src={Arrow} style={{marginLeft: "25px",
+                marginTop: "18px"}}/>
+              </div>
+            :
+              <Link to={this.props.back ? this.props.back : "/"}>
+                <img src={Arrow} style={{marginLeft: "25px",
+                marginTop: "18px"}}/>
+              </Link>}
+        
+            <CreateHeader>{this.props.name ? this.props.name : "View Market"}</CreateHeader>
+          </Header>
         
       
         <Container>
-            <MarketName>{market.name}</MarketName>
+            <MarketName className="MarketName">{market.name}</MarketName> {/*added tag for test*/}
             <MarketDescription>{market.description}</MarketDescription>
             <Tag>Address</Tag>
             <Ltag>{market.address}</Ltag>
@@ -62,19 +71,32 @@ class ViewMyMarket extends React.Component{
             { (market.facebook && market.facebook.length > 0) ? <div><Tag>Facebook</Tag> <Ltag>{market.facebook}</Ltag></div>: null }
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
-            <Flex>
-              <Link to="/addbooths"  onClick={() => Mixpanel.track('User clicked to edit booths')}>
-                <WhiteButton variant="outlined">Edit Booths</WhiteButton>
-              </Link>
-              <Link to="/createmarket" style={{ textDecoration: "none"}}  onClick={() => Mixpanel.track('User clicked to edit market')}>
-                <GreenButton variant="outlined">Edit Market</GreenButton>
-              </Link>
-            </Flex> 
+            { editing ? this.editingRender() : this.boothRender()}
         </Container>
         </div>
     )
     }
+    boothRender()
+    {
+      return(
+        <div>BOOTHS</div>
+      )
+    }
+    editingRender()
+    {
+      return (
+        <Flex>
+        <Link to="/addbooths"  onClick={() => Mixpanel.track('User clicked to edit booths')}>
+          <WhiteButton variant="outlined">Edit Booths</WhiteButton>
+        </Link>
+        <Link to="/createmarket" style={{ textDecoration: "none"}}  onClick={() => Mixpanel.track('User clicked to edit market')}>
+          <GreenButton variant="outlined">Edit Market</GreenButton>
+        </Link>
+      </Flex> 
+      )
+    }
   }
+
 
 const Header = styled.div`
   display: flex;
@@ -159,7 +181,8 @@ const Ltag = styled.p`
 
 const mapStateToProps = state => {
     return {
-      ...state.checkMarketData
+      ...state.checkMarketData,
+      ...state.checkUserData
     };
   };
   
