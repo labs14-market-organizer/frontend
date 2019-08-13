@@ -90,7 +90,7 @@ class Navbar extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><Button onClick={localStorage.clear()}>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -346,6 +346,9 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    @media   (min-resolution: 200dpi) {
+      margin-top: 8px;
+    }
     @media (max-width: 390px) {
       font-size: 40px; 
     }
@@ -375,6 +378,7 @@ const StyledBox = styled(Box)`
   align-items: center;
   .menuIcon {
     padding: 0 16px;
+    pointer-events: auto;
     :hover {
       cursor: pointer;
     }
@@ -391,12 +395,16 @@ background-color: #484848;
 `
 
 const StyledImg = styled.img`
-z-index: -10
+z-index: -100
 `
 
 const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
+pointer-events: none;
+div {
+  pointer-events: auto;
+}
 
 img {
   margin-top: -25px;
