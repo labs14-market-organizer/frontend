@@ -75,7 +75,7 @@ const renderRadioGroup = ({ label, input, meta: { dirty, error }, ...rest}) => (
     errorText={true}
     {...input}
     {...rest}
-    valueSelected={input.value}
+    valueSelected={input.value} //should be input.value
     onChange={(event, value) => input.onChange(value)}
     style={dirty && error ? {border: "solid red 2px"} : {}}
   />
@@ -452,12 +452,12 @@ class CreateMarket extends React.Component
         {/*Radio buttons, default to public market*/}
       <StyledRadioField name="market_type" component={renderRadioGroup}>
         <StyledRadioDiv>
-          <RadioStyled value="Public" label="Public" name="Public"/>
+          <RadioStyled value="Public" label="Public" name="Public" checked="checked"/>
           <StyledRadioDiv2>Public Market</StyledRadioDiv2>
         </StyledRadioDiv>
         <br />
         <StyledRadioDiv>
-          <RadioStyled id="Private" value="Private" label="Private" name="Private"/>
+          <RadioStyled id="Private" value="Private" label="Private" name="Private" disabled={true}/>
           <StyledRadioDiv2 > Private Market</StyledRadioDiv2>
         </StyledRadioDiv>
       </StyledRadioField>
