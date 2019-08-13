@@ -24,7 +24,7 @@ class TokenCollect extends React.Component
     var expr = this.props.location.search.split("&exp=")[1];
     } catch { return this.props.history.push("/");}
     if(token && token.split(" ").join("") !== "" && expr && expr.split(" ").join("") !== "") {
-      this.props.setLocalData(token);
+      this.props.setLocalData(token, expr)
     } else {
       this.props.history.push("/")
     }
