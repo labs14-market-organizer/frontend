@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
 import {Redirect,  withRouter } from "react-router-dom";
-
+import normalizePhone from "./NormalizePhone";
 
 function validate (values) {
   const errors = {};
@@ -30,7 +30,10 @@ function validate (values) {
     "Address",
     "City",
     "State",
-    "Zip Code"
+    "Zip Code",
+    "phone",
+    "email",
+    "rules"
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -72,7 +75,7 @@ const renderRadioGroup = ({ label, input, meta: { dirty, error }, ...rest}) => (
     errorText={true}
     {...input}
     {...rest}
-    valueSelected={input.value}
+    valueSelected={input.value} //should be input.value
     onChange={(event, value) => input.onChange(value)}
     style={dirty && error ? {border: "solid red 2px"} : {}}
   />
@@ -121,7 +124,8 @@ class CreateMarket extends React.Component
       start: 1200,
       end: 1200,
       daysList: [],
-      radio: "Public Market"
+      radio: "Public Market",
+      email: this.props.checkUserData.userData.email
     };
     if(this.props.market)
     {
@@ -157,9 +161,14 @@ class CreateMarket extends React.Component
           Twitter: market.twitter,
           Instagram: market.instagram,
           market_type: market.type,
+          email: market.email,
+          phone: market.phone,
+          rules: market.rules,
           operation: market.operation ? JSON.stringify(market.operation) : ""
         }
       )
+    } else {
+      this.props.initialize(this.state)
     }
   }
 
@@ -338,8 +347,38 @@ class CreateMarket extends React.Component
             id="description"
             label="Market Description"
             name="Market Description"
+            rows="3"
+            multiline
           />
-          <br />
+          <StyledField
+            component={renderTextField}
+            required
+            id="rules"
+            label="Market Rules"
+            name="rules"
+            rows="5"
+            multiline
+          />
+          <StyledRules>Rules, Code of Conduct, or anything the vendors need to acknowledge before they can join your market</StyledRules>
+          
+          <hr></hr>
+          <StyledContact>Contact Information</StyledContact>
+          <StyledField
+            component={renderTextField}
+            required
+            id="email"
+            label="Market Email Address"
+            name="email"
+          />
+          <StyledField
+            component={renderTextField}
+            required
+            id="phone"
+            type="text"
+            label="Market Phone Number"
+            name="phone"
+            normalize={normalizePhone}
+          />
         <StyledField
             component={renderTextField}
             required
@@ -378,7 +417,13 @@ class CreateMarket extends React.Component
               name="Zip Code"
               style={{ width: "48%" }}
             />
+            
         </StyledContainer>
+        <Container maxWidth="sm">
+        <hr></hr>
+        
+        <StyledContact>Social Media</StyledContact>
+        </Container>
         <Container maxWidth="sm">
         <StyledField
             component={renderTextField}
@@ -410,13 +455,13 @@ class CreateMarket extends React.Component
         {/*Radio buttons, default to public market*/}
       <StyledRadioField name="market_type" component={renderRadioGroup}>
         <StyledRadioDiv>
-          <RadioStyled value="Public" label="Public" name="Public"/>
+          <RadioStyled value="Public" label="Public" name="Public" checked="checked"/>
           <StyledRadioDiv2>Public Market</StyledRadioDiv2>
         </StyledRadioDiv>
         <br />
         <StyledRadioDiv>
-          <RadioStyled id="Private" value="Private" label="Private" name="Private"/>
-          <StyledRadioDiv2 > Private Market</StyledRadioDiv2>
+          <RadioStyled id="Private" value="Private" label="Private" name="Private" disabled={true}/>
+          <StyledRadioDiv2 > <span style={{color: "gray"}}> Private Market</span> <span style={{fontStyle: "italic"}}>(Coming Soon)</span></StyledRadioDiv2>
         </StyledRadioDiv>
       </StyledRadioField>
       <hr></hr>
@@ -554,7 +599,7 @@ class CreateMarket extends React.Component
                             prefunc={(e) => this.deleteTime(e, item.day)}
                           />
                             </StyledP5> 
-                        : <StyledP5> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> Closed </StyledP5>
+                        : <StyledP5> <StyledUp style={{fontWeight: "600"}}>{item.day}:</StyledUp> CLOSED </StyledP5>
                     })}
         <br />
         </StyleLeft>  
@@ -568,6 +613,25 @@ class CreateMarket extends React.Component
   }
 };
 
+const StyledContact = styled.p`
+  font-family: Raleway;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.33;
+  text-align: left;
+`
+
+const StyledRules = styled.p`
+  font-family: Raleway;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #3a3a3a;
+  text-align: left;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: -5px;
+  margin-bottom: 10px;
+`;
 const Header = styled.div`
   display: flex;
   background-color: #478529;

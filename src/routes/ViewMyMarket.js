@@ -104,13 +104,15 @@ const Container = styled.div`
 `
 const MarketName = styled.p`
   font-size: 18px;
+  font-family: Raleway;
   @media(min-width: 600px){
     font-size: 26px;
   }
 `
 const MarketDescription = styled.p`
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
+  font-family: Roboto;
 `;
 
 const Tag = styled.p`
@@ -154,7 +156,8 @@ const GreenButton = styled(Button)`
 
 const Ltag = styled.p`
   font-size: 16px;
-  font-family: Raleway;
+  font-family: Roboto;
+  line-height: 1.5;
   @media(min-width: 600px){
     font-size: 20px;
   }
