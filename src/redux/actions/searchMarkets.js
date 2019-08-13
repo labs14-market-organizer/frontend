@@ -22,7 +22,14 @@ export const searchMarkets = (query) => dispatch =>
             })
         })
         .catch(err => {
-            console.log(err.response);
-            dispatch({ type: GET_MARKETS_BY_AREA__ERROR, payload: {error: err.response.data.message }})
+            let error = err && err.response && err.response.data && err.response.data.message ? err.response.data.message : "Unable to contact server. Please Try again."
+            dispatch({ type: GET_MARKETS_BY_AREA__ERROR, payload: {error: error }})
         })
+}
+
+export const clearSearch = () => dispatch => 
+{
+    dispatch({ type: GET_MARKETS_BY_AREA__DATA_END, 
+        payload: {marketsBySearch: undefined}
+    })
 }
