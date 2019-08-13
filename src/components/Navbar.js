@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import {Link} from "react-router-dom";
 import cloud from "../assets/cloud.svg";
+import desktopCloud from "../assets/desktopNavCloud.svg";
 import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -317,13 +318,21 @@ class Navbar extends React.Component {
         return <NavVendor name={userName} vendorName={objName}/>
     return(
       <StyledDiv>
-        <StyledImg src={cloud} width="100%" height="87px" />
+        <StyledImg className="mobile" src={cloud} width="100%" height="87px" />
+        <StyledImg className="desktop" src={desktopCloud} width="100%" height="110px" />
           <StyledBox>
             <MenuIcon style={{pointerEvents: "auto"}} onClick={this.toggle} className="menuIcon" fontSize="large"/>
             <div>{this.Menu()}</div>
+            
             <CloudText>CLOUD</CloudText>
             <StandsText>STANDS</StandsText>
             </StyledBox>
+            <StyledNav> 
+            <Link to="/team">Meet the Team</Link>
+            <Link to="/signup">Sign in</Link>
+            <Link to="/signup"><Button variant="outlined" color="primary">Sign up </Button></Link>
+            </StyledNav>
+
         </StyledDiv>
     )
   }
@@ -340,6 +349,7 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    
     @media   (min-resolution: 200dpi) {
       margin-top: 8px;
     }
@@ -353,10 +363,15 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     @media (max-width: 350px) {
       font-size: 30px;  
     }
+    @media (min-width: 600px) {
+
+      margin-left: 100px;
+}
 `;
 
-const StandsText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
-    font-family: "Raleway Dots";
+const StandsText = styled(({ variant, ...otherProps}) => <Typography fontWeight={200} variant="h3" {...otherProps} />)`
+    font-family: "Raleway";
+    font-weight: 200;
     color: black;
     @media (max-width: 410px) {
       font-size: 40px;
@@ -367,6 +382,8 @@ const StandsText = styled(({ variant, ...otherProps}) => <Typography variant="h3
     @media (max-width: 350px) {
       font-size: 30px;
     }
+
+
 `;
 
 const StyledBox = styled(Box)`
@@ -379,6 +396,9 @@ const StyledBox = styled(Box)`
   .menuIcon {
     padding: 0 16px;
     pointer-events: auto;
+    @media (min-width: 600px) {
+      display: none;
+    }
     :hover {
       cursor: pointer;
     }
@@ -396,12 +416,16 @@ background-color: #484848;
 
 const StyledImg = styled.img`
 z-index: -100;
+
+
 `
 
 const StyledDiv = styled.div`
 position: fixed;
 z-index: 5000;
 pointer-events: none;
+display: flex;
+flex-wrap: nowrap;
 
 div {
   pointer-events: auto;
@@ -413,6 +437,32 @@ img {
   width: 100vw;
   opacity: .985;
   filter: blur(1px);
+  
+}
+.mobile {
+  @media (min-width: 600px) {
+
+  display: none;
+  }
+}
+ overflow-x: hidden;
+.desktop {
+  height: 165px;
+  display: none;
+  width: 1440px;
+  @media (min-width: 600px) {
+
+display: inherit
+}
+@media (min-width: 1440px) {
+width: 1920px;
+}
+@media (min-width: 1921px) {
+width: 2560px;
+}
+@media (min-width: 2561px) {
+width: 3200px;
+}
 }
 
 `
@@ -489,6 +539,32 @@ Button {
     background-color: rgba(71, 133, 41, 0.5);
   }
 
+}
+
+`
+const StyledNav = styled.div`
+  display: none;
+  @media (min-width: 600px) {
+    display: inline-block;
+  z-index: 60000;
+  }
+  /* display:  flex; */
+  /* margin-right: -500px; */
+
+a {
+margin-right: 32px;
+  text-decoration: none;
+  color: black;
+  font-family: "raleway";
+  font-weight: 600;
+
+}
+
+.MuiButton-root {
+  font-family: "raleway";
+  font-weight: 600;
+  border-radius: 10px;
+  text-transform: capitalize;
 }
 `
 

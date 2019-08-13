@@ -163,14 +163,14 @@ const MarketingPage = () => {
           Stands helps keep everyone organized and informed”
         </Typography>
         </CardContent>
-      </TestimonialCard>
-      <Box7/>
-      </TestimonialWrapper>
       <StyledLink2 to="/signup">
         <Button fullWidth="true" variant="contained" color="primary" label="CTA" onClick={() => Mixpanel.track('joined button clicked')}>
           JOIN CLOUD STANDS
         </Button>
       </StyledLink2>
+      </TestimonialCard>
+      <Box7/>
+      </TestimonialWrapper>
       <Footer />
     </>
 
@@ -204,20 +204,28 @@ const StyledLink2 = styled(Link)`
   &:active {
     text-decoration: none;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     
   }
   .MuiButton-fullWidth  {
     max-width: 424px;
-    margin-left: 22px;
-    margin-right: 38px;
+    margin: 0 16px 16px 16px;
+    /* margin-bottom: 16px; */
     
     height: 60px;
     /* margin-bottom:78px; */
     font-family: "Raleway";
     font-size: 18px;
     font-weight: bold;
-    
+    @media (max-width: 333px) {
+      font-size: 16px;
+    }
+    @media (max-width: 311px) {
+      font-size: 14px;
+    }
+    @media (max-width: 291px) {
+      font-size: 10px;
+    }
   }
 `;
 const StyledDiv = styled.div`
@@ -244,12 +252,17 @@ const Hero = styled(Paper)`
   max-height: 450px;
   box-sizing: border-box;
   text-align: left;
+  @media (min-width: 600px) {
+margin-top: 12px;
+padding-left: 100px;
+}
   @media(max-width: 380px) {
     height: 500px;
     max-height: 500px;
   }
   .MuiButton-fullWidth {
     max-width: 400px;
+    
   }
 
   .MuiTypography-subtitle1 {
@@ -261,6 +274,10 @@ const Hero = styled(Paper)`
     line-height: 36px;
     margin-bottom: 31px;
     margin-top: 40px;
+    @media (min-width: 600px) {
+    font-size: 48px;
+    
+  }
 
     span {
       font-weight: normal;
@@ -273,13 +290,24 @@ const Hero = styled(Paper)`
     font-weight: normal;
     margin-bottom: 41px;
     text-align: left;
+    @media (min-width: 600px) {
+  max-width: 660px;
+  }
   }
   .MuiButton-fullWidth {
     font-weight: bold;
     font-size: 18px;
     margin-left: -8px;
     height: 60px;
-    
+    @media (max-width: 333px) {
+      font-size: 16px;
+    }
+    @media (max-width: 311px) {
+      font-size: 14px;
+    }
+    @media (max-width: 291px) {
+      font-size: 10px;
+    }
 
   }
 `;
@@ -291,6 +319,9 @@ const Box1 = styled(Box)`
   background-color: #044d4c;
   margin-bottom: 12px;
   border-radius: 10px 0px 0px 10px;
+  @media (min-width: 600px) {
+margin-top: -86px;
+  }
 `;
 const Box2 = styled(Box)`
   height: 230px;
@@ -354,7 +385,7 @@ const Box5 = styled(Box)`
 const Box6 = styled(Box)`
   position: absolute;
   box-sizing: border-box;
-  height: 352px;
+  height: 416px;
   width: 10px;
   background-color: #ce8400;
   position: absolute;
@@ -363,7 +394,7 @@ const Box6 = styled(Box)`
 `;
 
 const Box7 = styled(Box)`
-  height: 352px;
+  height: 416px;
   width: 28px;
   background-color: #044d4c;
   

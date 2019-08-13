@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 import {
   Typography,
   Container,
@@ -16,7 +17,7 @@ const Footer = () => {
       <Typography variant="subtitle1">Cloud Stands</Typography>
 
 <StyledGridList cellHeight={26}>
-        <ListItem Button>Meet the Team</ListItem>
+        <ListItem Button to="team">Meet the Team</ListItem>
         <ListItem Button>Support</ListItem>
         <ListItem Button>About</ListItem>
         <ListItem Button>Contact</ListItem>
