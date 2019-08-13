@@ -100,6 +100,7 @@ const StyledContainer = styled(Container)`
     @media(min-width: 600px){
     width: 600px;
     padding-top: 100px;
+    max-height: 100vh;
   }
   #visible {
         opacity: 1.0;
@@ -147,14 +148,13 @@ const Popup = styled.div`
     position: fixed;
     top: 0px;
     margin: 0 auto;
-    overflow: scroll;
     max-height: 100vh;
     #visible {
         opacity: 1.0;
         transition: opacity 0.6s ease-in;
         background-color: white;
-        min-height: 100vh;
-        width: 100vw;
+        min-height: 99vh;
+        width: 99vw;
     }
   #invisible {
     opacity: 0.0;
