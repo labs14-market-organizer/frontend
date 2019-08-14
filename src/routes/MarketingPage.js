@@ -14,6 +14,9 @@ import {
   CardContent,
   CardAction }
 from "@material-ui/core";
+
+import carrot from "../assets/carrot.svg";
+import apple from "../assets/apple.svg";
 import lettuce from "../assets/lettuce.png";
 import tomato from "../assets/tomato.png";
 import step1 from "../assets/step1.svg";
@@ -70,10 +73,13 @@ const MarketingPage = () => {
           <Box1 />
           <Box2 />
         </BoxCol>
+        <Box8 />
+
       </StyledDiv>
       <TitleBox>
         <Typography variant="subtitle1">WHO IS IT FOR?</Typography>
       </TitleBox>
+      <WhoisitforWrap>
       <Box3 />
 
       <SmallMarkets>
@@ -102,6 +108,8 @@ const MarketingPage = () => {
         </Vendors>
         <Box4 />
       </VenderWrapper>
+
+      </WhoisitforWrap>
 
 
       <TitleBox className="instructions">
@@ -232,6 +240,7 @@ const StyledDiv = styled.div`
   display: flex;
   margin: 0 auto;
   padding-top: 112px;
+  z-index: -20
 `;
 
 const BoxCol = styled.div`
@@ -252,9 +261,11 @@ const Hero = styled(Paper)`
   max-height: 450px;
   box-sizing: border-box;
   text-align: left;
-  @media (min-width: 600px) {
+  @media (min-width: 696px) {
 margin-top: 12px;
-padding-left: 100px;
+padding-left: 10%;
+width: 70vw;
+
 }
   @media(max-width: 380px) {
     height: 500px;
@@ -274,9 +285,14 @@ padding-left: 100px;
     line-height: 36px;
     margin-bottom: 31px;
     margin-top: 40px;
-    @media (min-width: 600px) {
-    font-size: 48px;
-    
+    @media (min-width: 696px) {
+    font-size: 26px;
+    width: 100%;
+  }
+
+  @media (min-width: 750px) {
+    font-size: 32px;
+    width: 100%;
   }
 
     span {
@@ -290,7 +306,7 @@ padding-left: 100px;
     font-weight: normal;
     margin-bottom: 41px;
     text-align: left;
-    @media (min-width: 600px) {
+    @media (min-width: 696px) {
   max-width: 660px;
   }
   }
@@ -319,8 +335,12 @@ const Box1 = styled(Box)`
   background-color: #044d4c;
   margin-bottom: 12px;
   border-radius: 10px 0px 0px 10px;
-  @media (min-width: 600px) {
+  @media (min-width: 696px) {
 margin-top: -86px;
+width: 25vw;
+background-image: url(${carrot});
+background-position: center; /* Center the image */
+  background-repeat: no-repeat;
   }
 `;
 const Box2 = styled(Box)`
@@ -330,7 +350,16 @@ const Box2 = styled(Box)`
   border-radius: 10px 0px 0px 10px;
   @media(max-width: 380px) {
     height: 280px;
+
+    
   }
+  @media (min-width: 696px) {
+    width: 25vw;
+    background-image: url(${apple});
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  }
+
 `;
 
 const Box3 = styled(Box)`
@@ -352,7 +381,12 @@ const Box3 = styled(Box)`
 
 
   }
+
+  @media (min-width: 696px) {
+    height: 350px;
+  }
 `;
+
 
 const Box4 = styled(Box)`
   height: 230px;
@@ -389,6 +423,11 @@ const Box6 = styled(Box)`
   width: 10px;
   background-color: #ce8400;
   position: absolute;
+  @media (min-width: 692px) {
+    width: 396px;
+    position: static;
+    margin-right: -12px;
+  }
 
   /* margin-top: 12px; */
 `;
@@ -397,6 +436,27 @@ const Box7 = styled(Box)`
   height: 416px;
   width: 28px;
   background-color: #044d4c;
+  @media (min-width: 692px) {
+    width: 396px;
+  }
+  
+`;
+
+const Box8 = styled(Box)`
+@media (max-width: 691px) {
+  display: none;
+}
+  width: 100px;
+  margin-top: 12px;
+
+  border-radius: 10px 0px 0px 10px;
+  display: flex;
+  
+height: 452px;
+margin-left: 12px;
+  width: 5vw;
+  background-color: #f6e7cc
+;
   
 `;
 
@@ -407,7 +467,7 @@ const SmallMarkets = styled(Paper)`
   display: flex;
   box-shadow: none;
   margin-top: 12px;
-  max-height: 600px;
+  max-height: 696px;
   
   @media(max-width: 380px) {
     height: 250px;
@@ -454,9 +514,23 @@ const SmallMarkets = styled(Paper)`
   }
 `;
 
+const WhoisitforWrap = styled.div`
+@media (min-width: 692px)
+  {
+    display: flex;
+  flex-flow: row nowrap;
+  /* padding-top: 112px; */
+  /* margin-top: -110px; */
+  height: 350px;
+  }
+
+
+`;
+
 const VenderWrapper = styled(Box)`
   display: flex;
   padding-bottom: 16px;
+  height: 100%;
 `;
 
 const Vendors = styled(Paper)`
@@ -467,6 +541,7 @@ const Vendors = styled(Paper)`
   margin-top: 12px;
   margin-right: 12px;
   padding-right: 14px;
+ 
   @media(max-width: 380px) {
     height: 250px;
   }
@@ -476,15 +551,20 @@ const Vendors = styled(Paper)`
 
   @media(max-width: 360px) {
     height: 300px;
-
+  }
 
     @media(max-width: 340px) {
     img {
       display: none;
+    
+  }
     }
+  @media(min-width: 692px) {
+    height: 100%;
+    margin-left: 16px;
   }
 
-  }
+  
 
 
 
@@ -557,6 +637,10 @@ const Step1Paper = styled(Paper)`
   width: 100%;
   margin-left: 72px;
   padding: 20px 12px;
+  @media (min-width: 696px) {
+
+  text-align: center;
+  }
 
   .MuiTypography-body1 {
     margin-top: 24px;
@@ -618,9 +702,15 @@ const Step2Paper = styled(Paper)`
   box-sizing: border-box;
   width: 100%;
   margin-left: 104px;
+  
   @media(max-width: 321px) {
   height: 250px;
   }
+
+  @media (min-width: 696px) {
+
+text-align: center;
+}
   .MuiTypography-body1 {
     margin-top: 24px;
     font-size: 16px;
@@ -705,6 +795,11 @@ const Step3Paper = styled(Paper)`
     margin-top: 16px;
 
   }
+
+  @media (min-width: 696px) {
+
+text-align: center;
+}
 
   .MuiTypography-body1 {
     margin-top: 2px;

@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 
 import footerCloud from "../assets/footerCloud.svg"
+// import desktopFooterCloud from "../assets/desktopFooterCloud.svg"
 
 
 const Footer = () => {
@@ -17,14 +18,14 @@ const Footer = () => {
       <Typography variant="subtitle1">Cloud Stands</Typography>
 
 <StyledGridList cellHeight={26}>
-        <ListItem Button to="team">Meet the Team</ListItem>
+        <ListItem>  <Link to="team">Meet the Team</Link></ListItem>
         <ListItem Button>Support</ListItem>
         <ListItem Button>About</ListItem>
         <ListItem Button>Contact</ListItem>
         <ListItem Button>Careers</ListItem>
-        <ListItem Button>Terms of Service</ListItem>
+        <ListItem> <Link to="terms">Terms of Service</Link></ListItem>
         <ListItem Button>Blog</ListItem>
-        <ListItem Button>Privacy Policy</ListItem>
+        <ListItem> <Link to="privacy"> Privacy Policy</Link></ListItem>
 </StyledGridList>
       <Typography variant="body1">Copyright <span>©</span> 2019 Cloud Stands</Typography>
 
@@ -37,14 +38,17 @@ const StyledContainer = styled(Container)`
 height: 212px;
 margin-top: 78px;
 
+
+
 .MuiTypography-subtitle1 {
-text-align: left;
+text-align:  center;
 font-family: "Raleway";
 font-size: 18px;
 line-height: 1.33;
 font-weight: 600;
 margin-bottom: 12px;
 padding-left: 12px;
+
 }
 
 img {
@@ -65,6 +69,7 @@ img {
 
 .MuiTypography-body1 {
   /* margin-left: -26px; */
+  
   font-family: "Raleway";
   margin-bottom: -240px;
 
@@ -84,6 +89,8 @@ line-height: 1.5;
 padding-bottom: 12px;
 padding-left: 12px;
 padding-bottom: 16px;
+text-align:  center;
+
 
 
 

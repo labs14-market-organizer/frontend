@@ -320,18 +320,21 @@ class Navbar extends React.Component {
       <StyledDiv>
         <StyledImg className="mobile" src={cloud} width="100%" height="87px" />
         <StyledImg className="desktop" src={desktopCloud} width="100%" height="110px" />
+          <StyledDiv2> 
           <StyledBox>
             <MenuIcon style={{pointerEvents: "auto"}} onClick={this.toggle} className="menuIcon" fontSize="large"/>
             <div>{this.Menu()}</div>
-            
+            <Link to="/landing"> 
             <CloudText>CLOUD</CloudText>
             <StandsText>STANDS</StandsText>
+            </Link>
             </StyledBox>
             <StyledNav> 
             <Link to="/team">Meet the Team</Link>
             <Link to="/signup">Sign in</Link>
             <Link to="/signup"><Button variant="outlined" color="primary">Sign up </Button></Link>
             </StyledNav>
+            </StyledDiv2>
 
         </StyledDiv>
     )
@@ -363,9 +366,19 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     @media (max-width: 350px) {
       font-size: 30px;  
     }
-    @media (min-width: 600px) {
+    @media (min-width: 696px) {
 
-      margin-left: 100px;
+      margin-left: 12px;
+}
+
+@media (min-width: 732px) {
+
+margin-left: 18px;
+}
+
+@media (min-width: 835px) {
+
+margin-left: 100px;
 }
 `;
 
@@ -383,20 +396,35 @@ const StandsText = styled(({ variant, ...otherProps}) => <Typography fontWeight=
       font-size: 30px;
     }
 
+    
+
 
 `;
+
+const StyledDiv2 = styled.div`
+display: flex;
+justify-content: space-between;
+position: absolute;
+width: 100vw;
+top: 0;
+`
 
 const StyledBox = styled(Box)`
   display: flex;
   flex-wrap: nowrap;
-  position: absolute;
-  top: 0;
+  /* position: absolute; */
+  /* top: 0; */
   margin-top: 2px;
   -webkit-align-items:center;
+  a {
+    display: flex;
+    text-decoration: none;
+  }
+  
   .menuIcon {
     padding: 0 16px;
     pointer-events: auto;
-    @media (min-width: 600px) {
+    @media (min-width: 696px) {
       display: none;
     }
     :hover {
@@ -440,7 +468,7 @@ img {
   
 }
 .mobile {
-  @media (min-width: 600px) {
+  @media (min-width: 696px) {
 
   display: none;
   }
@@ -450,19 +478,21 @@ img {
   height: 165px;
   display: none;
   width: 1440px;
-  @media (min-width: 600px) {
+  @media (min-width: 696px) {
 
-display: inherit
+display: inherit;
 }
 @media (min-width: 1440px) {
 width: 1920px;
+
 }
-@media (min-width: 1921px) {
+@media (min-width: 1890px) {
 width: 2560px;
 }
 @media (min-width: 2561px) {
 width: 3200px;
 }
+
 }
 
 `
@@ -471,7 +501,7 @@ const StyledPaper = styled(Paper)`
 /* background-color: black; */
 height: 600px;
 width: 80%;
-z-index: -1;
+z-index: -100000000000000000;
 position: absolute;
 left: 0;
 top: 0;
@@ -544,13 +574,23 @@ Button {
 `
 const StyledNav = styled.div`
   display: none;
-  @media (min-width: 600px) {
-    display: inline-block;
+  @media (min-width: 696px) {
+  display: flex;
+  align-items: center;
+  /* position: absolute; */
+  /* right: 600px; */
+  /* top: 10px; */
   z-index: 60000;
+  margin-right: 0px;
   }
-  /* display:  flex; */
-  /* margin-right: -500px; */
 
+  @media (min-width: 740px) {
+
+  margin-right: 32px;
+  }
+
+
+  
 a {
 margin-right: 32px;
   text-decoration: none;
