@@ -16,12 +16,15 @@ import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 import { Field, reduxForm, FieldArray,  } from "redux-form";
 import {Redirect, withRouter, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
+import normalizePhone from "./NormalizePhone";
 
 function validate (values) {
     const errors = {};
     const requiredFields = [
       "name",
-      "description"
+      "description",
+      "email",
+      "phone"
       
     ];
     requiredFields.forEach(field => {
@@ -97,7 +100,8 @@ function validate (values) {
             website: '',
             facebook: '',
             twitter: '',
-            instagram: ''
+            instagram: '',
+            email: this.props.checkUserData.userData.email
         };
         else this.isUpdating = true;
         this.state.electricity = String(this.state.electricity)
@@ -174,7 +178,7 @@ function validate (values) {
                 
                     <StyledField
                         component={renderTextField}
-                        reuired
+                        required
                         id="name"
                         label="Business Name"
                         name="name"
@@ -196,8 +200,31 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
+                        <StyledField
+                        component={renderTextField}
+                        required
+                        id="email"
+                        label="Business Email Address"
+                        name="email"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                       
+                    /><br></br>
+                    <br></br>
+                        <StyledField
+                        component={renderTextField}
+                        required
+                        id="phone"
+                        name="phone"
+                        label="Business Phone Number"
+                        type="text"
+                        fullWidth={true}
+                        variant="outlined"
+                        normalize={normalizePhone}
+                    />
                     <StyledContainer>
-                    
+                    <br></br>
                     <StyledP>What are the specific items you plan to sell?</StyledP>
                     
                     <FlexContainer>
