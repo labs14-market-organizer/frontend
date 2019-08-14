@@ -61,8 +61,9 @@ class ViewMyMarket extends React.Component{
            { editing ? this.editingRender() : null }
             <MarketName className="MarketName">{market.name}</MarketName> {/*added tag for test*/}
             <MarketDescription>{market.description}</MarketDescription>
+        </Container>
             { !editing ? <Collapser market={market} /> :
-            <div>
+            <Container>
             <Tag>Address</Tag>
             <Ltag>{market.address}</Ltag>
             <Tag>Hours</Tag>
@@ -75,8 +76,8 @@ class ViewMyMarket extends React.Component{
             { (market.facebook && market.facebook.length > 0) ? <div><Tag>Facebook</Tag> <Ltag>{market.facebook}</Ltag></div>: null }
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
-            { editing ? null : this.boothRender()} </div>}
-        </Container>
+            { editing ? null : this.boothRender()} </Container>}
+        
         </div>
     )
     }
