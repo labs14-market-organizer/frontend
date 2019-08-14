@@ -26,11 +26,11 @@ class Collapser extends React.Component {
     constructor(props){
         super(props);
          this.state = {
-        toggle1: false,
-        toggle2: false,
-        toggle3: true
-      }
-    }
+            toggle1: false,
+            toggle2: false,
+            toggle3: true
+        }
+        }
    
     handleChange = (name) => {
     
@@ -101,16 +101,15 @@ const StyledDiv1 = styled.div`
     height: 60px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
     transition-property: height;
-    transitionDuration: 3s;
-    
+    transition-duration: 3s;
+    height: 200px;
 `;
-
 const StyledDiv2 = styled.div`
     width: 100%;
     height: 60px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
     transition-property: height;
-    transitionDuration: 3s;
+    transition-duration: 3s;
     
 `;
 
@@ -119,8 +118,8 @@ const StyledDiv3 = styled.div`
     height: 60px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
     transition-property: height;
-    transitionDuration: 3s;
-    (this.state.toggle3) ? height: 300px : height: 60px;
+    transition-duration: 3s;
+
 `;
 
 const Tag = styled.p`
