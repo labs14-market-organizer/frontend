@@ -28,7 +28,7 @@ goBack = () => {
 render() {
     let market = {
         name: "Farmers Market",
-        rules: "em Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.em Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        rules: "akdjhf;likajdfl;ajdsf a;sd failo;dfnzkjsdhfb; asdhf;kash df;ahsdf;ljabsd;fjhabsd; fhas;dfh;a djshf ;djsahf;djsahf; ash;f jashdf;ahsd f;jahsdkjfasldkjfgbh alskdjgfhlaksdghblaksdjf ;asdhfba;ldsjkhfb;al djskhfl;kajsbflkjasdfglkjasdhf ;asdhkf;aldjskhba; sdjkfblakjsdgfbvljZSDHbvc ,jhzdsvb,jhzdcvblzdjhsgflisuzjhfga,.skdjfba.sdfjhbna;djsfh;a djsf;adjskfhba; sdfjasdfh a;sdjfk ha;dfj h;audujhsa; dsfh;adjskfh asi;odkfh as;djkfh ajksdhfkjasd f;as f;k fdsadashjkfvbhnjadvfnmasdvbfcljxfycvkgvj,HWDV,JHASGB;K SAGDFSHA;Dakdjhf;likajdfl;ajdsf a;sd failo;dfnzkjsdhfb; asdhf;kash df;ahsdf;ljabsd;fjhabsd; fhas;dfh;a djshf ;djsahf;djsahf; ash;f jashdf;ahsd f;jahsdkjfasldkjfgbh alskdjgfhlaksdghblaksdjf ;asdhfba;ldsjkhfb;al djskhfl;kajsbflkjasdfglkjasdhf ;asdhkf;aldjskhba; sdjkfblakjsdgfbvljZSDHbvc ,jhzdsvb,jhzdcvblzdjhsgflisuzjhfga,.skdjfba.sdfjhbna;djsfh;a djsf;adjskfhba; sdfjasdfh a;sdjfk ha;dfj h;audujhsa; dsfh;adjskfh asi;odkfh as;djkfh ajksdhfkjasd f;as f;k fdsadashjkfvbhnjadvfnmasdvbfcljxfycvkgvj,HWDV,JHASGB;K SAGDFSHA;D" ,
 
 
     }
@@ -36,7 +36,7 @@ render() {
         <>
         <Header>
             <StyledImg src={Arrow} onClick={this.goBack} />
-            <CreateHeader>View Market</CreateHeader>
+            <CreateHeader>Market Rules</CreateHeader>
           </Header>
         <StyledContainer>
             
@@ -55,8 +55,9 @@ render() {
             variant="outlined"
             fullWidth={true}
             />
+            </StyledContainer>
             <StyledButton onClick={this.handleClick}>Accept</StyledButton>
-        </StyledContainer>
+        
         </>
     )
  }
@@ -106,6 +107,10 @@ const StyledBox = styled(Box)`
     padding-bottom: 8px;
     font-family: Roboto;
     font-size: 16px;
+    scrollbar-thumb {
+    background: green;
+}
+
     @media(min-width: 600px){
     max-width: 400px;
     margin-top: 12px;
@@ -127,7 +132,6 @@ const StyledButton = styled(Button)`
     width: 300px;
     border-radius: 8px;
     height: 60px;
-    align-content: center;
     background-color: #478529;
     color: white;
     font-size: 18px;
