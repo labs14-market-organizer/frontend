@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { Link, Redirect } from "react-router-dom";
 import { Mixpanel } from '../redux/actions/mixpanel';
+import Collapser from './Collapser';
 
 
 const militaryConvert = (time) => {
@@ -37,7 +38,7 @@ class ViewMyMarket extends React.Component{
   render() {
   let market = this.props.marketData;
   if(!market) return <Redirect to={this.props.back ? this.props.back : "/"} />;
-  let editing = this.props.userData.id === this.props.marketData.admin_id;
+  let editing = this.props.userData.id === this.props.marketData.admin_id;  //means market owner.
   return (
       <div>
           <Header>
@@ -57,21 +58,24 @@ class ViewMyMarket extends React.Component{
         
       
         <Container>
+           { editing ? this.editingRender() : null }
             <MarketName className="MarketName">{market.name}</MarketName> {/*added tag for test*/}
             <MarketDescription>{market.description}</MarketDescription>
+            { !editing ? <Collapser market={market} /> :
+            <div>
             <Tag>Address</Tag>
             <Ltag>{market.address}</Ltag>
             <Tag>Hours</Tag>
             { market.operation.map(opHours => {
-              return (opHours.start !== null) ? <Ltag key={market.id}>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)} {militaryConvert(opHours.start)} - {(militaryConvert(opHours.end))}</Ltag> : null 
-            }) }
+                return (opHours.start !== null) ? <Ltag key={market.id}>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)} {militaryConvert(opHours.start)} - {(militaryConvert(opHours.end))}</Ltag> : null
+              }) }
             <Tag>Market Status</Tag>
             {(market.type === 1)? <Ltag>Public Market</Ltag> :<Ltag>Private Market</Ltag>  }
             { (market.website && market.website.length > 0) ?<div> <Tag>Website</Tag> <Ltag>{market.website}</Ltag> </div> : null } 
             { (market.facebook && market.facebook.length > 0) ? <div><Tag>Facebook</Tag> <Ltag>{market.facebook}</Ltag></div>: null }
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
-            { editing ? this.editingRender() : this.boothRender()}
+            { editing ? null : this.boothRender()} </div>}
         </Container>
         </div>
     )
