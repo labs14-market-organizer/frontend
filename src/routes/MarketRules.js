@@ -23,6 +23,11 @@ handleChange = (e) => {
 goBack = () => {
     return this.props.history.goBack();
   }
+
+handleClick = (e) => {
+    e.preventDefault();
+    return (this.state.name !== '') ? null: null;
+}
   
 
 render() {
@@ -44,6 +49,7 @@ render() {
             <StyledBox>
                 {market.rules}
             </StyledBox>
+            <form onSubmit={this.handleClick}>
             <StyledTextField
             required
             id="name"
@@ -54,10 +60,10 @@ render() {
             margin="normal"
             variant="outlined"
             fullWidth={true}
-            />
+            /></form>
             </StyledContainer>
             <StyledButton onClick={this.handleClick}>Accept</StyledButton>
-        
+            
         </>
     )
  }
