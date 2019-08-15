@@ -122,7 +122,8 @@ export const deleteVendor = (vendorId) => dispatch =>
 
 function cleanData(vendor)
 {
-    vendor.items = Array.isArray(vendor.items) ? vendor.items : JSON.parse(vendor.items);
+    console.log(vendor.items)
+    // vendor.items = Array.isArray(vendor.items) ? vendor.items : JSON.parse(vendor.items);
     let phoneNumber = vendor.phone.split('').filter(item => item !== "-"); //removed the dashes in the number.
     let clean = 
     {   
