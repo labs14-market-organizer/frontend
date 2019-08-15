@@ -43,7 +43,14 @@ class VendorProfile extends React.Component {
                 {(vendor.loud) ? <StyledVendor>Makes loud noise</StyledVendor> : null}
                 {(vendor.ventilation) ? <StyledVendor>Needs ventilation</StyledVendor> : null}
                 {(vendor.other_special) ? <StyledVendor>{vendor.other_special}</StyledVendor> : null}
-
+                <hr></hr>
+                <StyledP1>Contact Information</StyledP1>
+                <StyledP>Business Email Address</StyledP>
+                <StyledVendor>{vendor.email && vendor.email.length > 0  ? vendor.email : null}</StyledVendor>
+                <StyledP>Business Phone Number</StyledP>
+                <StyledVendor>{vendor.phone && vendor.phone.length > 0  ? vendor.phone : null}</StyledVendor>
+                <hr></hr>
+                <StyledP1>Social Media</StyledP1>
                 {(vendor.website && vendor.website.length > 0) ? <div><StyledP>Website</StyledP><StyledVendor>{vendor.website}</StyledVendor></div> : null}
 
                 {(vendor.facebook && vendor.facebook.length > 0) ? <div><StyledP>Facebook</StyledP><StyledVendor>{vendor.facebook}</StyledVendor></div> : null}
@@ -116,7 +123,7 @@ const StyledVendor = styled.p`
   font-size: 16px;
   line-height: 1.5;
   font-family: Roboto;
-  margin-top: 0;
+  margin-top: -5px;
   margin-bottom: 0;
 
 `;
@@ -171,11 +178,18 @@ const StyledP = styled.p`
   font-size: 12px;
   font-family: Raleway;
   line-height: 1.33;
+  font-weight: 600;
+  margin-bottom: 5px;
+ 
+`
+const StyledP1 = styled.p`
+  font-size: 12px;
+  font-family: Raleway;
+  line-height: 1.33;
   font-weight: bold;
   margin-bottom: 5px;
  
 `
-
 const mapStateToProps = state => {
     return {
       ...state.checkVendorData
