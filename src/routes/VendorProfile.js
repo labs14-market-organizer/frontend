@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { Mixpanel } from '../redux/actions/mixpanel';
@@ -16,6 +16,10 @@ class VendorProfile extends React.Component {
         render() {
         
         let vendor = this.props.vendorData;
+        if (!vendor) {
+          localStorage.clear();
+          return <Redirect to='/landing' />
+        }
         return (
             <div>
                 <Header>
@@ -26,10 +30,13 @@ class VendorProfile extends React.Component {
                 <Container>
                 <VendorName>{vendor.name}</VendorName>
                 <StyledVendor>{vendor.description}</StyledVendor>
-                {((vendor.items.length > 0) ? <StyledP>Items</StyledP> : null)}
-                {vendor.items.map(item => {
-                    return <StyledVendor>{item}</StyledVendor>
-                })}
+                {((vendor.items && vendor.items.length > 0) ? 
+                  <div>
+                    <StyledP>Items</StyledP> 
+                    {vendor.items.map(item => {
+                      return <StyledVendor>{item}</StyledVendor>
+                      })}
+                      </div> : null )}
                 
                 {(vendor.electricity || vendor.loud || vendor.ventilation || vendor.other_special.length > 0) ?<StyledP>Special Considerations</StyledP> : null}
                 {(vendor.electricity) ? <StyledVendor>Needs electricity</StyledVendor> : null}
