@@ -15,10 +15,12 @@ import {
   CardAction }
 from "@material-ui/core";
 
-import carrot from "../assets/carrot.svg";
+import carrot from "../assets/carrot.png";
 import apple from "../assets/apple.svg";
 import lettuce from "../assets/lettuce.png";
+import lettuceDesktop from "../assets/lettuceDesktop.png"
 import tomato from "../assets/tomato.png";
+import tomatoDesktop from "../assets/tomatoDesktop.png"
 import step1 from "../assets/step1.svg";
 import step2 from "../assets/step2.svg";
 import step3 from "../assets/step3.svg";
@@ -48,6 +50,7 @@ const MarketingPage = () => {
   return (
     <>
     <Navbar />
+    <NavbarFix>
       <StyledDiv>
         <Hero>
           <Typography variant="subtitle1">
@@ -92,6 +95,7 @@ const MarketingPage = () => {
           </Typography>
         </div>
         <img src={lettuce} />
+        <img className="lettuceDesktop" src={lettuceDesktop}  />
       </SmallMarkets>
 
       <VenderWrapper>
@@ -105,6 +109,7 @@ const MarketingPage = () => {
               important; your business!
             </Typography>
           </div>
+          <img className="tomatoDesktop" src={tomatoDesktop} />
         </Vendors>
         <Box4 />
       </VenderWrapper>
@@ -180,6 +185,7 @@ const MarketingPage = () => {
       <Box7/>
       </TestimonialWrapper>
       <Footer />
+      </NavbarFix>
     </>
 
 
@@ -189,6 +195,10 @@ const MarketingPage = () => {
 // STYLES
 export default MarketingPage;
 
+const 
+NavbarFix = styled.div`
+z-index: -100000000000;
+`
 const StyledLink = styled(Link)`
   text-decoration: none;
 
@@ -338,6 +348,7 @@ const Box1 = styled(Box)`
   @media (min-width: 696px) {
 margin-top: -86px;
 width: 25vw;
+background-size: 70px;
 background-image: url(${carrot});
 background-position: center; /* Center the image */
   background-repeat: no-repeat;
@@ -358,12 +369,15 @@ const Box2 = styled(Box)`
     background-image: url(${apple});
   background-position: center; /* Center the image */
   background-repeat: no-repeat;
+
+
   }
 
 `;
 
 const Box3 = styled(Box)`
   position: absolute;
+
   height: 230px;
   width: 4px;
   background-color: #044d4c;
@@ -383,7 +397,14 @@ const Box3 = styled(Box)`
   }
 
   @media (min-width: 696px) {
+    position: static;
+    background-color: #478529;
     height: 350px;
+    width: 20vw;
+    margin-left: 0px;
+    
+    
+  
   }
 `;
 
@@ -394,6 +415,7 @@ const Box4 = styled(Box)`
   background-color: #478529;
   border-radius: 10px 0px 0px 10px;
   margin-top: 12px;
+  
   @media(max-width: 380px) {
     height: 250px;
   }
@@ -403,6 +425,13 @@ const Box4 = styled(Box)`
 
   @media(max-width: 360px) {
     height: 300px;
+
+
+  }
+  @media(min-width: 692px) {
+    width: 20vw;
+    height: 100%;
+    flex-shrink: 2;
 
 
   }
@@ -456,18 +485,21 @@ height: 452px;
 margin-left: 12px;
   width: 5vw;
   background-color: #f6e7cc
+  
 ;
   
 `;
 
 const SmallMarkets = styled(Paper)`
-  margin-left: 16px;
+  padding-left: 60px;
   background-color: #f6e7cc;
   height: 230px;
   display: flex;
+  flex-grow: 2;
   box-shadow: none;
   margin-top: 12px;
   max-height: 696px;
+  
   
   @media(max-width: 380px) {
     height: 250px;
@@ -486,12 +518,54 @@ const SmallMarkets = styled(Paper)`
       display: none;
     }
   }
+  .lettuceDesktop {
+  display: none;
+  }
 
+  @media(min-width: 692px) {
+    height: 350px;
+    padding-left: 16px;
+    img {
+    display: none;
+
+    margin-left: 16px;
+    }
+
+      
+    }
+
+
+    @media(min-width: 1000px) {
+
+.lettuceDesktop {
+  display: flex;
+  width: 140px;
+        }}
+
+        @media(min-width: 1060px) {
+
+.lettuceDesktop {
+  display: flex;
+  width: 160px;
+        }}
+
+@media(min-width: 1150px) {
+.lettuceDesktop {
+  width: 200px;
+}
+}
+
+    @media(min-width: 900px) {
+
+    
+
+    } 
 
   && .MuiTypography-subtitle1 {
     font-size: 22px;
     line-height: 32px;
     font-weight: bold;
+    /* width: 30vw; */
   }
   .MuiTypography-root {
     padding-left: 12px;
@@ -508,6 +582,24 @@ const SmallMarkets = styled(Paper)`
     margin-right: 0px;
     padding-right: 0px;
   }
+  @media(min-width: 692px) {
+    height: 100%;
+    margin-left: 16px;
+    .MuiTypography-root {
+      padding-right: 32px;
+      padding-left: -12px;
+    }
+    .MuiTypography-body1 {
+      text-align: left;
+      font-size: 21px;
+    }
+    .MuiTypography-subtitle1 {
+      text-align: left;
+      font-size: 24px;
+      padding-top: 40px;
+    }
+  }
+
 
   img {
     height: 100%;
@@ -522,6 +614,9 @@ const WhoisitforWrap = styled.div`
   /* padding-top: 112px; */
   /* margin-top: -110px; */
   height: 350px;
+  margin-bottom: 32px;
+  
+
   }
 
 
@@ -541,7 +636,10 @@ const Vendors = styled(Paper)`
   margin-top: 12px;
   margin-right: 12px;
   padding-right: 14px;
- 
+  flex-shrink: 2;
+  .tomatoDesktop {
+    display: none
+  }
   @media(max-width: 380px) {
     height: 250px;
   }
@@ -559,10 +657,50 @@ const Vendors = styled(Paper)`
     
   }
     }
-  @media(min-width: 692px) {
-    height: 100%;
-    margin-left: 16px;
-  }
+
+    @media(min-width: 692px) {
+      img {
+        display: none;
+        /* order: 2;
+        margin-right: -15px;
+        display: flex; */
+
+
+      }
+    }
+
+      @media(min-width: 1000px) {
+        img {
+        display: none;
+        }
+
+        .tomatoDesktop {
+
+        width: 140px;
+        display: flex;
+        margin-right: -15px;
+        border-radius: 0px;
+              }
+      
+
+      
+
+      
+
+    }
+
+    @media(min-width: 1050px) {
+      .tomatoDesktop {
+        width: 160px;
+      }
+    }
+
+    @media(min-width: 1160px) {
+
+.tomatoDesktop {
+  display: flex;
+  width: 200px;
+        }}
 
   
 
@@ -588,6 +726,23 @@ const Vendors = styled(Paper)`
     padding-left: 20px;
   }
 
+  @media(min-width: 692px) {
+    height: 100%;
+    margin-left: 16px;
+    .MuiTypography-root {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+    .MuiTypography-body1 {
+      text-align: left;
+      font-size: 21px;
+    }
+    .MuiTypography-subtitle1 {
+      text-align: left;
+      font-size: 24px;
+      padding-top: 40px;
+    }
+  }
   img {
     height: 100%;
   }

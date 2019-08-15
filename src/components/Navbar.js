@@ -326,8 +326,8 @@ class Navbar extends React.Component {
             <div>{this.Menu()}</div>
             <Link to="/landing"> 
             <CloudText>CLOUD</CloudText>
-            <StandsText>STANDS</StandsText>
             </Link>
+            <StandsText>STANDS</StandsText>
             </StyledBox>
             <StyledNav> 
             <Link to="/team">Meet the Team</Link>
@@ -407,6 +407,7 @@ justify-content: space-between;
 position: absolute;
 width: 100vw;
 top: 0;
+
 `
 
 const StyledBox = styled(Box)`
@@ -421,6 +422,11 @@ const StyledBox = styled(Box)`
     text-decoration: none;
   }
   
+  div {
+    @media (min-width: 696px) {
+      display: none;
+    }
+  }
   .menuIcon {
     padding: 0 16px;
     pointer-events: auto;
@@ -473,7 +479,6 @@ img {
   display: none;
   }
 }
- overflow-x: hidden;
 .desktop {
   height: 165px;
   display: none;
