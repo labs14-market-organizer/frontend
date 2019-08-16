@@ -86,7 +86,16 @@ function validate (values) {
       <div>
         <label>{label}</label>
         <div>
-          <input {...input} type={type} placeholder={label} />
+          <input {...input} type={type} placeholder={label} style={{fontSize: "18px", width: "200px", height: "30px", marginBottom: "0px" }}/>
+          {touched && error && <span>{error}</span>}
+        </div>
+      </div>
+    );
+    const renderField2 = ({ input, label, type, meta: { touched, error } }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} placeholder="Add Item" style={{fontSize: "18px", border: "none", borderBottom: "1px solid black", width: "200px", height: "40px", marginLeft:"10px"}}/>
           {touched && error && <span>{error}</span>}
         </div>
       </div>
@@ -94,36 +103,34 @@ function validate (values) {
     const renderItems = ({ fields, meta: { input, error, submitFailed, reset } }) => (
       <div>
         
-        {fields.getAll().map((item, index) => (
+        {fields.map((item, index) => (
          (index === 0) ? 
-
-        <FlexContainer>
-          <Field
+      
+        <FlexContainer style={{marginBottom: "15px"}}>
+          <StyledField
               name={item}
               type="text"
-              component={renderField}
-              style={{marginTop: "5px"}}
+              component={renderField2}
               margin="normal"
               fullWidth={true}
-              style={{marginTop: "-5px", marginLeft: "30px", marginRight: "5px"}}
+              
               /> 
-       
-            <button type="button" onClick={() => fields.unshift("")}>
+            
+            <StyledButton type="button" onClick={() => fields.unshift("")}>
              Add Item
-            </button>
+            </StyledButton>
         </FlexContainer>
      
-    
-    :
-        <FlexContainer key={index} style={{marginTop: "10px"}}>
-        <Button type="button" onClick={() => fields.remove(index)}>
+     :
+        <FlexContainer key={index} style={{marginTop: "-5px"}}>
+        <XButton type="button" onClick={() => fields.remove(index)} style={{fontSize: "18px", fontWeight: "bold", border: "none"}}>
             X
-        </Button>
-        <Field
+        </XButton>
+        <StyledField
           name={item}
           type="text"
           component={renderField}
-          style={{marginTop: "5px"}}
+          style={{marginTop: "15px"}}
         />
           </FlexContainer>
         ))}
@@ -527,14 +534,22 @@ const StyledContainer = styled.div`
 `;
 
 const StyledButton = styled.button`
-  border: none;
+  border: 1px solid #044d4c;
+  border-radius: 8px;
   background-color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 15px;
   font-family: Raleway;
+  width: 140px;
+  height: 40px;
+  color: #044d4c;
 `;
 
-
+const XButton = styled.button`
+    width: 50px;
+    height: 40px;
+    background-color: white;
+`;
 const mapStateToProps = state => {
     return {
       ...state
