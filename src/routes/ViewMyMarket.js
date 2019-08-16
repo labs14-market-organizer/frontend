@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import { Link, Redirect } from "react-router-dom";
 import { Mixpanel } from '../redux/actions/mixpanel';
 import Collapser from './Collapser';
+import BoothPicker from "../components/BoothPicker"
 
 
 const militaryConvert = (time) => {
@@ -76,7 +77,8 @@ class ViewMyMarket extends React.Component{
             { (market.facebook && market.facebook.length > 0) ? <div><Tag>Facebook</Tag> <Ltag>{market.facebook}</Ltag></div>: null }
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
-            { editing ? null : this.boothRender()} </Container>}
+            </Container>}
+            {editing ? "" : this.boothRender() } 
         
         </div>
     )
@@ -84,7 +86,7 @@ class ViewMyMarket extends React.Component{
     boothRender()
     {
       return(
-        <div>BOOTHS</div>
+        <div><BoothPicker />HELLO WORLD</div>
       )
     }
     editingRender()
