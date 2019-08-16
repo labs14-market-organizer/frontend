@@ -15,6 +15,7 @@ import desktopFooterCloud from "../assets/desktopFooterCloud.svg"
 const Footer = () => {
   return (
     <StyledContainer>
+    <div>
       <Typography variant="subtitle1">Cloud Stands</Typography>
 
 <StyledGridList cellHeight={26}>
@@ -28,7 +29,7 @@ const Footer = () => {
         <ListItem> <Link to="privacy"> Privacy Policy</Link></ListItem>
 </StyledGridList>
       <Typography variant="body1">Copyright <span>©</span> 2019 Cloud Stands</Typography>
-
+</div>
     <img src={footerCloud} alt="cloud"/>
     <img className="desktopFooterCloud" src={desktopFooterCloud} alt="cloud"/>
     </StyledContainer>
@@ -59,12 +60,6 @@ const StyledContainer = styled.div`
 margin-top: 78px;
 width: 100vw;
 
-.MuiTypography-root {
-  @media (min-width: 692px) {
-    color: red;
-    padding-top: 200px;
-  }
-}
 .MuiTypography-subtitle1 {
 text-align:  center;
 font-family: "Raleway";
@@ -79,6 +74,15 @@ padding-left: 12px;
 }
 .desktopFooterCloud {
   display: none;
+}
+div {
+  align-items: flex-start;
+  .MuiTypography-subtitle1 {
+    padding-left: 0px;
+width: 120px;
+margin-left: 8px;
+  }
+
 }
 img {
   position: relative;
@@ -97,9 +101,33 @@ img {
 
 }
 @media (min-width: 692px) {
-  
+
   img {
     display: none
+  }
+
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+
+  .MuiTypography-subtitle1 {
+    padding-top:70px;
+
+    width: 100%;
+    padding-left: 12px;
+    margin-left: -286px;
+
+
+  }
+  .muiTypography-body1 {
+    display: block;
+    width: 100%;
+    
+  }
+
   }
 }
 .desktopFooterCloud {
@@ -121,6 +149,10 @@ a{
 
   font-weight: normal;
   @media (min-width: 692px) {
+    margin-bottom: -260px;
+    margin-left: -156px;
+
+
   }
   span {
     font-weight: bold;
@@ -131,7 +163,7 @@ a{
   margin: 0px;
   /* width: 100vw; */
   margin-top: 0px;
-  padding-top:70px;
+
   margin-top: 24px;
   justify-content: flex-start;
   overflow-x: hidden;
@@ -162,15 +194,15 @@ font-size: 16px;
 line-height: 1.5;
 padding-bottom: 12px;
 padding-left: 12px;
+width: 100%;
 padding-bottom: 16px;
 text-align:  center;
-
 @media (min-width: 692px) {
-  .MuiTypography-body1  {
-    color: red;
-    font-size: 300px;
-  }
+  justify-content: space-around;
+  width: 400px;
+  
 }
+
 
 
 

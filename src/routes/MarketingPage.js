@@ -281,6 +281,9 @@ const BoxCol = styled.div`
   flex-direction: column;
   margin-top: 99px;
   margin-left: 12px;
+  @media (min-width: 692px) {
+    margin-left: 24px;
+  }
 `;
 
 const Hero = styled(Paper)`
@@ -321,6 +324,7 @@ const Hero = styled(Paper)`
     @media (min-width: 692px) {
       font-size: 26px;
       width: 100%;
+    
     }
 
     @media (min-width: 750px) {
@@ -497,7 +501,8 @@ const Box6 = styled(Box)`
 const Box7 = styled(Box)`
   height: 100%;
 
-  width: 28px;
+  width: 10px;
+  /* margin-left: -30px; */
   background-color: #044d4c;
   @media (min-width: 692px) {
     width: 36%;
@@ -517,7 +522,7 @@ const Box8 = styled(Box)`
   display: flex;
 
   height: 452px;
-  margin-left: 12px;
+  margin-left: 24px;
   width: 5vw;
   background-color: #f6e7cc;
 `;
@@ -792,6 +797,8 @@ const Step1Container = styled(Box)`
   }
   @media (min-width:692px) {
     height: 350px;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -887,6 +894,8 @@ const Step2Container = styled(Box)`
   }
   @media (min-width:692px) {
     height: 350px;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -997,6 +1006,10 @@ const Step3Container = styled(Box)`
   }
   @media (min-width: 692px) {
     height: 350px;
+
+    margin-top: 24px;
+    margin-bottom: 24px;
+  
   }
 `;
 
@@ -1102,6 +1115,10 @@ const TitleBox = styled(Box)`
   align-items: center;
   margin-top: 12px;
   padding-left: 28px;
+  @media (min-width: 692px) {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
 
   .MuiTypography-subtitle1 {
     font-size: 18px;
@@ -1112,6 +1129,10 @@ const TitleBox = styled(Box)`
     background-color: #044d4c;
     padding-right: 24px;
     margin-top: -5px;
+      @media (min-width: 692px) {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
   }
 
   &&.testimonial {
@@ -1132,6 +1153,7 @@ const TitleBox = styled(Box)`
 const TestimonialWrapper = styled(Box)`
   display: flex;
   width: 100%;
+  height: 416px;
   padding-bottom: 12px;
   @media (min-width: 692px) {
     height: 550px;
