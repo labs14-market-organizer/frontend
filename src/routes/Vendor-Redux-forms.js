@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 
-import { Field, reduxForm, FieldArray,  } from "redux-form";
+import { Field, reduxForm, FieldArray  } from "redux-form";
 import {Redirect, withRouter, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
 import normalizePhone from "./NormalizePhone";
@@ -82,6 +82,62 @@ function validate (values) {
       />
     );
 
+    const renderField = ({ input, label, type, meta: { touched, error } }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} placeholder={label} style={{fontSize: "18px", width: "200px", height: "30px", marginBottom: "0px" }}/>
+          {touched && error && <span>{error}</span>}
+        </div>
+      </div>
+    );
+    const renderField2 = ({ input, label, type, meta: { touched, error } }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} placeholder="Add Item" style={{fontSize: "18px", border: "none", borderBottom: "1px solid black", width: "200px", height: "40px", marginLeft:"10px"}}/>
+          {touched && error && <span>{error}</span>}
+        </div>
+      </div>
+    );
+    const renderItems = ({ fields, meta: { input, error, submitFailed, reset } }) => (
+      <div>
+        
+        {fields.map((item, index) => (
+         (index === 0) ? 
+      
+        <FlexContainer style={{marginBottom: "15px"}}>
+          <StyledField
+              name={item}
+              type="text"
+              component={renderField2}
+              margin="normal"
+              fullWidth={true}
+              
+              /> 
+            
+            <StyledButton type="button" onClick={() => fields.unshift("")}>
+             Add Item
+            </StyledButton>
+        </FlexContainer>
+     
+     :
+        <FlexContainer key={index} style={{marginTop: "-5px"}}>
+        <XButton type="button" onClick={() => fields.remove(index)} style={{fontSize: "18px", fontWeight: "bold", border: "none"}}>
+            X
+        </XButton>
+        <StyledField
+          name={item}
+          type="text"
+          component={renderField}
+          style={{marginTop: "15px"}}
+        />
+          </FlexContainer>
+        ))}
+      </div>
+    );
+   
+
   class CreateVendor extends React.Component{
     isUpdating = false;
     constructor(props){
@@ -132,6 +188,7 @@ function validate (values) {
         items: itemList,
         item: ''
       })
+     
       return itemList;
     }
     addCount = e => {
@@ -149,6 +206,7 @@ function validate (values) {
         ...this.state,
         items: newItems
       })
+     
       return newItems;
     }
     save = e => {
@@ -227,6 +285,12 @@ function validate (values) {
                     <br></br>
                     <StyledP>What are the specific items you plan to sell?</StyledP>
                     
+                    
+     
+                <form>
+                
+                <FieldArray name="items" component={renderItems} />
+                  </form>
                     <FlexContainer>
                     {/* <StyledField
                         component={renderButton}
@@ -240,7 +304,7 @@ function validate (values) {
                         fullWidth={true}
                     >
                     <img src={Add} style={{marginTop: "10px"}}/>   
-                    </StyledField>*/}
+                    </StyledField>
                     <TextField
                           margin="normal"
                           id="item"
@@ -251,8 +315,8 @@ function validate (values) {
                           margin="normal"
                           fullWidth={true}
                           style={{marginTop: "-5px", marginLeft: "30px", marginRight: "5px"}}
-                     />
-                      <StyledField
+                     /> */}
+                      {/* <StyledField
                         component={renderButton}
                         prefunc={this.addItem}
                         operation={this.state}
@@ -264,10 +328,10 @@ function validate (values) {
                         fullWidth={true}
                         >
                           <AddButton>Add Item</AddButton>
-                        </StyledField>
+                        </StyledField> */}
                      </FlexContainer>
 
-                    {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
+                    {/* {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
                     {this.state.items.map((item, index) => 
                     <FlexContainer  key={index}>
                         <StyledField
@@ -280,10 +344,10 @@ function validate (values) {
                         >
                           <StyledButton>X</StyledButton>
                         </StyledField>
-                       <StyledP1>{item}</StyledP1> 
+                       <StyledP1>{item}</StyledP1>  */}
                        
-                    </FlexContainer>
-                    )}
+                    {/* </FlexContainer>
+                    )} */}
                     
                      <StyledP>
 
@@ -470,14 +534,22 @@ const StyledContainer = styled.div`
 `;
 
 const StyledButton = styled.button`
-  border: none;
+  border: 1px solid #044d4c;
+  border-radius: 8px;
   background-color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 15px;
   font-family: Raleway;
+  width: 140px;
+  height: 40px;
+  color: #044d4c;
 `;
 
-
+const XButton = styled.button`
+    width: 50px;
+    height: 40px;
+    background-color: white;
+`;
 const mapStateToProps = state => {
     return {
       ...state

@@ -122,14 +122,15 @@ export const deleteVendor = (vendorId) => dispatch =>
 
 function cleanData(vendor)
 {
-    // console.log(vendor.items)
+   
+    console.log(vendor.items)
     // vendor.items = Array.isArray(vendor.items) ? vendor.items : JSON.parse(vendor.items);
     // let phoneNumber = vendor.phone.split('').filter(item => item !== "-"); //removed the dashes in the number.
     let clean = 
     {   
         name: vendor.name,
         description: vendor.description,
-        items: vendor.items && vendor.items !== "" ? vendor.items : [],
+        items: vendor.items,
         electricity: vendor.electricity === "true" ? true: false,
         ventilation: vendor.ventilation  === "true" ? true : false,
  		loud: vendor.loud  === "true" ? true : false,
@@ -150,5 +151,6 @@ function cleanData(vendor)
     //This is a really complex way of seeing if any values in the clean that also live in required array (by key) are null undefined or "" " " "  " etc.
     // console.log(clean)
     // clean = JSON.stringify(clean);
+    console.log(clean)
     return clean;
 }
