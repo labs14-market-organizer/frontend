@@ -370,7 +370,7 @@ z-index: -10
 
 const StyledDiv = styled.div`
 position: fixed;
-z-index: 5000;
+z-index: 10;
 
 img {
   margin-top: -25px;
