@@ -19,13 +19,14 @@ import { keys } from "@material-ui/core/styles/createBreakpoints";
 class SearchMarkets extends React.Component {
     state = {
         search: '',
-        popup:  -1
+        popup:  -1,
+        lastSearch: ''
     }
-
+    clearError = 0;
     handleChange = e => {
         this.setState({
+          ...this.state,
           [e.target.name]: e.target.value
-
         });
       };
       handleClear = e => {
@@ -34,23 +35,32 @@ class SearchMarkets extends React.Component {
       }
       startSearch = e => {
           e.preventDefault();
-          if(this.props.marketsBySearch.marketsBySearch) setTimeout(()=>this.props.searchMarkets(this.state.search), 1000);
-          if (this.state.search === '') return null;
+          if(this.props.marketsBySearch.marketsBySearch) setTimeout(()=>this.props.searchMarkets(this.state.search), 500);
+          if (this.state.search === '') return;
+          if(this.state.lastSearch === this.state.search) return;
           Mixpanel.track(`User searched for markets in ${this.state.search}`);
           this.props.searchMarkets(this.state.search);
+          this.setState({...this.state, clearError: false, lastSearch: this.state.search})
+          this.clearError = 0;
       }
       handleClick = (e,market) => 
       {
         this.props.localMarketSwitch(market);
         this.setState({...this.state, popup: 1})
       }
-
+    componentDidUpdate()
+    {
+      if(this.props.searchError) this.clearError++;
+      console.log(this.clearError)
+    }
     render() {
-        let popup = this.state.popup > 0 && !this.props.market.fetching && this.props.market.marketData;
+        let shouldClose = this.state.popup > 0 && !this.props.market.fetching && this.props.market.marketData;
+        let popup = this.state.popup > -1 && !this.props.market.fetching && this.props.market.marketData;
         return ( 
             <div>
             <Navbar />
-            <StyledContainer>
+            <div style={{overflowY: popup ? "hidden" : "scroll", width: "100vw", margin: "0 auto"}}>
+            <StyledContainer >
            
                 <form onSubmit={this.startSearch} >
                     <div style={{display: "flex"}}>
@@ -61,6 +71,7 @@ class SearchMarkets extends React.Component {
                             placeholder="City, State or ZIP Code"
                             value={this.state.search}
                             onChange={this.handleChange}
+                            onSubmit={this.handleSubmit}
                             margin="normal"
                             variant="outlined"
                             fullWidth={true}
@@ -69,8 +80,8 @@ class SearchMarkets extends React.Component {
                         <div style={{margin: "60px -50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
                     </div>
                 </form>
-                <StyledError>{this.props.searchError ? this.props.searchError : "" }</StyledError>
-                <div id={this.props.marketsBySearch.marketsBySearch && this.state.search !=="" ? "visible" : "invisible"}>
+                <StyledError id={this.props.searchError && this.clearError < 3 ? "visible":"invisible"}>{this.props.searchError ? this.props.searchError : "" }</StyledError>
+                <div id={this.props.marketsBySearch.marketsBySearch && this.state.search ===this.state.lastSearch && this.state.search !== '' ? "visible" : "invisible"}>
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
                         <StyleBox boxShadow={10} key={location.id} name={index} onClick={e => this.handleClick(e, location)}>
@@ -82,16 +93,16 @@ class SearchMarkets extends React.Component {
                 }) : null }
                 </div>
             </StyledContainer>
-            {<Popup>
-                <div id={popup ? "visible" : "invisible"}>
-               { popup ? <ViewMyMarket backcb={()=> {this.setState({...this.state, popup: -1})}} /> : ""}
+            </div>
+            {<Popup style={popup ? {} : {pointerEvents: "none"}}>
+                <div id={shouldClose ? "visible" : "invisible"}>
+               {popup ? <ViewMyMarket backcb={()=> {this.setState({...this.state, popup: 0}); setTimeout(()=> this.setState({...this.state, popup: -1}), 1000)}} /> : ""}
                </div>
             </Popup>}
             </div>
         )
     }
 }
-
 
 const StyledContainer = styled(Container)`
     margin: 0 auto;
@@ -100,7 +111,7 @@ const StyledContainer = styled(Container)`
     @media(min-width: 600px){
     width: 600px;
     padding-top: 100px;
-    max-height: 100vh;
+    min-height: 100vh;
   }
   #visible {
         opacity: 1.0;
@@ -108,9 +119,11 @@ const StyledContainer = styled(Container)`
         transition: opacity 1s linear;
     }
   #invisible {
-    opacity: 0.0;
-    height: 0;
-    transition: opacity 1s linear;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+  }
+  #noscroll{
+    overflow: hidden;
   }
 `;
 
@@ -121,6 +134,15 @@ const StyledError = styled.div`
     font-size: 18px;
     font-family: Raleway;
     color: #b21b2d;
+    #visible {
+      opacity: 1.0;
+      height: 100%;
+      transition: opacity 0.3s linear;
+  }
+#invisible {
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
 `
 const StyleBox = styled(Box)`
         min-height: 108px;
@@ -144,22 +166,26 @@ const StyleBox = styled(Box)`
 `;
 
 const Popup = styled.div`
-    z-index: 10000;
+    z-index: 20;
     position: fixed;
     top: 0px;
     margin: 0 auto;
     max-height: 100vh;
+    overflow-y: scroll;
     #visible {
         opacity: 1.0;
         transition: opacity 0.6s ease-in;
         background-color: white;
-        min-height: 99vh;
-        width: 99vw;
+        min-height: 100vh;
+        min-width: 100vw;
     }
   #invisible {
     opacity: 0.0;
-    transition: opacity 0.15s ease-out;
+    pointer-events: none
+    transition: opacity 0.4s ease-out;
     background-color: #FFFFFF00;
+    min-height: 100vh;
+    width: 100vw;
   }
 `
 
