@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 
-import { Field, reduxForm, FieldArray,  } from "redux-form";
+import { Field, reduxForm, FieldArray  } from "redux-form";
 import {Redirect, withRouter, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
 import normalizePhone from "./NormalizePhone";
@@ -82,6 +82,55 @@ function validate (values) {
       />
     );
 
+    const renderField = ({ input, label, type, meta: { touched, error } }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} placeholder={label} />
+          {touched && error && <span>{error}</span>}
+        </div>
+      </div>
+    );
+    const renderItems = ({ fields, meta: { input, error, submitFailed, reset } }) => (
+      <div>
+        
+        {fields.getAll().map((item, index) => (
+         (index === 0) ? 
+
+        <FlexContainer>
+          <Field
+              name={item}
+              type="text"
+              component={renderField}
+              style={{marginTop: "5px"}}
+              margin="normal"
+              fullWidth={true}
+              style={{marginTop: "-5px", marginLeft: "30px", marginRight: "5px"}}
+              /> 
+       
+            <button type="button" onClick={() => fields.unshift("")}>
+             Add Item
+            </button>
+        </FlexContainer>
+     
+    
+    :
+        <FlexContainer key={index} style={{marginTop: "10px"}}>
+        <Button type="button" onClick={() => fields.remove(index)}>
+            X
+        </Button>
+        <Field
+          name={item}
+          type="text"
+          component={renderField}
+          style={{marginTop: "5px"}}
+        />
+          </FlexContainer>
+        ))}
+      </div>
+    );
+   
+
   class CreateVendor extends React.Component{
     isUpdating = false;
     constructor(props){
@@ -132,6 +181,7 @@ function validate (values) {
         items: itemList,
         item: ''
       })
+     
       return itemList;
     }
     addCount = e => {
@@ -149,6 +199,7 @@ function validate (values) {
         ...this.state,
         items: newItems
       })
+     
       return newItems;
     }
     save = e => {
@@ -227,6 +278,12 @@ function validate (values) {
                     <br></br>
                     <StyledP>What are the specific items you plan to sell?</StyledP>
                     
+                    
+     
+                <form>
+                
+                <FieldArray name="items" component={renderItems} />
+                  </form>
                     <FlexContainer>
                     {/* <StyledField
                         component={renderButton}
@@ -240,7 +297,7 @@ function validate (values) {
                         fullWidth={true}
                     >
                     <img src={Add} style={{marginTop: "10px"}}/>   
-                    </StyledField>*/}
+                    </StyledField>
                     <TextField
                           margin="normal"
                           id="item"
@@ -251,8 +308,8 @@ function validate (values) {
                           margin="normal"
                           fullWidth={true}
                           style={{marginTop: "-5px", marginLeft: "30px", marginRight: "5px"}}
-                     />
-                      <StyledField
+                     /> */}
+                      {/* <StyledField
                         component={renderButton}
                         prefunc={this.addItem}
                         operation={this.state}
@@ -264,10 +321,10 @@ function validate (values) {
                         fullWidth={true}
                         >
                           <AddButton>Add Item</AddButton>
-                        </StyledField>
+                        </StyledField> */}
                      </FlexContainer>
 
-                    {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
+                    {/* {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
                     {this.state.items.map((item, index) => 
                     <FlexContainer  key={index}>
                         <StyledField
@@ -280,10 +337,10 @@ function validate (values) {
                         >
                           <StyledButton>X</StyledButton>
                         </StyledField>
-                       <StyledP1>{item}</StyledP1> 
+                       <StyledP1>{item}</StyledP1>  */}
                        
-                    </FlexContainer>
-                    )}
+                    {/* </FlexContainer>
+                    )} */}
                     
                      <StyledP>
 

@@ -10,7 +10,7 @@ import { searchMarkets } from '../redux/actions/searchMarkets';
 import { connect } from "react-redux";
 import Navbar from "../components/Navbar";
 import { Mixpanel } from '../redux/actions/mixpanel';
-
+import NavbarVendor from "../components/Navbar"
 class SearchMarkets extends React.Component {
     state = {
         search: ''
@@ -33,7 +33,7 @@ class SearchMarkets extends React.Component {
     render() {
         return ( 
             <div>
-            <Navbar />
+            <NavbarVendor />
             <StyledContainer>
            
                 <form onSubmit={this.startSearch}>

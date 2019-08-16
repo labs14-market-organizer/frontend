@@ -305,8 +305,10 @@ class Navbar extends React.Component {
   
   render() { 
     let usertype = this.props.checkUserData.userType;
-    let userName = this.props.checkUserData.userData ? this.props.checkUserData.userData.email : null;
-    let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
+    // let userName = this.props.checkUserData.userData ? this.props.checkUserData.userData.email : null;
+    let userName = "Todd A."
+    // let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
+    let objName = "Vendor"
     console.log(userName);
       
         
