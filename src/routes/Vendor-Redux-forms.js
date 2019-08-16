@@ -17,7 +17,7 @@ import { Field, reduxForm, FieldArray  } from "redux-form";
 import {Redirect, withRouter, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
 import normalizePhone from "./NormalizePhone";
-import { vendor } from "postcss";
+
 
 function validate (values) {
     const errors = {};
@@ -159,8 +159,7 @@ function validate (values) {
             facebook: '',
             twitter: '',
             instagram: '',
-            email: ''
-            // email: this.props.checkUserData.userData.email
+            email: this.props.checkUserData.userData.email
         };
         else this.isUpdating = true;
         this.state.electricity = String(this.state.electricity)
