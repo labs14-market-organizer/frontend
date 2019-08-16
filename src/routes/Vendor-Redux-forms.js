@@ -17,6 +17,7 @@ import { Field, reduxForm, FieldArray  } from "redux-form";
 import {Redirect, withRouter, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
 import normalizePhone from "./NormalizePhone";
+import { vendor } from "postcss";
 
 function validate (values) {
     const errors = {};
@@ -102,10 +103,8 @@ function validate (values) {
     );
     const renderItems = ({ fields, meta: { input, error, submitFailed, reset } }) => (
       <div>
-        
-        {fields.map((item, index) => (
+        { fields.map((item, index) => (
          (index === 0) ? 
-      
         <FlexContainer style={{marginBottom: "15px"}}>
           <StyledField
               name={item}
@@ -133,9 +132,12 @@ function validate (values) {
           style={{marginTop: "15px"}}
         />
           </FlexContainer>
-        ))}
+       
+        ))
+        }
       </div>
     );
+
    
 
   class CreateVendor extends React.Component{
@@ -147,7 +149,7 @@ function validate (values) {
         this.state = {
             name: '',
             description: '',
-            items: [],
+            items: [""],
             item: '',
             electricity: "false",
             ventilation: "false",
@@ -157,7 +159,8 @@ function validate (values) {
             facebook: '',
             twitter: '',
             instagram: '',
-            email: this.props.checkUserData.userData.email
+            email: ''
+            // email: this.props.checkUserData.userData.email
         };
         else this.isUpdating = true;
         this.state.electricity = String(this.state.electricity)
