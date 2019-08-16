@@ -74,7 +74,7 @@ export const setLocalData = (token, expiration) => dispatch => { //data should b
     } else {
         dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "token invalid" }})};
     if (Date.now() > expiration) {
-        dispatch({type: SET_LOCAL_DATA, payload: {error: "data invalid" }});
+        dispatch({type: SET_LOCAL_DATA, payload: {error: "data invalid" }}); 
         localStorage.clear()
     } else {
         dispatch({type: SET_LOCAL_DATA, payload: {token, expiration}})
