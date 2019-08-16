@@ -324,10 +324,11 @@ class Navbar extends React.Component {
           <StyledBox>
             <MenuIcon style={{pointerEvents: "auto"}} onClick={this.toggle} className="menuIcon" fontSize="large"/>
             <div>{this.Menu()}</div>
-            <Link to="/landing"> 
+            <StyledLink to="/landing"> 
             <CloudText>CLOUD</CloudText>
-            </Link>
+            
             <StandsText>STANDS</StandsText>
+            </StyledLink>
             </StyledBox>
             <StyledNav> 
             <Link to="/team">Meet the Team</Link>
@@ -347,7 +348,27 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {/* actions */})(Navbar);
-      
+
+// margin instead of padding to fix link bug
+const padding = props => `
+@media(min-width: 920px) {
+  margin-left: 40px;
+
+}
+
+
+
+@media(min-width: 1100px) {
+margin-left: 90px;
+
+}
+
+@media(min-width: 1300px) {
+margin-left: 120px;
+
+}
+`;
+
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Luckiest Guy";
     color: #7f817e;
@@ -366,20 +387,9 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     @media (max-width: 350px) {
       font-size: 30px;  
     }
-    @media (min-width: 696px) {
 
-      margin-left: 12px;
-}
 
-@media (min-width: 732px) {
 
-margin-left: 18px;
-}
-
-@media (min-width: 835px) {
-
-margin-left: 100px;
-}
 `;
 
 const StandsText = styled(({ variant, ...otherProps}) => <Typography fontWeight={200} variant="h3" {...otherProps} />)`
@@ -401,6 +411,13 @@ const StandsText = styled(({ variant, ...otherProps}) => <Typography fontWeight=
 
 `;
 
+const StyledLink = styled(Link)`
+@media (min-width: 692px) {
+  margin-left: 28px;
+}
+
+${padding}
+` 
 const StyledDiv2 = styled.div`
 display: flex;
 justify-content: space-between;
@@ -415,7 +432,7 @@ const StyledBox = styled(Box)`
   flex-wrap: nowrap;
   /* position: absolute; */
   /* top: 0; */
-  margin-top: 2px;
+  margin-top: 6px;
   -webkit-align-items:center;
   a {
     display: flex;
@@ -423,14 +440,14 @@ const StyledBox = styled(Box)`
   }
   
   div {
-    @media (min-width: 696px) {
+    @media (min-width: 692px) {
       display: none;
     }
   }
   .menuIcon {
     padding: 0 16px;
     pointer-events: auto;
-    @media (min-width: 696px) {
+    @media (min-width: 692px) {
       display: none;
     }
     :hover {
@@ -474,7 +491,7 @@ img {
   
 }
 .mobile {
-  @media (min-width: 696px) {
+  @media (min-width: 692px) {
 
   display: none;
   }
@@ -483,7 +500,7 @@ img {
   height: 165px;
   display: none;
   width: 1440px;
-  @media (min-width: 696px) {
+  @media (min-width: 692px) {
 
 display: inherit;
 }
@@ -579,20 +596,17 @@ Button {
 `
 const StyledNav = styled.div`
   display: none;
-  @media (min-width: 696px) {
+  @media (min-width: 692px) {
   display: flex;
   align-items: center;
   /* position: absolute; */
   /* right: 600px; */
   /* top: 10px; */
   z-index: 60000;
-  margin-right: 0px;
+  /* margin-right: 0px; */
   }
+  
 
-  @media (min-width: 740px) {
-
-  margin-right: 32px;
-  }
 
 
   
@@ -602,6 +616,7 @@ margin-right: 32px;
   color: black;
   font-family: "raleway";
   font-weight: 600;
+  font-size: 18px;
 
 }
 
@@ -610,6 +625,25 @@ margin-right: 32px;
   font-weight: 600;
   border-radius: 10px;
   text-transform: capitalize;
+  font-size: 18px;
+  margin-right: 120px;
+
+}
+@media (max-width: 918px) {
+a{
+
+font-size: 16px;
+margin-right: 16px;
+}
+.MuiButton-root {
+  margin-right: 2px;
+  font-size: 16px
+}
+}
+
+.MuiButton-root {
+  margin-right: 2px;
+  font-size: 16px
 }
 `
 

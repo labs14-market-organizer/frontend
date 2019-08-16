@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 
 import footerCloud from "../assets/footerCloud.svg"
-// import desktopFooterCloud from "../assets/desktopFooterCloud.svg"
+import desktopFooterCloud from "../assets/desktopFooterCloud.svg"
 
 
 const Footer = () => {
@@ -30,16 +30,41 @@ const Footer = () => {
       <Typography variant="body1">Copyright <span>©</span> 2019 Cloud Stands</Typography>
 
     <img src={footerCloud} alt="cloud"/>
+    <img className="desktopFooterCloud" src={desktopFooterCloud} alt="cloud"/>
     </StyledContainer>
   );
 };
 
-const StyledContainer = styled(Container)`
-height: 212px;
+const padding = props => `
+@media(min-width: 920px) {
+  padding-left: 40px;
+
+}
+
+
+
+@media(min-width: 1100px) {
+padding-left: 90px;
+
+}
+
+@media(min-width: 1300px) {
+padding-left: 120px;
+
+}
+`;
+
+
+const StyledContainer = styled.div`
 margin-top: 78px;
+width: 100vw;
 
-
-
+.MuiTypography-root {
+  @media (min-width: 692px) {
+    color: red;
+    padding-top: 200px;
+  }
+}
 .MuiTypography-subtitle1 {
 text-align:  center;
 font-family: "Raleway";
@@ -49,12 +74,16 @@ font-weight: 600;
 margin-bottom: 12px;
 padding-left: 12px;
 
-}
 
+
+}
+.desktopFooterCloud {
+  display: none;
+}
 img {
   position: relative;
   /* height: 400px; */
-  display: inline-block;
+  display: block;
   text-align: left;
   height: 280px;
   width: 110.2%;
@@ -64,9 +93,26 @@ img {
   z-index: -10
   /* min-width: 100%; */
 
+
+
 }
-
-
+@media (min-width: 692px) {
+  
+  img {
+    display: none
+  }
+}
+.desktopFooterCloud {
+  display: none;
+  @media (min-width: 692px) {
+    display: initial;
+    
+  }
+}
+a{
+  text-decoration: none;
+  color: initial;
+}
 .MuiTypography-body1 {
   /* margin-left: -26px; */
   
@@ -74,10 +120,38 @@ img {
   margin-bottom: -240px;
 
   font-weight: normal;
+  @media (min-width: 692px) {
+  }
   span {
     font-weight: bold;
   }
 }
+
+@media (min-width: 692px) {
+  margin: 0px;
+  /* width: 100vw; */
+  margin-top: 0px;
+  padding-top:70px;
+  margin-top: 24px;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+
+
+
+}
+@media (min-width: 1440px) {
+width: 100vw;
+.desktopFooterCloud {
+  width: 100vw;
+}
+}
+
+.muiTypography-body1 {
+    color: red;
+  }
+
 `
 
 const StyledGridList = styled(GridList)`
@@ -91,7 +165,12 @@ padding-left: 12px;
 padding-bottom: 16px;
 text-align:  center;
 
-
+@media (min-width: 692px) {
+  .MuiTypography-body1  {
+    color: red;
+    font-size: 300px;
+  }
+}
 
 
 
