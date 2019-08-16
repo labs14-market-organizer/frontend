@@ -112,6 +112,7 @@ const StyledContainer = styled(Container)`
     width: 600px;
     padding-top: 100px;
     min-height: 100vh;
+    pointer-events: auto;
   }
   #visible {
         opacity: 1.0;
@@ -121,6 +122,7 @@ const StyledContainer = styled(Container)`
   #invisible {
     opacity: 0;
     transition: opacity 0.5s linear;
+    pointer-events: none;
   }
   #noscroll{
     overflow: hidden;
