@@ -25,7 +25,6 @@ export const getUserData = (token=null) => dispatch => {
     return axiosWithAuth(token)
         .get(`${HOST_URL}/user`)
         .then(res => {
-            console.log(res.data.token)
             count = 0;
             if(!res.data) throw "interal client error";
             let userType = "undefined";
@@ -75,7 +74,7 @@ export const setLocalData = (token, expiration) => dispatch => { //data should b
     } else {
         dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "token invalid" }})};
     if (Date.now() > expiration) {
-        dispatch({type: SET_LOCAL_DATA, payload: {error: "data invalid" }});
+        dispatch({type: SET_LOCAL_DATA, payload: {error: "data invalid" }}); //brief comment out.
         localStorage.clear()
     } else {
         dispatch({type: SET_LOCAL_DATA, payload: {token, expiration}})

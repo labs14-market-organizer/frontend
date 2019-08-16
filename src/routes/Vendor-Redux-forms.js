@@ -295,62 +295,8 @@ function validate (values) {
                 <FieldArray name="items" component={renderItems} />
                   </form>
                     <FlexContainer>
-                    {/* <StyledField
-                        component={renderButton}
-                        prefunc={this.addItem}
-                        operation={this.state}
-                        id="items"
-                        label="items"
-                        name="items"
-                        margin="normal"
-                        variant="outlined"
-                        fullWidth={true}
-                    >
-                    <img src={Add} style={{marginTop: "10px"}}/>   
-                    </StyledField>
-                    <TextField
-                          margin="normal"
-                          id="item"
-                          label="Add New Item"
-                          name="item"
-                          onChange={this.handleChange}
-                          value={this.state.item}
-                          margin="normal"
-                          fullWidth={true}
-                          style={{marginTop: "-5px", marginLeft: "30px", marginRight: "5px"}}
-                     /> */}
-                      {/* <StyledField
-                        component={renderButton}
-                        prefunc={this.addItem}
-                        operation={this.state}
-                        id="items"
-                        label="items"
-                        name="items"
-                        margin="normal"
-                        variant="outlined"
-                        fullWidth={true}
-                        >
-                          <AddButton>Add Item</AddButton>
-                        </StyledField> */}
+                  
                      </FlexContainer>
-
-                    {/* {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
-                    {this.state.items.map((item, index) => 
-                    <FlexContainer  key={index}>
-                        <StyledField
-                          component={renderButton}
-                          prefunc={(e) => this.deleteItem(e,index)}
-                          operation={this.state}
-                          id="items"
-                          label="items"
-                          name="items"
-                        >
-                          <StyledButton>X</StyledButton>
-                        </StyledField>
-                       <StyledP1>{item}</StyledP1>  */}
-                       
-                    {/* </FlexContainer>
-                    )} */}
                     
                      <StyledP>
 
