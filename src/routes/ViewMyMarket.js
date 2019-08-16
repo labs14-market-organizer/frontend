@@ -78,15 +78,16 @@ class ViewMyMarket extends React.Component{
             { (market.twitter && market.twitter.length > 0) ? <div><Tag>Twitter</Tag> <Ltag>{market.twitter}</Ltag></div>: null }
             { (market.instagram && market.instagram.length > 0) ? <div><Tag>Instagram</Tag> <Ltag>{market.instagram}</Ltag></div>: null }
             </Container>}
-            {editing ? "" : this.boothRender() } 
+            {editing ? "" : this.boothRender(market) } 
         
         </div>
     )
     }
-    boothRender()
+    boothRender(market)
     {
+      if(!market) return <div/>
       return(
-        <div><BoothPicker />HELLO WORLD</div>
+        <div><BoothPicker market={market} /></div>
       )
     }
     editingRender()
