@@ -51,7 +51,6 @@ class SearchMarkets extends React.Component {
     componentDidUpdate()
     {
       if(this.props.searchError) this.clearError++;
-      console.log(this.clearError)
     }
     render() {
         let shouldClose = this.state.popup > 0 && !this.props.market.fetching && this.props.market.marketData;
@@ -84,7 +83,7 @@ class SearchMarkets extends React.Component {
                 <div id={this.props.marketsBySearch.marketsBySearch && this.state.search ===this.state.lastSearch && this.state.search !== '' ? "visible" : "invisible"}>
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
-                        <StyleBox boxShadow={10} key={location.id} name={index} onClick={e => this.handleClick(e, location)}>
+                        <StyleBox boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
                         <p style={{fontWeight: "600"}}>{location.name}</p>
                         <p>{location.description}</p>
                     </StyleBox>
