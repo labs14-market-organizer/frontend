@@ -29,7 +29,7 @@ class BoothPicker extends React.Component
     this.state =
     {
         date: d,
-        rulesChecked: false
+        vendors: false
     }
   }
   
@@ -60,6 +60,13 @@ class BoothPicker extends React.Component
  componentDidUpdate()
  {
    this.disable = false;
+ }
+
+ vendorsDetailsToggle = (e) => {
+   this.setState({
+     ...this.state,
+     vendors: !this.state.vendors
+   })
  }
 render()
 {
@@ -149,6 +156,9 @@ render()
       borderColor: "#b21b2d",
       color: "#b21b2d"
     }
+
+    let showing = (this.state.vendors) ? "showing" : "notshowing";
+    let showing1 = (this.state.vendors) ? "notshowing" : "showing";
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -168,12 +178,19 @@ render()
                 }}
                 />
             </MuiPickersUtilsProvider>
+            <div style={{display: "flex", justifyContent: "space-around"}}>
+            <StyledP className={showing} onClick={this.vendorsDetailsToggle}>Details</StyledP>
+            <StyledP className={showing1} onClick={this.vendorsDetailsToggle}>Vendors</StyledP>
+          </div>
+          <div>
+          <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
+          </div>
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
               { this.props.reserve.error ? <ErrorDiv>{ String(this.props.reserve.error)}</ErrorDiv>
               :
               <Expandor _width="600px">
+              <div>
                 {market.booths.map((x,i) => {
-                  console.log(market)
                   var creating = this.props.reserve && !this.props.reserve.fetching && this.props.reserve.reserveData && this.checkUsed(x);
                   return (
                     <Booth key={i}>
@@ -201,15 +218,14 @@ render()
                               <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ? this.props.createReservation(market.id, x.id, formatDate(this.state.date)) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                           }
                         </div>
-                        
                       </Booth>
                     )
                   }
                   )}
-                  
+                  </div>
               </Expandor> }
-            </div>
-        </div> 
+            </div> 
+          </div> 
 
     );
 }
@@ -284,7 +300,20 @@ animation: spin 2s linear infinite;
 const Booth = styled.div `
   display: flex;
   align-items: flex-end;
-`
+`;
+
+
+const StyledP = styled.p`
+  font-size: 18px;
+  font-family: Raleway;
+  .showing {
+    font-weight: bold;
+    color: red;
+  }
+  .notshowing {
+    font-weight: 500;
+  }
+`;
 const mapStateToProps = (state) =>
 {
   return {

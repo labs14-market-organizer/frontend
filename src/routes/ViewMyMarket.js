@@ -40,6 +40,8 @@ class ViewMyMarket extends React.Component{
   let market = this.props.marketData;
   console.log(market)
   if(!market) return <Redirect to={this.props.back ? this.props.back : "/"} />;
+  console.log(this.props.userData.id)
+  console.log(this.props.marketData.admin_id)
   let editing = this.props.userData.id === this.props.marketData.admin_id;  //means market owner.
   return (
       <div>

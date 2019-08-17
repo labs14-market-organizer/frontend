@@ -3,7 +3,7 @@ import styled from "styled-components";
 import dropdown from "../assets/dropdown.svg";
 import { Box } from '@material-ui/core';
 import Expandor from '../components/Expandor'
-import Icon from "../assets/dropdown.svg"
+// import Icon from "../assets/dropdown.svg"
 
 const militaryConvert = (time) => {
     let hours = time.split('');
@@ -89,7 +89,8 @@ class Collapser extends React.Component {
           lineHeight: "1.5",
           letterSpacing: "normal",
           color: "#000000",
-          marginBottom: "4px"
+          marginBottom: "4px",
+          marginLeft: "-20px"
         }
         let subtag = {
           fontFamily: "Raleway",
@@ -117,7 +118,7 @@ class Collapser extends React.Component {
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
             <Expandor _width="600px" >
             <div>
-              <div><img src={Icon}/></div>
+              <div></div>
               <div style={tag}>Market Info</div>
               <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                 <div style={subtag}>Address</div>
@@ -138,10 +139,10 @@ class Collapser extends React.Component {
               </div> : null }
               </div>
              </Expandor>
-             <div style={{margin: "10px"}}/>
+             <div style={{margin: "5px"}}/>
              <Expandor _width="600px">
                <div>
-                <div><img src={Icon}/></div>
+                <div></div>
                 <div style={tag}>Contact Info</div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                   <div style={subtag}>Email Address</div>
@@ -151,10 +152,11 @@ class Collapser extends React.Component {
                 </div>
                </div>
              </Expandor>
-             <div style={{margin: "10px"}}/>
-             <Expandor _width="600px">
+             <div />
+             <div style={{ marginTop: "10px"}}>
+             <Expandor _width="600px" >
                <div>
-                <div><img src={Icon}/></div>
+               <div></div>
                 <div style={tag}>Social Media</div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                   {(market.website !== null && market.website.length > 0) ? <div><div style={subtag}>Website</div> <div style={text}>{market.website}</div></div> : null}
@@ -163,12 +165,28 @@ class Collapser extends React.Component {
                   {(market.twitter !== null) ? <div> <div style={subtag}>Twitter</div> <div style={text}>{market.twitter}</div> </div> : null}
                 </div>
                </div>
+              
              </Expandor>
+             </div>
+             <div style={{marginTop: "10px"}}>
+             <Expandor _width="600px">
+               >
+               <div></div>
+                <div style={tag}>Market Rules</div>
+                <div style={{fontFamily: "Roboto", fontSize: "16px", textAlign: "left", marginLeft: "5px"}}>
+                    By confirming a booth, you are agreeing to this market's Rules and Code of Conduct
+                 </div>
+                <div style={{height: "320px", overflow: "scroll", fontFamily: "Roboto", fontSize: "16px", border: "1px solid black", textAlign: "left", marginLeft: "5px"}}>
+                  {market.rules}
+                </div>
+               
+             </Expandor>
+             </div>
              </div>
          )
     }
 
-}
+  };
 
 const StyledImg1 = styled.img`
   padding-top: 3px;
