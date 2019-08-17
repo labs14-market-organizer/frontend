@@ -189,7 +189,6 @@ render()
               { this.props.reserve.error ? <ErrorDiv>{ String(this.props.reserve.error)}</ErrorDiv>
               :
               <Expandor _width="600px">
-              <div>
                 {market.booths.map((x,i) => {
                   var creating = this.props.reserve && !this.props.reserve.fetching && this.props.reserve.reserveData && this.checkUsed(x);
                   return (
@@ -207,7 +206,7 @@ render()
                             </div>
                             <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                               <div style={minitile}>Booth Price</div>
-                              <div style={maintext}>{x.price}</div>
+                              <div style={maintext}>$25</div>
                             </div>
                           </div>
                           {x.description ? <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
@@ -218,14 +217,15 @@ render()
                               <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ? this.props.createReservation(market.id, x.id, formatDate(this.state.date)) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                           }
                         </div>
+                        
                       </Booth>
                     )
                   }
                   )}
-                  </div>
+                  
               </Expandor> }
-            </div> 
-          </div> 
+            </div>
+        </div> 
 
     );
 }
