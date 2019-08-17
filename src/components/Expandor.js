@@ -7,11 +7,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function Expandor(props) {
     const [expanded, setExpanded] = React.useState(false);
-    console.log(props.children)
     const handleChange = panel => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
     };
-    if(!props || !props.children || props.children.length < 1) {console.log("error");return <div/>}
+    if(!props || !props.children || props.children.length < 1) {return <div/>}
     let b = (x,i) => {
         return(
         <ExpansionPanel expanded={expanded === `panel${i+1}`} onChange={handleChange(`panel${i+1}`)} style={{margin: "0 2vw", width: "95vw", maxWidth: props._width ? props._width : "95vw"}}>
