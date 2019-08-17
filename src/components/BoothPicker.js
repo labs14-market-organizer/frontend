@@ -28,7 +28,8 @@ class BoothPicker extends React.Component
     }
     this.state =
     {
-        date: d
+        date: d,
+        rulesChecked: false
     }
   }
   
@@ -172,6 +173,7 @@ render()
               :
               <Expandor _width="600px">
                 {market.booths.map((x,i) => {
+                  console.log(market)
                   var creating = this.props.reserve && !this.props.reserve.fetching && this.props.reserve.reserveData && this.checkUsed(x);
                   return (
                     <Booth key={i}>
@@ -188,7 +190,7 @@ render()
                             </div>
                             <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                               <div style={minitile}>Booth Price</div>
-                              <div style={maintext}>$25</div>
+                              <div style={maintext}>{x.price}</div>
                             </div>
                           </div>
                           {x.description ? <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
