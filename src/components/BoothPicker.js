@@ -65,7 +65,7 @@ render()
     var market = this.props.market;
     market.booths.map(x=> 
       {
-        var r = this.props.reserve && !this.props.reserve.fetching && this.props.reserve.reserveData ? this.props.reserve.reserveData.filter(y => x.id === y.id) : null; 
+        var r = this.props.reserve && !this.props.reserve.fetching && this.props.reserve.reserveData && !this.disable ? this.props.reserve.reserveData.filter(y => x.id === y.id) : null; 
         x.number = r ? r.length > 0 ? r[0].available : 0 : -1;
         return x;
       })
