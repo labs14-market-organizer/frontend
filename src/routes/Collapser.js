@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import dropdown from "../assets/dropdown.svg";
 import { Box } from '@material-ui/core';
+import Expandor from '../components/Expandor'
+import Icon from "../assets/dropdown.svg"
 
 const militaryConvert = (time) => {
     let hours = time.split('');
@@ -77,57 +79,92 @@ class Collapser extends React.Component {
         // let img2 = (this.state.toggle2) ? "imgUp2" : null;
         // let img3 = (this.state.toggle3) ? "imgUp3" : null;
         let market = this.props.market;
-       
+
+        let tag = {
+          fontFamily: "Raleway",
+          fontSize: "16px",
+          fontWeight: "600",
+          fontStyle: "normal",
+          fontStretch: "normal",
+          lineHeight: "1.5",
+          letterSpacing: "normal",
+          color: "#000000",
+          marginBottom: "4px"
+        }
+        let subtag = {
+          fontFamily: "Raleway",
+          fontSize: "14px",
+          fontWeight: "600",
+          fontStyle: "normal",
+          fontStretch: "normal",
+          lineHeight: "1.33",
+          letterSpacing: "normal",
+          color: "#000000",
+          marginBottom: "7px"
+        }
+        let text ={
+          fontFamily: "Roboto",
+          fontSize: "16px",
+          fontWeight: "300",
+          fontStyle: "normal",
+          fontStretch: "normal",
+          lineHeight: "1.5",
+          letterSpacing: "normal",
+          color: "#000000",
+          marginBottom: "2px"
+        }
         return (
-            <>
-            <StyledBox1  boxShadow={4}> 
-            <div className={class1}>
-            <Flex>
-                <Tag>Market Info</Tag>
-                <StyledImg1 src={dropdown} style={{transform: (this.state.toggle1) ? "rotate(180deg)" : "rotate(0deg)"}} onClick={() => this.changeHeight("1")}/>
-            </Flex>
-            { (this.state.toggle1) ? 
-            <> 
-              <Tag1>Address</Tag1>
-                <Ltag>{market.address}, {market.city}, {market.state} {market.zipcode}</Ltag>
-                <Tag1>Hours</Tag1>
-                { this.state.operation.map(opHours => {
-                return (opHours.start !== null) ? <Flex><Ltag1 key={market.id}>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)}</Ltag1> <Ltag>{militaryConvert(opHours.start)} - {(militaryConvert(opHours.end))}</Ltag> </Flex> : <Flex><Ltag1>{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)}</Ltag1> <Ltag>CLOSED</Ltag></Flex>
-              }) } </> : null }
+            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <Expandor _width="600px" >
+            <div>
+              <div><img src={Icon}/></div>
+              <div style={tag}>Market Info</div>
+              <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+                <div style={subtag}>Address</div>
+                  <div style={text}>{market.address}, {market.city}, {market.state} {market.zipcode}</div>
+                  <div style={subtag}>Hours</div>
+                  <div style={{display: "flex", justifyContent: "space-between", width: "85vw", maxWidth: "400px"}}>
+                    <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%"}}>
+                      { this.state.operation.map(opHours =>
+                        <div style={text}><div style={{fontWeight: opHours.start ? "400" : ""}} >{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)}</div></div>
+                      )}
+                      </div>
+                      <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%"}}>
+                      { this.state.operation.map(opHours =>
+                      <div><div style={text}>{opHours.start === null ? <span>CLOSED</span> : <span style={{fontWeight: "400"}}>{`${militaryConvert(opHours.start)} - ${(militaryConvert(opHours.end))}`}</span>}</div></div>
+                      )}
+                    </div>
+                  </div>
+              </div> : null }
               </div>
-            </StyledBox1>
-            
-            <StyledBox2 boxShadow={4} >
-            <div className={class2}>
-            <Flex>
-            <Tag>Contact Info</Tag>
-            <StyledImg2 src={dropdown} onClick={() => this.changeHeight("2")} style={{transform: (this.state.toggle2) ? "rotate(180deg)" : "rotate(0deg)"}}/>
-            </Flex>
-            { (this.state.toggle2) ? 
-                <>
-                <Tag1>Email Address</Tag1>
-                <Ltag>{market.email}</Ltag>
-                <Tag1>Phone Number</Tag1>
-                <Ltag>{market.phone}</Ltag> </> : null }
+             </Expandor>
+             <div style={{margin: "10px"}}/>
+             <Expandor _width="600px">
+               <div>
+                <div><img src={Icon}/></div>
+                <div style={tag}>Contact Info</div>
+                <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+                  <div style={subtag}>Email Address</div>
+                  <div style={text}>{market.email}</div>
+                  <div style={subtag}>Phone Number</div>
+                  <div style={text}>{market.phone}</div>
                 </div>
-            </StyledBox2>
-            
-            <StyledBox3 className={class3} boxShadow={4}>
-            <div className={class3}>
-            <Flex>
-            <Tag>Social Media</Tag>
-            <StyledImg3 src={dropdown} onClick={() => this.changeHeight("3")} style={{transform: (this.state.toggle3) ? "rotate(180deg)" : "rotate(0deg)"}}/>
-            </Flex>
-            { (this.state.toggle3) ? 
-                <>
-              {(market.website !== null && market.website.length > 0) ? <div> <Tag1>Website</Tag1> <Ltag>{market.website}</Ltag> </div> : null}
-              {(market.facebook !== null) ? <div> <Tag1>Facebook</Tag1> <Ltag>{market.facebook}</Ltag> </div> : null}
-              {(market.instagram !== null) ? <div> <Tag1>Instagram</Tag1> <Ltag>{market.instagram}</Ltag> </div> : null}
-              {(market.twitter !== null) ? <div> <Tag1>Twitter</Tag1> <Ltag>{market.twitter}</Ltag> </div> : null} </>
-              : null }
-              </div>
-            </StyledBox3>
-            </>
+               </div>
+             </Expandor>
+             <div style={{margin: "10px"}}/>
+             <Expandor _width="600px">
+               <div>
+                <div><img src={Icon}/></div>
+                <div style={tag}>Social Media</div>
+                <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+                  {(market.website !== null && market.website.length > 0) ? <div><div style={subtag}>Website</div> <div style={text}>{market.website}</div></div> : null}
+                  {(market.facebook !== null) ? <div> <div style={subtag}>Facebook</div> <div style={text}>{market.facebook}</div> </div> : null}
+                  {(market.instagram !== null) ? <div> <div style={subtag}>Instagram</div> <div style={text}>{market.instagram}</div></div> : null}
+                  {(market.twitter !== null) ? <div> <div style={subtag}>Twitter</div> <div style={text}>{market.twitter}</div> </div> : null}
+                </div>
+               </div>
+             </Expandor>
+             </div>
          )
     }
 
@@ -216,12 +253,15 @@ const StyledBox3 = styled(Box)`
 `;
 
 const Tag = styled.p`
-  font-size: 16px;
-  font-family: Raleway;
-  font-weight: bold;
-  padding-top: 7px;
-  padding-left: 16px;
-  width: 80%;
+font-family: Raleway;
+font-size: 50px;
+font-weight: 500;
+font-style: normal;
+font-stretch: normal;
+line-height: 1.5;
+letter-spacing: normal;
+color: #000000;
+
 `;
 const Tag1 = styled.p`
   font-size: 12px;
