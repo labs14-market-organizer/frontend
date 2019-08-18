@@ -6,7 +6,7 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import {Button} from '@material-ui/core'
+import {Button, Typography} from '@material-ui/core'
 import Expandor from "./Expandor"
 import styled from "styled-components";
 import {createReservation, getBoothReservations, deleteBoothReservation, getVendorsWhoRented} from '../redux/actions/boothReserve'
@@ -175,6 +175,7 @@ render()
 
     let showing1 = (this.state.vendors) ? "showing" : "notshowing";
     let showing = (this.state.vendors) ? "notshowing" : "showing";
+
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -195,8 +196,8 @@ render()
                 />
             </MuiPickersUtilsProvider>
             <div style={{display: "flex", justifyContent: "space-around"}}>
-            <StyledP className={showing} onClick={() => this.vendorsDetailsToggle("1")}>Details</StyledP>
-            <StyledP className={showing1} onClick={() => this.vendorsDetailsToggle("2")}>Vendors</StyledP>
+            <StyledP onClick={() => this.vendorsDetailsToggle("1")} style={this.state.vendors ?{ fontWeight: "500" } : { fontWeight: "bold" }}>Details</StyledP>
+            <StyledP style={this.state.vendors ? { fontWeight: "bold" } : { fontWeight: "500" }} onClick={() => this.vendorsDetailsToggle("2")}>Vendors</StyledP>
               </div>
             <div>
               <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
@@ -330,10 +331,15 @@ const StyledP = styled.p`
   font-size: 18px;
   font-family: Raleway;
   .showing {
+    font-size: 25px;
     font-weight: bold;
+    font-size: 18px;
+    font-family: Raleway;
   }
   .notshowing {
-    font-weight: 500;
+    font-weight: 0;
+    font-size: 18px;
+    font-family: Raleway;
   }
 `;
 const mapStateToProps = (state) =>
