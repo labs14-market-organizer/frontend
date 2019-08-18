@@ -175,7 +175,6 @@ render()
 
     let showing1 = (this.state.vendors) ? "showing" : "notshowing";
     let showing = (this.state.vendors) ? "notshowing" : "showing";
-    console.log(this.props.reserve.vendorsWhoRented)
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
