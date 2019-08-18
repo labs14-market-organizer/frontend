@@ -13,6 +13,8 @@ import {createReservation, getBoothReservations, deleteBoothReservation} from '.
 import {connect} from 'react-redux';
 import {getUserData} from '../redux/actions/userData'
 
+
+
 class BoothPicker extends React.Component 
 {
   lastDate = new Date();
@@ -159,6 +161,7 @@ render()
 
     let showing = (this.state.vendors) ? "showing" : "notshowing";
     let showing1 = (this.state.vendors) ? "notshowing" : "showing";
+   
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -181,10 +184,10 @@ render()
             <div style={{display: "flex", justifyContent: "space-around"}}>
             <StyledP className={showing} onClick={this.vendorsDetailsToggle}>Details</StyledP>
             <StyledP className={showing1} onClick={this.vendorsDetailsToggle}>Vendors</StyledP>
-          </div>
-          <div>
-          <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
-          </div>
+              </div>
+            <div>
+              <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
+            </div>
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
               { this.props.reserve.error ? <ErrorDiv>{ String(this.props.reserve.error)}</ErrorDiv>
               :
@@ -198,6 +201,7 @@ render()
                           <div style={title}>{x.name}</div>
                           <div style={{...subtitle, display: "flex"}}><div style={{marginRight: "10%"}}>{`Avaliable: `}</div> <div>{x.number < 0 ? <Spinner/> : <span>{x.number > -1 ? x.number : ""}</span>}</div></div>
                         </div>
+                        { (this.state.vendors) ?
                         <div>
                           <div style={{display: "flex", flexDirection: "row", marginBottom: "2%"}}>
                             <div  style={{display: "flex", flexDirection: "column", alignItems: "flex-start", marginRight: "40%"}}>
@@ -212,11 +216,11 @@ render()
                           {x.description ? <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                             <div style={minitile}>Booth description</div>
                             <div style={{textAlign: "left", ...maintext}}>{x.description}</div>
-                          </div> : null}
+                          </div> : null} 
                           {
                               <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ? this.props.createReservation(market.id, x.id, formatDate(this.state.date)) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                           }
-                        </div>
+                        </div> : null } { /*add in null the list of vendors */}
                         
                       </Booth>
                     )
@@ -224,7 +228,7 @@ render()
                   )}
                   
               </Expandor> }
-            </div>
+            </div> 
         </div> 
 
     );
