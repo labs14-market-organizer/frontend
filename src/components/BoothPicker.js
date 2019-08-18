@@ -66,11 +66,19 @@ class BoothPicker extends React.Component
    this.disable = false;
  }
 
- vendorsDetailsToggle = (e) => {
-   this.setState({
+ vendorsDetailsToggle = (item) => {
+  if (item === "1" && this.state.vendors === true) {
+    this.setState({
      ...this.state,
      vendors: !this.state.vendors
    })
+  } else if (item === "2" && this.state.vendors === false) {
+    this.setState({
+      ...this.state,
+      vendors: !this.state.vendors
+    })
+  }
+   
  }
 
  createReservation = (marketId, boothId) => {
@@ -165,9 +173,8 @@ render()
       color: "#b21b2d"
     }
 
-    let showing = (this.state.vendors) ? "showing" : "notshowing";
-    let showing1 = (this.state.vendors) ? "notshowing" : "showing";
-
+    let showing1 = (this.state.vendors) ? "showing" : "notshowing";
+    let showing = (this.state.vendors) ? "notshowing" : "showing";
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -188,8 +195,8 @@ render()
                 />
             </MuiPickersUtilsProvider>
             <div style={{display: "flex", justifyContent: "space-around"}}>
-            <StyledP className={showing} onClick={this.vendorsDetailsToggle}>Details</StyledP>
-            <StyledP className={showing1} onClick={this.vendorsDetailsToggle}>Vendors</StyledP>
+            <StyledP className={showing} onClick={() => this.vendorsDetailsToggle("1")}>Details</StyledP>
+            <StyledP className={showing1} onClick={() => this.vendorsDetailsToggle("2")}>Vendors</StyledP>
               </div>
             <div>
               <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
@@ -207,7 +214,7 @@ render()
                           <div style={title}>{x.name}</div>
                           <div style={{...subtitle, display: "flex"}}><div style={{marginRight: "10%"}}>{`Avaliable: `}</div> <div>{x.number < 0 ? <Spinner/> : <span>{x.number > -1 ? x.number : ""}</span>}</div></div>
                         </div>
-                        { (this.state.vendors) ?
+                        { (!this.state.vendors) ?
                         <div>
                           <div style={{display: "flex", flexDirection: "row", marginBottom: "2%"}}>
                             <div  style={{display: "flex", flexDirection: "column", alignItems: "flex-start", marginRight: "40%"}}>

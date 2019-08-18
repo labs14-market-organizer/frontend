@@ -61,7 +61,6 @@ export const createReservation = (marketId, boothId, date) => dispatch =>
         .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
         .then(res1 => {
             dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
-            console.log(res1.data)
         })
         .catch(err => {
             console.log(err)
