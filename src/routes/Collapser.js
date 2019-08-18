@@ -114,6 +114,9 @@ class Collapser extends React.Component {
           color: "#000000",
           marginBottom: "2px"
         }
+        let something = {
+          rules: "ai dosfa osdn hfkaj dbnf asjfak ijsdf aajsd bfkjasdbf kbajsdfj kabsdf asijdfba klj sdbf asd bfkajs dbf lajkdf bakjsdf basd bfla ksd fb a kls dbfl kjdsb f kjdas bfakjsd f"
+        }
         return (
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
             <Expandor _width="600px" >
@@ -136,7 +139,7 @@ class Collapser extends React.Component {
                       )}
                     </div>
                   </div>
-              </div> : null }
+              </div> 
               </div>
              </Expandor>
              <div style={{margin: "5px"}}/>
@@ -169,18 +172,20 @@ class Collapser extends React.Component {
              </Expandor>
              </div>
              <div style={{marginTop: "10px"}}>
-             <Expandor _width="600px">
-               >
-               <div></div>
-                <div style={tag}>Market Rules</div>
-                <div style={{fontFamily: "Roboto", fontSize: "16px", textAlign: "left", marginLeft: "5px"}}>
-                    By confirming a booth, you are agreeing to this market's Rules and Code of Conduct
-                 </div>
-                <div style={{height: "320px", overflow: "scroll", fontFamily: "Roboto", fontSize: "16px", border: "1px solid black", textAlign: "left", marginLeft: "5px"}}>
-                  {market.rules}
+              <Expandor _width="600px">
+              <div>
+                <div></div>
+                  <div style={tag}>Market Rules</div>
+                  <div>
+                    <div style={{fontFamily: "Roboto", fontSize: "16px", textAlign: "left", marginLeft: "5px"}}>
+                        By confirming a booth, you are agreeing to this market's Rules and Code of Conduct
+                    </div>
+                    <div style={{height: "320px", overflow: "scroll", fontFamily: "Roboto", fontSize: "16px", border: "1px solid black", textAlign: "left", marginLeft: "5px"}}>
+                      {something.rules}
+                    </div>
                 </div>
-               
-             </Expandor>
+                </div>
+              </Expandor>
              </div>
              </div>
          )
