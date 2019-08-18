@@ -12,6 +12,7 @@ export const SET_BOOTH_DATA_END = "SET_BOOTH_DATA_END";
 export const ERROR_GET_BOOTH_DATA = "ERROR_GET_BOOTH_DATA";
 export const ERROR_SET_BOOTH_DATA = "ERROR_SET_BOOTH_DATA";
 export const ERROR_INVALID_TOKEN = "ERROR_INVALID_TOKEN";
+export const GET_VENDORS_WHO_RENTED = "GET_VENDORS_WHO_RENTED";
 
 /*
 object schema
@@ -142,3 +143,17 @@ export const deleteBoothReservation = (reservationId, boothId, marketId, date) =
         dispatch({type: ERROR_GET_BOOTH_DATA,  payload: {error: error.status !== "404" ? error.message : null}});
     })
 }
+
+export const getVendorsWhoRented = (marketId, date) => dispatch => {
+    let token = localStorage.getItem("token")
+    return axiosWithAuth(token)
+        .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
+        .then(res => {
+            console.log('here')
+            console.log(res.data)
+            console.log('here')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+};

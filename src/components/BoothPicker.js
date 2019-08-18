@@ -9,7 +9,7 @@ import {
 import {Button} from '@material-ui/core'
 import Expandor from "./Expandor"
 import styled from "styled-components";
-import {createReservation, getBoothReservations, deleteBoothReservation} from '../redux/actions/boothReserve'
+import {createReservation, getBoothReservations, deleteBoothReservation, getVendorsWhoRented} from '../redux/actions/boothReserve'
 import {connect} from 'react-redux';
 import {getUserData} from '../redux/actions/userData'
 
@@ -37,6 +37,7 @@ class BoothPicker extends React.Component
   
   handleDateChange(date) {
     this.props.getBoothReservations(this.props.market.id, formatDate(date))
+    this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date))
     this.setState({...this.state, date: date})
   }
   convertObjectToNumberDay(opp)
@@ -54,6 +55,7 @@ class BoothPicker extends React.Component
  componentWillMount()
  {
    this.props.getBoothReservations(this.props.market.id, formatDate(this.state.date))
+   this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date))
  }
  componentWillUpdate()
  {
@@ -69,6 +71,11 @@ class BoothPicker extends React.Component
      ...this.state,
      vendors: !this.state.vendors
    })
+ }
+
+ createReservation = (marketId, boothId) => {
+   this.props.createReservation(marketId, boothId, formatDate(this.state.date));
+   this.props.getVendorsWhoRented(marketId, formatDate(this.state.date));
  }
 render()
 {
@@ -161,7 +168,6 @@ render()
 
     let showing = (this.state.vendors) ? "showing" : "notshowing";
     let showing1 = (this.state.vendors) ? "notshowing" : "showing";
-    console.log(market.booths)
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -218,9 +224,13 @@ render()
                             <div style={{textAlign: "left", ...maintext}}>{x.description}</div>
                           </div> : null} 
                           {
-                              <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ? this.props.createReservation(market.id, x.id, formatDate(this.state.date)) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
+                              <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                           }
-                        </div> : null } { /*add in null the list of vendors */}
+                        </div> : <div>
+                          {/* {this.props.renters.map(renter => {
+                            <div>{renter}</div>
+                          }} */}
+                        </div> } 
                         
                       </Booth>
                     )
@@ -243,13 +253,14 @@ render()
   fireDelete = (x)=>
   {
     if(!this.props.user || !this.props.user.userData) return;
-    console.log(x);
+    // console.log(x);
     var ruser = this.props.user.userData.upcoming_vdr;
-    console.log(ruser);
+    // console.log(ruser);
     if(!ruser && ruser.length < 1 ) return;
     ruser = ruser.filter(y=> x.id === y.booth_id && x.market_id === y.market_id)
     if(ruser.length < 1) return;
     this.props.deleteBoothReservation(ruser[0].id, ruser[0].booth_id, ruser[0].market_id, formatDate(this.state.date));
+    this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date));
   } 
 }
 
@@ -325,7 +336,7 @@ const mapStateToProps = (state) =>
     user: {...state.checkUserData}
   }
 }
-export default connect(mapStateToProps, {createReservation, getBoothReservations, deleteBoothReservation, getUserData})(BoothPicker);
+export default connect(mapStateToProps, {createReservation, getBoothReservations, deleteBoothReservation, getUserData, getVendorsWhoRented})(BoothPicker);
 
 
 /* {
