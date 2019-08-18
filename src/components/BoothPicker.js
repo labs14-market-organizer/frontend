@@ -161,7 +161,7 @@ render()
 
     let showing = (this.state.vendors) ? "showing" : "notshowing";
     let showing1 = (this.state.vendors) ? "notshowing" : "showing";
-   
+    console.log(market.booths)
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -210,7 +210,7 @@ render()
                             </div>
                             <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                               <div style={minitile}>Booth Price</div>
-                              <div style={maintext}>$25</div>
+                              <div style={maintext}>${x.price}</div>
                             </div>
                           </div>
                           {x.description ? <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
