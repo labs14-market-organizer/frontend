@@ -6,7 +6,10 @@ import {
     ERROR_GET_BOOTH_DATA,
     ERROR_SET_BOOTH_DATA,
     ERROR_INVALID_TOKEN,
-} from '../actions/boothData';
+    } from '../actions/boothData';
+import {
+    GET_VENDORS_WHO_RENTED
+} from '../actions/boothReserve';
 
 const initalState =
 {
@@ -14,7 +17,8 @@ const initalState =
     reserveData: null,
     error: undefined,
     fetching: true,
-    updated: false
+    updated: false,
+    vendorsWhoRented: []
 }
 
 export const checkBoothReserve = (state = initalState, action) =>
@@ -39,6 +43,11 @@ export const checkBoothReserve = (state = initalState, action) =>
             state.fetching = true;
             state.error = undefined;
             state.reserveData = null;
+        case GET_VENDORS_WHO_RENTED:
+            return {
+                ...state,
+                vendorsWhoRented: action.payload
+            }
         default:
             return state;
     }

@@ -75,7 +75,6 @@ class BoothPicker extends React.Component
 
  createReservation = (marketId, boothId) => {
    this.props.createReservation(marketId, boothId, formatDate(this.state.date));
-   this.props.getVendorsWhoRented(marketId, formatDate(this.state.date));
  }
 render()
 {
@@ -168,6 +167,9 @@ render()
 
     let showing = (this.state.vendors) ? "showing" : "notshowing";
     let showing1 = (this.state.vendors) ? "notshowing" : "showing";
+    console.log('yo')
+    console.log(this.props.reserve.vendorsWhoRented);
+    console.log('yo')
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -227,9 +229,10 @@ render()
                               <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                           }
                         </div> : <div>
-                          {/* {this.props.renters.map(renter => {
-                            <div>{renter}</div>
-                          }} */}
+                          {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null ) ? this.props.reserve.vendorsWhoRented.map(renter => {
+                            return <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{renter.name}</div>
+                          }) : <div>Currently no one has rented a booth</div>} 
+                          <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                         </div> } 
                         
                       </Booth>
@@ -260,7 +263,6 @@ render()
     ruser = ruser.filter(y=> x.id === y.booth_id && x.market_id === y.market_id)
     if(ruser.length < 1) return;
     this.props.deleteBoothReservation(ruser[0].id, ruser[0].booth_id, ruser[0].market_id, formatDate(this.state.date));
-    this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date));
   } 
 }
 

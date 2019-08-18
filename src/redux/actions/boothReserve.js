@@ -56,6 +56,17 @@ export const createReservation = (marketId, boothId, date) => dispatch =>
             .catch(err => { }), 
         1);
     })
+    .then(res => {
+        return axiosWithAuth(token)
+        .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
+        .then(res1 => {
+            dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
+            console.log(res1.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    })
     .catch(err =>{
         //check if bad token if so clear local data
         let error = err && err.response && err.response.data && err.response.data.message ? err.response.data.message : "Unable to contact server. Please Try again."
@@ -133,6 +144,18 @@ export const deleteBoothReservation = (reservationId, boothId, marketId, date) =
                         dispatch({type: GET_BOOTH_DATA_END, payload: {reserveData: res4.data}});
                     })
             })
+            .then(res => {
+                return axiosWithAuth(token)
+                .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
+                .then(res1 => {
+                    dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
+                    console.log(res1.data)
+                    
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            })
             .catch(err => { }), 
         500);
        
@@ -149,9 +172,8 @@ export const getVendorsWhoRented = (marketId, date) => dispatch => {
     return axiosWithAuth(token)
         .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
         .then(res => {
-            console.log('here')
+            dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res.data })
             console.log(res.data)
-            console.log('here')
         })
         .catch(err => {
             console.log(err)
