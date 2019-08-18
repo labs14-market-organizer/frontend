@@ -175,7 +175,7 @@ render()
 
     let showing1 = (this.state.vendors) ? "showing" : "notshowing";
     let showing = (this.state.vendors) ? "notshowing" : "showing";
-
+    console.log(this.props.reserve.vendorsWhoRented)
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -235,9 +235,10 @@ render()
                               <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                           }
                         </div> : <div>
-                          {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null ) ? <><div style={{fontFamily: "Roboto", fontSize: "12px", fontWeight: "500", color: "#044d4c", textAlign: "left"}}>{this.props.reserve.vendorsWhoRented.length} Vendors</div>
+                          {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null ) ? <><div style={{fontFamily: "Roboto", fontSize: "12px", fontWeight: "500", color: "#044d4c", textAlign: "left"}}><div></div>Vendors</div>
                             {this.props.reserve.vendorsWhoRented.map(renter => {
-                            return <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{renter.name}</div>
+                              return (renter.booth_id === x.id) ? 
+                            <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{renter.name}</div> : <div></div>
                           })}</> : <></>} 
                           <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                         </div> } 
