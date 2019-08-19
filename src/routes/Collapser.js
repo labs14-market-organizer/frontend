@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import dropdown from "../assets/dropdown.svg";
-import { Box } from '@material-ui/core';
-import Expandor from '../components/Expandor'
+import { Box, Button } from '@material-ui/core';
+import Expandor from '../components/Expandor';
+import {connect} from "react-redux";
+import {requestReservationPermissions} from "../redux/actions/boothReserve"
 // import Icon from "../assets/dropdown.svg"
 
 const militaryConvert = (time) => {
@@ -25,6 +27,7 @@ const militaryConvert = (time) => {
   }
 
 class Collapser extends React.Component {
+    disabled = false;
     constructor(props){
         super(props);
          this.state = {
@@ -69,7 +72,10 @@ class Collapser extends React.Component {
         })
     }
   }
-  
+    componentDidUpdate()
+    {
+      this.disabled = false;
+    }
     render(){
         
         var class1 = this.state.toggle1 ? "longHeight1" : "shortHeight1";
@@ -114,11 +120,35 @@ class Collapser extends React.Component {
           color: "#000000",
           marginBottom: "2px"
         }
+        var button = 
+        {
+          width: "80vw",
+          maxWidth: "500px",
+          height: "60px",
+          fontSize: "18px",
+          fontFamily: "Raleway",
+          fountWeight: "600",
+          borderRadius: "5px",
+          border: "solid 1px rgba(0, 0, 0, 0.1)",
+          letterSpacing: "0.75px",
+          backgroundColor: "#478529",
+          color: "#FFF",
+          marginTop: "4%",
+          trasition: "color 10s linear"
+        }
+        var buttonDisabled =
+        {
+          ...button,
+          backgroundColor: "#FFF",
+          borderColor: "#AAA",
+          color: "#AAA"
+        }
         let something = {
           rules: "ai dosfa osdn hfkaj dbnf asjfak ijsdf aajsd bfkjasdbf kbajsdfj kabsdf asijdfba klj sdbf asd bfkajs dbf lajkdf bakjsdf basd bfla ksd fb a kls dbfl kjdsb f kjdas bfakjsd f"
         }
+        var acceptedRules = this.props.checkVendorData.vendorData && this.props.checkVendorData.vendorData.status_mkt ? this.props.checkVendorData.vendorData.status_mkt.find(x=> x && x.market_id === market.id && x.market_id) || this.disabled ? 1 : 0 : -1;
         return (
-            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <div style={{maxWidth: "600px", margin: "0 auto"}}>
             <Expandor _width="600px" >
             <div>
               <div></div>
@@ -172,18 +202,23 @@ class Collapser extends React.Component {
              </Expandor>
              </div>
              <div style={{marginTop: "10px"}}>
-              <Expandor _width="600px">
+              <Expandor _width="600px" expanded={acceptedRules === 0 ? "panel2": null}>
               <div>
                 <div></div>
-                  <div style={tag}>Market Rules</div>
+                  <div style={{...tag, marginBottom: "0px"}}>Market Rules</div>
                   <div>
-                    <div style={{fontFamily: "Roboto", fontSize: "16px", textAlign: "left", marginLeft: "5px"}}>
+                    <div style={{fontFamily: "Roboto", fontSize: "16px", fontWeight: "500", textAlign: "left", marginLeft: "-5%", marginTop:"-3%", marginBottom: "3%"}}>
                         By confirming a booth, you are agreeing to this market's Rules and Code of Conduct
                     </div>
-                    <div style={{height: "320px", overflow: "scroll", fontFamily: "Roboto", fontSize: "16px", border: "1px solid black", textAlign: "left", marginLeft: "5px"}}>
-                      {something.rules}
-                    </div>
+                    <BorderedBox>
+                    <ScrollOverride>
+                      <div>{something.rules}</div>
+                      </ScrollOverride>
+                    </BorderedBox>
+                    {acceptedRules === 1 && !this.disabled ? <ErrorDiv>You Have Already Accepted The Rules</ErrorDiv> : <div style={{height: "12px", marginTop: "2px"}}/>}
+                    {acceptedRules > -1 ? <div><Button style={acceptedRules > 0 ? buttonDisabled : button} disabled={acceptedRules > 0} onClick={()=> {this.props.requestReservationPermissions(market.id); this.disabled = true;}}>{"Accept"}</Button></div> : <div/>}
                 </div>
+                
                 </div>
               </Expandor>
              </div>
@@ -193,6 +228,22 @@ class Collapser extends React.Component {
 
   };
 
+  const mapStateToProps = (state) =>
+  {
+    return {
+      ...state
+    }
+  }
+
+
+const ErrorDiv = styled.div`
+  margin 0 auto;
+  padding-left: 10px;
+  padding-top: 5px;
+  font-size: 18px;
+  font-family: Raleway;
+  color: #b21b2d;
+`
 const StyledImg1 = styled.img`
   padding-top: 3px;
   transition: transform 1s;
@@ -314,6 +365,41 @@ const Ltag1 = styled.p`
   }
 `;
 
+const BorderedBox = styled.div `
+max-height: 324px;
+max-width: 330;
+padding: 2px 2px 0 0
+border: 1px solid #979797;
+border-radius: 10px;
+`
 
-export default Collapser;
+const ScrollOverride = styled.div `
+  max-height: 324px;
+  max-width: 330; 
+  padding-left: 20px;
+  padding-right: 4px;
+  overflow-y: scroll;
+  font-family: Roboto; 
+  font-size: 16px; 
+  text-align: left; 
+::-webkit-scrollbar {
+  width: 10px;
+  right: -500px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #97979700; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #478529; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #175500; 
+}
+
+`
+
+
+export default connect(mapStateToProps, {requestReservationPermissions})(Collapser);
 

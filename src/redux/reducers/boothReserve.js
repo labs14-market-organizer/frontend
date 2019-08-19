@@ -42,7 +42,6 @@ export const checkBoothReserve = (state = initalState, action) =>
         case GET_BOOTH_DATA_START:
             state.fetching = true;
             state.error = undefined;
-            state.reserveData = null;
         case GET_VENDORS_WHO_RENTED:
             return {
                 ...state,
