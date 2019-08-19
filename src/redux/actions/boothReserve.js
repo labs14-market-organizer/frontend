@@ -166,6 +166,40 @@ export const deleteBoothReservation = (reservationId, boothId, marketId, date) =
     })
 }
 
+export const requestReservationPermissions = (marketId) => dispatch => 
+{
+    dispatch({ type: SET_BOOTH_DATA_START });
+    dispatch({ type: GET_USER_DATA_START });
+    let token = localStorage.getItem("token");
+    if(!token || !marketId || marketId < 1 || isNaN(marketId)) {localStorage.clear(); return dispatch({ type: SET_BOOTH_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+    
+    return axiosWithAuth(token)
+        .post(`${HOST_URL}/markets/${marketId}/request`,{})
+        .then(res2 => {
+            setTimeout(() => 
+                axiosWithAuth(token)
+                .get(`${HOST_URL}/user`)
+                .then(res => {
+                    if(!res.data) throw "interal client error";
+                    let userType = "undefined";
+                    try { 
+                        userType = res.data.markets.length > 0 ? "Market Owner" : res.data.vendors.length > 0 ? "Vendor" : "undefined" 
+                        if(res.data.markets && res.data.markets.length > 0) dispatch({ type: "SET_MARKET_DATA_END", payload: {marketData: res.data.markets[0]} });
+                        else if(res.data.vendors && res.data.vendors.length > 0) dispatch({ type: "SET_VENDOR_DATA_END", payload: {vendorData: res.data.vendors[0]} });
+                    }catch{}
+                    localStorage.setItem("token", token);
+                    
+                    dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}});
+                    dispatch({type: GET_BOOTH_DATA_END, payload: {}});
+                })
+                .catch(()=>{})
+            , 1000);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const getVendorsWhoRented = (marketId, date) => dispatch => {
     let token = localStorage.getItem("token")
     return axiosWithAuth(token)
