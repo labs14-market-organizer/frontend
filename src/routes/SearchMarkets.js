@@ -83,8 +83,8 @@ class SearchMarkets extends React.Component {
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
                         <StyleBox boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
-                        <p style={{fontWeight: "600", fontSize: "18px"}}>{location.name}</p>
-                        <p>{location.description}</p>
+                        <p style={{fontWeight: "600", fontSize: "18px", marginLeft: "20px"}}>{location.name}</p>
+                        <p style={{marginLeft: "20px"}}>{location.description}</p>
                     </StyleBox>
                     )
                     
@@ -152,8 +152,7 @@ const StyleBox = styled(Box)`
         border-radius: 10px;
         background-color: #edf3ea;
         margin-top: 32px;
-        padding-top: 16px;
-        padding-bottom: 16px;
+        padding: 16;
         @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;

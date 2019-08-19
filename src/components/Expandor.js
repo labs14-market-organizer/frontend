@@ -10,7 +10,7 @@ export default class Expandor extends React.Component {
     {
       super(props);
       this.state ={
-        expanded: this.props.expanded ? this.rops.expanded : false
+        expanded: this.props.expanded ? this.props.expanded : false
       }
     }
     handleChange = panel => {

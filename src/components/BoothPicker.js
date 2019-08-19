@@ -196,7 +196,7 @@ render()
                 />
             </MuiPickersUtilsProvider>
             <div style={{maxWidth: "600px", margin: "0 auto"}}>
-              <div style={{display: "flex", justifyContent: "space-around"}}>
+              <div style={{display: "flex", justifyContent: "space-around", width: "95vw", maxWidth: "550px"}}>
                 <StyledPButton onClick={() => this.vendorsDetailsToggle("1")} style={this.state.vendors ?{ fontWeight: "500" } : { fontWeight: "bold" }}>Details</StyledPButton>
                 <StyledPButton style={this.state.vendors ? { fontWeight: "bold" } : { fontWeight: "500" }} onClick={() => this.vendorsDetailsToggle("2")}>Vendors</StyledPButton>
               </div>
@@ -350,7 +350,7 @@ const StyledP = styled.p`
   }
 `;
 const StyledPButton = styled(StyledP)`
-  padding 10px 100px;
+  padding 10px 10%;
   cursor: pointer;
   -webkit-user-select: none; /* Safari */        
   -moz-user-select: none; /* Firefox */

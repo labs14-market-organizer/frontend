@@ -134,6 +134,7 @@ const StyledImg = styled.img`
 `;
 const CreateHeader = styled.h4`
   margin-top: 20px;
+  margin-left 25px;
   font-family: Raleway;
   font-size: 18px;
 `;
