@@ -332,7 +332,6 @@ class Navbar extends React.Component {
     let userName = "T"
     // let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
     let objName = "Vendor"
-    
       
         
          
@@ -497,7 +496,7 @@ z-index: -100;
 
 const StyledDiv = styled.div`
 position: fixed;
-z-index: 5000;
+z-index: 10;
 pointer-events: none;
 display: flex;
 flex-wrap: nowrap;

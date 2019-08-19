@@ -424,7 +424,7 @@ z-index: -100
 
 const StyledDiv = styled.div`
 position: fixed;
-z-index: 5000;
+z-index: 10;
 pointer-events: none;
 div {
   pointer-events: auto;
