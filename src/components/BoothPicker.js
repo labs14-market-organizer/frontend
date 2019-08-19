@@ -138,7 +138,7 @@ render()
     {
       fontFamily: "Raleway",
       fontSize: '16px',
-      fontWeight: '300',
+      fontWeight: '400',
       lineHeight: '1.5',
       color: "#000"
     }
@@ -263,9 +263,11 @@ render()
   checkUsed = (x) =>
   {
     
-    try{
-      return this.props.reserve.reserveData.filter(y => x.id === y.id && y.user_vdrs.length > 0).length == 0;
-    }catch {return -1;}
+    console.log(this.props.reserve.reserveData);
+    if(!this.props.reserve.reserveData) return -1;
+    let r = this.props.reserve.reserveData.filter(y => x.id == y.id)[0];
+    console.log();
+    return r  && r.user_vdrs && r.user_vdrs.length > 0  && r.user_vdrs.filter(z => z === this.props.vendor.vendorData.id).length > 0 ? 0 : 1;
   }
   fireDelete = (x)=>
   {
