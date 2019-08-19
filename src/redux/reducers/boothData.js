@@ -14,7 +14,7 @@ const initalState =
     boothData: null,
     error: undefined,
     fetching: true,
-    updated: false
+    updated: false,
 }
 
 export const checkBoothData = (state = initalState, action) =>

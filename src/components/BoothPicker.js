@@ -6,12 +6,14 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import {Button} from '@material-ui/core'
+import {Button, Typography} from '@material-ui/core'
 import Expandor from "./Expandor"
 import styled from "styled-components";
-import {createReservation, getBoothReservations, deleteBoothReservation} from '../redux/actions/boothReserve'
+import {createReservation, getBoothReservations, deleteBoothReservation, getVendorsWhoRented} from '../redux/actions/boothReserve'
 import {connect} from 'react-redux';
 import {getUserData} from '../redux/actions/userData'
+
+
 
 class BoothPicker extends React.Component 
 {
@@ -28,12 +30,14 @@ class BoothPicker extends React.Component
     }
     this.state =
     {
-        date: d
+        date: d,
+        vendors: false
     }
   }
   
   handleDateChange(date) {
     this.props.getBoothReservations(this.props.market.id, formatDate(date))
+    this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date))
     this.setState({...this.state, date: date})
   }
   convertObjectToNumberDay(opp)
@@ -51,6 +55,7 @@ class BoothPicker extends React.Component
  componentWillMount()
  {
    this.props.getBoothReservations(this.props.market.id, formatDate(this.state.date))
+   this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date))
  }
  componentWillUpdate()
  {
@@ -59,6 +64,25 @@ class BoothPicker extends React.Component
  componentDidUpdate()
  {
    this.disable = false;
+ }
+
+ vendorsDetailsToggle = (item) => {
+  if (item === "1" && this.state.vendors === true) {
+    this.setState({
+     ...this.state,
+     vendors: !this.state.vendors
+   })
+  } else if (item === "2" && this.state.vendors === false) {
+    this.setState({
+      ...this.state,
+      vendors: !this.state.vendors
+    })
+  }
+   
+ }
+
+ createReservation = (marketId, boothId) => {
+   this.props.createReservation(marketId, boothId, formatDate(this.state.date));
  }
 render()
 {
@@ -148,6 +172,9 @@ render()
       borderColor: "#b21b2d",
       color: "#b21b2d"
     }
+
+    let showing1 = (this.state.vendors) ? "showing" : "notshowing";
+    let showing = (this.state.vendors) ? "notshowing" : "showing";
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -167,6 +194,13 @@ render()
                 }}
                 />
             </MuiPickersUtilsProvider>
+            <div style={{display: "flex", justifyContent: "space-around"}}>
+            <StyledP onClick={() => this.vendorsDetailsToggle("1")} style={this.state.vendors ?{ fontWeight: "500" } : { fontWeight: "bold" }}>Details</StyledP>
+            <StyledP style={this.state.vendors ? { fontWeight: "bold" } : { fontWeight: "500" }} onClick={() => this.vendorsDetailsToggle("2")}>Vendors</StyledP>
+              </div>
+            <div>
+              <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
+            </div>
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
               { this.props.reserve.error ? <ErrorDiv>{ String(this.props.reserve.error)}</ErrorDiv>
               :
@@ -180,6 +214,7 @@ render()
                           <div style={title}>{x.name}</div>
                           <div style={{...subtitle, display: "flex"}}><div style={{marginRight: "10%"}}>{`Avaliable: `}</div> <div>{x.number < 0 ? <Spinner/> : <span>{x.number > -1 ? x.number : ""}</span>}</div></div>
                         </div>
+                        { (!this.state.vendors) ?
                         <div>
                           <div style={{display: "flex", flexDirection: "row", marginBottom: "2%"}}>
                             <div  style={{display: "flex", flexDirection: "column", alignItems: "flex-start", marginRight: "40%"}}>
@@ -188,17 +223,24 @@ render()
                             </div>
                             <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                               <div style={minitile}>Booth Price</div>
-                              <div style={maintext}>$25</div>
+                              <div style={maintext}>${x.price}</div>
                             </div>
                           </div>
                           {x.description ? <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                             <div style={minitile}>Booth description</div>
                             <div style={{textAlign: "left", ...maintext}}>{x.description}</div>
-                          </div> : null}
+                          </div> : null} 
                           {
-                              <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ? this.props.createReservation(market.id, x.id, formatDate(this.state.date)) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
+                              <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
                           }
-                        </div>
+                        </div> : <div>
+                          {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null ) ? <><div style={{fontFamily: "Roboto", fontSize: "12px", fontWeight: "500", color: "#044d4c", textAlign: "left"}}><div></div>Vendors</div>
+                            {this.props.reserve.vendorsWhoRented.map(renter => {
+                              return (renter.booth_id === x.id) ? 
+                            <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{renter.name}</div> : <div></div>
+                          })}</> : <></>} 
+                          <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
+                        </div> } 
                         
                       </Booth>
                     )
@@ -206,7 +248,7 @@ render()
                   )}
                   
               </Expandor> }
-            </div>
+            </div> 
         </div> 
 
     );
@@ -221,9 +263,9 @@ render()
   fireDelete = (x)=>
   {
     if(!this.props.user || !this.props.user.userData) return;
-    console.log(x);
+    // console.log(x);
     var ruser = this.props.user.userData.upcoming_vdr;
-    console.log(ruser);
+    // console.log(ruser);
     if(!ruser && ruser.length < 1 ) return;
     ruser = ruser.filter(y=> x.id === y.booth_id && x.market_id === y.market_id)
     if(ruser.length < 1) return;
@@ -282,7 +324,24 @@ animation: spin 2s linear infinite;
 const Booth = styled.div `
   display: flex;
   align-items: flex-end;
-`
+`;
+
+
+const StyledP = styled.p`
+  font-size: 18px;
+  font-family: Raleway;
+  .showing {
+    font-size: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Raleway;
+  }
+  .notshowing {
+    font-weight: 0;
+    font-size: 18px;
+    font-family: Raleway;
+  }
+`;
 const mapStateToProps = (state) =>
 {
   return {
@@ -290,7 +349,7 @@ const mapStateToProps = (state) =>
     user: {...state.checkUserData}
   }
 }
-export default connect(mapStateToProps, {createReservation, getBoothReservations, deleteBoothReservation, getUserData})(BoothPicker);
+export default connect(mapStateToProps, {createReservation, getBoothReservations, deleteBoothReservation, getUserData, getVendorsWhoRented})(BoothPicker);
 
 
 /* {

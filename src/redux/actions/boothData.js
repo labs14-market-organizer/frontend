@@ -104,6 +104,7 @@ export const deleteBooth = (boothId, marketId) => dispatch =>
     })
 }
 
+
 function cleanData(booth)
 {
     let numcheck = (a) => isNaN(a) || parseInt(a) < 0 ? 0.0 : parseInt(a)

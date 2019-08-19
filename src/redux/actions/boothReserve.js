@@ -12,6 +12,7 @@ export const SET_BOOTH_DATA_END = "SET_BOOTH_DATA_END";
 export const ERROR_GET_BOOTH_DATA = "ERROR_GET_BOOTH_DATA";
 export const ERROR_SET_BOOTH_DATA = "ERROR_SET_BOOTH_DATA";
 export const ERROR_INVALID_TOKEN = "ERROR_INVALID_TOKEN";
+export const GET_VENDORS_WHO_RENTED = "GET_VENDORS_WHO_RENTED";
 
 /*
 object schema
@@ -54,6 +55,16 @@ export const createReservation = (marketId, boothId, date) => dispatch =>
             })
             .catch(err => { }), 
         1);
+    })
+    .then(res => {
+        return axiosWithAuth(token)
+        .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
+        .then(res1 => {
+            dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
+        })
+        .catch(err => {
+            console.log(err)
+        })
     })
     .catch(err =>{
         //check if bad token if so clear local data
@@ -132,6 +143,18 @@ export const deleteBoothReservation = (reservationId, boothId, marketId, date) =
                         dispatch({type: GET_BOOTH_DATA_END, payload: {reserveData: res4.data}});
                     })
             })
+            .then(res => {
+                return axiosWithAuth(token)
+                .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
+                .then(res1 => {
+                    dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
+                    console.log(res1.data)
+                    
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            })
             .catch(err => { }), 
         500);
        
@@ -142,3 +165,16 @@ export const deleteBoothReservation = (reservationId, boothId, marketId, date) =
         dispatch({type: ERROR_GET_BOOTH_DATA,  payload: {error: error.status !== "404" ? error.message : null}});
     })
 }
+
+export const getVendorsWhoRented = (marketId, date) => dispatch => {
+    let token = localStorage.getItem("token")
+    return axiosWithAuth(token)
+        .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
+        .then(res => {
+            dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res.data })
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+};
