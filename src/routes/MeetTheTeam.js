@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 // import {Github as GithubIcon, Twitter as TwitterIcon, Linkedin as LinkedinIcon } from "@material-ui/icons"
-import githubIcon from "@material-ui/icons"
+import githubIcon from "@material-ui/icons/"
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import {Link} from "react-router-dom";
 
 import { Typography } from "@material-ui/core";
 
@@ -40,7 +41,7 @@ class MeetTheTeam extends Component {
       location: "Lafayette, LA",
       linkedin: "https://www.linkedin.com/in/kayladugas/",
       twitter: "https://twitter.com/KaylahRoxOut",
-      portfolio: "kayladugas.com"
+      portfolio: "https://kayladugas.com"
     },
     {
       img: dwayne,
@@ -137,9 +138,10 @@ class MeetTheTeam extends Component {
                 </LabelWrapper>
               </ImageWrapper>
               <ContactWrapper>
-                <Github />
-                <Linkedin />
-                <Twitter />
+
+          <a href={member.github ? member.github : member.portfolio} > <Github><i className={member.github ? "fa fa-github" : "fa fa-lightbulb-o"}></i></Github></a>
+          <a href={member.linkedin}> <Linkedin><i className="fa fa-linkedin-square"></i></Linkedin></a>
+          <a href={member.twitter}>   <Twitter><i className="fa fa-twitter"></i></Twitter></a>
               </ContactWrapper>
             </Raindrop>
           ))}
@@ -183,17 +185,27 @@ const CloudContainer = styled.div`
 
   background-size: 350px 138px;
   }
-
-
-  @media (max-width: 390px) {
-    width: 300px;
-  }
-
   .MuiTypography-h2 {
     font-size: 32px;
     font-weight: bold;
     text-align: center;
   }
+
+  @media (max-width: 390px) {
+    width: 300px;
+  }
+  @media (min-width: 692px) {
+    background-size: 100% 100%;
+    height: 400px;
+    .MuiTypography-h2 {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  }
+
+
 `;
 
 const Raindrop = styled.div`
@@ -250,17 +262,29 @@ const LabelWrapper = styled.div`
 const ContactWrapper = styled.div`
 margin-top: 200px;
 z-index: 20;
+a {
+    text-decoration: none;
+  }
 `
 
 const Github = styled.div`
+
   border: 1px solid #979797;
   background-color: white;
   width: 60px;
   height: 60px;
   border-radius: 50%;
   margin-left: -280px;
-  background-image: url({githubIcon});
-  color: black;
+  background-size: 50% 50%;
+  background-position: center;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #969696;
+  i {
+    font-size: 36px;
+  }
   `;
 
 const Linkedin = styled.div`
@@ -271,6 +295,14 @@ const Linkedin = styled.div`
   border-radius: 100%;
   margin-left: -260px;
   margin-top: 8px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #969696;
+  i {
+    font-size: 36px;
+  }
 `;
 
 const Twitter = styled.div`
@@ -281,6 +313,14 @@ const Twitter = styled.div`
   border-radius: 100%;
   margin-left: -220px;
   margin-top: 4px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #969696;
+  i {
+    font-size: 36px;
+  }
 
 `;
 const Portfolio = styled.div`
