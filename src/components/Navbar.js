@@ -69,6 +69,28 @@ class Navbar extends React.Component {
           </ul>
         </StyledPaper> 
       );
+      case "/":
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li><Link to="landing"> <Button>Home</Button></Link></li>
+          <li><Link to="signup"> <Button>Sign Up / Sign In</Button></Link></li>
+          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Button>About</Button></li>
+            <li><Button>Blog</Button></li>
+            <li><Button>Careers</Button></li>
+            <li><Button>Support</Button></li>
+            <li><Button>Contact Us</Button></li>
+            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
+            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
+          </ul>
+        </StyledPaper> 
+      );
 
       case "/signup": 
         return (

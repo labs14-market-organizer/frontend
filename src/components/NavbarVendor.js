@@ -44,6 +44,30 @@ class Navbar extends React.Component {
  Menu = () => {
   if (this.state.menuOpen === true) {
     switch(window.location.pathname) {
+      case "/searchmarkets":
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Link to="/searchmarkets"></Link><Button className="currentPage">Home</Button></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+          </ul>
+        </StyledPaper> 
+      );
       case "/":
         return (
           <StyledPaper elevation={10}>
