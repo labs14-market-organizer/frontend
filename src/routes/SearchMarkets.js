@@ -10,7 +10,7 @@ import { searchMarkets } from '../redux/actions/searchMarkets';
 import { connect } from "react-redux";
 import Navbar from "../components/Navbar";
 import { Mixpanel } from '../redux/actions/mixpanel';
-
+import NavbarVendor from "../components/Navbar"
 class SearchMarkets extends React.Component {
     state = {
         search: ''
@@ -33,11 +33,11 @@ class SearchMarkets extends React.Component {
     render() {
         return ( 
             <div>
-            <Navbar />
+            <NavbarVendor />
             <StyledContainer>
            
                 <form onSubmit={this.startSearch}>
-                    <TextField
+                    <StyledTextField
                         id="search"
                         label="Search Markets"
                         name="search"
@@ -54,7 +54,7 @@ class SearchMarkets extends React.Component {
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map(location => {
                     return (
                         <StyleBox boxShadow={10} key={location.id}>
-                        <p style={{fontWeight: "600"}}>{location.name}</p>
+                        <p style={{fontWeight: "600", fontSize: "18px"}}>{location.name}</p>
                         <p>{location.description}</p>
                     </StyleBox>
                     )
@@ -79,7 +79,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const StyledError = styled.div`
-    margin 0 auto;
+    margin: 0 auto;
     padding-left: 10px;
     padding-top: 5px;
     font-size: 18px;
@@ -94,18 +94,23 @@ const StyleBox = styled(Box)`
         border-radius: 10px;
         background-color: #edf3ea;
         margin-top: 32px;
-        p {
-            padding-left: 10px;
-            padding-top: 5px;
-            font-size: 18px;
-            font-family: Raleway;
-        }
+        padding-top: 16px;
+        padding-bottom: 16px;
         @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;
         margin-top: 30px;
   }
 `;
+
+const StyledTextField = styled(TextField)`
+    .MuiInputBase-input {
+        font-family: Roboto;
+    }
+    .MuiInputBase-root {
+        font-family: Roboto;
+    }
+`
 
 
 

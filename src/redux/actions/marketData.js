@@ -137,6 +137,7 @@ export const localMarketSwitch = (market) => dispatch =>
 function cleanData(market)
 {
     market.operation = JSON.parse(market.operation);
+    // let phoneNumber = market.phone.split('').filter(item => item !== "-"); //removed the dashes in the number.
     let cleanopp = null;
     if(market.operation && market.operation.length) cleanopp = market.operation.map(x=> {return {day: x.day, start: x.start, end: x.end}});
     let clean = 
@@ -147,12 +148,15 @@ function cleanData(market)
         facebook: market.Facebook ? market.Facebook : "",
         //image: market.image,
         instagram: market.Instagram ? market.Instagram : "",
-        type: market.market_type === "Public" ? 1 : 2,
+        type: market.market_type === "Public" ? 1 : 1,
         name: market["Market Name"],
         operation: cleanopp ? cleanopp : [],
         state: market.State,
         twitter: market.Twitter ? market.Twitter : "",
-        zipcode: market["Zip Code"]
+        zipcode: market["Zip Code"],
+        phone: market.phone,
+        rules: market.rules,
+        email: market.email
     }
     if(market.Website && market.Website!=="") clean.website = market.Website;
     let required = ["address", "city", "description","state","zipcode"]
@@ -162,5 +166,6 @@ function cleanData(market)
     clean.operation = clean.operation.filter(x=> x.start && x.end);
     if(!clean.operation || clean.operation.length < 1) return {error: `must have at least one hour of operation`};
     if(isNaN(clean.zipcode) || clean.zipcode < 1000) return {error: `zipcode must be a real number`};
+    console.log(clean)
     return clean;
 }

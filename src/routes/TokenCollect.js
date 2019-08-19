@@ -23,10 +23,12 @@ class TokenCollect extends React.Component
     var token = this.props.location.search.split("?jwt=")[1].split("&")[0];
     var expr = this.props.location.search.split("&exp=")[1];
     } catch { return this.props.history.push("/");}
-    if(token && token.split(" ").join("") !== "" && expr && expr.split(" ").join("") !== "")
-      this.props.setLocalData(token);
-    else 
-    {this.props.history.push("/")}
+    if(token && token.split(" ").join("") !== "" && expr && expr.split(" ").join("") !== "") {
+      this.props.setLocalData(token, expr)
+    } else {
+      this.props.history.push("/")
+    }
+    
   }
   componentWillUpdate()
   {
@@ -34,6 +36,7 @@ class TokenCollect extends React.Component
     this.fetch = false;
   }
     render()
+    
     {
       if(this.props.fetching){return(<div>Loading</div>)}
       this.props.history.push("/");

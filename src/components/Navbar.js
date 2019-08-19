@@ -306,9 +306,11 @@ class Navbar extends React.Component {
   
   render() { 
     let usertype = this.props.checkUserData.userType;
-    let userName = this.props.checkUserData.userData ? this.props.checkUserData.userData.email : null;
-    let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
-    console.log(userName);
+    // let userName = this.props.checkUserData.userData ? this.props.checkUserData.userData.email : null;
+    let userName = "T"
+    // let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
+    let objName = "Vendor"
+    
       
         
          
@@ -477,6 +479,10 @@ z-index: 5000;
 pointer-events: none;
 display: flex;
 flex-wrap: nowrap;
+
+div {
+  pointer-events: auto;
+}
 
 div {
   pointer-events: auto;

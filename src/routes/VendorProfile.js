@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { Mixpanel } from '../redux/actions/mixpanel';
@@ -16,6 +16,10 @@ class VendorProfile extends React.Component {
         render() {
         
         let vendor = this.props.vendorData;
+        if (!vendor) {
+          localStorage.clear();
+          return <Redirect to='/landing' />
+        }
         return (
             <div>
                 <Header>
@@ -26,17 +30,27 @@ class VendorProfile extends React.Component {
                 <Container>
                 <VendorName>{vendor.name}</VendorName>
                 <StyledVendor>{vendor.description}</StyledVendor>
-                {((vendor.items.length > 0) ? <StyledP>Items</StyledP> : null)}
-                {vendor.items.map(item => {
-                    return <StyledVendor>{item}</StyledVendor>
-                })}
+                {((vendor.items && vendor.items.length > 0) ? 
+                  <div>
+                    <StyledP>Items</StyledP> 
+                    {vendor.items.map(item => {
+                      return <StyledVendor>{item}</StyledVendor>
+                      })}
+                      </div> : null )}
                 
                 {(vendor.electricity || vendor.loud || vendor.ventilation || vendor.other_special.length > 0) ?<StyledP>Special Considerations</StyledP> : null}
                 {(vendor.electricity) ? <StyledVendor>Needs electricity</StyledVendor> : null}
                 {(vendor.loud) ? <StyledVendor>Makes loud noise</StyledVendor> : null}
                 {(vendor.ventilation) ? <StyledVendor>Needs ventilation</StyledVendor> : null}
                 {(vendor.other_special) ? <StyledVendor>{vendor.other_special}</StyledVendor> : null}
-
+                <hr></hr>
+                <StyledP1>Contact Information</StyledP1>
+                <StyledP>Business Email Address</StyledP>
+                <StyledVendor>{vendor.email && vendor.email.length > 0  ? vendor.email : null}</StyledVendor>
+                <StyledP>Business Phone Number</StyledP>
+                <StyledVendor>{vendor.phone && vendor.phone.length > 0  ? vendor.phone : null}</StyledVendor>
+                <hr></hr>
+                <StyledP1>Social Media</StyledP1>
                 {(vendor.website && vendor.website.length > 0) ? <div><StyledP>Website</StyledP><StyledVendor>{vendor.website}</StyledVendor></div> : null}
 
                 {(vendor.facebook && vendor.facebook.length > 0) ? <div><StyledP>Facebook</StyledP><StyledVendor>{vendor.facebook}</StyledVendor></div> : null}
@@ -109,7 +123,7 @@ const StyledVendor = styled.p`
   font-size: 16px;
   line-height: 1.5;
   font-family: Roboto;
-  margin-top: 0;
+  margin-top: -5px;
   margin-bottom: 0;
 
 `;
@@ -164,11 +178,18 @@ const StyledP = styled.p`
   font-size: 12px;
   font-family: Raleway;
   line-height: 1.33;
+  font-weight: 600;
+  margin-bottom: 5px;
+ 
+`
+const StyledP1 = styled.p`
+  font-size: 12px;
+  font-family: Raleway;
+  line-height: 1.33;
   font-weight: bold;
   margin-bottom: 5px;
  
 `
-
 const mapStateToProps = state => {
     return {
       ...state.checkVendorData

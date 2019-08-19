@@ -1037,6 +1037,7 @@ const Step3Label = styled(Box)`
     position: static;
   }
 
+
   .MuiTypography-subtitle2 {
     font-size: 22px;
     font-weight: 600;

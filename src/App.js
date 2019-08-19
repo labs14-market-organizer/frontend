@@ -34,12 +34,13 @@ import MarketReduxForms from "./routes/Market-Redux-forms";
 import MeetTheTeam from "./routes/MeetTheTeam";
 import PrivacyPolicy from "./routes/PrivacyPolicy";
 import TermsAndConditions from "./routes/TermsAndConditions";
-
+import MarketRules from "./routes/MarketRules";
 import VendorReduxForms from "./routes/Vendor-Redux-forms";
 import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
+import CreateVendor from "./routes/CreateVendor"
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -47,6 +48,7 @@ class App extends React.Component {
   componentWillMount() {
     //async check on second pass
     this.props.getUserData();
+  
   }
 
   componentWillUpdate() 
@@ -130,6 +132,14 @@ class App extends React.Component {
               <Route 
               path="/vendorprofile"
               render={props => <VendorPage />}
+              />
+               <Route 
+              path="/marketrules"
+              render={props => <MarketRules />}
+              />
+               <Route 
+              path="/testcreatevendor"
+              render={props => <CreateVendor />}
               />
           </div>
         </MuiThemeProvider>
