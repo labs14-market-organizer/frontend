@@ -4,31 +4,17 @@ import Edit from "../assets/border-color-24-px.svg";
 import {
   TextField,
   InputAdornment,
-  MuiThemeProvider,
-  createMuiTheme,
-  Typography,
-  Container,
   Box
 } from "@material-ui/core";
-//import ToggleButton from '@material-ui/lab/ToggleButton';
 import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
-import Radio from "@material-ui/core/Radio";
-import RadioButtonGroup from "@material-ui/core/RadioGroup"
-import { withStyles } from "@material-ui/core/styles";
 import "../scss/CreateMarket.scss";
 import { createNewBooth, updateBooth, deleteBooth } from "../redux/actions/boothData";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import {Redirect} from "react-router-dom";
-import FormControlLabel from '@material-ui/core/FormLabel'
-import { maxWidth } from "@material-ui/system";
-import { checkMarketData } from "../redux/reducers/marketData";
-import MarketReduxForms from "./Market-Redux-forms";
+import {Redirect, withRouter} from "react-router-dom";
 import {getMarketById} from "../redux/actions/marketData"
 import "../scss/ReduxForm.scss";
-import { Link } from 'react-router-dom';
 import { Mixpanel } from '../redux/actions/mixpanel';
 
 function validate (values) {
@@ -140,6 +126,9 @@ class CreateMarket extends React.Component
   { 
     this.currentBooths = this.props.market.booths.map(x=> this.cleanData(x));
   }
+  goBack = () => {
+    return this.props.history.goBack();
+  }
 
 
   render(){
@@ -151,33 +140,15 @@ class CreateMarket extends React.Component
     }
     return (
       <div>
-        <header 
-          className="header"
-        >  <Link to="/">
-              <img src={Arrow} style={{marginLeft: "25px",
-               marginTop: "18px"}}/>
-            </Link>
-            <h4 
-            className="addbooths"
-            style={{
-                marginLeft: '2%',
-                }}>{this.isUpdating ? "Update" : "Add"} Booths</h4>
-        </header>
+        <Header>
+          <StyledImg src={Arrow} onClick={this.goBack} />
+          <CreateHeader>{this.isUpdating ? "Edit" : "Add"} Booths</CreateHeader>
+        </Header>
         {/* Styled this div for the time being...will change later */}
-        
-        <body 
-          style={{
-              width:'95%',
-              height: '100%',
-              margin: '10px auto',
-              maxWidth: '624px',
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center"
-          }}
-        >
+    
+        <StyledBody>
           {this.isUpdating && !this.currentBooth ? "" : this.form() }
-         <div style={{display: "flex", flexDirection: "column"}}>
+         <BoothContainer >
             {this.currentBooths.map(x=> {
               let flag =  this.props.form.BoothsForm.values && this.props.form.BoothsForm.values.id === x.id ;
               let obj = flag ? this.props.form.BoothsForm.values : x;
@@ -196,7 +167,7 @@ class CreateMarket extends React.Component
             </StyleBox>
             }
             )}
-          </div>
+          </BoothContainer>
             {this.isUpdating ? 
                 <Button 
                   variant="outlined"
@@ -216,8 +187,7 @@ class CreateMarket extends React.Component
               :
               ""
             }
-        </body>
-        
+        </StyledBody>
       </div>
     )
 
@@ -234,35 +204,40 @@ class CreateMarket extends React.Component
   {
     return <form onSubmit={handleSubmit}
               style={{
+                width: "100vw",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                marginLeft: "3%",
-                marginRight: "4%"
+                
               }}
           >
+   
           <StyledDiv>
           <Field
             component={renderTextField}
             required
             margin="normal"
             variant="outlined"
-            fullWidth={true}
             id="name"
             label="Market Name"
             name="Market Name"
             InputProps={{
               startAdornment: <InputAdornment position="start"></InputAdornment>}}
               style={{
-                margin: '2% 0',
-                marginBottom: "0px"
+                width: "92vw",
+                margin: '20px 1% 1% 1%',
+                marginLeft: '0',
+                marginBottom: "0px",
+                maxWidth: "560px",
               }}
             id="boothtype"
             label="Booth Type"
             name="boothtype"
           />
           <h5 style={{
-                  margin: '10px 0px'
+                  marginTop: '15px',
+                  marginBottom: '10px',
+                  marginLeft: '2%'
               }}>
               Ex. Standard Booths. Larger Booths. Corner Booths. etc.
           </h5>
@@ -313,14 +288,16 @@ class CreateMarket extends React.Component
                 display: 'flex',
                 margin: '5px',
                 width: "100vw",
-                textAlign: "left"
+                textAlign: "left",
+                marginLeft: "3%"
             }}>Size of Booths
           </h5>
           <div
             style={{
                 display: 'flex',
                 justifyContent: 'flex-start',
-                width: "100vw"
+                width: "100%",
+                marginLeft: "3%"
             }}>
             <Field
             component={renderTextField}
@@ -358,16 +335,15 @@ class CreateMarket extends React.Component
             component={renderTextField}
             margin="normal"
             variant="outlined"
-            fullWidth={true}
             id="boothdescription"
             name="boothdescription"
             label="Booth Description"
             multiline rows="4"
             margin="normal"
-            style={{ marginBottom: "0px"}}
+            style={{ marginBottom: "0px", marginLeft: "2%", marginRight: "3%", width: "91vw", maxWidth: "570px"}}
           />
           {(this.isUpdating ? 
-            <div style={{display: "flex", minWidth: "100%"}} >
+            <div style={{display: "flex", minWidth: "100%"}}  >
             <Button 
               variant="outlined"
               fullWidth
@@ -377,10 +353,12 @@ class CreateMarket extends React.Component
               this.currentBooth = null }} 
               className="redButton"
               style={{
+                  width: "46%",
                   color: 'red',
-                  fontSize:'1.4em',
+                  fontSize:'18px',
                   margin: '4% 0',
-                  height: '80px'
+                  height: '60px',
+                  marginLeft: "2%"
               }}
         >
             Delete
@@ -391,12 +369,13 @@ class CreateMarket extends React.Component
             disabled={pristine || submitting}
             variant="contained"
             color="primary"
-            fullWidth
             onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
             style={{
-                fontSize:'1.4em',
+                width: "46%",
+                fontSize:'18px',
                 margin: '4% 0',
-                height: '80px'
+                height: '60px',
+                marginLeft: "2%"
             }}
           >
             Save
@@ -409,13 +388,13 @@ class CreateMarket extends React.Component
           disabled={pristine || submitting}
           variant="outlined"
           color="secondary"
-          fullWidth
           onClick={() => {this.props.array.insert("redirecttype",0,1); this.erase = true; }}
           style={{
-              
-              fontSize:'1.4em',
+              width: "47%",
+              fontSize:'18px',
               margin: '4% 0',
-              height: '80px'
+              height: '60px',
+              marginLeft: "2%"
           }}
         >
             Add Group
@@ -426,12 +405,13 @@ class CreateMarket extends React.Component
           disabled={pristine || submitting}
           variant="contained"
           color="primary"
-          fullWidth
           onClick={(e)=> {this.props.array.insert("redirecttype",0,2);}}
           style={{
-              fontSize:'1.4em',
+              width: "46%",
+              fontSize:'18px',
               margin: '4% 0',
-              height: '80px'
+              height: '60px',
+              marginRight: "2%"
           }}
           >
             Save
@@ -440,6 +420,7 @@ class CreateMarket extends React.Component
         
         <hr/>
         </StyledDiv>
+       
         </form>
   }
 };
@@ -450,13 +431,61 @@ const mapStateToProps = state => {
   };
 };
 
+
+
+// const StyledContainer = styled(Container)`
+//   max-width: 50vw;
+//   .MuiInputBase-input ,.MuiOutlinedInput-input {
+//     width: 100%;
+// }
+
+
+// `;
+
+const Header = styled.div`
+  display: flex;
+  background-color: #478529;
+  color: white;
+  height: 60px;
+`;
+
+const StyledImg = styled.img`
+  margin-left: 16px;
+  margin-top: 0;
+  cursor: pointer; 
+  margin-right: 16px; 
+
+`;
+const CreateHeader = styled.h4`
+  margin-top: 20px;
+  font-family: Raleway;
+  font-size: 18px;
+`;
+
 const StyledDiv = styled.div`
-  margin-left: 2%;
-  margin-right: 2%;
+  max-width: 92vw;
   @media(min-width: 600px){
     margin: 0 auto;
     max-width: 600px;
+    margin-left: auto;
   }
+   .MuiOutlinedInput-root  .MuiOutlinedInput-adornedStart {
+    background-color: red;
+  }
+`
+const StyledBody = styled.body`
+
+    @media(max-width:447) {
+      width: 84vw;
+    height: 100%;
+    }
+    @media(min-width:600px){
+    
+    }
+    `
+
+const BoothContainer = styled.div`
+color: red;
 `
 
 const StyleBox = styled(Box)`
@@ -468,10 +497,13 @@ const StyleBox = styled(Box)`
  display: flex;
  flex-direction: row;
  justify-content: space-between;
- margin: 10px 0;
- @media(min-width: 450px)
+ margin: 10px;
+ margin-left: 5%;
+ @media(min-width: 570px)
  {
-   width: 450px;
+   max-width: 570px;
+   width: 100%;
+   margin: 10px auto;
  }
  .main-box
  {
@@ -479,6 +511,7 @@ const StyleBox = styled(Box)`
   flex-direction: row;
   align-items: flex-start;
   margin-top: 10px;
+
  }
  .title-box
   {
@@ -543,7 +576,7 @@ const StyleBox = styled(Box)`
 const ReduxForms = reduxForm({
   form: "BoothsForm", // a unique identifier for this form
   validate
-})(connect(mapStateToProps, { deleteBooth })(CreateMarket));
+})(connect(mapStateToProps, { deleteBooth })(withRouter(CreateMarket)));
 
 
 class ReduxContainer extends React.Component

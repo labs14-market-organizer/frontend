@@ -7,10 +7,12 @@ import {
   Typography,
   Container,
   CssBaseline,
-  Paper
+  Paper,
+  Avatar
 } from "@material-ui/core";
 import {Link} from "react-router-dom";
 import cloud from "../assets/cloud.svg";
+import avatar from "../assets/avatar.jpg";
 import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -22,7 +24,7 @@ class Navbar extends React.Component {
     super(props);
     this.state = {
       menuOpen: false,
-      page: "HOME"
+      page: "HOME",
       }
   }
 
@@ -42,48 +44,77 @@ class Navbar extends React.Component {
  Menu = () => {
   if (this.state.menuOpen === true) {
     switch(window.location.pathname) {
-      case "/landing":
+      case "/searchmarkets":
         return (
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Link to="landing"> <Button className="currentPage" >Home</Button></Link></li>
-          <li><Link to="signup"> <Button>Sign Up / Sign In</Button></Link></li>
-          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+            <li><Link to="/searchmarkets"></Link><Button className="currentPage">Home</Button></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+          </ul>
+        </StyledPaper> 
+      );
+      case "/":
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Link to="/searchmarkets"></Link><Button className="currentPage">Home</Button></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper> 
       );
 
-      case "/signup": 
+
+      case "/vendorprofile": 
         return (
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Link to="landing"><Button>Home</Button></Link></li>
-          <li><Link to="signup"><Button className="currentPage">Sign Up / Sign In</Button></Link></li>
-          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button className="currentPage">Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button onClick={localStorage.clear()}>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -93,20 +124,23 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Link to="landing"><Button>Home</Button></Link></li>
-          <li><Link to="signup"><Button className="currentPage">Sign Up / Sign In</Button></Link></li>
-          <li><Link to="team"><Button>Meet the Team</Button></Link></li>
+
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -116,20 +150,22 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Link to="/landing"><Button>Home</Button></Link></li>
-          <li><Link to="/signup"><Button >Sign Up / Sign In</Button></Link></li>
-          <li><Link to="/team"><Button className="currentPage">Meet the Team</Button></Link></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>  
       );
@@ -139,20 +175,22 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button className="currentPage">About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -162,20 +200,22 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button >Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button className="currentPage">Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -183,22 +223,24 @@ class Navbar extends React.Component {
       case "CAREERS": 
         return (
           <StyledPaper elevation={10}>
-          <div>
+           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button className="currentPage">Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -208,20 +250,22 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button className="currentPage">Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -231,20 +275,22 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button className="currentPage">Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -254,20 +300,22 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button className="currentPage">Privacy Policy</Button></li> 
-            <li><Button>Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -277,20 +325,22 @@ class Navbar extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.userName}</li>
+          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Button>Privacy Policy</Button></li> 
-            <li><Button className="currentPage">Terms of Service</Button></li> 
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><Button>Sign Out</Button></li> 
           </ul>
         </StyledPaper>
       );
@@ -320,6 +370,9 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    @media   (min-resolution: 200dpi) {
+      margin-top: 8px;
+    }
     @media (max-width: 390px) {
       font-size: 40px; 
     }
@@ -349,6 +402,7 @@ const StyledBox = styled(Box)`
   align-items: center;
   .menuIcon {
     padding: 0 16px;
+    pointer-events: auto;
     :hover {
       cursor: pointer;
     }
@@ -365,12 +419,16 @@ background-color: #484848;
 `
 
 const StyledImg = styled.img`
-z-index: -10
+z-index: -100
 `
 
 const StyledDiv = styled.div`
 position: fixed;
 z-index: 10;
+pointer-events: none;
+div {
+  pointer-events: auto;
+}
 
 img {
   margin-top: -25px;
@@ -430,6 +488,34 @@ li {
   line-height: 1.5;
   margin-left: -41px;
   margin-bottom: 1px;
+  .MuiTypography-caption {
+    color: #478529;
+    font-size: 14px;
+    line-height: 1.71;
+    margin-top: -24px;
+
+  }
+}
+
+  .avatar-wrapper {
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    overflow: hidden;
+
+    div {
+    /* background-color: red; */
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url(${avatar});
+  }
+}
+.username {
+  font-family: "Raleway";
+  font-size: 16px;
+  font-weight: bold;
 }
 Button {
   display: flex;
@@ -448,14 +534,24 @@ Button {
 
 }
 
+ul{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .currentPage {
   background-color: rgba(71, 133, 41, 0.4);
-
+  /* border: 2px solid red; */
+  margin-left: -270px;
   :hover {
     background-color: rgba(71, 133, 41, 0.5);
   }
   
 
+}
+.bottom-padding {
+  padding-top: 48px;
 }
 `
 

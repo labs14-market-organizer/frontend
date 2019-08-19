@@ -1,54 +1,86 @@
 import React from "react";
 import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
-import { Link } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { Mixpanel } from '../redux/actions/mixpanel';
 
-const VendorProfile = (props) => {
-        let vendor = props.vendorData;
+class VendorProfile extends React.Component {
+  
+       
+        goBack = () => {
+          return this.props.history.goBack();
+        }
+ 
+        render() {
+        
+        let vendor = this.props.vendorData;
+        if (!vendor) {
+          localStorage.clear();
+          return <Redirect to='/landing' />
+        }
         return (
             <div>
                 <Header>
-                <Link to="/">
-                  <img src={Arrow} style={{marginLeft: "25px",
-                  marginTop: "18px"}}/>
-                </Link>
-                <CreateHeader>View Profile</CreateHeader>
+                  <StyledImg src={Arrow} onClick={this.goBack} />
+                  <CreateHeader>View Vendor Profile</CreateHeader>
                 </Header>
+        
                 <Container>
-                <MarketName>{vendor.name}</MarketName>
-                {vendor.description}
-                {((vendor.items.length > 0) ? <p>Vendor Items</p> : null)}
-                {vendor.items.map(item => {
-                    return <Tag>{item}</Tag>
-                })}
-                <Flex>
-                <p>Electricity: </p> {(vendor.electricity)? <p>Yes </p>: <p>No</p>}
-                </Flex>
-                <Flex>
-                <p>Make Loud Noise: </p> {(vendor.loud)?<p>Yes </p>: <p>No</p>}
-                </Flex>
-                <Flex>
-                <p>Need Ventilation: </p> {(vendor.ventilation)? <p>Yes </p>: <p>No</p>}
-                </Flex>
-                <Flex>
-                <p>Other Needs: </p> {(vendor.electricity)? <p>Yes </p>: <p>No</p>}
-                </Flex>
-                <Flex>
-                <Link to="/createvendor" style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to edit vendor')}>
-                    <WhiteButton variant="outlined">Edit Profile</WhiteButton>
-                </Link>
-                <Link to="/searchmarkets" style={{ textDecoration: "none"}} onClick={() => Mixpanel.track('User clicked to search markets')}>
-                    <GreenButton variant="outlined">Search Markets</GreenButton>
-                </Link>
-                </Flex> 
-                </Container>
+                <VendorName>{vendor.name}</VendorName>
+                <StyledVendor>{vendor.description}</StyledVendor>
+                {((vendor.items && vendor.items.length > 0) ? 
+                  <div>
+                    <StyledP>Items</StyledP> 
+                    {vendor.items.map(item => {
+                      return <StyledVendor>{item}</StyledVendor>
+                      })}
+                      </div> : null )}
+                
+                {(vendor.electricity || vendor.loud || vendor.ventilation || vendor.other_special.length > 0) ?<StyledP>Special Considerations</StyledP> : null}
+                {(vendor.electricity) ? <StyledVendor>Needs electricity</StyledVendor> : null}
+                {(vendor.loud) ? <StyledVendor>Makes loud noise</StyledVendor> : null}
+                {(vendor.ventilation) ? <StyledVendor>Needs ventilation</StyledVendor> : null}
+                {(vendor.other_special) ? <StyledVendor>{vendor.other_special}</StyledVendor> : null}
+                <hr></hr>
+                <StyledP1>Contact Information</StyledP1>
+                <StyledP>Business Email Address</StyledP>
+                <StyledVendor>{vendor.email && vendor.email.length > 0  ? vendor.email : null}</StyledVendor>
+                <StyledP>Business Phone Number</StyledP>
+                <StyledVendor>{vendor.phone && vendor.phone.length > 0  ? vendor.phone : null}</StyledVendor>
+                <hr></hr>
+                <StyledP1>Social Media</StyledP1>
+                {(vendor.website && vendor.website.length > 0) ? <div><StyledP>Website</StyledP><StyledVendor>{vendor.website}</StyledVendor></div> : null}
+
+                {(vendor.facebook && vendor.facebook.length > 0) ? <div><StyledP>Facebook</StyledP><StyledVendor>{vendor.facebook}</StyledVendor></div> : null}
+
+                {(vendor.instagram && vendor.instagram.length > 0) ? <div><StyledP>Instagram</StyledP><StyledVendor>{vendor.instagram}</StyledVendor></div> : null}
+
+                {(vendor.twitter && vendor.twitter.length > 0) ? <div><StyledP>Twitter</StyledP><StyledVendor>{vendor.twitter}</StyledVendor></div> : null}
+               </Container> 
+               <Link to="/createvendor" style={{textDecoration: "none"}}>
+                <StyledButton>Edit Profile</StyledButton>
+               </Link>
             </div>
         )
-
+  }
 }
+
+const StyledButton = styled(Button)`
+  background-color: #478529;
+  color: white;
+  width: 300px;
+  height: 60px;
+  border-radius: 8px;
+  border: solide 2px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+  .MuiButton-label {
+    font-size: 18px;
+  }
+
+`
+
 const Header = styled.div`
   display: flex;
   background-color: #478529;
@@ -56,44 +88,56 @@ const Header = styled.div`
   height: 60px;
 `;
 
+const StyledImg = styled.img`
+  margin-left: 16px;
+  margin-top: 0;
+  cursor: pointer; 
+  margin-right: 16px; 
+
+`;
 const CreateHeader = styled.h4`
-  margin-left: 15px;
   margin-top: 20px;
+  font-family: Raleway;
+  font-size: 18px;
 `;
 
-const ArrowImage = styled.img`
-  margin-left: 2%;
-`;
 
 const Container = styled.div`
   text-align: left;
-  margin-left: 3%;
+  margin-left: 4%;
+  margin-right: 4%;
   @media(min-width: 600px){
-    max-width: 600px;
+    max-width: 570px;
     margin: 0 auto;
   }
 `
-const MarketName = styled.p`
+const VendorName = styled.p`
   font-size: 18px;
+  font-family: Raleway;
+  font-weight: bold;
   @media(min-width: 600px){
     font-size: 26px;
   }
 `
-const MarketDescription = styled.p`
+const StyledVendor = styled.p`
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
+  font-family: Roboto;
+  margin-top: -5px;
+  margin-bottom: 0;
+
 `;
 
-const Tag = styled.p`
-  font-size: 12px;
-  line-height: 16px;
-  font-family: Raleway;
-  font-weight: 600;
-  margin-bottom: -10px;
-  @media(min-width: 600px){
-    font-size: 16px;
-  }
-`;
+// const Tag = styled.p`
+//   font-size: 12px;
+//   line-height: 16px;
+//   font-family: Raleway;
+//   font-weight: 600;
+//   margin-bottom: -10px;
+//   @media(min-width: 600px){
+//     font-size: 16px;
+//   }
+// `;
 
 const Flex = styled.div`
   display: flex;
@@ -130,7 +174,22 @@ const Ltag = styled.p`
   }
 `;
 
-
+const StyledP = styled.p`
+  font-size: 12px;
+  font-family: Raleway;
+  line-height: 1.33;
+  font-weight: 600;
+  margin-bottom: 5px;
+ 
+`
+const StyledP1 = styled.p`
+  font-size: 12px;
+  font-family: Raleway;
+  line-height: 1.33;
+  font-weight: bold;
+  margin-bottom: 5px;
+ 
+`
 const mapStateToProps = state => {
     return {
       ...state.checkVendorData
@@ -140,17 +199,20 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { }
-  )(VendorProfile);
+  )(withRouter(VendorProfile));
   
-   // let vendor = {
+ 
+
+      //         let vendor = {
     //     name: "Todds Fruits",
-    //     description: "Fresh fruit",
-    //     items: [ "apples", "oranges", "peaches"],
-    //     electricty: false,
-    //     ventilation: false,
-    //     loud: false,
+    //     description: "Fresh fruit grown from local farms. Fresh fruit grown from local farms. Fresh fruit grown from local farms. Fresh fruit grown from local farms.",
+    //     items: [ "Apples", "Oranges", "Peaches"],
+    //     electricity: true,
+    //     ventilation: true,
+    //     loud: true,
     //     other_special: "peace and quite",
     //     website: "www.website.com",
     //     facebook: "www.facebook.com",
-    //     instagram: "www.instagram.com"
+    //     instagram: "www.instagram.com",
+    //     twitter: "www.twitter"
     // }

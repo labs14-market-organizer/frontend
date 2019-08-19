@@ -1,8 +1,6 @@
 import React from "react";
 import {
     TextField,
-    Button,
-    Typography,
     Container,
     Box
   } from "@material-ui/core";
@@ -15,6 +13,7 @@ import Navbar from "../components/Navbar";
 import { Mixpanel } from '../redux/actions/mixpanel';
 import ViewMyMarket from "./ViewMyMarket";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
+import NavbarVendor from "../components/Navbar"
 
 class SearchMarkets extends React.Component {
     state = {
@@ -57,7 +56,7 @@ class SearchMarkets extends React.Component {
         let popup = this.state.popup > -1 && !this.props.market.fetching && this.props.market.marketData;
         return ( 
             <div>
-            <Navbar />
+            <NavbarVendor />
             <div style={{overflowY: popup ? "hidden" : "scroll", width: "100vw", margin: "0 auto"}}>
             <StyledContainer >
            
@@ -84,7 +83,7 @@ class SearchMarkets extends React.Component {
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
                         <StyleBox boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
-                        <p style={{fontWeight: "600"}}>{location.name}</p>
+                        <p style={{fontWeight: "600", fontSize: "18px"}}>{location.name}</p>
                         <p>{location.description}</p>
                     </StyleBox>
                     )
@@ -129,7 +128,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const StyledError = styled.div`
-    margin 0 auto;
+    margin: 0 auto;
     padding-left: 10px;
     padding-top: 5px;
     font-size: 18px;
@@ -153,12 +152,8 @@ const StyleBox = styled(Box)`
         border-radius: 10px;
         background-color: #edf3ea;
         margin-top: 32px;
-        p {
-            padding-left: 10px;
-            padding-top: 5px;
-            font-size: 18px;
-            font-family: Raleway;
-        }
+        padding-top: 16px;
+        padding-bottom: 16px;
         @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;
@@ -188,6 +183,15 @@ const Popup = styled.div`
     min-height: 100vh;
     width: 100vw;
   }
+`
+
+const StyledTextField = styled(TextField)`
+    .MuiInputBase-input {
+        font-family: Roboto;
+    }
+    .MuiInputBase-root {
+        font-family: Roboto;
+    }
 `
 
 

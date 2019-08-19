@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Arrow from "../assets/ic-arrow-back.svg";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import { Mixpanel } from '../redux/actions/mixpanel';
 import Collapser from './Collapser';
 import BoothPicker from "../components/BoothPicker"
@@ -12,7 +12,7 @@ import BoothPicker from "../components/BoothPicker"
 const militaryConvert = (time) => {
   let hours = time.split('');
   let am = "am";
-  let newHours, combined, subtractedHours, rest;
+  let combined, subtractedHours, rest;
   if (hours[0] === "0"){
     combined = hours[1] + hours[2] + hours[3] + hours[4] + am;
     return combined;
@@ -29,12 +29,11 @@ const militaryConvert = (time) => {
 }
 
 class ViewMyMarket extends React.Component{
-  constructor(props){
-  super(props);
 
+
+goBack = () => {
+  return this.props.history.goBack();
 }
-
-
 
   render() {
   let market = this.props.marketData;
@@ -90,7 +89,6 @@ class ViewMyMarket extends React.Component{
             <Ltag>{market.rules}</Ltag>
             </Container>}
             {editing ? "" : this.boothRender(market) } 
-        
         </div>
     )
     }
@@ -127,13 +125,17 @@ const Header = styled.div`
   height: 60px;
 `;
 
-const CreateHeader = styled.h4`
-  margin-left: 15px;
-  margin-top: 20px;
-`;
+const StyledImg = styled.img`
+  margin-left: 16px;
+  margin-top: 0;
+  cursor: pointer; 
+  margin-right: 16px; 
 
-const ArrowImage = styled.img`
-  margin-left: 2%;
+`;
+const CreateHeader = styled.h4`
+  margin-top: 20px;
+  font-family: Raleway;
+  font-size: 18px;
 `;
 
 const Container = styled.div`
@@ -146,13 +148,15 @@ const Container = styled.div`
 `
 const MarketName = styled.p`
   font-size: 18px;
+  font-family: Raleway;
   @media(min-width: 600px){
     font-size: 26px;
   }
 `
 const MarketDescription = styled.p`
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
+  font-family: Roboto;
 `;
 
 const Tag = styled.p`
@@ -177,6 +181,7 @@ const WhiteButton = styled(Button)`
   border-radius: 10px;
   color: #044d4c;
   border: 1px solid #044d4c;
+
   @media(min-width: 600px){
     width: 200px;
     margin: 0 20px;
@@ -196,7 +201,8 @@ const GreenButton = styled(Button)`
 
 const Ltag = styled.p`
   font-size: 16px;
-  font-family: Raleway;
+  font-family: Roboto;
+  line-height: 1.5;
   @media(min-width: 600px){
     font-size: 20px;
   }
@@ -212,7 +218,7 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { }
-  )(ViewMyMarket);
+  )(withRouter(ViewMyMarket));
   
 //   {
 //     "id": 77,
