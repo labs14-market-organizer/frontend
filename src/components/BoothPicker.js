@@ -175,6 +175,7 @@ render()
 
     let showing1 = (this.state.vendors) ? "showing" : "notshowing";
     let showing = (this.state.vendors) ? "notshowing" : "showing";
+    var acceptedRules = this.props.vendor.vendorData && this.props.vendor.vendorData.status_mkt ? this.props.vendor.vendorData.status_mkt.find(x=> x && x.market_id === market.id && x.market_id) ? 1 : 0 : -1;
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -194,19 +195,22 @@ render()
                 }}
                 />
             </MuiPickersUtilsProvider>
-            <div style={{display: "flex", justifyContent: "space-around"}}>
-            <StyledP onClick={() => this.vendorsDetailsToggle("1")} style={this.state.vendors ?{ fontWeight: "500" } : { fontWeight: "bold" }}>Details</StyledP>
-            <StyledP style={this.state.vendors ? { fontWeight: "bold" } : { fontWeight: "500" }} onClick={() => this.vendorsDetailsToggle("2")}>Vendors</StyledP>
+            <div style={{maxWidth: "600px", margin: "0 auto"}}>
+              <div style={{display: "flex", justifyContent: "space-around"}}>
+                <StyledPButton onClick={() => this.vendorsDetailsToggle("1")} style={this.state.vendors ?{ fontWeight: "500" } : { fontWeight: "bold" }}>Details</StyledPButton>
+                <StyledPButton style={this.state.vendors ? { fontWeight: "bold" } : { fontWeight: "500" }} onClick={() => this.vendorsDetailsToggle("2")}>Vendors</StyledPButton>
               </div>
-            <div>
-              <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
+              <div>
+                <hr style={{marginLeft: "10px", marginRight: "10px", marginBottom: "15px"}}></hr>
+              </div>
             </div>
-            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <div style={{maxWidth: "600px", margin: "0 auto"}}>
               { this.props.reserve.error ? <ErrorDiv>{ String(this.props.reserve.error)}</ErrorDiv>
               :
               <Expandor _width="600px">
                 {market.booths.map((x,i) => {
-                  var creating = this.props.reserve && !this.props.reserve.fetching && this.props.reserve.reserveData && this.checkUsed(x);
+                  let checker = this.checkUsed(x);
+                  var creating = this.props.reserve && this.props.reserve.reserveData && checker !== -1 ? checker ? 1 : 0 : -1;
                   return (
                     <Booth key={i}>
                         <div id="price" style={price}>{`$${Math.round(x.price)}`}</div>
@@ -230,16 +234,18 @@ render()
                             <div style={minitile}>Booth description</div>
                             <div style={{textAlign: "left", ...maintext}}>{x.description}</div>
                           </div> : null} 
-                          {
-                              <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
-                          }
+                          
+                          {acceptedRules === 0 ? <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> : <div/>}
+                          <Button style={this.props.reserve.fetching || this.disable || acceptedRules < 1 ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable || acceptedRules < 1}>{creating > 0 ? "Rent Booth" : creating === 0 ? "Delete Reservation" : "Loading" }</Button>
+                          
                         </div> : <div>
                           {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null ) ? <><div style={{fontFamily: "Roboto", fontSize: "12px", fontWeight: "500", color: "#044d4c", textAlign: "left"}}><div></div>Vendors</div>
                             {this.props.reserve.vendorsWhoRented.map(renter => {
                               return (renter.booth_id === x.id) ? 
                             <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{renter.name}</div> : <div></div>
                           })}</> : <></>} 
-                          <Button style={this.props.reserve.fetching || this.disable ? buttonDisabled : creating ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable}>{creating ? "Rent Booth" : "Delete Reservation"}</Button>
+                          {acceptedRules === 0 ? <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> : <div/>}
+                          <Button style={this.props.reserve.fetching || this.disable || acceptedRules < 1 ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable || acceptedRules < 1}>{creating > 0 ? "Rent Booth" : creating === 0 ? "Delete Reservation": "Loading"}</Button>
                         </div> } 
                         
                       </Booth>
@@ -249,6 +255,7 @@ render()
                   
               </Expandor> }
             </div> 
+            <div style={{padding: "25px"}}/>
         </div> 
 
     );
@@ -258,7 +265,7 @@ render()
     
     try{
       return this.props.reserve.reserveData.filter(y => x.id === y.id && y.user_vdrs.length > 0).length == 0;
-    }catch {return false;}
+    }catch {return -1;}
   }
   fireDelete = (x)=>
   {
@@ -322,8 +329,8 @@ animation: spin 2s linear infinite;
 }
 `
 const Booth = styled.div `
-  display: flex;
-  align-items: flex-end;
+    display: flex;
+    align-items: flex-end;
 `;
 
 
@@ -342,11 +349,20 @@ const StyledP = styled.p`
     font-family: Raleway;
   }
 `;
+const StyledPButton = styled(StyledP)`
+  padding 10px 100px;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+`
 const mapStateToProps = (state) =>
 {
   return {
     reserve: {...state.checkBoothReserve},
-    user: {...state.checkUserData}
+    user: {...state.checkUserData},
+    vendor: {...state.checkVendorData}
   }
 }
 export default connect(mapStateToProps, {createReservation, getBoothReservations, deleteBoothReservation, getUserData, getVendorsWhoRented})(BoothPicker);
