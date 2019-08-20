@@ -17,9 +17,11 @@ import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 
-class Navbar extends React.Component {
+
+class NavbarVendor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,8 +53,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -75,8 +77,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -101,8 +103,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -127,8 +129,8 @@ class Navbar extends React.Component {
 
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -152,8 +154,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -177,8 +179,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -202,8 +204,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -227,8 +229,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -252,8 +254,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -277,8 +279,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -302,8 +304,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -327,8 +329,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -350,6 +352,12 @@ class Navbar extends React.Component {
   
   
   render() { 
+    let usertype = this.props.checkUserData.userType;
+    let userName = this.props.checkUserData.userData ? this.props.checkUserData.userData.email : null;
+    let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
+      
+    console.log(this.props)
+
     return ( 
       <StyledDiv>
         <StyledImg src={cloud}  width="100%" height="87px" />
@@ -363,8 +371,12 @@ class Navbar extends React.Component {
      );
   }
 }
- 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+export default connect(mapStateToProps, {/* actions */})(NavbarVendor);
       
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Luckiest Guy";
