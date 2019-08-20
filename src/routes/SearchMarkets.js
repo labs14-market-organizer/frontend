@@ -14,7 +14,7 @@ import { Mixpanel } from '../redux/actions/mixpanel';
 import ViewMyMarket from "./ViewMyMarket";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
 import NavbarVendor from "../components/Navbar"
-import icon from "../assets/dropdown.svg"
+import icon from "../assets/keyboardarrowright.svg"
 
 class SearchMarkets extends React.Component {
     state = {
@@ -88,7 +88,7 @@ class SearchMarkets extends React.Component {
                           <p style={{fontWeight: "600", fontSize: "18px", padding: "0 20px 0 20px"}}>{location.name}</p>
                           <p style={{padding: "0 37px 20px 40px"}}>{location.description}</p>
                         </div>
-                        <img src={icon} style={{width: "50px", height: "50px", transform: "rotate(-90deg)", position: "absolute", bottom: "0", right: "5px"}}/>
+                        <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "30px", right: "5px"}}/>
                     </StyleBox>
                     )
                     
