@@ -453,6 +453,16 @@ margin-left: 16px;
 margin-right: 26px;
 height: 1px;
 background-color: #484848;
+@media   (max-height: 720px) {
+  margin-bottom: 8px;
+  margin-top: 8px;
+
+    }
+    @media   (max-height: 600px) {
+/* display: none; */
+margin-top: -20px;
+margin-bottom: -20px;
+    }
 `
 
 const StyledImg = styled.img`
@@ -488,18 +498,64 @@ top: 0;
 border-radius: 10px 10px 10px 0px;
 text-align: left;
 padding-top: 112px;
-min-width:
 max-height: 99.8vh;
 overflow-y: hidden;
 overflow-x: hidden;
 
+
+@media   (max-height: 720px) {
+  /* background-color: red; */
+  padding-top: 48px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+
+    }
 ul {
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
   margin-left: 16px;
   margin-right: -16px;
-}
+  @media   (max-height: 600px) {
+    
+    margin-top: 16px;
+
+  :nth-child(3) {
+    /* margin-top: 0px; */
+    /* height: 20px; */
+    .MuiButton-root {
+
+      /* background-color: red; */
+      height: 20px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      
+    }
+
+
+
+
+
+  }
+  }
+    .username {
+
+      height: 20px;
+    font-size: 12px;
+    }
+    .MuiTypography-caption {
+      height: 16px;
+      font-size: 12px;
+      margin-top: -40px;  
+    }
+  .MuiButton-label {
+  /* color: red; */
+  font-size: 12px;
+  line-height: 1;
+  }
+
+    }
+
 
  a {
   text-decoration: none;
@@ -526,13 +582,18 @@ li {
   line-height: 1.5;
   margin-left: -41px;
   margin-bottom: 1px;
+
+}
   .MuiTypography-caption {
     color: #478529;
     font-size: 14px;
     line-height: 1.71;
     margin-top: -24px;
+    @media   (max-height: 720px) {
 
-  }
+margin-bottom: -28px;    }
+
+  
 }
 
   .avatar-wrapper {
@@ -590,6 +651,10 @@ ul{
 }
 .bottom-padding {
   padding-top: 48px;
-}
+  @media   (max-height: 720px) {
+  padding-top: 16px;
+
+    }
+
 `
 
