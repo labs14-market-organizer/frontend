@@ -45,6 +45,8 @@ export const checkBoothReserve = (state = initalState, action) =>
         case GET_VENDORS_WHO_RENTED:
             return {
                 ...state,
+                fetching: false,
+                updated: true,
                 vendorsWhoRented: action.payload
             }
         default:
