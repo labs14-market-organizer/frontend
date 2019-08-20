@@ -14,6 +14,7 @@ import { Mixpanel } from '../redux/actions/mixpanel';
 import ViewMyMarket from "./ViewMyMarket";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
 import NavbarVendor from "../components/Navbar"
+import icon from "../assets/dropdown.svg"
 
 class SearchMarkets extends React.Component {
     state = {
@@ -82,9 +83,12 @@ class SearchMarkets extends React.Component {
                 <div id={this.props.marketsBySearch.marketsBySearch && this.state.search ===this.state.lastSearch && this.state.search !== '' ? "visible" : "invisible"}>
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
-                        <StyleBox boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
-                        <p style={{fontWeight: "600", fontSize: "18px", marginLeft: "20px"}}>{location.name}</p>
-                        <p style={{marginLeft: "20px"}}>{location.description}</p>
+                        <StyleBox style={{position: "relative"}} boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
+                        <div>
+                          <p style={{fontWeight: "600", fontSize: "18px", padding: "0 20px 0 20px"}}>{location.name}</p>
+                          <p style={{padding: "0 37px 20px 40px"}}>{location.description}</p>
+                        </div>
+                        <img src={icon} style={{width: "50px", height: "50px", transform: "rotate(-90deg)", position: "absolute", bottom: "0", right: "5px"}}/>
                     </StyleBox>
                     )
                     
@@ -94,7 +98,7 @@ class SearchMarkets extends React.Component {
             </div>
             {<Popup style={popup ? {} : {pointerEvents: "none"}}>
                 <div id={shouldClose ? "visible" : "invisible"}>
-               {popup ? <ViewMyMarket backcb={()=> {this.setState({...this.state, popup: 0}); setTimeout(()=> this.setState({...this.state, popup: -1}), 1000)}} /> : ""}
+               {popup ? <ViewMyMarket backcb={()=> {this.setState({...this.state, popup: 0}); setTimeout(()=> this.setState({...this.state, popup: -1}), 400)}} /> : ""}
                </div>
             </Popup>}
             </div>
