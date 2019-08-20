@@ -40,7 +40,8 @@ import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
-import CreateVendor from "./routes/CreateVendor"
+import CreateVendor from "./routes/CreateVendor";
+import LoadingScreen from "./components/LoadingScreen";
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -50,23 +51,29 @@ class App extends React.Component {
     this.props.getUserData(null, true);
   
   }
-
+  mount = true;
   componentWillUpdate() 
   {
     if(!this.props.token || !this.props.userData && !this.props.fetching)  this.props.getUserData(this.props.token, false);
+  }
+  componentDidMount()
+  {
+    setTimeout(()=>this.setState({...this.state}), 1);
   }
   componentWillUnmount()
   {
   }
   render() {
-    if (this.props.fetching)
-      return <div className="App"> {"<LoadingScreen/>"} </div>;
+    var fetch = this.props.fetching
+    var mount = this.mount;
+    this.mount = false;
+    console.log(mount);
     return (
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-
-            <div>
+          <div className="loader" style={{opacity: fetch ? mount ? "0.3" : "1.0" : "0", zIndex: 300, position: "fixed", top: "0", right: "0", transition: "opacity 0.75s linear", pointerEvents: fetch ? "auto" : "none" }}><LoadingScreen/></div>;
+            <div style={{opacity: fetch ? 0.0 : 1.0, transition: "opacity 2s ease-in"}} >
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
               exact
