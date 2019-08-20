@@ -380,8 +380,6 @@ class NavbarVendor extends React.Component {
     let usertype = this.props.checkUserData.userType;
     let userName = this.props.checkUserData.userData ? this.props.checkUserData.userData.email : null;
     let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
-      
-    console.log(this.props)
 
     return ( 
       <StyledDiv>

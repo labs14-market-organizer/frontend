@@ -141,7 +141,7 @@ export const deleteBoothReservation = (reservationId, boothId, marketId, date) =
                     })
             }),
            
-        500);
+        1);
        
     }) 
     .then(res => {

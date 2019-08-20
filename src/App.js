@@ -47,13 +47,13 @@ let token = null;
 class App extends React.Component {
   componentWillMount() {
     //async check on second pass
-    this.props.getUserData();
+    this.props.getUserData(null, true);
   
   }
 
   componentWillUpdate() 
   {
-    if(!this.props.token || !this.props.userData)  this.props.getUserData();
+    if(!this.props.token || !this.props.userData && !this.props.fetching)  this.props.getUserData(this.props.token, false);
   }
   componentWillUnmount()
   {
