@@ -46,8 +46,8 @@ class AuthenticatePage extends React.Component{
           <StyledContainer>
             <StyledBox boxShadow={10}  display='flex' flexDirection='column'>
                 {(this.state.toggle) ? <StyledP>Create Account</StyledP> : <StyledP>Welcome Back</StyledP>}
-               <StyledCompanyButtons variant="contained" label="Facebook"  href="https://cloudstands-staging.herokuapp.com/auth/facebook" style={{backgroundColor: '#3b5998'}}><i class="fa fa-facebook-square" style={{color: "white", marginLeft: "0%", height: "18px", width: "16px", textAlign: "left"}} alt="facebook icon"></i><StyledSpan1>Sign In With Facebook</StyledSpan1></StyledCompanyButtons>
-               <StyledCompanyButtons variant="contained" style={{backgroundColor: 'white', color: "black"}} label="Facebook"  href="https://cloudstands-staging.herokuapp.com/auth/google"><img src={googleIcon} style={{marginLeft: "-10px"}} alt="google icon" /><StyledSpan1>Sign In With Google</StyledSpan1></StyledCompanyButtons>
+               <StyledCompanyButtons variant="contained" label="Facebook"  href="https://cloudstands.herokuapp.com/auth/facebook" style={{backgroundColor: '#3b5998'}}><i class="fa fa-facebook-square" style={{color: "white", marginLeft: "0%", height: "18px", width: "16px", textAlign: "left"}} alt="facebook icon"></i><StyledSpan1>Sign In With Facebook</StyledSpan1></StyledCompanyButtons>
+               <StyledCompanyButtons variant="contained" style={{backgroundColor: 'white', color: "black"}} label="Facebook"  href="https://cloudstands.herokuapp.com/auth/google"><img src={googleIcon} style={{marginLeft: "-10px"}} alt="google icon" /><StyledSpan1>Sign In With Google</StyledSpan1></StyledCompanyButtons>
 
                  <StyledD>
                 <StyledP1>By continuing, you agree to Cloud Stands<Link to="/terms" style={{textDecoration: "none", color: "black"}}><StyledSpan> Terms of Service</StyledSpan></Link> and <Link to="/privacy" style={{textDecoration: "none", color: "black"}}><StyledSpan>Privacy Policy</StyledSpan></Link> </StyledP1></StyledD>

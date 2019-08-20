@@ -66,7 +66,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper> 
       );
@@ -90,7 +90,32 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
+          </ul>
+        </StyledPaper> 
+      );
+
+      case "/landing":
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+          <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper> 
       );
@@ -116,7 +141,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button onClick={localStorage.clear()}>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -142,7 +167,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -167,7 +192,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>  
       );
@@ -192,7 +217,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -217,7 +242,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -242,7 +267,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -267,7 +292,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -292,7 +317,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -317,7 +342,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
@@ -342,7 +367,7 @@ class NavbarVendor extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li> 
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button>Sign Out</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
       );
