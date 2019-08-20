@@ -77,6 +77,8 @@ padding-left: 12px;
 }
 div {
   align-items: flex-start;
+  margin-left: 16px;
+
   .MuiTypography-subtitle1 {
     padding-left: 0px;
 width: 120px;

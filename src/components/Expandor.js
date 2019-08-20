@@ -13,6 +13,18 @@ export default class Expandor extends React.Component {
         expanded: this.props.expanded ? this.props.expanded : false
       }
     }
+    waiterTimer = false;
+    componentWillUpdate()
+    {
+
+      if(this.props.force)
+      {
+        if(this.waiterTimer) return;
+        this.waiterTimer = true;
+        setTimeout(()=> this.waiterTimer = false, 1000);
+        this.setState({...this.state, expanded: this.props.expanded ? this.props.expanded : false})
+      }
+    }
     handleChange = panel => {
       this.setState({...this.state, expanded : this.state.expanded !== panel ? panel : false})
     };
@@ -20,7 +32,7 @@ export default class Expandor extends React.Component {
       if(!this.props || !this.props.children || this.props.children.length < 1) {return <div/>}
       let b = (x,i) => {
           return(
-          <ExpansionPanel expanded={this.state.expanded === `panel${i+1}`} onChange={()=>this.handleChange(`panel${i+1}`)} style={{margin: "0 1.75%", width: "95vw", maxWidth: this.props._width ? this.props._width : "95vw"}}>
+          <ExpansionPanel expanded={this.state.expanded === `panel${i+1}` && !this.props.force} onChange={()=>this.handleChange(`panel${i+1}`)} style={{margin: "0 1.75%", width: "95vw", maxWidth: this.props._width ? this.props._width : "95vw"}}>
           <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1bh-content"

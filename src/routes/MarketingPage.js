@@ -562,7 +562,7 @@ const Box11 = styled(Box)`
 `;
 
 const SmallMarkets = styled(Paper)`
-  padding-left: 60px;
+  padding-left: 16px;
   background-color: #f6e7cc;
   height: 230px;
   display: flex;
@@ -630,14 +630,14 @@ const SmallMarkets = styled(Paper)`
     font-weight: bold;
   }
   .MuiTypography-root {
-    padding-left: 12px;
+    padding-left: 0px;
     padding-top: 23px;
     text-align: left;
   }
   .MuiTypography-body1 {
     font-size: 18px;
     line-height: 24px;
-    width: 80%;
+    width: 95%;
     font-family: Roboto;
     font-weight: normal;
     margin-top: -10px;
@@ -815,6 +815,7 @@ const Step1Label = styled(Box)`
   align-items: center;
   position: absolute;
   margin-right: 300px;
+  flex-wrap: nowrap;
 
   .MuiTypography-subtitle2 {
     font-size: 22px;

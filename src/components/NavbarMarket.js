@@ -112,8 +112,7 @@ class Navbar extends React.Component {
           <li><Button>Account Settings</Button></li>
           <li><Button>FAQ</Button></li>
           <li><Button>Contact Us</Button></li> 
-          <li className="bottom-padding"><Button>Sign Out</Button></li> 
-        </ul>
+          <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li>         </ul>
       </StyledPaper> 
     );
 
@@ -137,7 +136,6 @@ class Navbar extends React.Component {
           <li><Button>Account Settings</Button></li>
           <li><Button>FAQ</Button></li>
           <li><Button>Contact Us</Button></li> 
-          <li className="bottom-padding"><Button>Sign Out</Button></li> 
         </ul>
       </StyledPaper> 
     );
@@ -161,7 +159,7 @@ class Navbar extends React.Component {
         <li><Button>Account Settings</Button></li>
         <li><Button>FAQ</Button></li>
         <li><Button>Contact Us</Button></li> 
-        <li className="bottom-padding"><Button>Sign Out</Button></li> 
+        <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
       </ul>
     </StyledPaper> 
   );
