@@ -5,6 +5,7 @@ import {checkMarketData}from "./marketData";
 import {reducer as reduxFormReducer} from 'redux-form';
 import { checkVendorData } from "./vendorData";
 import { checkMarketsByArea } from "./searchMarkets";
+import { checkBoothReserve } from "./boothReserve";
 
 export default combineReducers({
     //list reducers
@@ -13,6 +14,7 @@ export default combineReducers({
     checkMarketData,
     checkVendorData,
     checkBoothData,                   
-    checkMarketsByArea
+    checkMarketsByArea,
+    checkBoothReserve
 });
 

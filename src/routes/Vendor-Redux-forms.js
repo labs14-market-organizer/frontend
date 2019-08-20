@@ -13,15 +13,19 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { createNewVendor, updateVendor } from "../redux/actions/vendorData";
 
-import { Field, reduxForm, FieldArray,  } from "redux-form";
+import { Field, reduxForm, FieldArray  } from "redux-form";
 import {Redirect, withRouter, Link} from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormLabel';
+import normalizePhone from "./NormalizePhone";
+
 
 function validate (values) {
     const errors = {};
     const requiredFields = [
       "name",
-      "description"
+      "description",
+      "email",
+      "phone"
       
     ];
     requiredFields.forEach(field => {
@@ -79,6 +83,63 @@ function validate (values) {
       />
     );
 
+    const renderField = ({ input, label, type, meta: { touched, error } }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} placeholder={label} style={{fontSize: "18px", width: "200px", height: "30px", marginBottom: "0px" }}/>
+          {touched && error && <span>{error}</span>}
+        </div>
+      </div>
+    );
+    const renderField2 = ({ input, label, type, meta: { touched, error } }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} placeholder="Add Item" style={{fontSize: "18px", border: "none", borderBottom: "1px solid black", width: "200px", height: "40px", marginLeft:"10px"}}/>
+          {touched && error && <span>{error}</span>}
+        </div>
+      </div>
+    );
+    const renderItems = ({ fields, meta: { input, error, submitFailed, reset } }) => (
+      <div>
+        { fields.map((item, index) => (
+         (index === 0) ? 
+        <FlexContainer style={{marginBottom: "15px"}}>
+          <StyledField
+              name={item}
+              type="text"
+              component={renderField2}
+              margin="normal"
+              fullWidth={true}
+              
+              /> 
+            
+            <StyledButton type="button" onClick={() => fields.unshift("")}>
+             Add Item
+            </StyledButton>
+        </FlexContainer>
+     
+     :
+        <FlexContainer key={index} style={{marginTop: "-5px"}}>
+        <XButton type="button" onClick={() => fields.remove(index)} style={{fontSize: "18px", fontWeight: "bold", border: "none"}}>
+            X
+        </XButton>
+        <StyledField
+          name={item}
+          type="text"
+          component={renderField}
+          style={{marginTop: "15px"}}
+        />
+          </FlexContainer>
+       
+        ))
+        }
+      </div>
+    );
+
+   
+
   class CreateVendor extends React.Component{
     isUpdating = false;
     constructor(props){
@@ -88,7 +149,7 @@ function validate (values) {
         this.state = {
             name: '',
             description: '',
-            items: [],
+            items: [""],
             item: '',
             electricity: "false",
             ventilation: "false",
@@ -97,7 +158,8 @@ function validate (values) {
             website: '',
             facebook: '',
             twitter: '',
-            instagram: ''
+            instagram: '',
+            email: this.props.checkUserData.userData.email
         };
         else this.isUpdating = true;
         this.state.electricity = String(this.state.electricity)
@@ -128,6 +190,7 @@ function validate (values) {
         items: itemList,
         item: ''
       })
+     
       return itemList;
     }
     addCount = e => {
@@ -145,6 +208,7 @@ function validate (values) {
         ...this.state,
         items: newItems
       })
+     
       return newItems;
     }
     save = e => {
@@ -155,6 +219,10 @@ function validate (values) {
     {
       return this.state.other_special !== "" && this.state.other_special;
     }
+
+    goBack= () => {
+      return this.props.history.goBack();
+    }
     
     render() 
     {
@@ -162,18 +230,15 @@ function validate (values) {
         return (
             <div>
                 <Header>
-                  <Link to="/">
-                    <img src={Arrow} style={{marginLeft: "25px",
-                    marginTop: "18px"}}/>
-                  </Link>
-                    <CreateHeader>{(this.isUpdating) ? "Edit Vendor" : "Create Vendor" }</CreateHeader>
+                  <StyledImg src={Arrow} onClick={this.goBack} />
+                  <CreateHeader>{(this.isUpdating) ? "Edit Vendor Profile" : "Create Vendor Profile" }</CreateHeader>
                 </Header>
                 <Container maxWidth="sm">
                 <form onSubmit={handleSubmit}>
                 
-                    <Field
+                    <StyledField
                         component={renderTextField}
-                        reuired
+                        required
                         id="name"
                         label="Business Name"
                         name="name"
@@ -182,7 +247,7 @@ function validate (values) {
                         fullWidth={true}
                        
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         required
                         id="description"
@@ -195,54 +260,42 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                    <StyledContainer>
-                    
-                    <StyledP>What are the specific items you plan to sell?</StyledP>
-                    
-                    <FlexContainer>
-                    <Field
-                        component={renderButton}
-                        prefunc={this.addItem}
-                        operation={this.state}
-                        id="items"
-                        label="items"
-                        name="items"
+                        <StyledField
+                        component={renderTextField}
+                        required
+                        id="email"
+                        label="Business Email Address"
+                        name="email"
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
-                    >
-                    <img src={Add} style={{marginTop: "10px"}}/>  
-                    </Field>
-                    <TextField
-                          margin="normal"
-                          id="item"
-                          label="Add Item"
-                          name="item"
-                          onChange={this.handleChange}
-                          value={this.state.item}
-                          margin="normal"
-                          variant="outlined"
-                          fullWidth={true}
-                          style={{marginTop: "-5px"}}
-                     />
-                     </FlexContainer>
-                    {(this.state.items.length > 0) ? <p>Vendor Items</p>: null}
-                    {this.state.items.map((item, index) => 
-                    <FlexContainer  key={index}>
-                        <Field
-                          component={renderButton}
-                          prefunc={(e) => this.deleteItem(e,index)}
-                          operation={this.state}
-                          id="items"
-                          label="items"
-                          name="items"
-                        >
-                          <StyledButton>X</StyledButton>
-                        </Field>
-                       <StyledP1>{item}</StyledP1> 
                        
-                    </FlexContainer>
-                    )}
+                    /><br></br>
+                    <br></br>
+                        <StyledField
+                        component={renderTextField}
+                        required
+                        id="phone"
+                        name="phone"
+                        label="Business Phone Number"
+                        type="text"
+                        fullWidth={true}
+                        variant="outlined"
+                        normalize={normalizePhone}
+                    />
+                    <StyledContainer>
+                    <br></br>
+                    <StyledP>What are the specific items you plan to sell?</StyledP>
+                    
+                    
+     
+                <form>
+                
+                <FieldArray name="items" component={renderItems} />
+                  </form>
+                    <FlexContainer>
+                  
+                     </FlexContainer>
                     
                      <StyledP>
 
@@ -256,7 +309,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /> <StyledP>Need Electricity</StyledP>
+                    /> <StyledP2>Need Electricity</StyledP2>
                     </FlexContainer>
                     <FlexContainer>
                     <Field
@@ -265,7 +318,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /><StyledP>Need Ventilation</StyledP>
+                    /><StyledP2>Need Ventilation</StyledP2>
                     </FlexContainer>
                     <FlexContainer>
                     <Field
@@ -274,7 +327,7 @@ function validate (values) {
                         inputProps={{
                         'aria-label': 'primary checkbox',
                         }}
-                    /><StyledP>Have loud machinery</StyledP>
+                    /><StyledP2>Have loud machinery</StyledP2>
                     </FlexContainer>
                    <FlexContainer>
                   <Checkbox checked={this.shouldCheck()}/>
@@ -283,13 +336,13 @@ function validate (values) {
                         label="Other"
                         name="other_special"
                         component={renderTextField}
-                        style={{fontFamily:"Raleway"}}
+                        style={{fontFamily:"Raleway", marginTop: "-12px"}}
                         onBlur={(e)=> this.setState({...this.state, other_special: e.target.value})}
                      />
                     </FlexContainer>
                     </FlexColumn>
                     </StyledContainer>
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="website"
                         label="Website"
@@ -298,7 +351,7 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="facebook"
                         label="Facebook"
@@ -307,7 +360,7 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="twitter"
                         label="Twitter"
@@ -316,7 +369,7 @@ function validate (values) {
                         variant="outlined"
                         fullWidth={true}
                     />
-                    <Field
+                    <StyledField
                         component={renderTextField}
                         id="instagram"
                         label="Instagram"
@@ -335,6 +388,25 @@ function validate (values) {
     }
     
 }
+
+const AddButton = styled(Button)`
+  border: 1px solid #044d4c;
+  width: 87px;
+  height: 40px;
+  text-transform: capitalize;
+  border-radius: 5px;
+  color: #044d4c;
+  font-family: Raleway;
+  font-size: 16px;
+  margin-top: 5px;
+`;
+
+const StyledField = styled(Field)`
+  .MuiInputBase-input{
+  font-family: Roboto;
+  font-size: 16px;
+}
+`
 const Header = styled.div`
   display: flex;
   background-color: #478529;
@@ -342,13 +414,17 @@ const Header = styled.div`
   height: 60px;
 `;
 
-const CreateHeader = styled.h4`
-  margin-left: 15px;
-  margin-top: 20px;
-`;
+const StyledImg = styled.img`
+  margin-left: 16px;
+  margin-top: 0;
+  cursor: pointer; 
+  margin-right: 16px; 
 
-const ArrowImage = styled.img`
-  margin-left: 2%;
+`;
+const CreateHeader = styled.h4`
+  margin-top: 20px;
+  font-family: Raleway;
+  font-size: 18px;
 `;
 
 const GreenButton = styled(Button)`
@@ -372,7 +448,8 @@ const GreenButton = styled(Button)`
 
 const StyledP = styled.p`
   font-family: Raleway;
-  font-size: 16px;
+  font-size: 12px;
+  font-weight: bold;
   line-height: 1.5;
 `;
 
@@ -383,6 +460,12 @@ line-height: 1.2;
 margin-top: 2px;
 `;
 
+const StyledP2 = styled.p`
+font-family: Raleway;
+font-size: 16px;
+line-height: 1.2;
+margin-top: 15px;
+`;
 
 
 const FlexColumn = styled.div`
@@ -392,20 +475,29 @@ const FlexColumn = styled.div`
 
 const FlexContainer = styled.div`
   display: flex;
+  margin-top: -10px;
 `;
 const StyledContainer = styled.div`
   text-align: left;
 `;
 
 const StyledButton = styled.button`
-  border: none;
+  border: 1px solid #044d4c;
+  border-radius: 8px;
   background-color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 15px;
   font-family: Raleway;
+  width: 140px;
+  height: 40px;
+  color: #044d4c;
 `;
 
-
+const XButton = styled.button`
+    width: 50px;
+    height: 40px;
+    background-color: white;
+`;
 const mapStateToProps = state => {
     return {
       ...state
@@ -416,7 +508,7 @@ const mapStateToProps = state => {
 const ReduxForms = reduxForm({
     form: "VendorForm", // a unique identifier for this form
     validate
-  })(connect(mapStateToProps,{})(CreateVendor));
+  })(connect(mapStateToProps,{})(withRouter(CreateVendor)));
 
   
   class ReduxContainer extends React.Component

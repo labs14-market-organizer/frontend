@@ -14,7 +14,7 @@ const initalState =
     userData: null,
     error: undefined,
     fetching: true,
-    userType: "undefined"
+    userType: "undefined",
 }
 
 export const checkUserData = (state = initalState, action) =>

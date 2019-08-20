@@ -1,8 +1,7 @@
-import axios from "axios";
 import { axiosWithAuth } from "./../utls/axiosWithAuth";
 import {HOST_URL} from "./../utls/hostUrl";
-import {getUserData} from "./userData";
-import { log } from "util";
+// import {getUserData} from "./userData";
+// import { log } from "util";
 
 import {SET_MARKET_DATA_END} from "./marketData"
 export const GET_BOOTH_DATA_START = "GET_BOOTH_DATA_START";
@@ -103,6 +102,7 @@ export const deleteBooth = (boothId, marketId) => dispatch =>
         dispatch({type: ERROR_GET_BOOTH_DATA,  payload: {error: err}});
     })
 }
+
 
 function cleanData(booth)
 {

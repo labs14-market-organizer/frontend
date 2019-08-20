@@ -2,9 +2,9 @@ import React from "react";
 //import "./sass/global.scss";
 import { connect } from "react-redux";
 import {
-  BrowserRouter as Router,
+
   Route,
-  Link,
+
   Redirect,
   withRouter
 } from "react-router-dom";
@@ -12,34 +12,35 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 import { setLocalData, getUserData } from "./redux/actions/userData";
 import "./App.scss";
-import CssBaseline from "@material-ui/core/CssBaseline";
+
 import theme from "./theme";
 import MarketingPage from "./routes/MarketingPage";
 import AuthenticatePage from "./routes/AuthenticatePage";
 import LandingPage from "./routes/Landing";
 import TokenCollect from "./routes/TokenCollect";
 import MainPage from "./routes/MainPage";
-import Navbar from "./components/Navbar";
+
 import { StylesProvider } from "@material-ui/styles";
 
 import UserList from "./routes/UserList";
-import CreateMarket from "./routes/CreateMarket";
-import AddBooths from "./routes/AddBooths";
+
+
 import UserOnboarding from "./routes/UserOnboarding";
 import ViewMyMarket from "./routes/ViewMyMarket";
-import CreateVendor from "./routes/CreateVendor";
+
 import BoothReduxForms from "./routes/Booths-Redux-forms";
 import SearchMarkets from "./routes/SearchMarkets";
 import MarketReduxForms from "./routes/Market-Redux-forms";
 import MeetTheTeam from "./routes/MeetTheTeam";
 import PrivacyPolicy from "./routes/PrivacyPolicy";
 import TermsAndConditions from "./routes/TermsAndConditions";
-
+import MarketRules from "./routes/MarketRules";
 import VendorReduxForms from "./routes/Vendor-Redux-forms";
 import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
+import CreateVendor from "./routes/CreateVendor"
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -47,6 +48,7 @@ class App extends React.Component {
   componentWillMount() {
     //async check on second pass
     this.props.getUserData();
+  
   }
 
   componentWillUpdate() 
@@ -130,6 +132,14 @@ class App extends React.Component {
               <Route 
               path="/vendorprofile"
               render={props => <VendorPage />}
+              />
+               <Route 
+              path="/marketrules"
+              render={props => <MarketRules />}
+              />
+               <Route 
+              path="/testcreatevendor"
+              render={props => <CreateVendor />}
               />
           </div>
         </MuiThemeProvider>

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { axiosWithAuth } from "./../utls/axiosWithAuth";
 import {HOST_URL} from "./../utls/hostUrl";
 
@@ -13,7 +12,7 @@ export const ERROR_LOCAL_DATA_BAD_DATA = "ERROR_LOCAL_DATA_BAD_DATA";
 export const GET_USER_DATA_START = "GET_USER_DATA_START";
 export const GET_USER_DATA_END = "GET_USER_DATA_END";
 export const ERROR_GET_USER_DATA = "ERROR_GET_USER_DATA";
-
+let count = 0;
 export const getUserData = (token=null) => dispatch => {
     dispatch({ type: GET_USER_DATA_START });
     
@@ -26,6 +25,7 @@ export const getUserData = (token=null) => dispatch => {
     return axiosWithAuth(token)
         .get(`${HOST_URL}/user`)
         .then(res => {
+            count = 0;
             if(!res.data) throw "interal client error";
             let userType = "undefined";
             try { 
@@ -36,19 +36,26 @@ export const getUserData = (token=null) => dispatch => {
             //localStorage.setItem("userdata", JSON.stringify(res.data));
             localStorage.setItem("token", token);
             //localStorage.setItem("userType", userType);
-            
-            return dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}});
+            return dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}}); //adding expiration to userdata state, going to check expiration in axioswithaut to see if expired or not?
         })
     .catch(err => {
+            count++;
             dispatch({ type: ERROR_GET_USER_DATA, payload: {error: err} });
+            if (count > 10){
+                localStorage.clear();
+            }
         })
 };
 
 const getLocalData = () =>
 {
-    let token, data;
+    let token, data, expiration;
     token = localStorage.getItem("token");
-    if(!token) return{type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: { error: "could not find token"}}
+    expiration = localStorage.getItem("expiration")
+    if(!token || Date.now() > expiration) {
+        localStorage.clear();
+        return{type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: { error: "could not find token"}}
+    }
     data = localStorage.getItem("userdata");
     if(!data) return {type: ERROR_LOCAL_DATA_BAD_DATA, payload: { error: "could not find data", token}}
     data = JSON.parse(data);
@@ -57,10 +64,21 @@ const getLocalData = () =>
     return {type: GET_LOCAL_DATA, payload: { userData: data , token, userType }}
 }
 
-export const setLocalData = (token, data) => dispatch => { //data should be an object of the user profile info
+export const setLocalData = (token, expiration) => dispatch => { //data should be an object of the user profile info
     dispatch({ type: GET_USER_DATA_START });
     
-    if(token) localStorage.setItem("token", token); else dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "token invalid" }});
-    if(data) localStorage.setItem("userdata", JSON.stringify(data)); else dispatch({type: SET_LOCAL_DATA, payload: {error: "data invalid" }});
-    dispatch({type: SET_LOCAL_DATA, payload: {token, data}});
+    if(token) {
+        localStorage.setItem("token", token); 
+        localStorage.setItem("expiration", expiration)
+        
+    } else {
+        dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "token invalid" }})};
+    if (Date.now() > expiration) {
+        dispatch({type: SET_LOCAL_DATA, payload: {error: "data invalid" }}); 
+        localStorage.clear()
+    } else {
+        dispatch({type: SET_LOCAL_DATA, payload: {token, expiration}})
+    }
+   
+    
 }
