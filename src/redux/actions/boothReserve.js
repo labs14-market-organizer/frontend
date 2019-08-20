@@ -53,7 +53,7 @@ export const createReservation = (marketId, boothId, date) => dispatch =>
                         dispatch({type: GET_BOOTH_DATA_END, payload: {reserveData: res4.data}});
                     })
             })
-            .catch(err => { }), 
+            .catch(err => { getError(dispatch, ERROR_GET_BOOTH_DATA,  err); }), 
         1);
     })
     .then(res => {
@@ -63,20 +63,18 @@ export const createReservation = (marketId, boothId, date) => dispatch =>
             dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
         })
         .catch(err => {
-            console.log(err)
+            getError(dispatch, ERROR_GET_BOOTH_DATA,  err);
         })
     })
     .catch(err =>{
         //check if bad token if so clear local data
-        let error = err && err.response && err.response.data && err.response.data.message ? err.response.data.message : "Unable to contact server. Please Try again."
-        console.error(error);
-        dispatch({ type: ERROR_SET_BOOTH_DATA, payload: {error: error} });
+        getError(dispatch, ERROR_SET_BOOTH_DATA,  err);
     })
 }
 
-export const getBoothReservations = (marketId, date) => dispatch => 
+export const getBoothReservations = (marketId, date, force=false) => dispatch => 
 {
-    dispatch({ type: GET_BOOTH_DATA_START });    
+    if(!force)dispatch({ type: GET_BOOTH_DATA_START });    
     let token = localStorage.getItem("token");
     if(!token) {localStorage.clear(); return dispatch({ type: SET_BOOTH_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
 
@@ -88,7 +86,6 @@ export const getBoothReservations = (marketId, date) => dispatch =>
     .catch(err => {
         //check if bad token if so clear local data
         let error = err && err.response && err.response.data && err.response.data.message ? err.response.data.message : "Unable to contact server. Please Try again."
-        console.log(error);
         dispatch({type: ERROR_GET_BOOTH_DATA,  payload: {error: error}});
     })
 }
@@ -142,27 +139,25 @@ export const deleteBoothReservation = (reservationId, boothId, marketId, date) =
                     .then(res4 => {
                         dispatch({type: GET_BOOTH_DATA_END, payload: {reserveData: res4.data}});
                     })
-            })
-            .then(res => {
-                return axiosWithAuth(token)
-                .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
-                .then(res1 => {
-                    dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
-                    console.log(res1.data)
-                    
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-            })
-            .catch(err => { }), 
+            }),
+           
         500);
        
+    }) 
+    .then(res => {
+        return axiosWithAuth(token)
+        .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
+        .then(res1 => {
+            dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res1.data })
+            
+        })
+        .catch(err => {
+            getError(dispatch, ERROR_GET_BOOTH_DATA,  err);
+        })
     })
+    .catch(err => {getError(dispatch, ERROR_GET_BOOTH_DATA,  err) })
     .catch(err => {
-        let error = err && err.response && err.response.data && err.response.data ? err.response.data : "Unable to contact server. Please Try again."
-        //check if bad token if so clear local data
-        dispatch({type: ERROR_GET_BOOTH_DATA,  payload: {error: error.status !== "404" ? error.message : null}});
+        getError(dispatch, ERROR_GET_BOOTH_DATA,  err);
     })
 }
 
@@ -192,23 +187,31 @@ export const requestReservationPermissions = (marketId) => dispatch =>
                     dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}});
                     dispatch({type: GET_BOOTH_DATA_END, payload: {}});
                 })
-                .catch(()=>{})
-            , 1000);
+                .catch((err)=>{getError(dispatch, ERROR_GET_BOOTH_DATA,  err);})
+            , 1);
         })
         .catch(err => {
-            console.log(err)
+            getError(dispatch, ERROR_GET_BOOTH_DATA,  err);
         })
 }
 
-export const getVendorsWhoRented = (marketId, date) => dispatch => {
+export const getVendorsWhoRented = (marketId, date, force = false) => dispatch => {
+    if(!force)dispatch({ type: GET_BOOTH_DATA_START });
     let token = localStorage.getItem("token")
+    if(!token) {localStorage.clear(); return dispatch({ type: SET_BOOTH_DATA_START, payload: { error: "Must have token to be on this page"} });} //this is probably an intruder
+
     return axiosWithAuth(token)
         .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
         .then(res => {
             dispatch({ type: GET_VENDORS_WHO_RENTED, payload: res.data })
-            console.log(res.data)
         })
         .catch(err => {
-            console.log(err)
+            getError(dispatch, ERROR_GET_BOOTH_DATA,  err);
         })
 };
+
+const getError = (dis,type,err) =>
+{
+    err = err && err.response && err.response.data && err.response.data ? err.response.data : "Unable to contact server. Please Try again."
+    dis({type: type, payload: err})
+}
