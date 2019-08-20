@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import styled from "styled-components";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import Scrollfix from "./components/Scrollfix";
@@ -9,6 +10,9 @@ import store from "./redux/utls/store";
 import "./index.scss";
 import App from "./App";
 
+const OverflowFix = styled.div`
+  overflow-x: hidden;
+`;
 // const store = createStore(rootReducer,
 //     applyMiddleware(thunk, logger));
 
@@ -17,7 +21,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Scrollfix>
-        <App />
+        <OverflowFix>
+          <App />
+        </OverflowFix>
       </Scrollfix>
     </Router>
   </Provider>,
