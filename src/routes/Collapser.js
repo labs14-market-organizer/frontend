@@ -74,7 +74,6 @@ class Collapser extends React.Component {
   }
     componentDidUpdate()
     {
-      this.disabled = false;
     }
     render(){
         
@@ -146,7 +145,7 @@ class Collapser extends React.Component {
         let something = {
           rules: "ai dosfa osdn hfkaj dbnf asjfak ijsdf aajsd bfkjasdbf kbajsdfj kabsdf asijdfba klj sdbf asd bfkajs dbf lajkdf bakjsdf basd bfla ksd fb a kls dbfl kjdsb f kjdas bfakjsd f"
         }
-        var acceptedRules = this.props.checkVendorData.vendorData && this.props.checkVendorData.vendorData.status_mkt ? this.props.checkVendorData.vendorData.status_mkt.find(x=> x && x.market_id === market.id && x.market_id) || this.disabled ? 1 : 0 : -1;
+        var acceptedRules = this.props.checkVendorData.vendorData && this.props.checkVendorData.vendorData.status_mkt ? this.props.checkVendorData.vendorData.status_mkt.find(x=> x && x.market_id === market.id && x.market_id) && !this.disabled ? 1 : 0 : -1;
         return (
             <Container style={{maxWidth: "600px", margin: "0 auto"}}>
             <Expandor _width="600px" >
@@ -204,12 +203,12 @@ class Collapser extends React.Component {
              </Expandor>: ""}
              </div>
              <div style={{marginTop: "10px"}}>
-              <Expandor _width="600px" expanded={acceptedRules === 0 ? "panel2": null}>
+              <Expandor _width="600px" expanded={acceptedRules === 0 && !this.disabled ? "panel2": false} force={this.disabled}>
               <div>
                 <div><i className="fa fa-file-text" style={{fontSize: "20px"}}></i></div>
                   <div style={{...tag, marginBottom: "0px"}}>Market Rules</div>
                   <div>
-                    <div style={{fontFamily: "Roboto", fontSize: "16px", fontWeight: "500", textAlign: "left", marginLeft: "-5%", marginTop:"-3%", marginBottom: "3%"}}>
+                    <div style={{fontFamily: "Roboto", fontSize: "16px", fontWeight: "500", textAlign: "left", marginLeft: "-5%", marginTop:"-2%", marginBottom: "3%"}}>
                         By confirming a booth, you are agreeing to this market's Rules and Code of Conduct
                     </div>
                     <BorderedBox>
@@ -218,7 +217,7 @@ class Collapser extends React.Component {
                       </ScrollOverride>
                     </BorderedBox>
                     {acceptedRules === 1 && !this.disabled ? <ErrorDiv>You Have Already Accepted The Rules</ErrorDiv> : <div style={{height: "12px", marginTop: "2px"}}/>}
-                    {acceptedRules > -1 ? <div><Button style={acceptedRules > 0  ? buttonDisabled : button} disabled={acceptedRules > 0} onClick={()=> {this.props.requestReservationPermissions(market.id); this.disabled = true;}}>{"Accept"}</Button></div> : <div/>}
+                    {acceptedRules > -1 ? <div><Button style={acceptedRules > 0  ? buttonDisabled : button} disabled={acceptedRules > 0} onClick={()=> {this.props.requestReservationPermissions(market.id); setTimeout(()=> this.disabled= true, 200); setTimeout(()=> this.disabled= false, 1000)}}>{"Accept"}</Button></div> : <div/>}
                 </div>
                 
                 </div>
