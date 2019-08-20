@@ -60,6 +60,7 @@ class BoothPicker extends React.Component
    this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date))
    if(this.updateTimer) clearInterval(this.updateTimer);
    this.updateTimer = setInterval(() =>{
+    if(this.props.reserve.fetching) return;
     this.props.getBoothReservations(this.props.market.id, formatDate(this.state.date), true)
     this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date), true)
     } ,1000);
@@ -73,16 +74,16 @@ class BoothPicker extends React.Component
    if(this.props.reserve.error ) { if(this.updateTimer)clearInterval(this.updateTimer); } //clear timer if there is an error
    else if(!this.updateTimer) { //reinstantiate timer on next update
     this.updateTimer = setInterval(() =>{
+      if(this.props.reserve.fetching) return;
       this.props.getBoothReservations(this.props.market.id, formatDate(this.state.date), true)
       this.props.getVendorsWhoRented(this.props.market.id, formatDate(this.state.date), true)
-    } ,1000);
+    } ,100);
     
   }
    if(!this.props.user.userData && !this.props.user.fetching) this.props.getUserData();
  }
  componentDidUpdate()
  {
-   this.disable = false;
    if(this.props.reserve.vendorsWhoRented) this.oldVendors = this.props.reserve.vendorsWhoRented;
  }
 
@@ -112,7 +113,8 @@ render()
         var r = this.props.reserve && !this.props.reserve.fetching && this.props.reserve.reserveData && !this.disable ? this.props.reserve.reserveData.filter(y => x.id === y.id) : null; 
         x.number = r ? r.length > 0 ? r[0].available : 0 : -1;
         return x;
-      })
+      });
+    
     var price =
     {
         fontFamily: 'Roboto',
@@ -176,7 +178,7 @@ render()
       backgroundColor: "#478529",
       color: "#FFF",
       marginTop: "4%",
-      trasition: "color 10s linear"
+      
     }
     var buttonDisabled =
     {
@@ -230,8 +232,9 @@ render()
               <Expandor _width="600px">
                 {market.booths.map((x,i) => {
                   let checker = this.checkUsed(x);
-                  var creating = this.props.reserve && this.props.reserve.reserveData && checker !== -1 ? checker ? 1 : 0 : -1;
+                  var creating = this.props.reserve && this.props.reserve.reserveData && !this.props.reserve.fetch && checker !== -1 ? checker ? 1 : 0 : -1;
                   var ban = x.number < 1 && creating > 0;
+                  var loading = !this.props.reserve.vendorsWhoRented;
                   return (
                     <Booth key={i}>
                         <div id="price" style={price}>{`$${Math.round(x.price)}`}</div>
@@ -257,11 +260,11 @@ render()
                           </div> : null} 
                           
                           {acceptedRules === 0 ? <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> : <div/>}
-                          <Button style={this.props.reserve.fetching || this.disable || acceptedRules < 1 || ban ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable || acceptedRules < 1 || ban}>{creating > 0 ? "Rent Booth" : creating === 0 ? "Delete Reservation" : "Loading" }</Button>
+                          <Button style={loading || this.props.reserve.fetching || this.disable || acceptedRules  < 1 || ban || creating < 0 ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{if(this.disable) return; this.disable = true; setTimeout(()=>this.disable=false, 1000); this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={loading || this.props.reserve.fetching || this.disable || acceptedRules < 1 || ban || creating < 0}>{creating > 0 ? "Rent Booth" : creating === 0 && !this.disable ? "Delete Reservation": "Loading"}</Button>
                           
                         </div> : <div>
                         <div style={{fontFamily: "Roboto", fontSize: "12px", fontWeight: "500", color: "#044d4c", textAlign: "left"}}>Vendors</div>
-                          {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null ) ? <>
+                          {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null && !this.disable ) ? <>
                             {this.props.reserve.vendorsWhoRented.map(renter => {
                               return (renter.booth_id === x.id) ? 
                             <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{renter.name}</div> : <div></div>
@@ -270,7 +273,7 @@ render()
                             {this.oldVendors.map(y=> y.booth_id === x.id ? <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{y.name}</div> : "")} 
                           <Spinner/> </> } 
                           {acceptedRules === 0 ? <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> : <div/>}
-                          <Button style={this.props.reserve.fetching || this.disable || acceptedRules  < 1 || ban ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{this.disable = true; this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={this.props.reserve.fetching || this.disable || acceptedRules < 1 || ban}>{creating > 0 ? "Rent Booth" : creating === 0 ? "Delete Reservation": "Loading"}</Button>
+                          <Button style={loading || this.props.reserve.fetching || this.disable || acceptedRules  < 1 || ban || creating < 0 ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{if(this.disable) return; this.disable = true; setTimeout(()=>this.disable=false, 1000); this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={loading || this.props.reserve.fetching || this.disable || acceptedRules < 1 || ban || creating < 0}>{creating > 0 ? "Rent Booth" : creating === 0 && !this.disable ? "Delete Reservation": "Loading"}</Button>
                         </div> } 
                         
                       </Booth>
