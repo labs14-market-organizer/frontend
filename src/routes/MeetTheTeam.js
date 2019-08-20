@@ -261,7 +261,7 @@ const LabelWrapper = styled.div`
 
 const ContactWrapper = styled.div`
 margin-top: 200px;
-z-index: 20;
+z-index: 1;
 a {
     text-decoration: none;
   }
