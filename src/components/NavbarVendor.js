@@ -535,7 +535,7 @@ ul {
 
 
   }
-  }
+  
     .username {
 
       height: 20px;
@@ -553,7 +553,7 @@ ul {
   }
 
     }
-
+}
 
  a {
   text-decoration: none;
@@ -639,8 +639,7 @@ ul{
 
 .currentPage {
   background-color: rgba(71, 133, 41, 0.4);
-  /* border: 2px solid red; */
-{padding}
+
   :hover {
     background-color: rgba(71, 133, 41, 0.5);
   }
@@ -653,6 +652,6 @@ ul{
   padding-top: 16px;
 
     }
-
+}
 `
 
