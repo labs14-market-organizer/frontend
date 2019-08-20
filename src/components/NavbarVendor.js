@@ -57,7 +57,7 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Link to="/searchmarkets"></Link><Button className="currentPage">Home</Button></li>
+            <li><Link to="/searchmarkets"><Button className="currentPage">Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
             <li><Button>Market History</Button></li>
             <li><Button>Payment Methods</Button></li>
@@ -81,7 +81,7 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Link to="/searchmarkets"></Link><Button className="currentPage">Home</Button></li>
+            <li><Link to="/searchmarkets"><Button className="currentPage">Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
             <li><Button>Market History</Button></li>
             <li><Button>Payment Methods</Button></li>
@@ -451,6 +451,7 @@ top: 0;
 border-radius: 10px 10px 10px 0px;
 text-align: left;
 padding-top: 112px;
+min-width:
 max-height: 99.8vh;
 overflow-y: hidden;
 overflow-x: hidden;
@@ -543,7 +544,7 @@ ul{
 .currentPage {
   background-color: rgba(71, 133, 41, 0.4);
   /* border: 2px solid red; */
-  margin-left: -270px;
+{padding}
   :hover {
     background-color: rgba(71, 133, 41, 0.5);
   }
