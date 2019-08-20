@@ -398,7 +398,7 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     @media   (min-resolution: 200dpi) {
       margin-top: 8px;
     }
-    @media (max-width: 410px) {
+    @media (max-width: 440px) {
       font-size: 40px;
     }
     @media (max-width: 390px) {
@@ -417,7 +417,7 @@ const StandsText = styled(({ variant, ...otherProps}) => <Typography fontWeight=
     font-family: "Raleway";
     font-weight: 200;
     color: black;
-    @media (max-width: 410px) {
+    @media (max-width: 440px) {
       font-size: 40px;
     }
     @media (max-width: 390px) {
