@@ -21,7 +21,7 @@ export const getUserData = (token=null, force=false) => dispatch => {
     if(!dis.payload.error && !force)  return dispatch(dis); //if gathering local storage didnt error then just give back that info
     if(!token) return dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "Invalid Token"}}); //if we couldnt grab a token triger kick to landing
     //if above checks fail then we will query the server to get the data
-    return axiosWithAuth(token)
+   setTimeout( () => axiosWithAuth(token)
         .get(`${HOST_URL}/user`)
         .then(res => {
             count = 0;
@@ -45,7 +45,7 @@ export const getUserData = (token=null, force=false) => dispatch => {
             if (count > 10){
                 localStorage.clear();
             }
-        })
+        }), 1000)
 };
 
 const getLocalData = () =>
