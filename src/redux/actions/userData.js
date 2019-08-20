@@ -13,13 +13,12 @@ export const GET_USER_DATA_START = "GET_USER_DATA_START";
 export const GET_USER_DATA_END = "GET_USER_DATA_END";
 export const ERROR_GET_USER_DATA = "ERROR_GET_USER_DATA";
 let count = 0;
-export const getUserData = (token=null) => dispatch => {
+export const getUserData = (token=null, force=false) => dispatch => {
     dispatch({ type: GET_USER_DATA_START });
     
     let dis = getLocalData(); //go get from local storage
-    
     if(!token) token =  dis.payload.token ? dis.payload.token : null; // if no token then assign from local storage
-    if(!dis.payload.error)  return dispatch(dis); //if gathering local storage didnt error then just give back that info
+    if(!dis.payload.error && !force)  return dispatch(dis); //if gathering local storage didnt error then just give back that info
     if(!token) return dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "Invalid Token"}}); //if we couldnt grab a token triger kick to landing
     //if above checks fail then we will query the server to get the data
     return axiosWithAuth(token)
@@ -34,13 +33,15 @@ export const getUserData = (token=null) => dispatch => {
                 else if(res.data.vendors && res.data.vendors.length > 0) dispatch({ type: "SET_VENDOR_DATA_END", payload: {vendorData: res.data.vendors[0]} });
             }catch{}
             //localStorage.setItem("userdata", JSON.stringify(res.data));
-            localStorage.setItem("token", token);
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("expiration", Date.now()+ res.data.exp)
             //localStorage.setItem("userType", userType);
-            return dispatch({type: GET_USER_DATA_END, payload: {token, userData: res.data, userType}}); //adding expiration to userdata state, going to check expiration in axioswithaut to see if expired or not?
+            return dispatch({type: GET_USER_DATA_END, payload: {userData: res.data, userType, token: res.data.token}}); //adding expiration to userdata state, going to check expiration in axioswithaut to see if expired or not?
         })
     .catch(err => {
             count++;
             dispatch({ type: ERROR_GET_USER_DATA, payload: {error: err} });
+            console.log(err.response.data);
             if (count > 10){
                 localStorage.clear();
             }
