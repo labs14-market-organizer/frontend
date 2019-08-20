@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import dropdown from "../assets/dropdown.svg";
+//import facebook from "../assets/facebookSymbol.svg";
 import { Box, Button } from '@material-ui/core';
 import Expandor from '../components/Expandor';
 import {connect} from "react-redux";
@@ -100,7 +100,7 @@ class Collapser extends React.Component {
         }
         let subtag = {
           fontFamily: "Raleway",
-          fontSize: "14px",
+          fontSize: "12px",
           fontWeight: "600",
           fontStyle: "normal",
           fontStretch: "normal",
@@ -148,15 +148,15 @@ class Collapser extends React.Component {
         }
         var acceptedRules = this.props.checkVendorData.vendorData && this.props.checkVendorData.vendorData.status_mkt ? this.props.checkVendorData.vendorData.status_mkt.find(x=> x && x.market_id === market.id && x.market_id) || this.disabled ? 1 : 0 : -1;
         return (
-            <div style={{maxWidth: "600px", margin: "0 auto"}}>
+            <Container style={{maxWidth: "600px", margin: "0 auto"}}>
             <Expandor _width="600px" >
             <div>
-              <div></div>
+             <div><i class="fa fa-map-marker" style={{fontSize: "20px"}}></i></div>
               <div style={tag}>Market Info</div>
               <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
-                <div style={subtag}>Address</div>
+                <div style={subtag}><em class="fa fa-map-marker" aria-hidden="true"> </em> Address</div>
                   <div style={text}>{market.address}, {market.city}, {market.state} {market.zipcode}</div>
-                  <div style={subtag}>Hours</div>
+                  <div style={subtag}><em class="fa fa-calendar" aria-hidden="true"> </em> Hours</div>
                   <div style={{display: "flex", justifyContent: "space-between", width: "85vw", maxWidth: "400px"}}>
                     <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%"}}>
                       { this.state.operation.map(opHours =>
@@ -173,38 +173,40 @@ class Collapser extends React.Component {
               </div>
              </Expandor>
              <div style={{margin: "5px"}}/>
-             <Expandor _width="600px">
+            { (market.email && market.email.length > 0) || (market.phone && market.phone.length > 0) ? 
+              <Expandor _width="600px">
                <div>
-                <div></div>
+               <div><i class="fa fa-2x fa-address-book-o" style={{fontSize: "20px"}}></i></div>
                 <div style={tag}>Contact Info</div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
-                  <div style={subtag}>Email Address</div>
-                  <div style={text}>{market.email}</div>
-                  <div style={subtag}>Phone Number</div>
-                  <div style={text}>{market.phone}</div>
+                 {market.email && market.email.length > 0 ? <><div style={subtag}><em class="fa fa-at" aria-hidden="true"> </em> Email Address</div>
+                  <div style={text}>{market.email}</div></> : ""}
+                  {market.phone && market.phone.length > 0 ? <><div style={subtag}><em class="fa fa-phone" aria-hidden="true"> </em> Phone Number</div>
+                  <div style={text}>{market.phone}</div></> : ""}
                 </div>
                </div>
-             </Expandor>
+             </Expandor> : ""}
              <div />
              <div style={{ marginTop: "10px"}}>
+             { (market.website !== null && market.website.length > 0) || (market.facebook !== null && market.facebook.length > 0) || (market.instagram !== null && market.instagram.length > 0) || (market.twitter !== null  && market.twitter.length > 0) ?
              <Expandor _width="600px" >
-               <div>
-               <div></div>
+               <div id="alt">
+               <div><i class="fa fa-2x fa-globe" style={{fontSize: "20px"}}></i></div>
                 <div style={tag}>Social Media</div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
-                  {(market.website !== null && market.website.length > 0) ? <div><div style={subtag}>Website</div> <div style={text}>{market.website}</div></div> : null}
-                  {(market.facebook !== null) ? <div> <div style={subtag}>Facebook</div> <div style={text}>{market.facebook}</div> </div> : null}
-                  {(market.instagram !== null) ? <div> <div style={subtag}>Instagram</div> <div style={text}>{market.instagram}</div></div> : null}
-                  {(market.twitter !== null) ? <div> <div style={subtag}>Twitter</div> <div style={text}>{market.twitter}</div> </div> : null}
+                  {(market.website !== null && market.website.length > 0) ? <><div style={subtag}><em class="fa fa-globe" aria-hidden="true"> </em> Website</div> <div onClick={()=>openInNewTab(`http://${market.website}`)} style={text}>{market.website}</div></> : null}
+                  {(market.facebook !== null && market.facebook.length > 0) ? <> <div style={subtag}><em class="fa fa-facebook-square" aria-hidden="true"> </em> Facebook</div> <div onClick={()=>openInNewTab(`http://www.facebook.com/${market.facebook}`)}style={text}>{market.facebook}</div> </> : null}
+                  {(market.instagram !== null) && market.instagram.length > 0 ? <> <div style={subtag}><em class="fa fa-instagram" aria-hidden="true"> </em> Instagram</div> <div onClick={()=>openInNewTab(`http://www.instagram.com/${market.instagram}`)} style={text}>{market.instagram}</div></> : null}
+                  {(market.twitter !== null)  && market.twitter.length > 0 ? <> <div style={subtag}><em class="fa fa-twitter-square" aria-hidden="true"> </em> Twitter</div> <div onClick={()=>openInNewTab(`http://www.twitter.com/${market.twitter}`)} style={text}>{market.twitter}</div> </> : null}
                 </div>
                </div>
               
-             </Expandor>
+             </Expandor>: ""}
              </div>
              <div style={{marginTop: "10px"}}>
               <Expandor _width="600px" expanded={acceptedRules === 0 ? "panel2": null}>
               <div>
-                <div></div>
+                <div><i className="fa fa-file-text" style={{fontSize: "20px"}}></i></div>
                   <div style={{...tag, marginBottom: "0px"}}>Market Rules</div>
                   <div>
                     <div style={{fontFamily: "Roboto", fontSize: "16px", fontWeight: "500", textAlign: "left", marginLeft: "-5%", marginTop:"-3%", marginBottom: "3%"}}>
@@ -212,17 +214,17 @@ class Collapser extends React.Component {
                     </div>
                     <BorderedBox>
                     <ScrollOverride>
-                      <div>{something.rules}</div>
+                      <div>{market.rules}</div>
                       </ScrollOverride>
                     </BorderedBox>
                     {acceptedRules === 1 && !this.disabled ? <ErrorDiv>You Have Already Accepted The Rules</ErrorDiv> : <div style={{height: "12px", marginTop: "2px"}}/>}
-                    {acceptedRules > -1 ? <div><Button style={acceptedRules > 0 ? buttonDisabled : button} disabled={acceptedRules > 0} onClick={()=> {this.props.requestReservationPermissions(market.id); this.disabled = true;}}>{"Accept"}</Button></div> : <div/>}
+                    {acceptedRules > -1 ? <div><Button style={acceptedRules > 0  ? buttonDisabled : button} disabled={acceptedRules > 0} onClick={()=> {this.props.requestReservationPermissions(market.id); this.disabled = true;}}>{"Accept"}</Button></div> : <div/>}
                 </div>
                 
                 </div>
               </Expandor>
              </div>
-             </div>
+             </Container>
          )
     }
 
@@ -235,6 +237,15 @@ class Collapser extends React.Component {
     }
   }
 
+const Container = styled.div`
+  i{
+    color: #478529
+  }
+    em
+  {
+    color: #ce8400
+  }
+`
 
 const ErrorDiv = styled.div`
   margin 0 auto;
@@ -368,7 +379,7 @@ const Ltag1 = styled.p`
 const BorderedBox = styled.div `
 max-height: 324px;
 max-width: 330;
-padding: 2px 2px 0 0
+padding: 2px 2px 2px 0
 border: 1px solid #979797;
 border-radius: 10px;
 `
@@ -399,7 +410,10 @@ const ScrollOverride = styled.div `
 }
 
 `
-
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
 
 export default connect(mapStateToProps, {requestReservationPermissions})(Collapser);
 
