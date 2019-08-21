@@ -27,7 +27,6 @@ class Upcoming extends React.Component {
 
     render() {
         console.log(this.props.user.userData)
-        // console.log(this.props.market)
         console.log(this.props.user.userData.upcoming_mkt)
         return (
             

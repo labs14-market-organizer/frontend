@@ -44,6 +44,8 @@ import DebugRouteChase from './DebugRouteChase'; */
 import LoadingScreen from "./components/LoadingScreen";
 import Upcoming from "./routes/Upcoming";
 import MarketDay from "./components/MarketDay";
+import VendorsRentedByDay from "./components/VendorsRentedByDay";
+
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -153,6 +155,11 @@ class App extends React.Component {
                <Route 
               path="/listofvendor"
               render={props => <MarketDay />}
+              />
+              <Route 
+              path="/boothrenters/:date"
+              render={props => <VendorsRentedByDay {...props}/>} 
+
               />
           </div>
         </MuiThemeProvider>
