@@ -72,7 +72,7 @@ class App extends React.Component {
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-          <div className="loader" style={{opacity: fetch ? mount ? "0.3" : "1.0" : "0", zIndex: 300, position: "fixed", top: "0", right: "0", transition: "opacity 0.75s linear", pointerEvents: fetch ? "auto" : "none" }}><LoadingScreen/></div>;
+          <div className="loader" style={{opacity: fetch ? mount ? "0.4" : "1.0" : "0", zIndex: 300, position: "fixed", top: "0", right: "0", transition: "opacity 0.75s linear", pointerEvents: fetch ? "auto" : "none" }}><LoadingScreen/></div>;
             <div style={{opacity: fetch ? 0.0 : 1.0, transition: "opacity 2s ease-in"}} >
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
