@@ -40,8 +40,10 @@ import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
-import CreateVendor from "./routes/CreateVendor";
+// import CreateVendor from "./routes/CreateVendor";
 import LoadingScreen from "./components/LoadingScreen";
+import Upcoming from "./routes/Upcoming";
+import MarketDay from "./components/MarketDay";
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -145,8 +147,12 @@ class App extends React.Component {
               render={props => <MarketRules />}
               />
                <Route 
-              path="/testcreatevendor"
-              render={props => <CreateVendor />}
+              path="/upcoming"
+              render={props => <Upcoming />}
+              />
+               <Route 
+              path="/listofvendor"
+              render={props => <MarketDay />}
               />
           </div>
         </MuiThemeProvider>
