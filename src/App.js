@@ -67,7 +67,6 @@ class App extends React.Component {
     var fetch = this.props.fetching
     var mount = this.mount;
     this.mount = false;
-    console.log(mount);
     return (
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
@@ -152,7 +151,7 @@ class App extends React.Component {
         </MuiThemeProvider>
       </StylesProvider>
 
-    );
+    )
   }
 }
 

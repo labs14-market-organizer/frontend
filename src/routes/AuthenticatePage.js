@@ -39,7 +39,7 @@ class AuthenticatePage extends React.Component{
               <Button color="deault" label="Google" onClick={this.authenticate} style={{ background: "white", Color: "white", textDecoration: "none" }} >Sign In</Button>
                 
           </Box> */}
-          <div style={{display: "flex", justifyContent: "center", alignItems: "flex-end", paddingBottom: "20px"}}>
+          <div style={{display: "flex", justifyContent: "center", alignItems: "flex-end", paddingBottom: "20px", flexDirection: this.state.toggle ? "row-reverse": "row"}}>
             <MarginDiv>
             <Flexing>
               {(this.state.toggle) ? <StyledP4 onClick={this.signUp}>Sign Up</StyledP4> : <StyledP3 onClick={this.signUp}>Sign Up</StyledP3>}
@@ -61,7 +61,7 @@ class AuthenticatePage extends React.Component{
               </StyledBox>
              </StyledContainer>
             </MarginDiv>
-            <ImageOverLay style={{zIndex: 1}}>
+            <ImageOverLay style={{zIndex: 1, transform: this.state.toggle ? "scaleX(-1)" : "scaleX(1)", marginLeft: this.state.toggle ? "0px" :"-100px", marginRight: this.state.toggle ? "-100px" :"0px"}}>
             <img src={icon}  />
             </ImageOverLay>
           </div>
@@ -72,7 +72,7 @@ class AuthenticatePage extends React.Component{
 }
 
 const ImageOverLay = styled.div`
-  margin-left: -100px;
+  
   margin-top: 50px;
   object-fit: contain;
   border-radius: 10px;
