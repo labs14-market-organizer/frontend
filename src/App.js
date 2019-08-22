@@ -71,6 +71,7 @@ class App extends React.Component {
     var fetch = this.props.fetching
     var mount = this.mount;
     this.mount = false;
+   
     return (
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>

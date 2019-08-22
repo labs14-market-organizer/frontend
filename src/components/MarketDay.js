@@ -15,7 +15,42 @@ class MarketDay extends React.Component {
             day: props.day
          }
     }
-
+    formatedDate = (date) => {
+        let splitDate = date.split("");
+        let year = splitDate.slice(0,4);
+        let day = splitDate.slice(8,10);
+        let monthJoined = splitDate.slice(5,7).join('');
+        let month = () => {
+        if (monthJoined === "01") {
+            return "January"
+        } else if (monthJoined === "02"){
+            return "February"
+        }else if (monthJoined === "03"){
+            return "March"
+        }else if (monthJoined === "04"){
+            return "April"
+        }else if (monthJoined === "05"){
+            return "May"
+        }else if (monthJoined === "06"){
+            return "June"
+        }else if (monthJoined === "07"){
+            return "July"
+        }else if (monthJoined === "08"){
+            return "August"
+        }else if (monthJoined === "09"){
+            return "September"
+        }else if (monthJoined === "10"){
+            return "October"
+        }else if (monthJoined === "11"){
+            return "November"
+        }else if (monthJoined === "12"){
+            return "December"
+        }
+    }
+        let newDate = month() + " " + day.join('') + ", " + year.join('');
+        
+        return newDate;
+    }
     
 
 render() {
@@ -27,7 +62,7 @@ render() {
             <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
                     <div>
-                    <p style={{fontWeight: "600", fontSize: "18px", padding: "20px 20px 0 20px"}}>{date}</p>
+                    <p style={{fontWeight: "600", fontSize: "18px", padding: "20px 20px 0 20px"}}>{this.formatedDate(date)}</p>
                     
                     <p style={{padding: "0 0px 0 30px", marginBottom: "0"}}>Available Booths: {available} </p>
                     <p style={{padding: "0 0px 0 30px", marginTop: "0"}}>Rented Booths: {rented} </p>
