@@ -24,34 +24,31 @@ class VendorsRentedByDay extends React.Component {
     goBack = () => {
         return this.props.history.goBack();
       }
+
     changePage = () => {
         this.setState({
             page: true
         })
     }
 
+    
     render() {
-    //  let market = this.props.market;
-        setTimeout = (() => {
-            this.changePage()
-        }, 5000)
-        console.log(this.state.page)
         return (
-            <FadeIn>
-                <Header>
-                    <StyledImg src={Arrow} onClick={this.goBack}/>
-                    <CreateHeader>View Vendors</CreateHeader>
-                </Header>
-                <StyledP>Date: {this.props.match.params.date}</StyledP>
-                <StyledP>Vendors</StyledP>
-                {this.props.market.vendorsWhoRentedByDate.map(vendor => {
-                    return <Flex><span style={{width: "200px"}}>{vendor.name}</span> Paid: {vendor.paid}</Flex>
-                })}
-            </FadeIn>
-        ) }
+        <FadeIn>
+            <Header>
+                <StyledImg src={Arrow} onClick={this.goBack}/>
+                <CreateHeader>View Vendors</CreateHeader>
+            </Header>
+            <StyledP>Date: {this.props.match.params.date}</StyledP>
+            <StyledP>Vendors</StyledP>
+            {this.props.market.vendorsWhoRentedByDate.map(vendor => {
+                return <Flex><span style={{width: "200px"}}>{vendor.name}</span> {(vendor.paid === 0) ? <span style={{color: "red"}}>Not Paid</span> : <span>Paid: ${vendor.paid} </span>}</Flex>
+            })}
+        </FadeIn> 
+        ) 
     }
     
-
+}
 
 const FadeIn = styled.div`
     opacity: 1;
