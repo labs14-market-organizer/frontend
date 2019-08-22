@@ -26,9 +26,12 @@ class VendorsRentedByDay extends React.Component {
       }
 
     changePage = () => {
-        this.setState({
-            page: true
-        })
+        setTimeout(() => {
+            this.setState({
+                page: true
+            })
+        }, 500)
+        
     }
     formatedDate = (date) => {
         let splitDate = date.split("");
@@ -69,7 +72,8 @@ class VendorsRentedByDay extends React.Component {
 
     
     render() {
-        { setTimeout(() => { this.changePage() } ,400) }
+        // { setTimeout(() => { return this.changePage() } ,400) }
+        console.log(this.state.page)
         return (
         <> 
             {(this.state.page) ? 
@@ -85,7 +89,7 @@ class VendorsRentedByDay extends React.Component {
                     return <StyledPFlex><p style={{width: "200px"}}>{vendor.name}</p> {(vendor.paid === 0) ? <p style={{color: "red"}}>Not Paid</p> : <p>Paid: ${vendor.paid} </p>}</StyledPFlex>
                 })}
             </StyledDiv>
-            </> : <><LoadingScreen /> </> } 
+            </> : <> <LoadingScreen /> {this.changePage()} </> } 
         </> 
         ) 
     }
