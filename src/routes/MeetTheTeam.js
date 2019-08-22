@@ -118,7 +118,7 @@ class MeetTheTeam extends Component {
             for an easier way to organize and communicate with their vendors.
             This is the awesome team that answered the call.
           </Typography>
-
+          <div>
           {this.team.map(member => (
             <Raindrop>
               <ImageWrapper>
@@ -145,6 +145,7 @@ class MeetTheTeam extends Component {
               </ContactWrapper>
             </Raindrop>
           ))}
+            </div>
         </StyledDiv>
         <Footer />
       </>
@@ -160,14 +161,30 @@ const StyledDiv = styled.div`
   padding-top: 116px;
   flex-direction: column;
   align-items: center;
+  div {
+  @media (min-width: 692px) {
+    display: flex;
+    flex-direction: row;
+    margin-right: 8px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+  }
+  }
 
   .intro {
     /* color: red; */
-    font-family: "Roboto";
+    font-family: "Raleway";
     margin-top: 6px;
     margin-bottom: 20px;
     padding: 0px 34px;
     color: #484848;
+    margin-bottom: 16px;
+    @media(min-width: 692px) {
+    max-width: 508px;
+  
+
+    }
+
   }
   
 `;
@@ -181,14 +198,16 @@ const CloudContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-position: center;
+  margin-bottom: 16px;
   @media (max-width: 370px) {
 
   background-size: 350px 138px;
   }
   .MuiTypography-h2 {
-    font-size: 32px;
+      font-size: 32px;
     font-weight: bold;
     text-align: center;
+ 
   }
 
   @media (max-width: 390px) {
@@ -201,6 +220,7 @@ const CloudContainer = styled.div`
     font-size: 48px;
     font-weight: bold;
     text-align: center;
+  
   }
 
   }
@@ -219,6 +239,13 @@ const Raindrop = styled.div`
   margin: 8px auto;
   /* width: 500px; */
   background-size: 100% 100%;
+  @media (min-width: 692px) {
+    padding: 20px;
+    padding-left: 40px;
+    padding-top: 30px;
+  }
+  
+
 `;
 
 const ImageWrapper = styled.div`
@@ -242,14 +269,25 @@ const Label = styled.div`
 
   .name {
     font-weight: 600;
+    width: 100%;
   }
   .role {
     font-size: 14px;
     color: #478529;
+    width: 100%;
   }
   .location {
     font-size: 12px;
     color: #484848;
+    width: 100%;
+  }
+
+  @media (min-width: 692px) {
+
+    height: 70px;
+    text-align: center;
+
+    
   }
 `;
 
@@ -257,6 +295,19 @@ const LabelWrapper = styled.div`
   height: 126px;
   display: flex;
   align-items: flex-end;
+  
+  @media (min-width: 692px) {
+    margin-top: -110px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 110px;
+    width: 205px;
+    justify-content: center;
+  }
+
+
+  
 `;
 
 const ContactWrapper = styled.div`
@@ -282,6 +333,9 @@ const Github = styled.div`
   justify-content: center;
 
   color: #969696;
+  @media (min-width: 692px) {
+    margin-top: -60px;
+  }
   i {
     font-size: 36px;
   }
@@ -300,6 +354,10 @@ const Linkedin = styled.div`
   justify-content: center;
 
   color: #969696;
+  @media (min-width: 692px) {
+    margin-top: 10px;
+    margin-left: -270px;
+  }
   i {
     font-size: 36px;
   }
@@ -318,6 +376,10 @@ const Twitter = styled.div`
   justify-content: center;
 
   color: #969696;
+  @media (min-width: 692px) {
+    margin-top: 72px;
+    margin-left: -240px;
+  }
   i {
     font-size: 36px;
   }

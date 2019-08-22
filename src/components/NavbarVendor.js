@@ -652,6 +652,10 @@ ul{
   padding-top: 16px;
 
     }
+          @media (max-height: 528px) {
+        margin-top: -10px;
+        padding-top: 0px;
+  }
 }
 `
 
