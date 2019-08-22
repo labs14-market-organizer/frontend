@@ -58,12 +58,12 @@ class Navbar extends React.Component {
       <BorderSpacer />
           <ul>
             <li><Link to="/"><Button>Home</Button></Link></li>
-            <li><Button>Vendor History</Button></li>
+            <li><Link to="/viewmymarket" style={{color: "black", textAlign: "left", marginLeft: "8px", fontSize: "14px"}}>Market Profile</Link></li>
             <li><Button>Payment Methods</Button></li>
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li>
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button onClick={localStorage.clear()}>Sign Out</Button></li> 
+            <li className="bottom-padding"><Button onClick={() => localStorage.clear()}>Sign Out</Button></li> 
           </ul>
         </StyledPaper> 
       );
@@ -87,7 +87,7 @@ class Navbar extends React.Component {
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li>
             <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><Button onClick={localStorage.clear()}>Sign Out</Button></li> 
+            <li className="bottom-padding"><Button onClick={() => localStorage.clear()}>Sign Out</Button></li> 
           </ul>
         </StyledPaper> 
       );
@@ -112,7 +112,8 @@ class Navbar extends React.Component {
           <li><Button>Account Settings</Button></li>
           <li><Button>FAQ</Button></li>
           <li><Button>Contact Us</Button></li> 
-          <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li>         </ul>
+          <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li>        
+           </ul>
       </StyledPaper> 
     );
 

@@ -20,23 +20,21 @@ class LoadingScreen extends React.Component
     {
         return (
             <div style={{width: "100vw", height: "100vh", position: "relative", top: "0%", left: "0%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#EEE"}}>
-                <div style={{position: "relative", top: "0", right: "0"}}>
+               {/*  <div style={{position: "relative", top: "0", right: "0"}}> */}
                    {/*  <img style={{width: "90vw", height: "90vw", maxWidth: "90vh", maxHeight: "90vh"}} src={Logo}/> */}
-                    <Spinner /* style={{position: "absolute", top: "15%", right: "45%"}} *//>
-                </div>
+                    <Spinner style={{marginTop: "-10%"}}/* style={{position: "absolute", top: "15%", right: "45%"}} *//>
+               {/*  </div> */}
             </div>
         )
     }
 }
 
 const Spinner = styled.div`
-border: 2vw solid #aaa;
+border: 3vw solid #aaa;
 border-radius: 100%;
-border-top: 2vw solid #478529;
+border-top: 3vw solid #478529;
 width: 10vw;
 height: 10vw;
-max-width: 10vh;
-max-height: 10vh;
 -webkit-animation: spin 2s linear infinite; /* Safari */
 animation: spin 2s linear infinite;
 @-webkit-keyframes spin {
