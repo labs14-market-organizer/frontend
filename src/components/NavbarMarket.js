@@ -17,9 +17,9 @@ import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-
-class Navbar extends React.Component {
+class NavbarMarket extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,8 +51,8 @@ class Navbar extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div></div>
           </li>
-          <li className="username">{this.props.userName}</li>
-          <li><Typography variant="caption">{this.props.marketName}</Typography></li>
+          <li className="username">{this.props.user.userData.email}</li>
+          <li><Typography variant="caption">{this.props.user.userData.markets[0].name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -187,7 +187,17 @@ class Navbar extends React.Component {
   }
 }
  
-export default Navbar;
+
+const mapStateToProps = state => {
+  return {
+    user: {...state.checkUserData},
+    market: {...state.checkMarketData},
+  }
+}
+
+export default connect( mapStateToProps,
+      { })(NavbarMarket);
+  
       
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Luckiest Guy";
