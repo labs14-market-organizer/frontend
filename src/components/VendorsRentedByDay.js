@@ -19,6 +19,7 @@ class VendorsRentedByDay extends React.Component {
         const marketId = this.props.user.userData.markets[0].id;
         const date =  this.props.match.params.date;
         this.props.getVendorsWhoRentedByMarket(marketId, date);
+        this.changePage();
     }
 
     goBack = () => {
@@ -30,7 +31,7 @@ class VendorsRentedByDay extends React.Component {
             this.setState({
                 page: true
             })
-        }, 500)
+        }, 100)
         
     }
     formatedDate = (date) => {
@@ -72,25 +73,23 @@ class VendorsRentedByDay extends React.Component {
 
     
     render() {
-        // { setTimeout(() => { return this.changePage() } ,400) }
-        console.log(this.state.page)
+        if (this.props.user.fetching && !this.props.user.userData) return <div/>;
         return (
-        <> 
-            {(this.state.page) ? 
+  
             <>
             <Header>
                 <StyledImg src={Arrow} onClick={this.goBack}/>
                 <CreateHeader>View Vendors</CreateHeader>
             </Header>
-            <StyledDiv>
+            <StyledDiv style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
                 <StyledP>{this.formatedDate(this.props.match.params.date)}</StyledP>
                 <StyledP style={{fontWeight: "bold"}}>Vendors</StyledP>
                 {this.props.market.vendorsWhoRentedByDate.map(vendor => {
                     return <StyledPFlex><p style={{width: "200px"}}>{vendor.name}</p> {(vendor.paid === 0) ? <p style={{color: "red"}}>Not Paid</p> : <p>Paid: ${vendor.paid} </p>}</StyledPFlex>
                 })}
             </StyledDiv>
-            </> : <> <LoadingScreen /> {this.changePage()} </> } 
-        </> 
+            </> 
+   
         ) 
     }
     
@@ -106,7 +105,7 @@ const StyledDiv = styled.div`
 
 const FadeIn = styled.div`
     opacity: 1;
-    transition: 4s opacity;
+    transition: 1s opacity;
     background-color: white;
     min-height: 100vh;
     min-width: 100vw;
