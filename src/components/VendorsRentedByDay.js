@@ -10,7 +10,9 @@ import { dateTimePickerDefaultProps } from "@material-ui/pickers/constants/prop-
 class VendorsRentedByDay extends React.Component {
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            page: false
+        }
     }
 
     componentDidMount() {
@@ -22,16 +24,20 @@ class VendorsRentedByDay extends React.Component {
     goBack = () => {
         return this.props.history.goBack();
       }
+    changePage = () => {
+        this.setState({
+            page: true
+        })
+    }
 
     render() {
-    //    let market = this.props.market;
-        let fade = "fade-out";
-        setTimeout(() => {
-            console.log('here')
-        }, 1000);
-    
+    //  let market = this.props.market;
+        setTimeout = (() => {
+            this.changePage()
+        }, 5000)
+        console.log(this.state.page)
         return (
-            <FadeIn className={fade}>
+            <FadeIn>
                 <Header>
                     <StyledImg src={Arrow} onClick={this.goBack}/>
                     <CreateHeader>View Vendors</CreateHeader>
@@ -42,23 +48,17 @@ class VendorsRentedByDay extends React.Component {
                     return <Flex><span style={{width: "200px"}}>{vendor.name}</span> Paid: {vendor.paid}</Flex>
                 })}
             </FadeIn>
-        )
+        ) }
     }
     
-}
+
 
 const FadeIn = styled.div`
-    .fade-out{
-        opacity: 0;
-        transition: none;
-    }
-    .fade-in {
-        opacity: 1;
-        transition: 1s opacity;
-        background-color: white;
-        min-height: 100vh;
-        min-width: 100vw;
-    }
+    opacity: 1;
+    transition: 1s opacity;
+    background-color: white;
+    min-height: 100vh;
+    min-width: 100vw;
 `;
 
 const Flex = styled.p`
