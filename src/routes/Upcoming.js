@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarVendor from "../components/NavbarVendor";
+import NavbarMarket from "../components/NavbarMarket";
 import { connect } from "react-redux";
 import MarketDay from "../components/MarketDay";
 
@@ -7,13 +7,20 @@ class Upcoming extends React.Component {
     constructor(props) {
          super(props);
          this.state = {
-
+            popup: null
          }
     }
+
+   changePopup = (e, index) => {
+     this.setState({
+         ...this.state,
+         popup: index
+     })
+   };
    renderMarketOwner = () => {
        return (
            <>
-        {this.props.user.userData.upcoming_mkt.map(day => {
+        {this.props.user.userData.upcoming_mkt.map((day, index) => {
             return <MarketDay day={day} />
         })}
         </>
@@ -26,13 +33,11 @@ class Upcoming extends React.Component {
 }
 
     render() {
-        console.log(this.props.user.userData)
-        console.log(this.props.user.userData.upcoming_mkt)
         return (
             
             <div>
   
-            <NavbarVendor />
+            <NavbarMarket />
             
             <p style={{paddingTop: "140px", fontFamily:"Raleway"}}>Upcoming Schedule</p>
             { this.props.user.userType ===  "Market Owner" ? this.renderMarketOwner()  : this.renderVendor() }

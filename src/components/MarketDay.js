@@ -12,28 +12,28 @@ class MarketDay extends React.Component {
     constructor(props) {
          super(props);
          this.state = {
-
+            day: props.day
          }
     }
 
-    handleClick = () => {
-        return <VendorsRentedByDay day={this.props.day} />
-    }
-
+    
 
 render() {
-
     let date = this.props.day.reserve_date.split("T")[0];
     let available = this.props.day.available;
+    let rented = this.props.day.reserved;
+    let day = this.props.day;
     return (
-        <Link to={`boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
-            <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}  onClick={() => this.handleClick()}>
-            <div>
-            <p style={{fontWeight: "600", fontSize: "18px", padding: "20px 20px 0 20px"}}>{date}</p>
-            <p style={{padding: "0 37px 20px 40px"}}>Available Booths: {available} </p>
-            </div>
-            <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "30px", right: "5px"}}/>
-            </StyleBox>
+        <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
+            <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
+                <div>
+                <p style={{fontWeight: "600", fontSize: "18px", padding: "20px 20px 0 20px"}}>{date}</p>
+                
+                <p style={{padding: "0 0px 0 30px", marginBottom: "0"}}>Available Booths: {available} </p>
+                <p style={{padding: "0 0px 0 30px", marginTop: "0"}}>Rented Booths: {rented} </p>
+                </div>
+                <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "30px", right: "5px"}}/>
+            </StyleBox> 
         </Link>
     )
 }
