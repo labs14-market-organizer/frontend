@@ -25,23 +25,42 @@ class VendorsRentedByDay extends React.Component {
 
     render() {
     //    let market = this.props.market;
+        let fade = "fade-out";
+        setTimeout(() => {
+            console.log('here')
+        }, 1000);
     
         return (
-            <>
-            <Header>
-                  <StyledImg src={Arrow} onClick={this.goBack}/>
-                  <CreateHeader>View Vendors</CreateHeader>
-            </Header>
-            <StyledP>Date: {this.props.match.params.date}</StyledP>
-            <StyledP>Vendors</StyledP>
-           {this.props.market.vendorsWhoRentedByDate.map(vendor => {
-            return <Flex><span style={{width: "200px"}}>{vendor.name}</span> Paid: {vendor.paid}</Flex>
-           })}
-            </>
+            <FadeIn className={fade}>
+                <Header>
+                    <StyledImg src={Arrow} onClick={this.goBack}/>
+                    <CreateHeader>View Vendors</CreateHeader>
+                </Header>
+                <StyledP>Date: {this.props.match.params.date}</StyledP>
+                <StyledP>Vendors</StyledP>
+                {this.props.market.vendorsWhoRentedByDate.map(vendor => {
+                    return <Flex><span style={{width: "200px"}}>{vendor.name}</span> Paid: {vendor.paid}</Flex>
+                })}
+            </FadeIn>
         )
     }
     
 }
+
+const FadeIn = styled.div`
+    .fade-out{
+        opacity: 0;
+        transition: none;
+    }
+    .fade-in {
+        opacity: 1;
+        transition: 1s opacity;
+        background-color: white;
+        min-height: 100vh;
+        min-width: 100vw;
+    }
+`;
+
 const Flex = styled.p`
     display: flex;
     text-align: left;

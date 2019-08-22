@@ -24,21 +24,22 @@ render() {
     let rented = this.props.day.reserved;
     let day = this.props.day;
     return (
-        <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
-            <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
-                <div>
-                <p style={{fontWeight: "600", fontSize: "18px", padding: "20px 20px 0 20px"}}>{date}</p>
-                
-                <p style={{padding: "0 0px 0 30px", marginBottom: "0"}}>Available Booths: {available} </p>
-                <p style={{padding: "0 0px 0 30px", marginTop: "0"}}>Rented Booths: {rented} </p>
-                </div>
-                <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "30px", right: "5px"}}/>
-            </StyleBox> 
-        </Link>
+            <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
+                <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
+                    <div>
+                    <p style={{fontWeight: "600", fontSize: "18px", padding: "20px 20px 0 20px"}}>{date}</p>
+                    
+                    <p style={{padding: "0 0px 0 30px", marginBottom: "0"}}>Available Booths: {available} </p>
+                    <p style={{padding: "0 0px 0 30px", marginTop: "0"}}>Rented Booths: {rented} </p>
+                    </div>
+                    <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "30px", right: "5px"}}/>
+                </StyleBox> 
+            </Link>
     )
 }
 
 }
+
 const StyleBox = styled(Box)`
         min-height: 108px;
         width: 85vw; 
