@@ -35,7 +35,6 @@ class VendorsRentedByDay extends React.Component {
         let year = splitDate.slice(0,4);
         let day = splitDate.slice(8,10);
         let monthJoined = splitDate.slice(5,7).join('');
-        console.log(splitDate.slice(5,7))
         let month = () => {
         if (monthJoined === "01") {
             return "January"
@@ -63,9 +62,6 @@ class VendorsRentedByDay extends React.Component {
             return "December"
         }
     }
-        console.log(year);
-        console.log(month());
-        console.log(day)
         let newDate = month() + " " + day.join('') + ", " + year.join('');
         
         return newDate;
@@ -74,21 +70,31 @@ class VendorsRentedByDay extends React.Component {
     
     render() {
         return (
-        <FadeIn>
+        <>
             <Header>
                 <StyledImg src={Arrow} onClick={this.goBack}/>
                 <CreateHeader>View Vendors</CreateHeader>
             </Header>
-            <StyledP>{this.formatedDate(this.props.match.params.date)}</StyledP>
-            <StyledP style={{fontWeight: "bold"}}>Vendors</StyledP>
-            {this.props.market.vendorsWhoRentedByDate.map(vendor => {
-                return <StyledPFlex><p style={{width: "200px"}}>{vendor.name}</p> {(vendor.paid === 0) ? <p style={{color: "red"}}>Not Paid</p> : <p>Paid: ${vendor.paid} </p>}</StyledPFlex>
-            })}
-        </FadeIn> 
+            <StyledDiv>
+                <StyledP>{this.formatedDate(this.props.match.params.date)}</StyledP>
+                <StyledP style={{fontWeight: "bold"}}>Vendors</StyledP>
+                {this.props.market.vendorsWhoRentedByDate.map(vendor => {
+                    return <StyledPFlex><p style={{width: "200px"}}>{vendor.name}</p> {(vendor.paid === 0) ? <p style={{color: "red"}}>Not Paid</p> : <p>Paid: ${vendor.paid} </p>}</StyledPFlex>
+                })}
+            </StyledDiv>
+        </> 
         ) 
     }
     
 }
+
+const StyledDiv = styled.div`
+     @media(min-width: 600px){
+        margin: 0 auto;
+        width: 500px;
+        margin-top: 30px;
+  }
+`
 
 const FadeIn = styled.div`
     opacity: 1;
