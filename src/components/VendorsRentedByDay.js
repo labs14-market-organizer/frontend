@@ -30,6 +30,46 @@ class VendorsRentedByDay extends React.Component {
             page: true
         })
     }
+    formatedDate = (date) => {
+        let splitDate = date.split("");
+        let year = splitDate.slice(0,4);
+        let day = splitDate.slice(8,10);
+        let monthJoined = splitDate.slice(5,7).join('');
+        console.log(splitDate.slice(5,7))
+        let month = () => {
+        if (monthJoined === "01") {
+            return "January"
+        } else if (monthJoined === "02"){
+            return "February"
+        }else if (monthJoined === "03"){
+            return "March"
+        }else if (monthJoined === "04"){
+            return "April"
+        }else if (monthJoined === "05"){
+            return "May"
+        }else if (monthJoined === "06"){
+            return "June"
+        }else if (monthJoined === "07"){
+            return "July"
+        }else if (monthJoined === "08"){
+            return "August"
+        }else if (monthJoined === "09"){
+            return "September"
+        }else if (monthJoined === "10"){
+            return "October"
+        }else if (monthJoined === "11"){
+            return "November"
+        }else if (monthJoined === "12"){
+            return "December"
+        }
+    }
+        console.log(year);
+        console.log(month());
+        console.log(day)
+        let newDate = month() + " " + day.join('') + ", " + year.join('');
+        
+        return newDate;
+    }
 
     
     render() {
@@ -39,10 +79,10 @@ class VendorsRentedByDay extends React.Component {
                 <StyledImg src={Arrow} onClick={this.goBack}/>
                 <CreateHeader>View Vendors</CreateHeader>
             </Header>
-            <StyledP>Date: {this.props.match.params.date}</StyledP>
-            <StyledP>Vendors</StyledP>
+            <StyledP>{this.formatedDate(this.props.match.params.date)}</StyledP>
+            <StyledP style={{fontWeight: "bold"}}>Vendors</StyledP>
             {this.props.market.vendorsWhoRentedByDate.map(vendor => {
-                return <Flex><span style={{width: "200px"}}>{vendor.name}</span> {(vendor.paid === 0) ? <span style={{color: "red"}}>Not Paid</span> : <span>Paid: ${vendor.paid} </span>}</Flex>
+                return <StyledPFlex><p style={{width: "200px"}}>{vendor.name}</p> {(vendor.paid === 0) ? <p style={{color: "red"}}>Not Paid</p> : <p>Paid: ${vendor.paid} </p>}</StyledPFlex>
             })}
         </FadeIn> 
         ) 
@@ -70,6 +110,15 @@ const StyledP = styled.p`
     text-align: left;
     margin-left: 4%;
     margin-bottom: 20px;
+    width: 99%;
+`;
+const StyledPFlex = styled.p`
+    text-align: left;
+    margin-left: 4%;
+    margin-top: 0;
+    margin-bottom: -15px;
+    width: 99%;
+    display: flex;
 `;
 
 const Header = styled.div`
