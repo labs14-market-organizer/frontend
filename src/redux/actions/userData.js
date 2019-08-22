@@ -13,15 +13,16 @@ export const GET_USER_DATA_START = "GET_USER_DATA_START";
 export const GET_USER_DATA_END = "GET_USER_DATA_END";
 export const ERROR_GET_USER_DATA = "ERROR_GET_USER_DATA";
 let count = 0;
-export const getUserData = (token=null, force=false) => dispatch => {
+export const getUserData = (token=null, force=false) => async dispatch => {
     dispatch({ type: GET_USER_DATA_START });
-    
+    await  new Promise((resolve) => setTimeout(() => resolve(), 1500));
+
     let dis = getLocalData(); //go get from local storage
-    if(!token) token =  dis.payload.token ? dis.payload.token : null; // if no token then assign from local storage
+    if(!token)  token =  dis.payload.token ? dis.payload.token : null; // if no token then assign from local storage
     if(!dis.payload.error && !force)  return dispatch(dis); //if gathering local storage didnt error then just give back that info
     if(!token) return dispatch({type: ERROR_LOCAL_DATA_BAD_TOKEN, payload: {error: "Invalid Token"}}); //if we couldnt grab a token triger kick to landing
     //if above checks fail then we will query the server to get the data
-   setTimeout( () => axiosWithAuth(token)
+    return axiosWithAuth(token)
         .get(`${HOST_URL}/user`)
         .then(res => {
             count = 0;
@@ -45,7 +46,7 @@ export const getUserData = (token=null, force=false) => dispatch => {
             if (count > 10){
                 localStorage.clear();
             }
-        }), 1000)
+        })
 };
 
 const getLocalData = () =>

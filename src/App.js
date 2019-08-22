@@ -40,8 +40,12 @@ import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
-import CreateVendor from "./routes/CreateVendor";
+// import CreateVendor from "./routes/CreateVendor";
 import LoadingScreen from "./components/LoadingScreen";
+import Upcoming from "./routes/Upcoming";
+import MarketDay from "./components/MarketDay";
+import VendorsRentedByDay from "./components/VendorsRentedByDay";
+
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -72,7 +76,7 @@ class App extends React.Component {
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-          <div className="loader" style={{opacity: fetch ? mount ? "0.3" : "1.0" : "0", zIndex: 300, position: "fixed", top: "0", right: "0", transition: "opacity 0.75s linear", pointerEvents: fetch ? "auto" : "none" }}><LoadingScreen/></div>;
+          <div className="loader" style={{opacity: fetch ? mount ? "0.4" : "1.0" : "0", zIndex: 300, position: "fixed", top: "0", right: "0", transition: "opacity 0.75s linear", pointerEvents: fetch ? "auto" : "none" }}><LoadingScreen/></div>
             <div style={{opacity: fetch ? 0.0 : 1.0, transition: "opacity 2s ease-in"}} >
             <Route path="/landing" component={MarketingPage} />
             <PrivateRoute
@@ -145,8 +149,17 @@ class App extends React.Component {
               render={props => <MarketRules />}
               />
                <Route 
-              path="/testcreatevendor"
-              render={props => <CreateVendor />}
+              path="/upcoming"
+              render={props => <Upcoming />}
+              />
+               <Route 
+              path="/listofvendor"
+              render={props => <MarketDay />}
+              />
+              <Route 
+              path="/boothrenters/:date"
+              render={props => <VendorsRentedByDay {...props}/>} 
+
               />
           </div>
         </MuiThemeProvider>
