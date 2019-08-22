@@ -8,13 +8,18 @@ import {
     ERROR_INVALID_TOKEN,
 } from '../actions/marketData';
 
+import {
+    GET_VENDORS_WHO_RENTED_BY_MARKET
+} from '../actions/marketsReservations';
+
 const initalState =
 {
     token: null,
     marketData: null,
     error: undefined,
     fetching: false,
-    updated: false
+    updated: false,
+    vendorsWhoRentedByDate: []
 }
 
 export const checkMarketData = (state = initalState, action) =>
@@ -30,6 +35,11 @@ export const checkMarketData = (state = initalState, action) =>
                 updated: true
             }        
         case ERROR_GET_MARKET_DATA:
+        case GET_VENDORS_WHO_RENTED_BY_MARKET:
+            return {
+                ...state,
+                vendorsWhoRentedByDate: action.payload
+            }
         case ERROR_SET_MARKET_DATA:
             return {...initalState, token: state.token,  error: action.payload.error, fetching: false, updated: false }
         case ERROR_INVALID_TOKEN: //this should nv trigger, we auto check data and request if data doesnt exist

@@ -40,8 +40,12 @@ import VendorPage from "./routes/VendorProfile";
 /* import LandingPage from './routes/LandingPage';
 import DebugRouteBobby from './DebugRouteBobby';
 import DebugRouteChase from './DebugRouteChase'; */
-import CreateVendor from "./routes/CreateVendor";
+// import CreateVendor from "./routes/CreateVendor";
 import LoadingScreen from "./components/LoadingScreen";
+import Upcoming from "./routes/Upcoming";
+import MarketDay from "./components/MarketDay";
+import VendorsRentedByDay from "./components/VendorsRentedByDay";
+
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -67,7 +71,7 @@ class App extends React.Component {
     var fetch = this.props.fetching
     var mount = this.mount;
     this.mount = false;
-    console.log(mount);
+   
     return (
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={theme}>
@@ -145,14 +149,23 @@ class App extends React.Component {
               render={props => <MarketRules />}
               />
                <Route 
-              path="/testcreatevendor"
-              render={props => <CreateVendor />}
+              path="/upcoming"
+              render={props => <Upcoming />}
+              />
+               <Route 
+              path="/listofvendor"
+              render={props => <MarketDay />}
+              />
+              <Route 
+              path="/boothrenters/:date"
+              render={props => <VendorsRentedByDay {...props}/>} 
+
               />
           </div>
         </MuiThemeProvider>
       </StylesProvider>
 
-    );
+    )
   }
 }
 

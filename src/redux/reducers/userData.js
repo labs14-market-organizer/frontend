@@ -8,13 +8,15 @@ import {
     ERROR_GET_USER_DATA
 } from '../actions/userData';
 
+
+
 const initalState =
 {
     token: null,
     userData: null,
     error: undefined,
     fetching: true,
-    userType: "undefined",
+    userType: "undefined"
 }
 
 export const checkUserData = (state = initalState, action) =>

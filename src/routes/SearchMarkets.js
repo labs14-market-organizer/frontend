@@ -102,7 +102,7 @@ class SearchMarkets extends React.Component {
                </div>
             </Popup>}
             </div>
-        )
+        )  
     }
 }
 
