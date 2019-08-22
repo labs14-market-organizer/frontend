@@ -353,8 +353,8 @@ class Navbar extends React.Component {
             </StyledBox>
             <StyledNav> 
             <Link to="/team">Meet the Team</Link>
-            <Link to="/signup">Sign in</Link>
-            <Link to="/signup"><Button variant="outlined" color="primary">Sign up </Button></Link>
+            <Link to={{pathname: "/signup", state: {toggle: false} } } onClick={this.props.signIn}>Sign in</Link>
+            <Link to={{pathname: "/signup", state: {toggle: true} }} onClick={this.props.signUp} ><Button variant="outlined" color="primary">Sign up </Button></Link>
             </StyledNav>
             </StyledDiv2>
 

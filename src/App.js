@@ -165,7 +165,7 @@ class App extends React.Component {
         </MuiThemeProvider>
       </StylesProvider>
 
-    );
+    )
   }
 }
 
