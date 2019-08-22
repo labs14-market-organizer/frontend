@@ -17,6 +17,17 @@ class AuthenticatePage extends React.Component{
       toggle: true //displays create account //false displays welcome back.
     }
 
+    componentDidMount() {
+      if (this.props.location.state != undefined) {
+        this.setState({
+          toggle: this.props.location.state.toggle
+        })
+      };
+    }
+      componentDidUpdate() {
+        console.log(this.props)
+    };
+
     signIn = (e) => {
       e.preventDefault();
       return (this.state.toggle) ? this.setState({ toggle: false }) : null;
@@ -30,7 +41,7 @@ class AuthenticatePage extends React.Component{
     render(){
         return (
         <>
-          <Navbar />
+          <Navbar signIn={this.signIn} signUp={this.signUp} />
           {/* <Box className="header-SignIn" display='flex'>
             
               <span className="meet-the-team"><p>Meet the Team</p></span>
@@ -77,7 +88,13 @@ const ImageOverLay = styled.div`
   object-fit: contain;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 8px 0 6px -6px rgba(0, 0, 0, 0.5);
+  box-shadow: rgba(0, 0, 0, .31) 30px 0px 29px 0.15px;
+  pointer-events: none;
+  /* height: 100vh; */
+
+  
+  /* background-color: #d8d8d8; */
+
   @media(max-width: 700px)
   {
     display: none
@@ -104,7 +121,6 @@ const StyledContainer = styled(Container)`
 
 const StyledBox = styled(Box)`
   display: flex;
-  felx-direction: column;
   text-align: center;
   min-height: 400px;
   height: auto;
@@ -114,6 +130,10 @@ const StyledBox = styled(Box)`
   height: 100%;
   max-height: 80vh;
   border-radius: 15px;
+  @media (min-width: 692px) {
+
+  height: 605px;
+  }
 `;
 
 const StyledP = styled.p`
@@ -155,11 +175,17 @@ const Flexing = styled.p`
   display: flex;
   justify-content: space-around;
   margin-top: 60px;
+  @media (min-width: 692px) {
+    display: none;
+  }
 `;
 const MarginDiv = styled.div`
   padding-top: 40px;
   width: 400px;
-  max-width: 95vw
+  max-width: 95vw;
+  @media(min-width: 692px) {
+    padding-top: 120px;
+  }
 `;
 
 const StyledD = styled.div`
@@ -200,7 +226,6 @@ const StyledCompanyButtons = styled(Button)`
 
 `
 const StyledSpan1 = styled.span`
-  marginL-left: 100px;
   @media (min-width: 400) {
     text-size: 5px;
   }
