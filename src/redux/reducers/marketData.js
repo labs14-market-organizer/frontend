@@ -38,7 +38,7 @@ export const checkMarketData = (state = initalState, action) =>
         case GET_VENDORS_WHO_RENTED_BY_MARKET:
             return {
                 ...state,
-                vendorsWhoRentedByDate: [...action.payload]
+                vendorsWhoRentedByDate: action.payload
             }
         case ERROR_SET_MARKET_DATA:
             return {...initalState, token: state.token,  error: action.payload.error, fetching: false, updated: false }

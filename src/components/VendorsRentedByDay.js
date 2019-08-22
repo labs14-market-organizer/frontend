@@ -25,7 +25,7 @@ class VendorsRentedByDay extends React.Component {
 
     render() {
     //    let market = this.props.market;
-        console.log(this.props.market)
+    
         return (
             <>
             <Header>
@@ -47,12 +47,13 @@ const Flex = styled.p`
     text-align: left;
     margin-top: 0;
     margin-top: -10px;
+    margin-left: 2%;
 `;
 
 const StyledP = styled.p`
     text-align: left;
-    margin-left: 2%;
-    
+    margin-left: 4%;
+    margin-bottom: 20px;
 `;
 
 const Header = styled.div`

@@ -10,7 +10,6 @@ export const getVendorsWhoRentedByMarket = (marketId, date) => dispatch => {
     return axiosWithAuth(token)
         .get(`${HOST_URL}/markets/${marketId}/vendors/date/${date}`)
         .then(res => {
-            console.log(res.data)
             dispatch({ type: GET_VENDORS_WHO_RENTED_BY_MARKET, payload: res.data })
         })
         .catch(err => {
