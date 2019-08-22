@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Arrow from "../assets/ic-arrow-back.svg";
 import { getVendorsWhoRentedByMarket } from "../redux/actions/marketsReservations";
 import { dateTimePickerDefaultProps } from "@material-ui/pickers/constants/prop-types";
-
+import LoadingScreen from "./LoadingScreen";
 
 class VendorsRentedByDay extends React.Component {
     constructor(props){
@@ -69,8 +69,11 @@ class VendorsRentedByDay extends React.Component {
 
     
     render() {
+        { setTimeout(() => { this.changePage() } ,400) }
         return (
-        <>
+        <> 
+            {(this.state.page) ? 
+            <>
             <Header>
                 <StyledImg src={Arrow} onClick={this.goBack}/>
                 <CreateHeader>View Vendors</CreateHeader>
@@ -82,6 +85,7 @@ class VendorsRentedByDay extends React.Component {
                     return <StyledPFlex><p style={{width: "200px"}}>{vendor.name}</p> {(vendor.paid === 0) ? <p style={{color: "red"}}>Not Paid</p> : <p>Paid: ${vendor.paid} </p>}</StyledPFlex>
                 })}
             </StyledDiv>
+            </> : <><LoadingScreen /> </> } 
         </> 
         ) 
     }
@@ -98,7 +102,7 @@ const StyledDiv = styled.div`
 
 const FadeIn = styled.div`
     opacity: 1;
-    transition: 1s opacity;
+    transition: 4s opacity;
     background-color: white;
     min-height: 100vh;
     min-width: 100vw;
