@@ -74,8 +74,8 @@ class VendorsRentedByDay extends React.Component {
     
     render() {
         if (this.props.user.fetching && !this.props.user.userData) return <div/>;
-        console.log(this.props.user.userData.upcoming_mkt)
-        console.log(this.props.market.marketData.booths)
+        // console.log(this.props.user.userData.upcoming_mkt)
+        // console.log(this.props.market.marketData.booths)
         let boothTypes = [];
         let booths = this.props.market.vendorsWhoRentedByDate;
         let availableBooths = this.props.market.marketData.booths;
