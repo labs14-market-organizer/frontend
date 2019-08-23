@@ -135,6 +135,7 @@ const StyledPTag = styled.p`
 `;
 
 const StyledDiv = styled.div`
+    min-height: 100vh;
      @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;
