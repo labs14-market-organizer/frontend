@@ -98,17 +98,16 @@ class VendorsRentedByDay extends React.Component {
       
         return (
   
-            <>
+            <div style={{height: "100%"}}>
             <Header>
                 <StyledImg src={Arrow} onClick={this.goBack}/>
                 <CreateHeader>View Vendors</CreateHeader>
             </Header>
             <StyledDiv style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
                 <StyledP2>{this.formatedDate(this.props.match.params.date)}</StyledP2>
-                <StyledP style={{fontWeight: "bold"}}>Vendors</StyledP>
                 { boothTypes.map((boothT, index) => {
                     return <div key={index}>
-                        <StyledPTag><p style={{width: "60%"}}>{boothT}</p>  <p style={{fontFamily: "Raleway", fontSize: "14px", color: "#ce8400"}}>Available: {available[index]}</p></StyledPTag> 
+                        <StyledPTag><p style={{width: "60%"}}>{boothT}</p>  <p style={{fontFamily: "Raleway", fontSize: "14px", color: "#ce8400", paddingTop: "3px"}}>Available: {available[index]}</p></StyledPTag> 
                         {this.props.market.vendorsWhoRentedByDate.map(vendor => {
                             return (vendor.booth_name === boothT) ?
                                 <StyledPFlex>
@@ -118,7 +117,7 @@ class VendorsRentedByDay extends React.Component {
                     </div>
                                 })}
             </StyledDiv>
-            </> 
+            </div> 
    
         ) 
     }
@@ -130,9 +129,9 @@ const StyledPTag = styled.p`
     font-weight: bold;
     text-align: left;
     margin-left: 4%;
-    margin-bottom: -5px;
-    margin-top: 25px;
+    margin-bottom: -20px;
     display: flex;
+
 `;
 
 const StyledDiv = styled.div`
@@ -178,9 +177,12 @@ const StyledPFlex = styled.p`
     text-align: left;
     margin-left: 4%;
     margin-top: 0;
-    margin-bottom: -15px;
     width: 99%;
     display: flex;
+    paddingTop: -10px;
+    paddingBottom: -10px;
+    margin-bottom: 0;
+    height: 30px;
 `;
 
 const Header = styled.div`

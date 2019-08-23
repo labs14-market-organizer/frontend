@@ -62,25 +62,24 @@ render() {
             <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
                     <div>
-                    <p style={{fontWeight: "600", fontSize: "18px", padding: "20px 20px 0 20px"}}>{this.formatedDate(date)}</p>
-                    
-                    <p style={{padding: "0 0px 0 30px", marginBottom: "0"}}>Available Booths: {available} </p>
-                    <p style={{padding: "0 0px 0 30px", marginTop: "0"}}>Rented Booths: {rented} </p>
+                    <p style={{fontWeight: "600", fontSize: "18px", padding: "15px 20px 0 20px", fontFamily: "Raleway"}}>{this.formatedDate(date)}</p>
+                    <Flex>
+                    <p style={{padding: "15px 0px 0px 20px", marginBottom: "10px", fontFamily: "Raleway", color: "#044d4c", fontSize: "16px", fontWeight: "600"}}>Available Booths: {available} </p> <p style={{fontFamily: "Raleway", fontSize: "12px", fontWeight: "600", position: "absolute", bottom: "0px", right: "15px"}}>View Vendors...</p></Flex>
                     </div>
-                    <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "30px", right: "5px"}}/>
+                    <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "40px", right: "5px"}}/>
                 </StyleBox> 
             </Link>
     )
 }
 
 }
-
+const Flex = styled.div`
+    display: flex;
+`;
 const StyleBox = styled(Box)`
-        min-height: 108px;
-        width: 85vw; 
-        margin-left: 1%;  
+        min-height: 100px;
+        width: 360px; 
         text-align: left; 
-        border-radius: 10px;
         background-color: #edf3ea;
         margin-top: 32px;
         padding: 16;
