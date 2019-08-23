@@ -74,28 +74,68 @@ class VendorsRentedByDay extends React.Component {
     
     render() {
         if (this.props.user.fetching && !this.props.user.userData) return <div/>;
+        console.log(this.props.user.userData.upcoming_mkt)
+        console.log(this.props.market.marketData.booths)
+        let boothTypes = [];
+        let booths = this.props.market.vendorsWhoRentedByDate;
+        let availableBooths = this.props.market.marketData.booths;
+        booths.map(booth => {
+            if (!boothTypes.includes(booth.booth_name)){
+                boothTypes.push(booth.booth_name)
+            }
+        });
+
+        let available = []; //finding the numbers of available booths of each type of booths with the maps below.
+        availableBooths.map(boothNum => {
+            available.push(boothNum.number);
+        })
+
+        boothTypes.map((boothT, index) => {
+            this.props.market.vendorsWhoRentedByDate.map(vendor => {
+            return (vendor.booth_name === boothT) ? available[index] = available[index] - 1 : null 
+            })
+        });
+      
         return (
   
-            <>
+            <div style={{height: "100%"}}>
             <Header>
                 <StyledImg src={Arrow} onClick={this.goBack}/>
                 <CreateHeader>View Vendors</CreateHeader>
             </Header>
             <StyledDiv style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
-                <StyledP>{this.formatedDate(this.props.match.params.date)}</StyledP>
-                <StyledP style={{fontWeight: "bold"}}>Vendors</StyledP>
-                {this.props.market.vendorsWhoRentedByDate.map(vendor => {
-                    return <StyledPFlex><p style={{width: "200px"}}>{vendor.name}</p> {(vendor.paid === 0) ? <p style={{color: "red"}}>Not Paid</p> : <p>Paid: ${vendor.paid} </p>}</StyledPFlex>
-                })}
+                <StyledP2>{this.formatedDate(this.props.match.params.date)}</StyledP2>
+                { boothTypes.map((boothT, index) => {
+                    return <div key={index}>
+                        <StyledPTag><p style={{width: "60%"}}>{boothT}</p>  <p style={{fontFamily: "Raleway", fontSize: "14px", color: "#ce8400", paddingTop: "3px"}}>Available: {available[index]}</p></StyledPTag> 
+                        {this.props.market.vendorsWhoRentedByDate.map(vendor => {
+                            return (vendor.booth_name === boothT) ?
+                                <StyledPFlex>
+                                    <p style={{width: "60%"}}>{vendor.name}</p>
+                                    {(vendor.paid === 0) ? <p style={{color: "red"}}>NOT PAID</p> : <p style={{color: "#478529" }}>PAID</p> }
+                                </StyledPFlex>  : null })}
+                    </div>
+                                })}
             </StyledDiv>
-            </> 
+            </div> 
    
         ) 
     }
     
 }
+const StyledPTag = styled.p`
+    font-family: Raleway;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 4%;
+    margin-bottom: -20px;
+    display: flex;
+
+`;
 
 const StyledDiv = styled.div`
+    min-height: 100vh;
      @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;
@@ -118,20 +158,32 @@ const Flex = styled.p`
     margin-top: -10px;
     margin-left: 2%;
 `;
+const StyledP2 = styled.p`
+    text-align: left;
+    margin-left: 4%;
+    margin-bottom: 5px;
+    width: 99%;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Raleway;
+`;
 
 const StyledP = styled.p`
     text-align: left;
     margin-left: 4%;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     width: 99%;
 `;
 const StyledPFlex = styled.p`
     text-align: left;
     margin-left: 4%;
     margin-top: 0;
-    margin-bottom: -15px;
     width: 99%;
     display: flex;
+    paddingTop: -10px;
+    paddingBottom: -10px;
+    margin-bottom: 0;
+    height: 30px;
 `;
 
 const Header = styled.div`

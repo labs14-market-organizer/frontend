@@ -39,7 +39,7 @@ class Upcoming extends React.Component {
   
             <NavbarMarket />
             
-            <p style={{paddingTop: "140px", fontFamily:"Raleway"}}>Upcoming Schedule</p>
+            <p style={{paddingTop: "140px", fontFamily:"Raleway", fontSize: "18px", fontWeight: "600"}}>Upcoming Market Schedule</p>
             { this.props.user.userType ===  "Market Owner" ? this.renderMarketOwner()  : this.renderVendor() }
             </div>
         )
