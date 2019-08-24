@@ -4,6 +4,8 @@ import Arrow from "../assets/ic-arrow-back.svg";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
+import add from "../assets/add.svg";
+
 
 class RentBooth extends React.Component {
     constructor(props){
@@ -36,6 +38,10 @@ class RentBooth extends React.Component {
                     </Flex>
                     <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
                     <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>Payment Method</p>
+                    <Flex style={{marginTop: "-20px"}}>
+                        <img src={add} />
+                        <MarketsInfo style={{color: "#044d4c"}}>ADD PAYMENT INFO</MarketsInfo>
+                    </Flex>
                     <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
                     <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>{booth.name}</p>
                     <Market>Booth Size</Market>
