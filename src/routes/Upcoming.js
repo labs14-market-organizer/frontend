@@ -35,7 +35,7 @@ class Upcoming extends React.Component {
     render() {
         return (
             
-            <div>
+            <div style={{height: "100vh"}}>
   
             <NavbarMarket />
             
