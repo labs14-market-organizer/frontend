@@ -61,7 +61,7 @@ class SearchMarkets extends React.Component {
             <div style={{overflowY: popup ? "hidden" : "scroll", width: "100vw", margin: "0 auto"}}>
             <StyledContainer>
            
-                <form onSubmit={this.startSearch} style={{paddingBottom: "0", marginBottom: "-35px"}}>
+                <form onSubmit={this.startSearch} style={{paddingBottom: "0"}}>
                     <div style={{display: "flex"}}>
                         <TextField
                             id="search"
@@ -76,7 +76,7 @@ class SearchMarkets extends React.Component {
                             fullWidth={true}
                             style={{marginTop: "60px", marginBottom: "0px"}}
                         />
-                        <div style={{margin: "60px -50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
+                        <div style={{margin: "60px -50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}></div>
                     </div>
                 </form>
                 <StyledError id={this.props.searchError && this.clearError < 3 ? "visible":"invisible"}>{this.props.searchError ? this.props.searchError : "" }</StyledError>

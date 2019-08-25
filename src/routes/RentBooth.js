@@ -76,8 +76,6 @@ class RentBooth extends React.Component {
     render() {
         let day = this.props.match.params.date.split(' ').slice(0,1).join(' ');
         let date1 = this.props.match.params.date.split(' ').slice(1,3).join(' ');
-        console.log(date1)
-        console.log(this.props.match.params.date)
         let year = this.props.match.params.date.split(' ').slice(3,4);
         let boothId = this.props.match.params.boothid;
         let market = this.props.market.marketData;
