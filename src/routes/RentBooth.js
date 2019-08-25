@@ -5,53 +5,87 @@ import { Link, withRouter, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import add from "../assets/add.svg";
+import { createReservation } from '../redux/actions/boothReserve';
+import formatedDate from '../components/formatedDate';
 
 
 class RentBooth extends React.Component {
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            page: false
+        }
     }
+    componentDidMount() {
+        this.changePage();
+    };
 
     goBack = () => {
           return this.props.history.goBack();
-        }
+        };
+
+
+    changePage = () => { //timeout function that will originally set opacity to 0 and switch when this.state.page === true
+        setTimeout(() => {
+            this.setState({
+                page: true
+            })
+        }, 300)
+        
+    };
+
+
+    createReservation = (e) => {
+        e.preventDefault();
+        let marketId = this.props.match.params.marketid;
+        let boothId = this.props.match.params.boothid;
+        this.props.createReservation(marketId, boothId);
+    }
 
     render() {
+        // console.log(this.props.match.params.marketid)
+        // console.log(this.props.match.params.boothid)
+        console.log(this.props.market.marketData)
+        console.log(this.props.match.params.date)
+        // console.log(this.props.reserve)
+        // console.log(this.props.vendor)
+        // let market = this.props.market.marketData;
         return (
             <div>
                     <Header>
                     <StyledImg src={Arrow} onClick={this.goBack} />
                     <CreateHeader>Rent Booth</CreateHeader>
                     </Header>
-                <StyledDiv style={{textAlign: "left"}}>
-                    <MarketName>{market.name}</MarketName>
-                    <Market>Address</Market>
-                    <MarketsInfo>{market.address}</MarketsInfo>
-                    <Flex>
-                        <Market style={{width: "200px"}}>Date</Market>
-                        <Market>Time</Market>
-                    </Flex>
-                    <Flex>
-                        <MarketsInfo style={{width: "200px"}}>{market.date}</MarketsInfo>
-                        <MarketsInfo>{market.time}</MarketsInfo>
-                    </Flex>
-                    <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
-                    <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>Payment Method</p>
-                    <Flex style={{marginTop: "-20px"}}>
-                        <img src={add} />
-                        <MarketsInfo style={{color: "#044d4c"}}>ADD PAYMENT INFO</MarketsInfo>
-                    </Flex>
-                    <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
-                    <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>{booth.name}</p>
-                    <Market>Booth Size</Market>
-                    <MarketsInfo>{booth.size}</MarketsInfo>
-                    <Market>Booth Price</Market>
-                    <MarketsInfo>{booth.price}</MarketsInfo>
-                    <Market>Booth Descriptioon</Market>
-                    <MarketsInfo>{booth.description}</MarketsInfo>
-                </StyledDiv>
-                <StyledButton>CONFIRM BOOTH</StyledButton>
+                <div style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
+                    <StyledDiv style={{textAlign: "left"}}>
+                        <MarketName>{market.name}</MarketName>
+                        <Market>Address</Market>
+                        <MarketsInfo>{market.address} {market.city}, {market.state} {market.zipcode}</MarketsInfo>
+                        <Flex>
+                            <Market style={{width: "200px"}}>Date</Market>
+                            <Market>Time</Market>
+                        </Flex>
+                        <Flex>
+                            <MarketsInfo style={{width: "200px"}}>{market.date}</MarketsInfo>
+                            <MarketsInfo>{market.time}</MarketsInfo>
+                        </Flex>
+                        <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
+                        <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>Payment Method</p>
+                        <Flex style={{marginTop: "-20px"}}>
+                            <img src={add} />
+                            <MarketsInfo style={{color: "#044d4c"}}>ADD PAYMENT INFO</MarketsInfo>
+                        </Flex>
+                        <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
+                        <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>{booth.name}</p>
+                        <Market>Booth Size</Market>
+                        <MarketsInfo>{booth.size}</MarketsInfo>
+                        <Market>Booth Price</Market>
+                        <MarketsInfo>{booth.price}</MarketsInfo>
+                        <Market>Booth Descriptioon</Market>
+                        <MarketsInfo>{booth.description}</MarketsInfo>
+                    </StyledDiv>
+                    <StyledButton onClick={this.createReservation}>CONFIRM BOOTH</StyledButton>
+                </div>
              </div>
         )
     }
@@ -63,6 +97,7 @@ const StyledButton = styled(Button)`
      width: 300px;
      height: 60px;
      border-radius: 8px;
+     margin-bottom: 20px;
 `;
 const HeaderDiv = styled.div`
     fontFamily: Raleway;
@@ -134,7 +169,7 @@ const mapStateToProps = state => {
 }
 
 export default connect( mapStateToProps,
-        { })(withRouter(RentBooth));
+        { createReservation })(withRouter(RentBooth));
 
 
 

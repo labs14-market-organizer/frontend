@@ -161,7 +161,7 @@ class App extends React.Component {
               render={props => <VendorsRentedByDay {...props}/>} 
               />
                <Route 
-              path="/rentbooth"
+              path="/rentbooth/:marketid/:boothid/:date"
               render={props => <RentBooth {...props}/>} 
               />
           </div>
