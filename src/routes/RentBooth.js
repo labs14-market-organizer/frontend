@@ -109,6 +109,8 @@ const StyledButton = styled(Button)`
      height: 60px;
      border-radius: 8px;
      margin-bottom: 20px;
+     font-size: 18px;
+     font-family: Raleway;
 `;
 const HeaderDiv = styled.div`
     fontFamily: Raleway;
