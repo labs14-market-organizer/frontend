@@ -39,23 +39,48 @@ class RentBooth extends React.Component {
         e.preventDefault();
         let marketId = this.props.match.params.marketid;
         let boothId = this.props.match.params.boothid;
-        this.props.createReservation(marketId, boothId);
+        let fullDate = this.props.match.params.date.split(' ');
+        let year = fullDate.slice(3,4);
+        let month = fullDate.slice(1,2);
+        let formatMonth;
+        if (month[0] === "Jan") {
+            formatMonth = "01"
+        } else if (month[0] === "Feb"){
+            formatMonth = "02"
+        }else if (month[0] === "Mar"){
+            formatMonth = "03"
+        }else if (month[0] === "Apr"){
+            formatMonth = "04"
+        }else if (month[0] === "May"){
+            formatMonth = "05"
+        }else if (month[0] === "Jun"){
+            formatMonth = "06"
+        }else if (month[0] === "Jul"){
+            formatMonth = "07"
+        }else if (month[0] === "Aug"){
+            formatMonth = "08"
+        }else if (month[0] === "Sep"){
+            formatMonth = "09"
+        }else if (month[0] === "Oct"){
+            formatMonth = "10"
+        }else if (month[0] === "Nov"){
+            formatMonth = "11"
+        }else if (month[0] === "Dec"){
+            formatMonth = "12"
+        }
+        let day = this.props.match.params.date.split(' ').slice(2,3);
+        let newDate = year + '-' + formatMonth + '-' + day;
+        this.props.createReservation(marketId, boothId, newDate);
     }
 
     render() {
-        // console.log(this.props.match.params.marketid)
-        // console.log(this.props.match.params.boothid)
-        console.log(this.props.market.marketData)
-        console.log(this.props.match.params.date.split(' ').slice(0,4).join(' '));
         let day = this.props.match.params.date.split(' ').slice(0,1).join(' ');
         let date1 = this.props.match.params.date.split(' ').slice(1,3).join(' ');
+        console.log(date1)
+        console.log(this.props.match.params.date)
         let year = this.props.match.params.date.split(' ').slice(3,4);
-        console.log(year)
-        // console.log(this.props.reserve)
-        // console.log(this.props.vendor)
-        // let market = this.props.market.marketData;
+        let boothId = this.props.match.params.boothid;
         let market = this.props.market.marketData;
-        console.log(market.name);
         return (
             <div>
                     <Header>
@@ -87,13 +112,20 @@ class RentBooth extends React.Component {
                             <MarketsInfo style={{color: "#044d4c"}}>ADD PAYMENT INFO</MarketsInfo>
                         </Flex>
                         <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
-                        <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>{booth.name}</p>
-                        <Market>Booth Size</Market>
-                        <MarketsInfo>{booth.size}</MarketsInfo>
-                        <Market>Booth Price</Market>
-                        <MarketsInfo>{booth.price}</MarketsInfo>
-                        <Market>Booth Descriptioon</Market>
-                        <MarketsInfo>{booth.description}</MarketsInfo>
+                        {market.booths.map(booth => {
+                            return (booth.id === parseInt(boothId)) ?
+                            <>
+                            <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>{booth.name}</p>
+                            <Market>Booth Size</Market>
+                            <MarketsInfo>{booth.size[0]} ft. X {booth.size[1]} ft.</MarketsInfo>
+                            <Market>Booth Price</Market>
+                            <MarketsInfo>${booth.price}</MarketsInfo>
+                            <Market>Booth Descriptioon</Market>
+                            <MarketsInfo>{booth.description}</MarketsInfo>  </>:
+                            <> </>
+
+                        })}
+                        
                     </StyledDiv>
                     <StyledButton onClick={this.createReservation}>CONFIRM BOOTH</StyledButton>
                 </div>
@@ -186,16 +218,16 @@ export default connect( mapStateToProps,
 
 
 
-const market = {
-    name: "Lafayette Farmers Market",
-    address: "131 Geno Dr., Lafayette, LA  70506",
-    date: "Sun. July 21, 2019",
-    time: "6:00AM - 2:00PM",
-}
+// const market = {
+//     name: "Lafayette Farmers Market",
+//     address: "131 Geno Dr., Lafayette, LA  70506",
+//     date: "Sun. July 21, 2019",
+//     time: "6:00AM - 2:00PM",
+// }
 
-const booth = {
-    name: "Standard Booth",
-    size: "10ft. x 10ft",
-    price: "$25",
-    description: "These booths do not come with electricity or a water hookup."
-}
+// const booth = {
+//     name: "Standard Booth",
+//     size: "10ft. x 10ft",
+//     price: "$25",
+//     description: "These booths do not come with electricity or a water hookup."
+// }
