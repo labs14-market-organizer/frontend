@@ -108,7 +108,7 @@ class SearchMarkets extends React.Component {
 
 const StyledContainer = styled(Container)`
     margin: 0 auto;
-    max-width: 100vw;
+    max-width: 99vw;
     padding-top: 100px;
     height: 100vh;
     @media(min-width: 600px){
@@ -155,7 +155,7 @@ const StyleBox = styled(Box)`
         text-align: left; 
         background-color: #edf3ea;
         margin-top: 32px;
-        margin-left: -15px;
+        margin-left: -19px;
         @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;
