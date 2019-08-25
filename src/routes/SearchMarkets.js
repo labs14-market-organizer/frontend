@@ -59,9 +59,9 @@ class SearchMarkets extends React.Component {
             <div>
             <NavbarVendor />
             <div style={{overflowY: popup ? "hidden" : "scroll", width: "100vw", margin: "0 auto"}}>
-            <StyledContainer >
+            <StyledContainer>
            
-                <form onSubmit={this.startSearch} >
+                <form onSubmit={this.startSearch} style={{paddingBottom: "0", marginBottom: "-35px"}}>
                     <div style={{display: "flex"}}>
                         <TextField
                             id="search"
@@ -74,7 +74,7 @@ class SearchMarkets extends React.Component {
                             margin="normal"
                             variant="outlined"
                             fullWidth={true}
-                            style={{marginTop: "60px"}}
+                            style={{marginTop: "60px", marginBottom: "0px"}}
                         />
                         <div style={{margin: "60px -50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
                     </div>
@@ -84,12 +84,12 @@ class SearchMarkets extends React.Component {
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
                         <StyleBox style={{position: "relative"}} boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
-                        <div>
-                          <p style={{fontWeight: "600", fontSize: "18px", padding: "0 20px 0 20px"}}>{location.name}</p>
-                          <p style={{padding: "0 37px 20px 40px"}}>{location.description}</p>
-                        </div>
-                        <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "30px", right: "5px"}}/>
-                    </StyleBox>
+                          <p style={{fontWeight: "600", fontSize: "18px", padding: "10px 20px 0 20px", fontFamily: "Raleway", fontSize: "18px"}}>{location.name}</p>
+                          <div style={{display: "flex"}}>
+                            <p style={{paddingLeft: "20px", marginTop: "-5px", width: "80%", fontFamily: "Roboto", fontSize: "16px"}} >{location.description}</p>
+                            <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", marginTop: "-5px"}}/>
+                          </div>
+                        </StyleBox>
                     )
                     
                 }) : null }
@@ -108,8 +108,9 @@ class SearchMarkets extends React.Component {
 
 const StyledContainer = styled(Container)`
     margin: 0 auto;
-    max-width: 95vw;
+    max-width: 100vw;
     padding-top: 100px;
+    height: 100vh;
     @media(min-width: 600px){
     width: 600px;
     padding-top: 100px;
@@ -150,13 +151,11 @@ const StyledError = styled.div`
 `
 const StyleBox = styled(Box)`
         min-height: 108px;
-        width: 85vw; 
-        margin-left: 1%;  
+        width: 100vw;  
         text-align: left; 
-        border-radius: 10px;
         background-color: #edf3ea;
         margin-top: 32px;
-        padding: 16;
+        margin-left: -15px;
         @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;
