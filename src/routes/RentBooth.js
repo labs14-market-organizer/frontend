@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import add from "../assets/add.svg";
 import { createReservation } from '../redux/actions/boothReserve';
 import formatedDate from '../components/formatedDate';
-
+import militaryConvert from "../components/militaryConvert"
 
 class RentBooth extends React.Component {
     constructor(props){
@@ -46,10 +46,16 @@ class RentBooth extends React.Component {
         // console.log(this.props.match.params.marketid)
         // console.log(this.props.match.params.boothid)
         console.log(this.props.market.marketData)
-        console.log(this.props.match.params.date)
+        console.log(this.props.match.params.date.split(' ').slice(0,4).join(' '));
+        let day = this.props.match.params.date.split(' ').slice(0,1).join(' ');
+        let date1 = this.props.match.params.date.split(' ').slice(1,3).join(' ');
+        let year = this.props.match.params.date.split(' ').slice(3,4);
+        console.log(year)
         // console.log(this.props.reserve)
         // console.log(this.props.vendor)
         // let market = this.props.market.marketData;
+        let market = this.props.market.marketData;
+        console.log(market.name);
         return (
             <div>
                     <Header>
@@ -66,8 +72,13 @@ class RentBooth extends React.Component {
                             <Market>Time</Market>
                         </Flex>
                         <Flex>
-                            <MarketsInfo style={{width: "200px"}}>{market.date}</MarketsInfo>
-                            <MarketsInfo>{market.time}</MarketsInfo>
+                            <MarketsInfo style={{width: "200px"}}>{day}. {date1}, {year}</MarketsInfo>
+                            <MarketsInfo>
+                            {market.operation.map(day1 => {
+                                return (day1.day.split('').slice(0,3).join('') === day.toLowerCase()) ? 
+                            <div>{militaryConvert(day1.start)} - {militaryConvert(day1.end)}</div> : <></>
+                            })}
+                            </MarketsInfo>
                         </Flex>
                         <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
                         <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>Payment Method</p>
