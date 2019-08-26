@@ -38,10 +38,7 @@ class Upcoming extends React.Component {
 
     render() {
         var marketOwner = this.props.user.userType === "Market Owner";
-        // console.log(this.props.vendor.vendorData);
-        // console.log(this.props.vendor.vendorData.status_mkt);
-        // console.log(this.props.market)
-        console.log(this.props.user.userData)
+        // console.log(this.props.user.userData);
         return (
             
             <div>

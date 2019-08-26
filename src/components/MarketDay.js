@@ -72,21 +72,23 @@ render() {
                     </div>
                     <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "40px", right: "5px"}}/>
                 </StyleBox> 
-        </Link> )
+            </Link> )
             : (
-            <StyleBox style={{position: "relative", margin: "0 auto", backgroundColor: "#f6e7cc", marginBottom: "20px"}} boxShadow={10}>
-                <div>
-                    <StyledP style={{fontWeight: "normal"}}>{this.formatedDate(date)}</StyledP>
-                    <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "40px", right: "5px"}}/>
-                    {/* <StyledP1 style={{color: "#044d4c"}}>{this.props.day.market_name}</StyledP1> */}
-                    <StyledP1 style={{color: "#044d4c"}}>Layfayette Farmers Market</StyledP1>
-                </div>
-            </StyleBox> 
+            <Link to={`/boothrented/${this.props.day.market_id}/${this.props.day.booth_id}/${date}`} style={{textDecoration: "none", color: "black"}}>
+                <StyleBox style={{position: "relative", margin: "0 auto", backgroundColor: "#f6e7cc", marginBottom: "20px"}} boxShadow={10}>
+                    <div>
+                        <StyledP style={{fontWeight: "normal"}}>{this.formatedDate(date)}</StyledP>
+                        <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "40px", right: "5px"}}/>
+                        <StyledP1 style={{color: "#044d4c"}}>{this.props.day.market_name}</StyledP1>
+                    </div>
+                </StyleBox> 
+            </Link> 
             )
-            } 
+    } 
 }
 
 }
+// path="/boothrented/:marketid/:boothid/:date"
 
 const StyledP = styled.p`
     font-weight: 600;
