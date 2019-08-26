@@ -145,6 +145,30 @@ class NavbarVendor extends React.Component {
           </ul>
         </StyledPaper>
       );
+      case "/rentalconfirmation": 
+        return (
+          <StyledPaper elevation={10}>
+          <div>
+          <ul>
+          <li className="avatar-wrapper"><div></div>
+          </li>
+          <li className="username">{this.props.name}</li>
+          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          </ul>
+          </div>
+      <BorderSpacer />
+      <ul>
+            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
+            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
+            <li><Button>Market History</Button></li>
+            <li><Button>Payment Methods</Button></li>
+            <li><Button>Account Settings</Button></li>
+            <li><Button>FAQ</Button></li> 
+            <li><Button>Contact Us</Button></li> 
+            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
+          </ul>
+        </StyledPaper>
+      );
 
       case "/signin": 
         return (
@@ -401,12 +425,35 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {/* actions */})(NavbarVendor);
       
+const padding = props => `
+@media(min-width: 920px) {
+  margin-left: 40px;
+
+}
+
+
+
+@media(min-width: 1100px) {
+margin-left: 90px;
+
+}
+
+@media(min-width: 1300px) {
+margin-left: 120px;
+
+}
+`;
+
 const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    
     @media   (min-resolution: 200dpi) {
       margin-top: 8px;
+    }
+    @media (max-width: 440px) {
+      font-size: 40px;
     }
     @media (max-width: 390px) {
       font-size: 40px; 
@@ -415,18 +462,44 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     @media (max-width: 350px) {
       font-size: 30px;  
     }
+
+
+
 `;
 
-const StandsText = styled(({ variant, ...otherProps}) => <Typography variant="h3" {...otherProps} />)`
-    font-family: "Raleway Dots";
+const StandsText = styled(({ variant, ...otherProps}) => <Typography fontWeight={200} variant="h3" {...otherProps} />)`
+    font-family: "Raleway";
+    font-weight: 200;
     color: black;
-    @media (max-width: 390px) {
+    @media (max-width: 440px) {
       font-size: 40px;
+    }
+    @media (max-width: 390px) {
+      font-size: 38px;
     }
     @media (max-width: 350px) {
       font-size: 30px;
     }
+
+    
+
+
 `;
+
+const StyledLink = styled(Link)`
+@media (min-width: 692px) {
+  margin-left: 28px;
+}
+
+${padding}
+` 
+const StyledDiv2 = styled.div`
+display: flex;
+justify-content: space-between;
+position: absolute;
+width: 100vw;
+top: 0;
+`
 
 const StyledBox = styled(Box)`
   display: flex;

@@ -405,6 +405,20 @@ const StyledField = styled(Field)`
   .MuiInputBase-input{
   font-family: Roboto;
   font-size: 16px;
+  color: #6a6a66;
+
+
+  .label {
+    color: red;
+  }
+
+}
+.MuiOutlinedInput-notchedOutline {
+  border-color: black;
+  border-width: 1.5px;
+}
+.MuiOutlinedInputLabel {
+  color: yellow;
 }
 `
 const Header = styled.div`
@@ -447,21 +461,21 @@ const GreenButton = styled(Button)`
 `;
 
 const StyledP = styled.p`
-  font-family: Raleway;
+  font-family: "Roboto";
   font-size: 12px;
   font-weight: bold;
   line-height: 1.5;
 `;
 
 const StyledP1 = styled.p`
-font-family: Raleway;
+font-family: "Roboto";
 font-size: 16px;
 line-height: 1.2;
 margin-top: 2px;
 `;
 
 const StyledP2 = styled.p`
-font-family: Raleway;
+font-family: "Roboto";
 font-size: 16px;
 line-height: 1.2;
 margin-top: 15px;
@@ -476,6 +490,22 @@ const FlexColumn = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   margin-top: -10px;
+  font-family: Roboto;
+  input{
+  border: none;
+    font-family: Roboto;
+  font-weight: 300;
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    font-family: Roboto;
+  font-weight: 300;
+  }
+  :-ms-input-placeholder {
+     font-family: Roboto;
+  font-weight: 300;
+  }
+  }
 `;
 const StyledContainer = styled.div`
   text-align: left;

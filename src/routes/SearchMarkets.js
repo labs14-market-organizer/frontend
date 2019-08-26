@@ -13,7 +13,7 @@ import Navbar from "../components/Navbar";
 import { Mixpanel } from '../redux/actions/mixpanel';
 import ViewMyMarket from "./ViewMyMarket";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
-import NavbarVendor from "../components/Navbar"
+import NavbarVendor from "../components/NavbarVendor"
 import icon from "../assets/keyboardarrowright.svg"
 
 class SearchMarkets extends React.Component {
