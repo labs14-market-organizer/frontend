@@ -68,6 +68,9 @@ line-height: 1.33;
 font-weight: 600;
 margin-bottom: 12px;
 padding-left: 12px;
+white-space: nowrap;
+flex-wrap: nowrap;
+
 
 
 
