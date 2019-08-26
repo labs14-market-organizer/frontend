@@ -103,7 +103,17 @@ const ImageOverLay = styled.div`
   {
     display: none
   }
+  @media screen and (orientation: landscape) {
+    
+      height: calc(108vh);  
+      width: 50%;
+
+      }
+  
+
+  
   `
+  
 
 const StyledSpan = styled.span`
   font-weight: bold;
