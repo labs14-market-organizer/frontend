@@ -88,7 +88,6 @@ render() {
 }
 
 }
-// path="/boothrented/:marketid/:boothid/:date"
 
 const StyledP = styled.p`
     font-weight: 600;

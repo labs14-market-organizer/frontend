@@ -5,18 +5,25 @@ import styled from "styled-components";
 import icon from "../assets/keyboardarrowright.svg"
 import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { deleteVendor } from "../redux/actions/vendorData";
+import { getMarketById } from "../redux/actions/marketData";
 
 class BoothRented extends React.Component {
     constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+        page: false
+    };
+    }
+    componentDidMount() {
+        this.props.getMarketById()
     }
 
 
     render() {
         return (
             <div>
-                    NI
+                
             </div>
         )
     }
@@ -29,5 +36,5 @@ const mapStateToProps = state => {
 }
     
 export default connect( mapStateToProps,
-        {})(BoothRented);
+        {deleteVendor, getMarketById})(BoothRented);
     
