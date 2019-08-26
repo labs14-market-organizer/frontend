@@ -57,8 +57,8 @@ class MeetTheTeam extends Component {
       title: "Full Stack Developer",
       location: "Southern, MD",
       github: "https://github.com/MAllen07",
-      linkedin: "https://twitter.com/icolorcode",
-      twitter: "https://www.linkedin.com/in/mindyallen7/"
+      twitter: "https://twitter.com/icolorcode",
+      linkedin: "https://www.linkedin.com/in/mindyallen7/"
     },
     {
       img: matt,
@@ -84,7 +84,7 @@ class MeetTheTeam extends Component {
       title: "Full Stack Developer",
       location: "St. Louis, MO",
       github: "https://github.com/hammettDev",
-      linkedin: "linkedin.com/in/justin-hammett-stl"
+      linkedin: "https://linkedin.com/in/justin-hammett-stl"
     },
     {
       img: leigh,
@@ -92,7 +92,7 @@ class MeetTheTeam extends Component {
       title: "Full Stack Developer",
       location: "Columbia, SC",
       github: "https://github.com/LTM888",
-      linkedin: "linkedin.com/leighmartin"
+      linkedin: "https://linkedin.com/leighmartin"
     },
     {
       img: chase,
