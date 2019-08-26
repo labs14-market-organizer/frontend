@@ -104,7 +104,7 @@ class RentBooth extends React.Component {
                             </MarketsInfo>
                         </Flex>
                         <hr style={{width: "96%", marginTop: "-6px", marginRight: "16px"}}></hr>
-                        <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>Payment Method</p>
+                        <StyledP>Payment Method</StyledP>
                         <Flex style={{marginTop: "-20px"}}>
                             <img src={add} />
                             <MarketsInfo style={{color: "#044d4c"}}>ADD PAYMENT INFO</MarketsInfo>
@@ -113,7 +113,7 @@ class RentBooth extends React.Component {
                         {market.booths.map(booth => {
                             return (booth.id === parseInt(boothId)) ?
                             <>
-                            <p style={{fontFamily: "Raleway", fontSize: "16xp", fontWeight: "bold"}}>{booth.name}</p>
+                            <StyledP>{booth.name}</StyledP>
                             <Market>Booth Size</Market>
                             <MarketsInfo>{booth.size[0]} ft. X {booth.size[1]} ft.</MarketsInfo>
                             <Market>Booth Price</Market>
@@ -131,6 +131,13 @@ class RentBooth extends React.Component {
         )
     }
 }
+
+
+const StyledP = styled.p`
+    font-family: Raleway;
+    font-size: 16px;
+    font-weight: bold;
+`;
 
 const StyledButton = styled(Button)`
      background-color: #478529;
