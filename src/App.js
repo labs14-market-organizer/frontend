@@ -45,6 +45,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import Upcoming from "./routes/Upcoming";
 import MarketDay from "./components/MarketDay";
 import VendorsRentedByDay from "./components/VendorsRentedByDay";
+import BoothConfirmation from "./routes/BoothConfirmation";
 
 
 var user_type = localStorage.getItem("userType");
@@ -159,8 +160,12 @@ class App extends React.Component {
               <Route 
               path="/boothrenters/:date"
               render={props => <VendorsRentedByDay {...props}/>} 
-
               />
+             <Route 
+              path="/rentalconfirmation"
+              render={props => <BoothConfirmation />}
+              />
+              
           </div>
         </MuiThemeProvider>
       </StylesProvider>
