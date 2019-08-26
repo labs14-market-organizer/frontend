@@ -17,6 +17,8 @@ import NavbarVendor from "../components/NavbarVendor"
 import icon from "../assets/keyboardarrowright.svg"
 import Upcoming from "./Upcoming.js";
 
+
+
 class SearchMarkets extends React.Component {
     state = {
         search: '',
