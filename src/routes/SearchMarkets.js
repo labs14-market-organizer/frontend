@@ -15,6 +15,7 @@ import ViewMyMarket from "./ViewMyMarket";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
 import NavbarVendor from "../components/NavbarVendor"
 import icon from "../assets/keyboardarrowright.svg"
+import Upcoming from "./Upcoming.js";
 
 class SearchMarkets extends React.Component {
     state = {
@@ -76,7 +77,7 @@ class SearchMarkets extends React.Component {
                             fullWidth={true}
                             style={{marginTop: "60px"}}
                         />
-                        <div style={{margin: "60px -50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
+                        <div style={{marginTop: "60px", marginBottom: "20px", marginLeft: "-50px", marginRight: "-50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
                     </div>
                 </form>
                 <StyledError id={this.props.searchError && this.clearError < 3 ? "visible":"invisible"}>{this.props.searchError ? this.props.searchError : "" }</StyledError>
@@ -101,6 +102,7 @@ class SearchMarkets extends React.Component {
                {popup ? <ViewMyMarket backcb={()=> {this.setState({...this.state, popup: 0}); setTimeout(()=> this.setState({...this.state, popup: -1}), 400)}} /> : ""}
                </div>
             </Popup>}
+            {(this.state.search.length > 0) ? "": <Upcoming />}
             </div>
         )  
     }

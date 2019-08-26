@@ -76,6 +76,9 @@ export const getVendorById = (vendorId) => dispatch =>
     return axiosWithAuth(token)
     .get(`${HOST_URL}/vendors/${vendorId}`)
     .then(res => {
+        console.log('here')
+        console.log(res)
+        console.log('yo')
         dispatch({type: GET_VENDOR_DATA_END, payload: {vendorData: res.data}});
     })
     .catch(err => {
@@ -151,6 +154,6 @@ function cleanData(vendor)
     //This is a really complex way of seeing if any values in the clean that also live in required array (by key) are null undefined or "" " " "  " etc.
     // console.log(clean)
     // clean = JSON.stringify(clean);
-    console.log(clean)
+    // console.log(clean)
     return clean;
 }
