@@ -9,9 +9,8 @@ import { deleteVendor } from "../redux/actions/vendorData";
 import { getMarketById } from "../redux/actions/marketData";
 import Arrow from "../assets/ic-arrow-back.svg";
 import Expandor from '../components/Expandor';
-import { getBoothById } from "../redux/actions/boothData";
 import militaryConvert from "./militaryConvert";
-
+// import deleteBoothReservation from "../redux/actions/boothReserve";
 
 class BoothRented extends React.Component {
     constructor(props){
@@ -40,10 +39,18 @@ class BoothRented extends React.Component {
         
     };
 
+    deleteReservation = () => { //reservationId, boothId, marketId, date
+        let marketId = this.props.match.params.marketid;
+        let boothId = this.props.match.params.boothid;
+
+    }
+
     render() {
         let marketId = this.props.match.params.marketid;
         let boothId = this.props.match.params.boothid;
         let market = this.props.market.marketData;
+        // if(checkMarketData.fetching || !checkMarketData.marketData) return <div/>;
+        console.log(market)
         let tag = {
             fontFamily: "Raleway",
             fontSize: "16px",
@@ -95,8 +102,7 @@ class BoothRented extends React.Component {
             trasition: "color 10s linear"
           }
         const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-        console.log(market);
-       
+        
         return !market
             ? (<></>)
             : (<div style={{height: "100vh"}}>
@@ -107,6 +113,26 @@ class BoothRented extends React.Component {
                     <div style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s",  marginLeft: "2%" }}>
                         <StyledP>{market.name}</StyledP>
                         <Flex><Tag>Date</Tag> <Tag>Time</Tag></Flex>
+                        <div style={{marginTop: "20px", marginBottom: "10px"}}>
+                            <Expandor _width="600px">
+                            <div>
+                            <div></div>
+                            <div style={tag}>Your Booth Info</div>
+                            <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+                                
+                                <div style={text}>{market.booths.map(booth => {
+                                    return (parseInt(booth.id) === parseInt(boothId)) ? <div>
+                                    <div style={subtag}><em aria-hidden="true"> </em> Booth Size</div>
+                                        {booth.size[0]} X {booth.size[1]}
+                                    <div style={subtag}><em  aria-hidden="true"> </em>Booth Price</div>
+                                        {booth.price}
+                                    <div style={subtag}><em  aria-hidden="true"> </em>Booth Description</div>
+                                        {booth.description} </div> : null })
+                                }</div>
+                            </div> 
+                        </div>
+                        </Expandor>
+                        </div>
                         <Expandor _width="600px" >
                         <div>
                         <div><i class="fa fa-map-marker" style={{fontSize: "20px"}}></i></div>
@@ -182,7 +208,7 @@ class BoothRented extends React.Component {
                 </Expandor>
             </div>
             </div>
-            <StyledButton>CANCEL BOOTH</StyledButton>
+            <StyledButton onClick={this.deleteReservation}>CANCEL BOOTH</StyledButton>
     </div>
         )
     }
@@ -205,7 +231,7 @@ const Tag = styled.p`
 `
 const StyledButton = styled(Button)`
     width: 300px;
-    margin: 20px auto 20px auto;
+    margin: 50px auto 20px auto;
     height: 60px;
     border: 1px solid #b21b2d;
     border-radius: 5px;
@@ -282,6 +308,6 @@ const mapStateToProps = state => {
 }
     
 export default connect( mapStateToProps,
-        {deleteVendor, getMarketById, getBoothById})(withRouter(BoothRented));
+        {deleteVendor, getMarketById })(withRouter(BoothRented));
 
  
