@@ -378,10 +378,10 @@ const Ltag1 = styled.p`
 const BorderedBox = styled.div `
 max-height: 324px;
 max-width: 330;
-padding: 2px 2px 2px 0
+padding: 2px 2px 2px 0;
 border: 1px solid #979797;
 border-radius: 10px;
-`
+`;
 
 const ScrollOverride = styled.div `
   max-height: 324px;
