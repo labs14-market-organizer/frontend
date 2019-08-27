@@ -38,7 +38,7 @@ render() {
             <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
                     <div>
-                <StyledP>{dayOfWeek.slice(0,3)}. {this.formatedDate(date)}</StyledP>
+                <StyledP>{dayOfWeek.slice(0,3)}. {formatedDate(date)}</StyledP>
                     <Flex>
                         <StyledP1>Available Booths: {available} </StyledP1> 
                         <StyledP2>View Vendors...</StyledP2>
@@ -51,7 +51,7 @@ render() {
              <Link to={`/boothrented/${this.props.day.market_id}/${this.props.day.booth_id}/${date}/${this.props.day.id}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto", backgroundColor: "#f6e7cc", marginBottom: "20px"}} boxShadow={10}>
                     <div>
-                        <StyledP style={{fontWeight: "normal"}}>{dayOfWeek.slice(0,3)}. {this.formatedDate(date)}</StyledP>
+                        <StyledP style={{fontWeight: "normal"}}>{dayOfWeek.slice(0,3)}. {formatedDate(date)}</StyledP>
                         <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "40px", right: "5px"}}/>
                         <StyledP1 style={{color: "#044d4c"}}>{this.props.day.market_name}</StyledP1>
                     </div>
