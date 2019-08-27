@@ -76,24 +76,31 @@ class SearchMarkets extends React.Component {
     }
     parseUrl()
     {
-      let q = this.props.history.location.search.split("?q=");
+      let q = this.props.history.location.search.split("q=");
       let flag = false;
-      if(q && q.length > 1 && q[1] !== this.state.search){
+      if(q && q.length > 1 && q[1] !== this.state.search)
+      {
         q = q[1].split("&mid=");
         if(!q || q.length < 1) return;
         this.props.searchMarkets(q[0]);
-        let m = null;
-        if(q.length > 1) m = q[1];
+        //if(q.length > 1) m = q[1];
+        flag = true;
         q = q[0];
-        if(m)
-        {
+      }
+      let m = this.props.history.location.search.split("mid=");
+      if(m && m.length > 1)
+      {
+        m = parseInt(m[1]);
+        console.log(m);
+        if(m && m !== NaN)
+        { 
+          if(!this.props.market.marketData || m !== this.props.market.marketData.id)
           this.props.getMarketById(m);
-          console.log(m);
           flag = true;
         }
-        this.setState({...this.state,search: q, clearError: false, lastSearch: q, popup: 1});
       }
-    }
+        if(flag) this.setState({...this.state,search: q, clearError: false, lastSearch: q, popup: m ? 1 : 0});
+      }
     render() {
         let shouldClose = this.state.popup > 0 && !this.props.market.fetching && this.props.market.marketData;
         let popup = this.state.popup > -1 && !this.props.market.fetching && this.props.market.marketData;
