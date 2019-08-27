@@ -80,12 +80,15 @@ class NavbarVendor extends React.Component {
         return (
           <StyledPaper elevation={10}>
           <div>
+          <Link to="/vendorprofile">
+
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
           </ul>
+          </Link>
           </div>
       <BorderSpacer />
           <ul>
@@ -103,16 +106,16 @@ class NavbarVendor extends React.Component {
 
       case "/landing":
         return (
-          <div>
-          {console.log(avySwitch)}
           <StyledPaper elevation={10}>
           <div>
+          <Link to="/vendorprofile">
           <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
+         <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
           </ul>
+          </Link>
           </div>
       <BorderSpacer />
           <ul>
@@ -126,7 +129,6 @@ class NavbarVendor extends React.Component {
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper> 
-        </div>
       );
 
 
@@ -134,12 +136,14 @@ class NavbarVendor extends React.Component {
         return (
           <StyledPaper elevation={10}>
           <div>
+          <Link to="/vendorprofile">
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
           </ul>
+          </Link>
           </div>
       <BorderSpacer />
       <ul>
@@ -158,12 +162,14 @@ class NavbarVendor extends React.Component {
         return (
           <StyledPaper elevation={10}>
           <div>
+          <Link to="/vendorprofile">
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
           </ul>
+          </Link>
           </div>
       <BorderSpacer />
       <ul>
@@ -183,13 +189,14 @@ class NavbarVendor extends React.Component {
         return (
           <StyledPaper elevation={10}>
           <div>
+          <Link to="/vendorprofile">
           <ul>
-
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
           </ul>
+          </Link>
           </div>
       <BorderSpacer />
       <ul>
@@ -209,12 +216,14 @@ class NavbarVendor extends React.Component {
         return (
           <StyledPaper elevation={10}>
           <div>
+          <Link to="/vendorprofile">
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
           </ul>
+          </Link>
           </div>
       <BorderSpacer />
       <ul>
@@ -230,180 +239,6 @@ class NavbarVendor extends React.Component {
         </StyledPaper>  
       );
 
-      case "ABOUT": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
-          </li>
-          <li className="username">{email}</li>
-          <li><Typography variant="caption">{name}</Typography></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-      <ul>
-            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
-          </ul>
-        </StyledPaper>
-      );
-
-      case "BLOG": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
-          </li>
-          <li className="username">{email}</li>
-          <li><Typography variant="caption">{name}</Typography></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-      <ul>
-            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
-          </ul>
-        </StyledPaper>
-      );
-
-      case "CAREERS": 
-        return (
-          <StyledPaper elevation={10}>
-           <div>
-          <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
-          </li>
-          <li className="username">{email}</li>
-          <li><Typography variant="caption">{name}</Typography></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-      <ul>
-            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
-          </ul>
-        </StyledPaper>
-      );
-
-      case "SUPPORT": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
-          </li>
-          <li className="username">{email}</li>
-          <li><Typography variant="caption">{name}</Typography></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-      <ul>
-            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
-          </ul>
-        </StyledPaper>
-      );
-
-      case "CONTACT": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
-          </li>
-          <li className="username">{email}</li>
-          <li><Typography variant="caption">{name}</Typography></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-      <ul>
-            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
-          </ul>
-        </StyledPaper>
-      );
-
-      case "PRIVACY": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
-          </li>
-          <li className="username">{email}</li>
-          <li><Typography variant="caption">{name}</Typography></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-      <ul>
-            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
-          </ul>
-        </StyledPaper>
-      );
-
-      case "TERMS": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
-          </li>
-          <li className="username">{email}</li>
-          <li><Typography variant="caption">{name}</Typography></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-      <ul>
-            <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
-            <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
-            <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
-          </ul>
-        </StyledPaper>
-      );
     }
     }
   } 
@@ -617,6 +452,12 @@ padding-top: 112px;
 max-height: 99.8vh;
 overflow-y: hidden;
 overflow-x: hidden;
+div {
+      a {
+        text-decoration: none;
+        color: initial;
+      }
+    }
 
 
 @media   (max-height: 720px) {
@@ -648,6 +489,7 @@ ul {
       
     }
 
+    
 
 
 
