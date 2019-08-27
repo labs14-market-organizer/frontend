@@ -166,7 +166,7 @@ class App extends React.Component {
               render={props => <BoothConfirmation />}
               />
                <Route 
-              path="/boothrented/:marketid/:boothid/:date"
+              path="/boothrented/:marketid/:boothid/:date/:reservationid"
               render={props => <BoothRented />}
               />
           </div>

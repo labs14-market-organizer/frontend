@@ -58,13 +58,23 @@ render() {
     let available = this.props.day.available;
     let rented = this.props.day.reserved;
     let day = this.props.day;
+    console.log(day)
     var marketOwner = this.props.user.userType === "Market Owner";
-    console.log(this.props.day)
+    let dayOfWeek;
+    if (this.props.user.userData){
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; 
+        let splitDate = date.split("-");
+        if (splitDate[1].split('')[0] === "0"){
+            splitDate[1] = splitDate[1].split('')[1];
+        }
+        let removedO = splitDate[0] + "-" + splitDate[1] + "-" + splitDate[2];
+        dayOfWeek = days [ new Date(removedO).getDay() ];
+    }
         {return (marketOwner) ? (
             <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
                     <div>
-                    <StyledP>{this.formatedDate(date)}</StyledP>
+                    <StyledP>{dayOfWeek.slice(0,3)}. {this.formatedDate(date)}</StyledP>
                     <Flex>
                         <StyledP1>Available Booths: {available} </StyledP1> 
                         <StyledP2>View Vendors...</StyledP2>
@@ -74,10 +84,10 @@ render() {
                 </StyleBox> 
             </Link> )
             : ( 
-             <Link to={`/boothrented/${this.props.day.market_id}/${this.props.day.booth_id}/${date}`} style={{textDecoration: "none", color: "black"}}>
+             <Link to={`/boothrented/${this.props.day.market_id}/${this.props.day.booth_id}/${date}/${this.props.day.id}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto", backgroundColor: "#f6e7cc", marginBottom: "20px"}} boxShadow={10}>
                     <div>
-                        <StyledP style={{fontWeight: "normal"}}>{this.formatedDate(date)}</StyledP>
+                        <StyledP style={{fontWeight: "normal"}}>{dayOfWeek.slice(0,3)}. {this.formatedDate(date)}</StyledP>
                         <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "40px", right: "5px"}}/>
                         <StyledP1 style={{color: "#044d4c"}}>{this.props.day.market_name}</StyledP1>
                     </div>

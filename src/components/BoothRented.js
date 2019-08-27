@@ -3,22 +3,33 @@ import NavbarVendor from "../components/NavbarVendor";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import icon from "../assets/keyboardarrowright.svg"
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, Modal, Typography } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { deleteVendor } from "../redux/actions/vendorData";
 import { getMarketById } from "../redux/actions/marketData";
 import Arrow from "../assets/ic-arrow-back.svg";
 import Expandor from '../components/Expandor';
 import militaryConvert from "./militaryConvert";
-// import deleteBoothReservation from "../redux/actions/boothReserve";
+import { deleteBoothReservation } from "../redux/actions/boothReserve";
 import info from "../assets/info.svg";
 
 
 class BoothRented extends React.Component {
+    dayDate = null;
     constructor(props){
     super(props);
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let splitDate = this.props.match.params.date.split('-');
+    if (splitDate[1].split('')[0] === "0"){
+        splitDate[1] = splitDate[1].split('')[1];
+    }
+    let removedO = splitDate[0] + "-" + splitDate[1] + "-" + splitDate[2];
+    this.dayDate = days [ new Date(removedO).getDay() ];
+
     this.state = {
-        page: false
+        page: false,
+        cancel: false,
+        open: false
     };
     }
     componentDidMount() {
@@ -35,6 +46,7 @@ class BoothRented extends React.Component {
     changePage = () => { //timeout function that will originally set opacity to 0 and switch when this.state.page === true
         setTimeout(() => {
             this.setState({
+                ...this.state,
                 page: true
             })
         }, 300)
@@ -42,9 +54,12 @@ class BoothRented extends React.Component {
     };
 
     deleteReservation = () => { //reservationId, boothId, marketId, date
+        let date = this.props.match.params.date;
         let marketId = this.props.match.params.marketid;
         let boothId = this.props.match.params.boothid;
-
+        let reservationId = this.props.match.params.reservationid;
+        this.props.deleteBoothReservation(reservationId, boothId, marketId, date);
+        this.props.history.push('/');
     }
     formatedDate = (date) => {
         let splitDate = date.split("");
@@ -82,15 +97,25 @@ class BoothRented extends React.Component {
         
         return newDate;
     }
-    
-
+    handleClose = () => {
+        this.setState({
+            ...this.state,
+            open: false
+        })
+    }
+    handleOpen = () => {
+        this.setState({
+            ...this.state,
+            open: true
+        })
+    }
     render() {
         let marketId = this.props.match.params.marketid;
         let boothId = this.props.match.params.boothid;
         let market = this.props.market.marketData;
         let date = this.props.match.params.date;
         // if(checkMarketData.fetching || !checkMarketData.marketData) return <div/>;
-        console.log(market)
+        // console.log(market)
         let tag = {
             fontFamily: "Raleway",
             fontSize: "16px",
@@ -158,7 +183,6 @@ class BoothRented extends React.Component {
                 })
             })
         }
-        console.log(builtWeek)
         return !market
             ? (<></>)
             : (<div style={{height: "100vh"}}>
@@ -169,7 +193,12 @@ class BoothRented extends React.Component {
                     <StyledDiv style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
                         <StyledP>{market.name}</StyledP>
                         <Flex><Tag style={{width: "200px"}}>Date</Tag> <Tag>Time</Tag></Flex>
-                        <Flex><StyledP1 style={{width: "200px"}}>{this.formatedDate(date)}</StyledP1> <StyledP1>Time</StyledP1></Flex>
+                        <Flex>
+                            <StyledP1 style={{width: "200px"}}>{this.dayDate.slice(0,3)}. {this.formatedDate(date)}</StyledP1> 
+                            {market.operation.map(day => {
+                            return (day.day === this.dayDate.toLowerCase()) ? <StyledP1>{militaryConvert(day.start)} - {militaryConvert(day.end)}</StyledP1> : null
+                                })}
+                        </Flex>
                         <div style={{marginTop: "20px", marginBottom: "10px"}}>
                             <Expandor _width="600px">
                             <div>
@@ -264,7 +293,29 @@ class BoothRented extends React.Component {
                     </div>
                 </Expandor>
             </div>
-            <StyledButton onClick={this.deleteReservation}>CANCEL BOOTH</StyledButton>
+            <StyledButton onClick={() => this.handleOpen()}>CANCEL BOOTH</StyledButton>
+            {/* <Modal >
+                <p>Are you sure you want to cancel this booth reservation</p>
+                <button>Yes</button>
+            </Modal> */}
+            <Modal
+        
+            open={this.state.open}
+            onClose={this.handleClose}
+            >
+            <div style={{width: "70%", height: "40%", backgroundColor: "white", fontFamily: "Roboto", margin: "50% auto", border: "1px solid black", borderRadius: "10px"}}>
+                <Typography style={{marginTop: "20px", marginBottom: "20px", marginLeft: "15px", marginRight: "15px"}}>
+                    Are you sure you want to cancel your booth reservation?
+                </Typography> 
+                <Button style={{width: "95%", marginTop: "10px", marginBottom: "10px", marginLeft: "2.5%", height: "50px", border: "1px solid black", fontSize: "18px", backgroundColor: "#478529" , color: "white"}} onClick={this.handleClose}>
+                    KEEP BOOTH
+                </Button>
+                <Button style={{width: "95%", marginTop: "10px", marginBottom: "10px", marginLeft: "2.5%", height: "50px", border: "1px solid red", fontSize: "18px", color: "red"}} onClick={this.deleteReservation}>
+                    CANCEL BOOTH
+                </Button>
+               
+            </div>
+            </Modal>`
         </StyledDiv>
            
     </div>
@@ -384,6 +435,6 @@ const mapStateToProps = state => {
 }
     
 export default connect( mapStateToProps,
-        {deleteVendor, getMarketById })(withRouter(BoothRented));
+        {deleteVendor, getMarketById, deleteBoothReservation})(withRouter(BoothRented));
 
  

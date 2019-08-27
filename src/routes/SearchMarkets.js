@@ -38,7 +38,7 @@ class SearchMarkets extends React.Component {
       }
       startSearch = e => {
           e.preventDefault();
-          if(this.props.marketsBySearch.marketsBySearch) setTimeout(()=>this.props.searchMarkets(this.state.search), 500);
+          if(this.props.marketsBySearch.marketsBySearch) setTimeout(()=>this.props.searchMarkets(this.state.search), 0);
           if (this.state.search === '') return;
           if(this.state.lastSearch === this.state.search) return;
           Mixpanel.track(`User searched for markets in ${this.state.search}`);
