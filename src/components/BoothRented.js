@@ -110,7 +110,7 @@ class BoothRented extends React.Component {
                         <StyledImg src={Arrow} onClick={this.goBack} />
                         <CreateHeader>View Booth</CreateHeader>
                     </Header>
-                    <div style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s",  marginLeft: "2%" }}>
+                    <StyledDiv style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
                         <StyledP>{market.name}</StyledP>
                         <Flex><Tag>Date</Tag> <Tag>Time</Tag></Flex>
                         <div style={{marginTop: "20px", marginBottom: "10px"}}>
@@ -207,21 +207,33 @@ class BoothRented extends React.Component {
                     </div>
                 </Expandor>
             </div>
-            </div>
             <StyledButton onClick={this.deleteReservation}>CANCEL BOOTH</StyledButton>
+        </StyledDiv>
+           
     </div>
         )
     }
 };
+
+const StyledDiv = styled.div`
+    @media(min-width: 570px){
+    max-width: 570px;
+    margin: 0 auto;
+  }
+`;
+
 const Flex = styled.div`
     display: flex;
+    margin-left: 2%;
 `;
 const StyledP = styled.p`
     font-family: Raleway;
     font-size: 18px;
     font-weight: 600;
     text-align: left;
+    margin-left: 2%;
 `;
+
 const Tag = styled.p`
     font-family: Raleway;
     font-size: 12px;
