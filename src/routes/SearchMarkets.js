@@ -16,6 +16,7 @@ import { keys } from "@material-ui/core/styles/createBreakpoints";
 import NavbarVendor from "../components/NavbarVendor"
 import icon from "../assets/keyboardarrowright.svg"
 import {withRouter} from "react-router-dom";
+import Upcoming from "./Upcoming.js";
 
 class SearchMarkets extends React.Component {
   history = 0;
@@ -119,7 +120,7 @@ class SearchMarkets extends React.Component {
                             autoComplete={false}
                             style={{marginTop: "60px", marginBottom: "0px"}}
                         />
-                        <div style={{margin: "60px -50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}></div>
+                        <div style={{marginTop: "60px", marginBottom: "20px", marginLeft: "-50px", marginRight: "-50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
                     </div>
                 </form>
                 <StyledError id={this.props.searchError && this.clearError < 3 ? "visible":"invisible"}>{this.props.searchError ? this.props.searchError : "" }</StyledError>
@@ -154,6 +155,7 @@ class SearchMarkets extends React.Component {
                 : ""}
                </div>
             </Popup>}
+            {(this.state.search.length > 0) ? "": <Upcoming />}
             </div>
         )  
     }

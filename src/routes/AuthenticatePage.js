@@ -103,12 +103,12 @@ const ImageOverLay = styled.div`
   {
     display: none
   }
-  @media screen and (orientation: landscape) {
+  /* @media screen and (orientation: landscape) { //Breaks on desktop was originally a landscape mobile fix. 
     
       height: calc(108vh);  
       width: 50%;
 
-      }
+      } */
   
 
   
