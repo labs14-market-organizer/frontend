@@ -11,6 +11,8 @@ import Arrow from "../assets/ic-arrow-back.svg";
 import Expandor from '../components/Expandor';
 import militaryConvert from "./militaryConvert";
 // import deleteBoothReservation from "../redux/actions/boothReserve";
+import info from "../assets/info.svg";
+
 
 class BoothRented extends React.Component {
     constructor(props){
@@ -44,11 +46,49 @@ class BoothRented extends React.Component {
         let boothId = this.props.match.params.boothid;
 
     }
+    formatedDate = (date) => {
+        let splitDate = date.split("");
+        let year = splitDate.slice(0,4);
+        let day = splitDate.slice(8,10);
+        let monthJoined = splitDate.slice(5,7).join('');
+        let month = () => {
+        if (monthJoined === "01") {
+            return "January"
+        } else if (monthJoined === "02"){
+            return "February"
+        }else if (monthJoined === "03"){
+            return "March"
+        }else if (monthJoined === "04"){
+            return "April"
+        }else if (monthJoined === "05"){
+            return "May"
+        }else if (monthJoined === "06"){
+            return "June"
+        }else if (monthJoined === "07"){
+            return "July"
+        }else if (monthJoined === "08"){
+            return "August"
+        }else if (monthJoined === "09"){
+            return "September"
+        }else if (monthJoined === "10"){
+            return "October"
+        }else if (monthJoined === "11"){
+            return "November"
+        }else if (monthJoined === "12"){
+            return "December"
+        }
+    }
+        let newDate = month() + " " + day.join('') + ", " + year.join('');
+        
+        return newDate;
+    }
+    
 
     render() {
         let marketId = this.props.match.params.marketid;
         let boothId = this.props.match.params.boothid;
         let market = this.props.market.marketData;
+        let date = this.props.match.params.date;
         // if(checkMarketData.fetching || !checkMarketData.marketData) return <div/>;
         console.log(market)
         let tag = {
@@ -112,11 +152,12 @@ class BoothRented extends React.Component {
                     </Header>
                     <StyledDiv style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
                         <StyledP>{market.name}</StyledP>
-                        <Flex><Tag>Date</Tag> <Tag>Time</Tag></Flex>
+                        <Flex><Tag style={{width: "200px"}}>Date</Tag> <Tag>Time</Tag></Flex>
+                        <Flex><StyledP1 style={{width: "200px"}}>{this.formatedDate(date)}</StyledP1> <StyledP1>Time</StyledP1></Flex>
                         <div style={{marginTop: "20px", marginBottom: "10px"}}>
                             <Expandor _width="600px">
                             <div>
-                            <div></div>
+                            <div><img src={info} alt="Info tag" /></div>
                             <div style={tag}>Your Booth Info</div>
                             <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                                 
@@ -214,7 +255,13 @@ class BoothRented extends React.Component {
         )
     }
 };
-
+const StyledP1 = styled.p`
+    font-size: 16px;
+    font-family: Roboto;
+    margin-top: -5px;
+    text-align: left;
+    
+`;
 const StyledDiv = styled.div`
     @media(min-width: 570px){
     max-width: 570px;
@@ -238,9 +285,10 @@ const Tag = styled.p`
     font-family: Raleway;
     font-size: 12px;
     font-weight: 600;
-    width: 60%;
     text-align: left;
+    
 `
+
 const StyledButton = styled(Button)`
     width: 300px;
     margin: 50px auto 20px auto;
