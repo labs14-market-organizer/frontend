@@ -12,7 +12,9 @@ import {
 } from "@material-ui/core";
 import {Link} from "react-router-dom";
 import cloud from "../assets/cloud.svg";
-import avatar from "../assets/avatar.jpg";
+import desktopCloud from "../assets/desktopNavCloud.svg";
+import avatar from "../assets/apple.svg";
+import avatar2 from "../assets/carrot.png";
 import { ThemeProvider } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -44,6 +46,8 @@ class NavbarVendor extends React.Component {
 }
 
  Menu = () => {
+  let usertype = this.props.checkUserData.userType;
+  let avySwitch = usertype === "Market Owner" ? "marketOwner" : usertype === "Vendor" ? "vendor" : null;
   if (this.state.menuOpen === true) {
     switch(window.location.pathname) {
       case "/searchmarkets":
@@ -51,7 +55,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -75,7 +79,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -97,10 +101,12 @@ class NavbarVendor extends React.Component {
 
       case "/landing":
         return (
+          <div>
+          {console.log(avySwitch)}
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -118,6 +124,7 @@ class NavbarVendor extends React.Component {
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper> 
+        </div>
       );
 
 
@@ -126,7 +133,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -150,7 +157,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -176,7 +183,7 @@ class NavbarVendor extends React.Component {
           <div>
           <ul>
 
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -201,7 +208,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -226,7 +233,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -251,7 +258,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -276,7 +283,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
            <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -301,7 +308,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -326,7 +333,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -351,7 +358,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -376,7 +383,7 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div></div>
+          <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
           <li className="username">{this.props.name}</li>
           <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
@@ -407,10 +414,12 @@ class NavbarVendor extends React.Component {
 
     return ( 
       <StyledDiv>
-        <StyledImg src={cloud}  width="100%" height="87px" />
+        <StyledImg src={cloud}  className="mobile" width="100%" height="87px" />
+        <StyledImg className="desktop" src={desktopCloud} width="100%" height="110px" />
+
         <StyledBox>
           <MenuIcon onClick={this.toggle} className="menuIcon" fontSize="large"/>
-          {this.Menu()}      
+          <div>{this.Menu()}</div>  
           <CloudText>CLOUD</CloudText>
           <StandsText>STANDS</StandsText>
         </StyledBox>
@@ -515,6 +524,7 @@ const StyledBox = styled(Box)`
       cursor: pointer;
     }
   }
+
 `;
 
 const BorderSpacer = styled.div`
@@ -537,13 +547,20 @@ margin-bottom: -20px;
 `
 
 const StyledImg = styled.img`
-z-index: -100
+z-index: -1
 `
 
 const StyledDiv = styled.div`
 position: fixed;
 z-index: 10;
 pointer-events: none;
+display: flex;
+flex-wrap: nowrap;
+
+div {
+  pointer-events: auto;
+}
+
 div {
   pointer-events: auto;
 }
@@ -554,6 +571,33 @@ img {
   width: 100vw;
   opacity: .985;
   filter: blur(1px);
+  
+}
+.mobile {
+  @media (min-width: 692px) {
+
+  display: none;
+  }
+}
+.desktop {
+  height: 165px;
+  display: none;
+  width: 1440px;
+  @media (min-width: 692px) {
+
+display: inherit;
+}
+@media (min-width: 1440px) {
+width: 1920px;
+
+}
+@media (min-width: 1890px) {
+width: 2560px;
+}
+@media (min-width: 2561px) {
+width: 3200px;
+}
+
 }
 
 `
@@ -562,7 +606,7 @@ const StyledPaper = styled(Paper)`
 /* background-color: black; */
 height: 600px;
 width: 80%;
-z-index: -1;
+z-index: -2;
 position: absolute;
 left: 0;
 top: 0;
@@ -672,13 +716,25 @@ margin-bottom: -28px;    }
     width: 60px;
     border-radius: 100%;
     overflow: hidden;
-
+    
     div {
     /* background-color: red; */
     height: 100%;
     width: 100%;
-    background-size: cover;
+    /* background-size: cover; */
     background-position: center;
+    background-repeat: no-repeat;
+  }
+  .vendor {
+
+    background-image: url(${avatar2});
+    background-size: 20px;
+    background-color: #044d4c;
+  }
+  .marketOwner {
+    background-color: #478529;
+    background-size: 40px;
+
     background-image: url(${avatar});
   }
 }

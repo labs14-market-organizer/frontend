@@ -487,7 +487,7 @@ background-color: #484848;
 `
 
 const StyledImg = styled.img`
-z-index: -100;
+z-index: -1;
 
 
 `
@@ -548,7 +548,7 @@ const StyledPaper = styled(Paper)`
 /* background-color: black; */
 height: 600px;
 width: 80%;
-z-index: -100000000000000000;
+z-index: -2;
 position: absolute;
 left: 0;
 top: 0;
