@@ -87,7 +87,7 @@ class NavbarMarket extends React.Component {
       <BorderSpacer />
           <ul>
             <li><Link to="/"><Button>Home</Button></Link></li>
-            <li><Button>Vendor History</Button></li>
+           <li><Link to="/viewmymarket"> <Button >Market Profile</Button></Link></li>
             <li><Button>Payment Methods</Button></li>
             <li><Button>Account Settings</Button></li>
             <li><Button>FAQ</Button></li>
@@ -112,7 +112,7 @@ class NavbarMarket extends React.Component {
     <BorderSpacer />
         <ul>
           <li><Link to="/"><Button>Home</Button></Link></li>
-          <li><Button>Vendor History</Button></li>
+         <li><Link to="/viewmymarket"> <Button >Market Profile</Button></Link></li>
           <li><Button>Payment Methods</Button></li>
           <li><Button>Account Settings</Button></li>
           <li><Button>FAQ</Button></li>
@@ -137,7 +137,7 @@ class NavbarMarket extends React.Component {
     <BorderSpacer />
         <ul>
           <li><Link to="/"><Button>Home</Button></Link></li>
-          <li><Button>Vendor History</Button></li>
+         <li><Link to="/viewmymarket"> <Button >Market Profile</Button></Link></li>
           <li><Button>Payment Methods</Button></li>
           <li><Button>Account Settings</Button></li>
           <li><Button>FAQ</Button></li>
@@ -161,7 +161,7 @@ class NavbarMarket extends React.Component {
   <BorderSpacer />
       <ul>
         <li><Link to="/"><Button>Home</Button></Link></li>
-        <li><Button>Vendor History</Button></li>
+       <li><Link to="/viewmymarket"> <Button >Market Profile</Button></Link></li>
         <li><Button>Payment Methods</Button></li>
         <li><Button>Account Settings</Button></li>
         <li><Button>FAQ</Button></li>
@@ -176,7 +176,9 @@ class NavbarMarket extends React.Component {
 
   
   
-  render() { 
+  render() {
+    if(this.props.user.fetching || !this.props.user.userData) return <div/>
+ 
     return ( 
       <StyledDiv>
         <StyledImg src={cloud}  className="mobile" width="100%" height="87px" />
@@ -453,7 +455,7 @@ export default connect( mapStateToProps,
   }
   .marketOwner {
     background-color: #478529;
-    background-size: 40px;
+    background-size: 30px;
 
     background-image: url(${avatar});
   }

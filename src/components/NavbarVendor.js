@@ -46,7 +46,9 @@ class NavbarVendor extends React.Component {
 }
 
  Menu = () => {
-  let usertype = this.props.checkUserData.userType;
+  let usertype = this.props.user.userType;
+  let email = this.props.user.userData.email;
+  let name = this.props.vendor.vendorData.name;
   let avySwitch = usertype === "Market Owner" ? "marketOwner" : usertype === "Vendor" ? "vendor" : null;
   if (this.state.menuOpen === true) {
     switch(window.location.pathname) {
@@ -57,8 +59,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -81,8 +83,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -108,8 +110,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -135,8 +137,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -159,8 +161,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -185,8 +187,8 @@ class NavbarVendor extends React.Component {
 
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -210,8 +212,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -235,8 +237,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -260,8 +262,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -285,8 +287,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -310,8 +312,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -335,8 +337,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -360,8 +362,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -385,8 +387,8 @@ class NavbarVendor extends React.Component {
           <ul>
           <li className="avatar-wrapper"><div className={avySwitch}></div>
           </li>
-          <li className="username">{this.props.name}</li>
-          <li><Typography variant="caption">{this.props.vendorName}</Typography></li>
+          <li className="username">{email}</li>
+          <li><Typography variant="caption">{name}</Typography></li>
           </ul>
           </div>
       <BorderSpacer />
@@ -408,9 +410,7 @@ class NavbarVendor extends React.Component {
   
   
   render() { 
-    let usertype = this.props.checkUserData.userType;
-    let userName = this.props.checkUserData.userData ? this.props.checkUserData.userData.email : null;
-    let objName = usertype === "Market Owner" ? this.props.checkMarketData.marketData.name : usertype === "Vendor" ? this.props.checkVendorData.vendorData.name : null;
+    if(this.props.user.fetching || !this.props.user.userData) return <div/>
 
     return ( 
       <StyledDiv>
@@ -429,7 +429,8 @@ class NavbarVendor extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    ...state
+    user: {...state.checkUserData},
+    vendor: {...state.checkVendorData},
   };
 };
 export default connect(mapStateToProps, {/* actions */})(NavbarVendor);
@@ -733,7 +734,7 @@ margin-bottom: -28px;    }
   }
   .marketOwner {
     background-color: #478529;
-    background-size: 40px;
+    background-size: 30px;
 
     background-image: url(${avatar});
   }
