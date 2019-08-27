@@ -191,7 +191,7 @@ const StyledDiv = styled.div`
 
 const CloudContainer = styled.div`
   background-image: url(${teamcloud});
-  width: 100%;
+  width: 110vw;
   height: 170px;
   background-repeat: no-repeat;
   display: flex;

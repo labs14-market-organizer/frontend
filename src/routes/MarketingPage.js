@@ -816,12 +816,22 @@ const Step1Label = styled(Box)`
   position: absolute;
   margin-right: 300px;
   flex-wrap: nowrap;
+  flex: 1;
 
   .MuiTypography-subtitle2 {
     font-size: 22px;
     font-weight: 600;
     transform: rotate(270deg);
     margin-right: -12px;
+    white-space: nowrap;
+    padding-right: 16px;
+    /* width: 700px; */
+    @media (min-width: 692px) {
+      padding-right: 32px;
+    }
+    @media (min-width: 1300px) {
+      padding-right: 64px;
+    }
   }
 
   @media (min-width: 692px) {
