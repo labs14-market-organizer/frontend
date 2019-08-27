@@ -112,7 +112,7 @@ class BoothRented extends React.Component {
             lineHeight: "1.33",
             letterSpacing: "normal",
             color: "#000000",
-            marginBottom: "7px"
+            marginBottom: "0px"
           }
           let text ={
             fontFamily: "Roboto",
@@ -123,7 +123,8 @@ class BoothRented extends React.Component {
             lineHeight: "1.5",
             letterSpacing: "normal",
             color: "#000000",
-            marginBottom: "2px"
+            marginBottom: "5px",
+            textAlign: "left"
           }
           var button = 
           {
@@ -142,7 +143,22 @@ class BoothRented extends React.Component {
             trasition: "color 10s linear"
           }
         const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-        
+        let builtWeek = []; //backend sends only days with hours and not closed day so need to build whole week to map.
+        if (market) {
+            daysOfWeek.forEach(day => {
+                let flag = false;
+                market.operation.forEach((day1, index) => {
+                    if (day === day1.day) {
+                        builtWeek.push(day1);
+                        flag = true;
+                    }
+                    if (index === market.operation.length - 1 && !flag) {
+                        builtWeek.push({day: day, start: null, end: null})
+                    }
+                })
+            })
+        }
+        console.log(builtWeek)
         return !market
             ? (<></>)
             : (<div style={{height: "100vh"}}>
@@ -157,7 +173,7 @@ class BoothRented extends React.Component {
                         <div style={{marginTop: "20px", marginBottom: "10px"}}>
                             <Expandor _width="600px">
                             <div>
-                            <div><img src={info} alt="Info tag" /></div>
+                            <div style={{width: "30px", textAlign: "left"}}><img src={info} alt="Info tag" /></div>
                             <div style={tag}>Your Booth Info</div>
                             <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                                 
@@ -176,7 +192,7 @@ class BoothRented extends React.Component {
                         </div>
                         <Expandor _width="600px" >
                         <div>
-                        <div><i class="fa fa-map-marker" style={{fontSize: "20px"}}></i></div>
+                        <div><i class="fa fa-map-marker" style={{fontSize: "20px", width: "30px", textAlign: "left"}}></i></div>
                         <div style={tag}>Market Info</div>
                         <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                             <div style={subtag}><em class="fa fa-map-marker" aria-hidden="true"> </em> Address</div>
@@ -184,12 +200,12 @@ class BoothRented extends React.Component {
                             <div style={subtag}><em class="fa fa-calendar" aria-hidden="true"> </em> Hours</div>
                             <div style={{display: "flex", justifyContent: "space-between", width: "85vw", maxWidth: "400px"}}>
                                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%"}}>
-                                { market.operation.map(opHours =>
+                                { builtWeek.map(opHours =>
                                     <div style={text}><div style={{fontWeight: opHours.start ? "400" : ""}} >{opHours.day.charAt(0).toUpperCase() + opHours.day.slice(1)}</div></div>
                                 )}
                                 </div>
                                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%"}}>
-                                { market.operation.map(opHours =>
+                                { builtWeek.map(opHours =>
                                 <div><div style={text}>{opHours.start === null ? <span>CLOSED</span> : <span style={{fontWeight: "400"}}>{`${militaryConvert(opHours.start)} - ${(militaryConvert(opHours.end))}`}</span>}</div></div>
                                 )}
                                 </div>
@@ -201,7 +217,7 @@ class BoothRented extends React.Component {
                 { (market.email && market.email.length > 0) || (market.phone && market.phone.length > 0) ? 
                 <Expandor _width="600px">
                 <div>
-                    <div><i class="fa fa-2x fa-address-book-o" style={{fontSize: "20px"}}></i></div>
+                    <div><i class="fa fa-2x fa-address-book-o" style={{fontSize: "20px", width: "30px", textAlign: "left"}}></i></div>
                         <div style={tag}>Contact Info</div>
                         <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                         {market.email && market.email.length > 0 ? <><div style={subtag}><em class="fa fa-at" aria-hidden="true"> </em> Email Address</div>
@@ -216,7 +232,7 @@ class BoothRented extends React.Component {
              { (market.website !== null && market.website.length > 0) || (market.facebook !== null && market.facebook.length > 0) || (market.instagram !== null && market.instagram.length > 0) || (market.twitter !== null  && market.twitter.length > 0) ?
              <Expandor _width="600px" >
                <div id="alt">
-               <div><i class="fa fa-2x fa-globe" style={{fontSize: "20px"}}></i></div>
+               <div><i class="fa fa-2x fa-globe" style={{fontSize: "20px", width: "30px", textAlign: "left"}}></i></div>
                 <div style={tag}>Social Media</div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                   {(market.website !== null && market.website.length > 0) ? <><div style={subtag}><em class="fa fa-globe" aria-hidden="true"> </em> Website</div> <div onClick={()=>openInNewTab(`http://${market.website}`)} style={text}>{market.website}</div></> : null}
@@ -232,7 +248,7 @@ class BoothRented extends React.Component {
               <Expandor _width="600px">
                     <div>
                             <div>
-                                <i className="fa fa-file-text" style={{fontSize: "20px"}}></i>
+                                <i className="fa fa-file-text" style={{fontSize: "20px", width: "30px", textAlign: "left"}}></i>
                             </div>
                             <div style={{...tag, marginBottom: "0px"}}>
                                 Market Rules
