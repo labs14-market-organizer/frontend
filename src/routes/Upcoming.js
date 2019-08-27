@@ -41,7 +41,7 @@ class Upcoming extends React.Component {
         // console.log(this.props.user.userData);
         return (
             
-            <div>
+            <div style={{marginBottom: marketOwner ? "24px" : "0px"}}>
   
             { marketOwner ? <NavbarMarket /> : "" }
             
