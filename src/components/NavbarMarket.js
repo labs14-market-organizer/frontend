@@ -21,6 +21,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
+
 class NavbarMarket extends React.Component {
   constructor(props) {
     super(props);
@@ -42,8 +43,19 @@ class NavbarMarket extends React.Component {
     }
   };
 
+  toggle = () => {
+    if (this.state.menuOpen === true) {
+      this.setState({
+        menuOpen: false
+      });
+    } else {
+      this.setState({
+        menuOpen: true
+      });
+    }
+  };
+
   Menu = () => {
-    console.log(this.props.user.userType);
     let usertype = this.props.user.userType;
     let avySwitch =
       usertype === "Market Owner"
@@ -51,6 +63,13 @@ class NavbarMarket extends React.Component {
         : usertype === "Vendor"
         ? "vendor"
         : null;
+
+        let profilePic = false;
+        if (this.props.user.userData.profile_pic !== null) {
+           profilePic = this.props.user.userData.profile_pic;
+        } 
+        
+
     if (this.state.menuOpen === true) {
       switch (window.location.pathname) {
         case "/":
@@ -60,7 +79,8 @@ class NavbarMarket extends React.Component {
                 <Link to="/viewmymarket">
                   <ul>
                     <li className="avatar-wrapper">
-                      <div className={avySwitch} />
+                      <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
+                      
                     </li>
                     <li className="username">
                       {this.props.user.userData.email}
@@ -116,7 +136,7 @@ class NavbarMarket extends React.Component {
                 <Link to="/viewmymarket">
                   <ul>
                     <li className="avatar-wrapper">
-                      <div className={avySwitch} />
+                      <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
                     </li>
                     <li className="username">{this.props.userName}</li>
                     <li>
@@ -170,7 +190,7 @@ class NavbarMarket extends React.Component {
                 <Link to="/viewmymarket">
                   <ul>
                     <li className="avatar-wrapper">
-                      <div className={avySwitch} />
+                      <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
                     </li>
                     <li className="username">{this.props.userName}</li>
                     <li>
@@ -224,7 +244,7 @@ class NavbarMarket extends React.Component {
                 <Link to="/viewmymarket">
                   <ul>
                     <li className="avatar-wrapper">
-                      <div className={avySwitch} />
+                      <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
                     </li>
                     <li className="username">{this.props.userName}</li>
                     <li>
@@ -278,7 +298,7 @@ class NavbarMarket extends React.Component {
                 <Link to="/viewmymarket">
                   <ul>
                     <li className="avatar-wrapper">
-                      <div className={avySwitch} />
+                      <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
                     </li>
                     <li className="username">{this.props.userName}</li>
                     <li>
@@ -330,7 +350,6 @@ class NavbarMarket extends React.Component {
 
   render() {
     if (this.props.user.fetching || !this.props.user.userData) return <div />;
-
     return (
       <StyledDiv>
         <StyledImg src={cloud} className="mobile" width="100%" height="87px" />
@@ -629,6 +648,12 @@ const StyledPaper = styled(Paper)`
       background-position: center;
       background-repeat: no-repeat;
     }
+
+    .profile {
+      background-color: none;
+      background-size: 70px;
+    }
+
     .vendor {
       background-image: url(${avatar2});
       background-size: 20px;
