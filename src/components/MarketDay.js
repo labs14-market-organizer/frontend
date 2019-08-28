@@ -22,7 +22,6 @@ render() {
     let available = this.props.day.available;
     let rented = this.props.day.reserved;
     let day = this.props.day;
-    console.log(day)
     var marketOwner = this.props.user.userType === "Market Owner";
     let dayOfWeek;
     if (this.props.user.userData){

@@ -19,19 +19,22 @@ import {withRouter} from "react-router-dom";
 import Upcoming from "./Upcoming.js";
 
 class SearchMarkets extends React.Component {
-  history = 0;
-    state = {
+ history = 0;
+  constructor(props){ 
+   super(props);
+    this.state = {
         search: '',
         popup:  -1,
         lastSearch: ''
     }
-    clearError = 0;
+  }
+  clearError = 0;
     handleChange = e => {
         this.setState({
           ...this.state,
           [e.target.name]: e.target.value
         });
-        if (e.target.value === '') this.props.history.push({location: this.props.history.location, search: ""});
+        //if (e.target.value === '') this.props.history.push({location: this.props.history.location, search: ""});
         if(this.props.searchError) this.clearError++;
       };
       handleClear = e => {
@@ -42,7 +45,7 @@ class SearchMarkets extends React.Component {
       startSearch = e => {
           if(e) e.preventDefault();
           if(this.props.marketsBySearch.marketsBySearch) setTimeout(()=>this.props.searchMarkets(this.state.search), 500);
-          if (this.state.search === '') return this.props.history.push({location: this.props.history.location, search: ""});
+         if (this.state.search === '') return this.props.history.push({location: this.props.history.location, search: ""});
           if(this.state.lastSearch === this.state.search) return;
           Mixpanel.track(`User searched for markets in ${this.state.search}`);
           this.props.searchMarkets(this.state.search);
@@ -65,7 +68,7 @@ class SearchMarkets extends React.Component {
     }
     componentWillUpdate()
     {
-      if(this.props.history.location.search && this.history !== this.props.history.location.search)
+      if(this.history !== this.props.history.location.search)
       {
         this.parseUrl();
       }
@@ -78,16 +81,14 @@ class SearchMarkets extends React.Component {
     parseUrl()
     {
       let q = this.props.history.location.search.split("q=");
-      let flag = false;
-      if(q && q.length > 1 && q[1] !== this.state.search)
+      if(q && q.length > 1 /* && q[1] !== this.state.search */)
       {
         q = q[1].split("&mid=");
         if(!q || q.length < 1) return;
         this.props.searchMarkets(q[0]);
         //if(q.length > 1) m = q[1];
-        flag = true;
         q = q[0];
-      }
+      }else q = "";
       let m = this.props.history.location.search.split("mid=");
       if(m && m.length > 1)
       {
@@ -97,14 +98,14 @@ class SearchMarkets extends React.Component {
         { 
           if(!this.props.market.marketData || m !== this.props.market.marketData.id)
           this.props.getMarketById(m);
-          flag = true;
-        }
-      }
-        if(flag) this.setState({...this.state,search: q, clearError: false, lastSearch: q, popup: m ? 1 : 0});
+        } else m = null;
+      } else m = null;
+        this.setState({...this.state, search: q, clearError: false, lastSearch: q, popup:  m ? 1 : -1});
       }
     render() {
-        let shouldClose = this.state.popup > 0 && !this.props.market.fetching && this.props.market.marketData;
-        let popup = this.state.popup > -1 && !this.props.market.fetching && this.props.market.marketData;
+        let shouldClose = this.state.popup > 0 && !this.props.market.fetching && !!this.props.market.marketData;
+        let popup = this.state.popup > -1 && !this.props.market.fetching && !!this.props.market.marketData;
+        console.log(this.state.popup);
         return ( 
             <div>
             <NavbarVendor />
@@ -124,7 +125,6 @@ class SearchMarkets extends React.Component {
                             margin="normal"
                             variant="outlined"
                             fullWidth={true}
-                            autoComplete={false}
                             style={{marginTop: "60px", marginBottom: "0px"}}
                         />
                         <div style={{marginTop: "60px", marginBottom: "20px", marginLeft: "-50px", marginRight: "-50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
@@ -149,17 +149,15 @@ class SearchMarkets extends React.Component {
             </div>
             {<Popup style={popup ? {} : {pointerEvents: "none"}}>
                 <div id={shouldClose ? "visible" : "invisible"}>
-               {popup ? 
                 <ViewMyMarket 
                   backcb={()=> 
                     {
-                      this.props.history.push({location: this.props.history.location, search: "?q=" + this.state.search}); 
+                      this.props.history.push({location: this.props.history.location, search: "?q=" + this.state.search});
                       this.setState({...this.state, popup: 0}); 
                       setTimeout(()=> this.setState({...this.state, popup: -1}), 400)
                     }
                   } 
                 /> 
-                : ""}
                </div>
             </Popup>}
             {(this.state.search.length > 0) ? "": <Upcoming />}
