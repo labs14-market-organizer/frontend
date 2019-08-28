@@ -23,9 +23,8 @@ class BoothRented extends React.Component {
     if (splitDate[1].split('')[0] === "0"){
         splitDate[1] = splitDate[1].split('')[1];
     }
-    let removedO = splitDate[0] + "-" + splitDate[1] + "-" + splitDate[2];
+    let removedO = splitDate[0] + "/" + splitDate[1] + "/" + splitDate[2];
     this.dayDate = days [ new Date(removedO).getDay() ];
-
     this.state = {
         page: false,
         cancel: false,
@@ -110,6 +109,7 @@ class BoothRented extends React.Component {
         })
     }
     render() {
+        
         let marketId = this.props.match.params.marketid;
         let boothId = this.props.match.params.boothid;
         let market = this.props.market.marketData;

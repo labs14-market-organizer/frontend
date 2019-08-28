@@ -71,7 +71,10 @@ class RentBooth extends React.Component {
         let day = this.props.match.params.date.split(' ').slice(2,3);
         let newDate = year + '-' + formatMonth + '-' + day;
         this.props.createReservation(marketId, boothId, newDate);
-        this.props.history.push("/rentalconfirmation");
+        setTimeout(() => {
+            this.props.history.push("/rentalconfirmation");
+        }, 50)
+        
     }
 
     render() {
