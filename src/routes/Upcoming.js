@@ -40,8 +40,7 @@ class Upcoming extends React.Component {
         var marketOwner = this.props.user.userType === "Market Owner";
         // console.log(this.props.user.userData);
         return (
-            
-            <div style={{height: "100vh"}}>
+            <div style={{marginBottom: marketOwner ? "24px" : "0px"}}>
   
             { marketOwner ? <NavbarMarket /> : "" }
             
