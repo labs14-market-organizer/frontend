@@ -105,7 +105,7 @@ class SearchMarkets extends React.Component {
     render() {
         let shouldClose = this.state.popup > 0 && !this.props.market.fetching && !!this.props.market.marketData;
         let popup = this.state.popup > -1 && !this.props.market.fetching && !!this.props.market.marketData;
-        console.log(this.state.popup);
+        // console.log(this.state.popup);
         return ( 
             <div>
             <NavbarVendor />
@@ -135,7 +135,7 @@ class SearchMarkets extends React.Component {
                 <div id={this.props.marketsBySearch.marketsBySearch && this.state.search ===this.state.lastSearch && this.state.search !== '' ? "visible" : "invisible"}>
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
-                        <StyleBox style={{position: "relative"}} boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
+                        <StyleBox boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
                           <p style={{fontWeight: "600", fontSize: "18px", padding: "10px 20px 0 20px", fontFamily: "Raleway", fontSize: "18px"}}>{location.name}</p>
                           <div style={{display: "flex"}}>
                             <p style={{paddingLeft: "20px", marginTop: "-5px", width: "95%", fontFamily: "Roboto", fontSize: "16px"}} >{location.description}</p>
@@ -168,7 +168,7 @@ class SearchMarkets extends React.Component {
 
 const StyledContainer = styled(Container)`
     margin: 0 auto;
-    max-width: 99vw;
+    max-width: 100vw;
     padding-top: 100px;
     width: 600px;
     padding-top: 100px;
@@ -213,7 +213,7 @@ const StyleBox = styled(Box)`
         text-align: left; 
         background-color: #edf3ea;
         margin-top: 32px;
-        margin-left: -19px;
+        margin-left: -19px; 
         margin: 0 auto;
         width: 500px;
         max-width: 95vw;
