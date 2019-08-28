@@ -50,7 +50,7 @@ class NavbarVendor extends React.Component {
   let email = this.props.user.userData.email;
   let name = this.props.vendor.vendorData.name;
   let avySwitch = usertype === "Market Owner" ? "marketOwner" : usertype === "Vendor" ? "vendor" : null;
-  
+
   let profilePic = false;
   if (this.props.user.userData.profile_pic !== null) {
      profilePic = this.props.user.userData.profile_pic;
@@ -580,8 +580,12 @@ margin-bottom: -28px;    }
     background-position: center;
     background-repeat: no-repeat;
   }
-  .vendor {
 
+  .profile {
+      background-color: none;
+      background-size: 70px;
+    }
+  .vendor {
     background-image: url(${avatar2});
     background-size: 20px;
     background-color: #044d4c;

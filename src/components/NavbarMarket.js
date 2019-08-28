@@ -31,6 +31,17 @@ class NavbarMarket extends React.Component {
     };
   }
 
+  toggle = () => {
+    if (this.state.menuOpen === true) {
+      this.setState({
+        menuOpen: false
+      });
+    } else {
+      this.setState({
+        menuOpen: true
+      });
+    }
+  };
 
   toggle = () => {
     if (this.state.menuOpen === true) {
