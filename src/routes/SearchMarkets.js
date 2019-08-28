@@ -216,7 +216,7 @@ const StyleBox = styled(Box)`
         margin-left: -19px; 
         margin: 0 auto;
         width: 500px;
-        max-width: 95vw;
+        max-width: 100vw;
         margin-top: 30px;
 `;
 
@@ -245,7 +245,7 @@ const Popup = styled.div`
   }
 `
 const HorizontalBar = styled.div `
-  border-bottom: 1px #8e8e8c solid
+  border-bottom: 1px #8e8e8c solid;
   width: 100%; 
   height: 20px;
 `
