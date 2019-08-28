@@ -6,7 +6,7 @@ import VendorsRentedByDay from "../components/VendorsRentedByDay";
 import icon from "../assets/keyboardarrowright.svg"
 import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
+import formatedDate from "./formatedDate";
 
 class MarketDay extends React.Component {
     constructor(props) {
@@ -15,50 +15,13 @@ class MarketDay extends React.Component {
             day: props.day
          }
     }
-    formatedDate = (date) => {
-        let splitDate = date.split("");
-        let year = splitDate.slice(0,4);
-        let day = splitDate.slice(8,10);
-        let monthJoined = splitDate.slice(5,7).join('');
-        let month = () => {
-        if (monthJoined === "01") {
-            return "January"
-        } else if (monthJoined === "02"){
-            return "February"
-        }else if (monthJoined === "03"){
-            return "March"
-        }else if (monthJoined === "04"){
-            return "April"
-        }else if (monthJoined === "05"){
-            return "May"
-        }else if (monthJoined === "06"){
-            return "June"
-        }else if (monthJoined === "07"){
-            return "July"
-        }else if (monthJoined === "08"){
-            return "August"
-        }else if (monthJoined === "09"){
-            return "September"
-        }else if (monthJoined === "10"){
-            return "October"
-        }else if (monthJoined === "11"){
-            return "November"
-        }else if (monthJoined === "12"){
-            return "December"
-        }
-    }
-        let newDate = month() + " " + day.join('') + ", " + year.join('');
-        
-        return newDate;
-    }
     
-
+  
 render() {
     let date = this.props.day.reserve_date.split("T")[0];
     let available = this.props.day.available;
     let rented = this.props.day.reserved;
     let day = this.props.day;
-    console.log(day)
     var marketOwner = this.props.user.userType === "Market Owner";
     let dayOfWeek;
     if (this.props.user.userData){
@@ -74,7 +37,7 @@ render() {
             <Link to={`/boothrenters/${date}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto"}} boxShadow={10}>
                     <div>
-                    <StyledP>{dayOfWeek.slice(0,3)}. {this.formatedDate(date)}</StyledP>
+                <StyledP>{dayOfWeek.slice(0,3)}. {formatedDate(date)}</StyledP>
                     <Flex>
                         <StyledP1>Available Booths: {available} </StyledP1> 
                         <StyledP2>View Vendors...</StyledP2>
@@ -87,7 +50,7 @@ render() {
              <Link to={`/boothrented/${this.props.day.market_id}/${this.props.day.booth_id}/${date}/${this.props.day.id}`} style={{textDecoration: "none", color: "black"}}>
                 <StyleBox style={{position: "relative", margin: "0 auto", backgroundColor: "#f6e7cc", marginBottom: "20px"}} boxShadow={10}>
                     <div>
-                        <StyledP style={{fontWeight: "normal"}}>{dayOfWeek.slice(0,3)}. {this.formatedDate(date)}</StyledP>
+                        <StyledP style={{fontWeight: "normal"}}>{dayOfWeek.slice(0,3)}. {formatedDate(date)}</StyledP>
                         <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", position: "absolute", bottom: "40px", right: "5px"}}/>
                         <StyledP1 style={{color: "#044d4c"}}>{this.props.day.market_name}</StyledP1>
                     </div>

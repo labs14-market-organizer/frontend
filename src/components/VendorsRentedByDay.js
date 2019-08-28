@@ -26,15 +26,15 @@ class VendorsRentedByDay extends React.Component {
         return this.props.history.goBack();
       }
 
-    changePage = () => {
+    changePage = () => { //timeout function that will originally set opacity to 0 and switch when this.state.page === true
         setTimeout(() => {
             this.setState({
                 page: true
             })
-        }, 100)
+        }, 300)
         
     }
-    formatedDate = (date) => {
+    formatedDate = (date) => { //takes date stored in backend and converts it to more UI friendly.
         let splitDate = date.split("");
         let year = splitDate.slice(0,4);
         let day = splitDate.slice(8,10);
@@ -108,7 +108,7 @@ class VendorsRentedByDay extends React.Component {
                 { boothTypes.map((boothT, index) => {
                     return <div key={index}>
                         <StyledPTag><p style={{width: "60%"}}>{boothT}</p>  <p style={{fontFamily: "Raleway", fontSize: "14px", color: "#ce8400", paddingTop: "3px"}}>Available: {available[index]}</p></StyledPTag> 
-                        {this.props.market.vendorsWhoRentedByDate.map(vendor => {
+                        {this.props.market.vendorsWhoRentedByDate.map((vendor) => {
                             return (vendor.booth_name === boothT) ?
                                 <StyledPFlex>
                                     <p style={{width: "60%"}}>{vendor.name}</p>

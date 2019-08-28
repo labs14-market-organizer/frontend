@@ -303,7 +303,7 @@ class BoothRented extends React.Component {
             open={this.state.open}
             onClose={this.handleClose}
             >
-            <div style={{width: "70%", height: "40%", backgroundColor: "white", fontFamily: "Roboto", margin: "50% auto", border: "1px solid black", borderRadius: "10px"}}>
+            <StyledModalDiv>
                 <Typography style={{marginTop: "20px", marginBottom: "20px", marginLeft: "15px", marginRight: "15px"}}>
                     Are you sure you want to cancel your booth reservation?
                 </Typography> 
@@ -314,14 +314,29 @@ class BoothRented extends React.Component {
                     CANCEL BOOTH
                 </Button>
                
-            </div>
-            </Modal>`
+            </StyledModalDiv>
+            </Modal>
         </StyledDiv>
            
     </div>
         )
     }
 };
+
+const StyledModalDiv = styled.div`
+    width: 70%;
+    height: 40%;
+    background-color: white;
+    font-family: Roboto;
+    margin: 50% auto;
+    border: 1px solid black;
+    border-radius: 10px;
+     @media(min-width: 570px){
+        max-width: 570px;
+        margin: 200px auto;
+  }
+`;
+
 const StyledP1 = styled.p`
     font-size: 16px;
     font-family: Roboto;

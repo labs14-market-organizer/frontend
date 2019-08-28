@@ -20,7 +20,7 @@ const BoothConfirmation = () => {
 
             </div>
             <div>
-                <StyledLink to="/searchmarkets" ><Button  variant="contained" color="primary" label="Return to dashboard">Return to dashboard</Button></StyledLink>
+                <StyledLink to="/searchmarkets" ><Button  variant="contained" color="primary" label="Return to dashboard" style={{width: "300px", height: "60px", fontFamily: "Raleway", fontSize: "18px", fontWeight: "bold"}}>Return to dashboard</Button></StyledLink>
             </div>
             </StyledDiv>
         </>
