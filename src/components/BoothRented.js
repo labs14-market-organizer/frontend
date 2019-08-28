@@ -183,6 +183,7 @@ class BoothRented extends React.Component {
                 })
             })
         }
+        
         return !market
             ? (<></>)
             : (<div style={{height: "100vh"}}>

@@ -174,6 +174,8 @@ const StyledContainer = styled(Container)`
     padding-top: 100px;
     min-height: 100vh;
     pointer-events: auto;
+    padding-left: 0;
+    padding-right: 0;
   #visible {
         opacity: 1.0;
         height: 100%;
