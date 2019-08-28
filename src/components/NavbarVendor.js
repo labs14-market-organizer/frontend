@@ -50,6 +50,11 @@ class NavbarVendor extends React.Component {
   let email = this.props.user.userData.email;
   let name = this.props.vendor.vendorData.name;
   let avySwitch = usertype === "Market Owner" ? "marketOwner" : usertype === "Vendor" ? "vendor" : null;
+  
+  let profilePic = false;
+  if (this.props.user.userData.profile_pic !== null) {
+     profilePic = this.props.user.userData.profile_pic;
+  } 
   if (this.state.menuOpen === true) {
     switch(window.location.pathname) {
       case "/searchmarkets":
@@ -57,7 +62,8 @@ class NavbarVendor extends React.Component {
           <StyledPaper elevation={10}>
           <div>
           <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
+          <li className="avatar-wrapper">
+          <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
@@ -83,7 +89,8 @@ class NavbarVendor extends React.Component {
           <Link to="/vendorprofile">
 
           <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
+          <li className="avatar-wrapper">
+          <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
@@ -110,7 +117,8 @@ class NavbarVendor extends React.Component {
           <div>
           <Link to="/vendorprofile">
           <ul>
-         <li className="avatar-wrapper"><div className={avySwitch}></div>
+         <li className="avatar-wrapper">
+         <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
@@ -138,7 +146,8 @@ class NavbarVendor extends React.Component {
           <div>
           <Link to="/vendorprofile">
           <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
+          <li className="avatar-wrapper">
+          <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
@@ -164,7 +173,8 @@ class NavbarVendor extends React.Component {
           <div>
           <Link to="/vendorprofile">
           <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
+          <li className="avatar-wrapper">
+          <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
@@ -191,7 +201,8 @@ class NavbarVendor extends React.Component {
           <div>
           <Link to="/vendorprofile">
           <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
+          <li className="avatar-wrapper">
+          <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
@@ -218,7 +229,8 @@ class NavbarVendor extends React.Component {
           <div>
           <Link to="/vendorprofile">
           <ul>
-          <li className="avatar-wrapper"><div className={avySwitch}></div>
+          <li className="avatar-wrapper">
+          <div className={profilePic ? "profile" : avySwitch} style={profilePic ? {"backgroundImage": `url(${profilePic})` }: null } />
           </li>
           <li className="username">{email}</li>
           <li><Typography variant="caption">{name}</Typography></li>
