@@ -130,6 +130,7 @@ class SearchMarkets extends React.Component {
                         <div style={{marginTop: "60px", marginBottom: "20px", marginLeft: "-50px", marginRight: "-50px", fontSize: "2rem", color: this.state.search !== "" ? "#555": "#AAA", zIndex: 1, cursor: "pointer"}} onClick={this.handleClear}>x</div>
                     </div>
                 </form>
+                { <div id={(this.state.search.length < 1) ? "visible" : "invisible"}> <HorizontalBar/><Upcoming /></div>}
                 <StyledError id={this.props.searchError && this.clearError < 3 ? "visible":"invisible"}>{this.props.searchError ? this.props.searchError : "" }</StyledError>
                 <div id={this.props.marketsBySearch.marketsBySearch && this.state.search ===this.state.lastSearch && this.state.search !== '' ? "visible" : "invisible"}>
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
@@ -137,7 +138,7 @@ class SearchMarkets extends React.Component {
                         <StyleBox style={{position: "relative"}} boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
                           <p style={{fontWeight: "600", fontSize: "18px", padding: "10px 20px 0 20px", fontFamily: "Raleway", fontSize: "18px"}}>{location.name}</p>
                           <div style={{display: "flex"}}>
-                            <p style={{paddingLeft: "20px", marginTop: "-5px", width: "80%", fontFamily: "Roboto", fontSize: "16px"}} >{location.description}</p>
+                            <p style={{paddingLeft: "20px", marginTop: "-5px", width: "95%", fontFamily: "Roboto", fontSize: "16px"}} >{location.description}</p>
                             <img src={icon} style={{width: "24px", height: "24px", transform: "rotate(0deg)", marginTop: "-5px"}}/>
                           </div>
                         </StyleBox>
@@ -160,7 +161,6 @@ class SearchMarkets extends React.Component {
                 /> 
                </div>
             </Popup>}
-            {(this.state.search.length > 0) ? "": <Upcoming />}
             </div>
         )  
     }
@@ -170,13 +170,10 @@ const StyledContainer = styled(Container)`
     margin: 0 auto;
     max-width: 99vw;
     padding-top: 100px;
-    height: 100vh;
-    @media(min-width: 600px){
     width: 600px;
     padding-top: 100px;
     min-height: 100vh;
     pointer-events: auto;
-  }
   #visible {
         opacity: 1.0;
         height: 100%;
@@ -186,6 +183,7 @@ const StyledContainer = styled(Container)`
     opacity: 0;
     transition: opacity 0.5s linear;
     pointer-events: none;
+    height: 0;
   }
   #noscroll{
     overflow: hidden;
@@ -216,11 +214,10 @@ const StyleBox = styled(Box)`
         background-color: #edf3ea;
         margin-top: 32px;
         margin-left: -19px;
-        @media(min-width: 600px){
         margin: 0 auto;
         width: 500px;
+        max-width: 95vw;
         margin-top: 30px;
-  }
 `;
 
 const Popup = styled.div`
@@ -229,10 +226,11 @@ const Popup = styled.div`
     top: 0px;
     margin: 0 auto;
     max-height: 100vh;
+    min-width: 100vw;
     overflow-y: scroll;
     #visible {
         opacity: 1.0;
-        transition: opacity 0.6s ease-in;
+        transition: opacity 0.6s ease-in, min-width 5s linear;
         background-color: white;
         min-height: 100vh;
         min-width: 100vw;
@@ -240,13 +238,17 @@ const Popup = styled.div`
   #invisible {
     opacity: 0.0;
     pointer-events: none
-    transition: opacity 0.4s ease-out;
+    transition: opacity 0.4s ease-out, min-width 5s linear;
     background-color: #FFFFFF00;
     min-height: 100vh;
-    width: 100vw;
+    min-width: 100vw;
   }
 `
-
+const HorizontalBar = styled.div `
+  border-bottom: 1px #8e8e8c solid
+  width: 100%; 
+  height: 20px;
+`
 const StyledTextField = styled(TextField)`
     .MuiInputBase-input {
         font-family: Roboto;
