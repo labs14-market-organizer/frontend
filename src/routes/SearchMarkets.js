@@ -135,7 +135,7 @@ class SearchMarkets extends React.Component {
                 <div id={this.props.marketsBySearch.marketsBySearch && this.state.search ===this.state.lastSearch && this.state.search !== '' ? "visible" : "invisible"}>
                 {(this.props.marketsBySearch.marketsBySearch !== undefined) ? this.props.marketsBySearch.marketsBySearch.map((location, index) => {
                     return (
-                        <StyleBox boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
+                        <StyleBox style={{position: "relative"}} boxShadow={10} key={location.id} name={index} key={index} onClick={e => this.handleClick(e, location)}>
                           <p style={{fontWeight: "600", fontSize: "18px", padding: "10px 20px 0 20px", fontFamily: "Raleway", fontSize: "18px"}}>{location.name}</p>
                           <div style={{display: "flex"}}>
                             <p style={{paddingLeft: "20px", marginTop: "-5px", width: "95%", fontFamily: "Roboto", fontSize: "16px"}} >{location.description}</p>
