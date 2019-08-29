@@ -679,8 +679,13 @@ const RadioStyled = styled(Radio)`
 const StyledField = styled(Field)`
 .MuiInputBase-input{
   font-family: Roboto;
+  font-size: 16px;
+  color: #6a6a66;
 }
-  
+.MuiOutlinedInput-notchedOutline {
+  border-color: black;
+  border-width: 1.5px;
+}
 `;
 const StyledDiv = styled.div`
   display: flex;
@@ -709,15 +714,20 @@ const StyledDiv = styled.div`
       border-radius: 5px;
   }
   .MuiButton-outlined {
-    border: 1.5px solid;
+    border: 1.5px solid; 
+
   }
 
  `;
  const StyledDiv2 = styled.div`
   display: flex;
-  justify-content: space-around;
-  margin: 30px 10px auto;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  margin: 30px auto 30px;
   max-width: 520px;
+
+
+  
   .MuiButton-root {
     height: 40px;
     width: 13vh;
@@ -725,6 +735,11 @@ const StyledDiv = styled.div`
     margin: 0 auto;
     cursor: pointer;
     min-width: 0;
+    &:first-child{
+    background-color: red;
+    margin-left: 0px;
+  }
+
     
   }
   .MuiButton-label{
@@ -733,13 +748,34 @@ const StyledDiv = styled.div`
   }
   .MuiButton-outlined {
     border: 1.5px solid;
+    margin-right: 2px;
+    margin-left: 2px;
+
+    @media (min-width: 442px) {
+    margin-right: 6px;
+    margin-left: 6px;
+    }
+
+    @media (min-width: 692px) {
+    margin-right: 8px;
+    margin-left: 8px;
+    }
+
+    @media (min-width: 800px) {
+    margin-right: 12px;
+    margin-left: 12px;
+    }
+
   }
 
  `;
 
 const StyledDays = styled(Button)`
-  width: 10vw;
-  margin-left: 0 auto;
+  width: 7vw;
+  /* margin-left: 0 auto; */
+  /* display: flex; */
+  /* justify-content: space-around; */
+  /* background-color: red; */
 `;
 
 
