@@ -194,9 +194,9 @@ class Collapser extends React.Component {
                 <div style={tag}>Social Media</div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
                   {(market.website !== null && market.website.length > 0) ? <><div style={subtag}><em class="fa fa-globe" aria-hidden="true"> </em> Website</div> <div onClick={()=>openInNewTab(`http://${market.website}`)} style={text}>{market.website}</div></> : null}
-                  {(market.facebook !== null && market.facebook.length > 0) ? <> <div style={subtag}><em class="fa fa-facebook-square" aria-hidden="true"> </em> Facebook</div> <div onClick={()=>openInNewTab(`http://www.facebook.com/${market.facebook}`)}style={text}>{market.facebook}</div> </> : null}
-                  {(market.instagram !== null) && market.instagram.length > 0 ? <> <div style={subtag}><em class="fa fa-instagram" aria-hidden="true"> </em> Instagram</div> <div onClick={()=>openInNewTab(`http://www.instagram.com/${market.instagram}`)} style={text}>{market.instagram}</div></> : null}
-                  {(market.twitter !== null)  && market.twitter.length > 0 ? <> <div style={subtag}><em class="fa fa-twitter-square" aria-hidden="true"> </em> Twitter</div> <div onClick={()=>openInNewTab(`http://www.twitter.com/${market.twitter}`)} style={text}>{market.twitter}</div> </> : null}
+                  {(market.facebook !== null && market.facebook.length > 0) ? <> <div style={subtag}><em class="fa fa-facebook-square" aria-hidden="true"> </em> Facebook</div> <div onClick={()=>openInNewTab(`${market.facebook}`)}style={text}>{market.facebook}</div> </> : null}
+                  {(market.instagram !== null) && market.instagram.length > 0 ? <> <div style={subtag}><em class="fa fa-instagram" aria-hidden="true"> </em> Instagram</div> <div onClick={()=>openInNewTab(`${market.instagram}`)} style={text}>{market.instagram}</div></> : null}
+                  {(market.twitter !== null)  && market.twitter.length > 0 ? <> <div style={subtag}><em class="fa fa-twitter-square" aria-hidden="true"> </em> Twitter</div> <div onClick={()=>openInNewTab(`${market.twitter}`)} style={text}>{market.twitter}</div> </> : null}
                 </div>
                </div>
               

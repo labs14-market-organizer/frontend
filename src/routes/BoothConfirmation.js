@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavbarVendor from '../components/NavbarVendor';
 import styled from "styled-components";
 import { Typography, Button } from '@material-ui/core';
@@ -6,25 +6,47 @@ import {Link} from "react-router-dom";
 
 import confirmation from "../assets/confirmation.png"
 
-const BoothConfirmation = () => {
-    return (
-        <>
-            <NavbarVendor />
-            <StyledDiv>
-            <div>
+class BoothConfirmation extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            page: false
+        }
+    }
+    componentDidMount() {
+        this.changePage();
+    };
 
-                <Typography variant="subtitle1">Woohoo! Your booth has been confirmed!</Typography>
-            </div>
-            <div>
-                <img src={confirmation} />
+    changePage = () => { //timeout function that will originally set opacity to 0 and switch when this.state.page === true
+        setTimeout(() => {
+            this.setState({
+                page: true
+            })
+        }, 300)
+    };
 
-            </div>
-            <div>
-                <StyledLink to="/searchmarkets" ><Button  variant="contained" color="primary" label="Return to dashboard" style={{width: "300px", height: "60px", fontFamily: "Raleway", fontSize: "18px", fontWeight: "bold"}}>Return to dashboard</Button></StyledLink>
-            </div>
-            </StyledDiv>
-        </>
-    );
+    render() {
+        return (
+            <>
+                <NavbarVendor />
+                <div style={{ opacity: (this.state.page) ? "1" : "0" , transition: "opacity 1s" }}>
+                <StyledDiv>
+                <div>
+
+                        <Typography variant="subtitle1">Woohoo! Your booth has been confirmed!</Typography>
+                    </div>
+                    <div>
+                        <img src={confirmation} />
+
+                    </div>
+                    <div>
+                        <StyledLink to="/searchmarkets" ><Button  variant="contained" color="primary" label="Return to dashboard" style={{width: "300px", height: "60px", fontFamily: "Raleway", fontSize: "18px", fontWeight: "bold"}}>Return to dashboard</Button></StyledLink>
+                    </div>
+                    </StyledDiv>
+                </div>
+            </>
+        );
+    }
 }
 
 export default BoothConfirmation;

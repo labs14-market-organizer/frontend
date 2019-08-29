@@ -174,6 +174,8 @@ const StyledContainer = styled(Container)`
     padding-top: 100px;
     min-height: 100vh;
     pointer-events: auto;
+    padding-left: 0;
+    padding-right: 0;
   #visible {
         opacity: 1.0;
         height: 100%;
@@ -216,7 +218,7 @@ const StyleBox = styled(Box)`
         margin-left: -19px; 
         margin: 0 auto;
         width: 500px;
-        max-width: 95vw;
+        max-width: 100vw;
         margin-top: 30px;
 `;
 
@@ -245,7 +247,7 @@ const Popup = styled.div`
   }
 `
 const HorizontalBar = styled.div `
-  border-bottom: 1px #8e8e8c solid
+  border-bottom: 1px #8e8e8c solid;
   width: 100%; 
   height: 20px;
 `

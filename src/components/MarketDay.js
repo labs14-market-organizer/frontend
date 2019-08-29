@@ -30,7 +30,7 @@ render() {
         if (splitDate[1].split('')[0] === "0"){
             splitDate[1] = splitDate[1].split('')[1];
         }
-        let removedO = splitDate[0] + "-" + splitDate[1] + "-" + splitDate[2];
+        let removedO = splitDate[0] + "/" + splitDate[1] + "/" + splitDate[2];
         dayOfWeek = days [ new Date(removedO).getDay() ];
     }
         {return (marketOwner) ? (
