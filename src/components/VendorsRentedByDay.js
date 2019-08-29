@@ -84,7 +84,6 @@ class VendorsRentedByDay extends React.Component {
                 boothTypes.push(booth.booth_name)
             }
         });
-
         let available = []; //finding the numbers of available booths of each type of booths with the maps below.
         availableBooths.map(boothNum => {
             available.push(boothNum.number);
@@ -116,8 +115,11 @@ class VendorsRentedByDay extends React.Component {
                                 </StyledPFlex>  : null })}
                     </div>
                                 })}
+                { availableBooths.map(boothA => {
+                    return (boothTypes.includes(boothA.name)) ? <> </> :
+                    <StyledPTag><p style={{width: "60%"}}>{boothA.name}</p>  <p style={{fontFamily: "Raleway", fontSize: "14px", color: "#ce8400", paddingTop: "3px"}}>Available: {boothA.number}</p></StyledPTag>})}
             </StyledDiv>
-            </div> 
+        </div> 
    
         ) 
     }
