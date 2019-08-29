@@ -117,7 +117,7 @@ class VendorsRentedByDay extends React.Component {
                                 })}
                 { availableBooths.map(boothA => {
                     return (boothTypes.includes(boothA.name)) ? <> </> :
-                    <StyledPTag><p style={{width: "60%"}}>{boothA.name}</p>  <p style={{fontFamily: "Raleway", fontSize: "14px", color: "#ce8400", paddingTop: "3px"}}>Available: {boothA.number}</p></StyledPTag> })}
+                    <StyledPTag><p style={{width: "60%"}}>{boothA.name}</p>  <p style={{fontFamily: "Raleway", fontSize: "14px", color: "#ce8400", paddingTop: "3px"}}>Available: {boothA.number}</p></StyledPTag>})}
             </StyledDiv>
         </div> 
    
