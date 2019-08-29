@@ -84,16 +84,11 @@ class VendorsRentedByDay extends React.Component {
                 boothTypes.push(booth.booth_name)
             }
         });
-        console.log('boothtypes')
-        console.log(boothTypes)
-        console.log('boothtypes')
         let available = []; //finding the numbers of available booths of each type of booths with the maps below.
         availableBooths.map(boothNum => {
             available.push(boothNum.number);
         })
-        console.log('available')
-        console.log(availableBooths)
-        console.log('available')
+
         boothTypes.map((boothT, index) => {
             this.props.market.vendorsWhoRentedByDate.map(vendor => {
             return (vendor.booth_name === boothT) ? available[index] = available[index] - 1 : null 
