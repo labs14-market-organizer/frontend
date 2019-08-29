@@ -59,11 +59,11 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
+            <li><Button className="inactive">About</Button></li>
+            <li><Button className="inactive">Blog</Button></li>
+            <li><Button className="inactive">Careers</Button></li>
+            <li><Button className="inactive">Support</Button></li>
+            <li><Button className="inactive">Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
@@ -81,11 +81,11 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
+          <li><Button className="inactive">About</Button></li>
+            <li><Button className="inactive">Blog</Button></li>
+            <li><Button className="inactive">Careers</Button></li>
+            <li><Button className="inactive">Support</Button></li>
+            <li><Button className="inactive">Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
@@ -104,11 +104,11 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
+          <li><Button className="inactive">About</Button></li>
+            <li><Button className="inactive">Blog</Button></li>
+            <li><Button className="inactive">Careers</Button></li>
+            <li><Button className="inactive">Support</Button></li>
+            <li><Button className="inactive">Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
@@ -127,11 +127,11 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
+          <li><Button className="inactive">About</Button></li>
+            <li><Button className="inactive">Blog</Button></li>
+            <li><Button className="inactive">Careers</Button></li>
+            <li><Button className="inactive">Support</Button></li>
+            <li><Button className="inactive">Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
@@ -150,132 +150,18 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
+          <li><Button className="inactive">About</Button></li>
+            <li><Button className="inactive">Blog</Button></li>
+            <li><Button className="inactive">Careers</Button></li>
+            <li><Button className="inactive">Support</Button></li>
+            <li><Button className="inactive">Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
         </StyledPaper>  
       );
 
-      case "ABOUT": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-          <ul>
-            <li><Button className="currentPage">About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
-          </ul>
-        </StyledPaper>
-      );
-
-      case "BLOG": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li><Button>Home</Button></li>
-          <li><Button >Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button className="currentPage">Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
-          </ul>
-        </StyledPaper>
-      );
-
-      case "CAREERS": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button className="currentPage">Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
-          </ul>
-        </StyledPaper>
-      );
-
-      case "SUPPORT": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button className="currentPage">Support</Button></li>
-            <li><Button>Contact Us</Button></li>
-            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
-          </ul>
-        </StyledPaper>
-      );
-
-      case "CONTACT": 
-        return (
-          <StyledPaper elevation={10}>
-          <div>
-          <ul>
-          <li><Button>Home</Button></li>
-          <li><Button>Sign Up / Sign In</Button></li>
-          <li><Button>Meet the Team</Button></li>
-          </ul>
-          </div>
-      <BorderSpacer />
-          <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button className="currentPage">Contact Us</Button></li>
-            <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
-            <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
-          </ul>
-        </StyledPaper>
-      );
-
+      
       case "/privacy": 
         return (
           <StyledPaper elevation={10}>
@@ -288,11 +174,11 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
+          <li><Button className="inactive">About</Button></li>
+            <li><Button className="inactive">Blog</Button></li>
+            <li><Button className="inactive">Careers</Button></li>
+            <li><Button className="inactive">Support</Button></li>
+            <li><Button className="inactive">Contact Us</Button></li>
             <li><Link to="privacy"><Button className="currentPage">Privacy Policy</Button></Link></li>
             <li><Link to="terms"><Button>Terms of Service</Button></Link></li>
           </ul>
@@ -311,11 +197,11 @@ class Navbar extends React.Component {
           </div>
       <BorderSpacer />
           <ul>
-            <li><Button>About</Button></li>
-            <li><Button>Blog</Button></li>
-            <li><Button>Careers</Button></li>
-            <li><Button>Support</Button></li>
-            <li><Button>Contact Us</Button></li>
+          <li><Button className="inactive">About</Button></li>
+            <li><Button className="inactive">Blog</Button></li>
+            <li><Button className="inactive">Careers</Button></li>
+            <li><Button className="inactive">Support</Button></li>
+            <li><Button className="inactive">Contact Us</Button></li>
             <li><Link to="privacy"><Button>Privacy Policy</Button></Link></li>
             <li><Link to="terms"><Button className="currentPage">Terms of Service</Button></Link></li>
           </ul>
@@ -394,10 +280,9 @@ const CloudText = styled(({ variant, ...otherProps}) => <Typography variant="h3"
     font-family: "Luckiest Guy";
     color: #7f817e;
     margin-right: 8px;
+    line-height: 1.3;
     
-    @media   (min-resolution: 200dpi) {
-      margin-top: 8px;
-    }
+
     @media (max-width: 440px) {
       font-size: 40px;
     }
@@ -417,6 +302,11 @@ const StandsText = styled(({ variant, ...otherProps}) => <Typography fontWeight=
     font-family: "Raleway";
     font-weight: 200;
     color: black;
+    line-height: 1.3;
+
+    @media   (min-resolution: 200dpi) {
+      line-height: 1.2;
+    } 
     @media (max-width: 440px) {
       font-size: 40px;
     }
@@ -616,6 +506,11 @@ Button {
     background-color: rgba(71, 133, 41, 0.5);
   }
 
+}
+
+.inactive {
+ 
+ color: lightgrey;
 }
 
 `

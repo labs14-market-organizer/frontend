@@ -1129,7 +1129,7 @@ const TitleBox = styled(Box)`
   padding-left: 28px;
   @media (min-width: 692px) {
     margin-top: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
 
   .MuiTypography-subtitle1 {
@@ -1152,6 +1152,9 @@ const TitleBox = styled(Box)`
     margin-bottom: 12px;
     @media (max-width: 368px) {
       margin-top: 34px;
+    }
+    @media (min-width: 692px) {
+      margin-bottom: 24px;
     }
   }
   @media (min-width: 692px) {

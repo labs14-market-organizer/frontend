@@ -106,18 +106,10 @@ class NavbarMarket extends React.Component {
                     <Button>Market Profile</Button>
                   </Link>
                 </li>
-                <li>
-                  <Button>Payment Methods</Button>
-                </li>
-                <li>
-                  <Button>Account Settings</Button>
-                </li>
-                <li>
-                  <Button>FAQ</Button>
-                </li>
-                <li>
-                  <Button>Contact Us</Button>
-                </li>
+                <li><Button className="inactive">Payment Methods</Button></li>
+                <li><Button className="inactive">Account Settings</Button> </li>
+                <li><Button className="inactive">FAQ</Button></li>
+                <li><Button className="inactive">Contact Us</Button></li>
                 <li className="bottom-padding">
                   <a href="/">
                     <Button onClick={() => localStorage.clear()}>
@@ -160,18 +152,10 @@ class NavbarMarket extends React.Component {
                     <Button>Market Profile</Button>
                   </Link>
                 </li>
-                <li>
-                  <Button>Payment Methods</Button>
-                </li>
-                <li>
-                  <Button>Account Settings</Button>
-                </li>
-                <li>
-                  <Button>FAQ</Button>
-                </li>
-                <li>
-                  <Button>Contact Us</Button>
-                </li>
+                <li><Button className="inactive">Payment Methods</Button></li>
+                <li><Button className="inactive">Account Settings</Button> </li>
+                <li><Button className="inactive">FAQ</Button></li>
+                <li><Button className="inactive">Contact Us</Button></li>
                 <li className="bottom-padding">
                   <a href="/">
                     <Button onClick={() => localStorage.clear()}>
@@ -214,18 +198,10 @@ class NavbarMarket extends React.Component {
                     <Button>Market Profile</Button>
                   </Link>
                 </li>
-                <li>
-                  <Button>Payment Methods</Button>
-                </li>
-                <li>
-                  <Button>Account Settings</Button>
-                </li>
-                <li>
-                  <Button>FAQ</Button>
-                </li>
-                <li>
-                  <Button>Contact Us</Button>
-                </li>
+                <li><Button className="inactive">Payment Methods</Button></li>
+                <li><Button className="inactive">Account Settings</Button> </li>
+                <li><Button className="inactive">FAQ</Button></li>
+                <li><Button className="inactive">Contact Us</Button></li>
                 <li className="bottom-padding">
                   <a href="/">
                     <Button onClick={() => localStorage.clear()}>
@@ -268,18 +244,10 @@ class NavbarMarket extends React.Component {
                     <Button>Market Profile</Button>
                   </Link>
                 </li>
-                <li>
-                  <Button>Payment Methods</Button>
-                </li>
-                <li>
-                  <Button>Account Settings</Button>
-                </li>
-                <li>
-                  <Button>FAQ</Button>
-                </li>
-                <li>
-                  <Button>Contact Us</Button>
-                </li>
+                <li><Button className="inactive">Payment Methods</Button></li>
+                <li><Button className="inactive">Account Settings</Button> </li>
+                <li><Button className="inactive">FAQ</Button></li>
+                <li><Button className="inactive">Contact Us</Button></li>
                 <li className="bottom-padding">
                   <a href="/">
                     <Button onClick={() => localStorage.clear()}>
@@ -322,18 +290,10 @@ class NavbarMarket extends React.Component {
                     <Button>Market Profile</Button>
                   </Link>
                 </li>
-                <li>
-                  <Button>Payment Methods</Button>
-                </li>
-                <li>
-                  <Button>Account Settings</Button>
-                </li>
-                <li>
-                  <Button>FAQ</Button>
-                </li>
-                <li>
-                  <Button>Contact Us</Button>
-                </li>
+                <li><Button className="inactive">Payment Methods</Button></li>
+                <li><Button className="inactive">Account Settings</Button> </li>
+                <li><Button className="inactive">FAQ</Button></li>
+                <li><Button className="inactive">Contact Us</Button></li>
                 <li className="bottom-padding">
                   <a href="/">
                     <Button onClick={() => localStorage.clear()}>
@@ -457,6 +417,8 @@ const StyledBox = styled(Box)`
   top: 0;
   margin-top: 2px;
   align-items: center;
+  vertical-align: middle;
+
 
   .menuIcon {
     padding: 0 16px;
@@ -700,6 +662,10 @@ const StyledPaper = styled(Paper)`
       background-color: rgba(71, 133, 41, 0.5);
     }
   }
+  .inactive {
+ 
+ color: lightgrey;
+}
   .bottom-padding {
     padding-top: 48px;
     @media (max-height: 720px) {
