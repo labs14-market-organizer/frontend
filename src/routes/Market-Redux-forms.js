@@ -736,7 +736,6 @@ const StyledDiv = styled.div`
     cursor: pointer;
     min-width: 0;
     &:first-child{
-    background-color: red;
     margin-left: 0px;
   }
 
