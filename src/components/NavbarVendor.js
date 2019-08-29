@@ -101,11 +101,11 @@ class NavbarVendor extends React.Component {
           <ul>
             <li><Link to="/searchmarkets"><Button className="currentPage">Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
+            <li><Button className="inactive">Market History</Button></li>
+            <li><Button className="inactive">Payment Methods</Button></li>
+            <li><Button className="inactive">Account Settings</Button></li>
+            <li><Button className="inactive">FAQ</Button></li> 
+            <li><Button className="inactive">Contact Us</Button></li> 
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper> 
@@ -129,11 +129,11 @@ class NavbarVendor extends React.Component {
           <ul>
             <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
+            <li><Button className="inactive">Market History</Button></li>
+            <li><Button className="inactive">Payment Methods</Button></li>
+            <li><Button className="inactive">Account Settings</Button></li>
+            <li><Button className="inactive">FAQ</Button></li> 
+            <li><Button className="inactive">Contact Us</Button></li> 
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper> 
@@ -158,11 +158,11 @@ class NavbarVendor extends React.Component {
       <ul>
             <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button className="currentPage">Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
+            <li><Button className="inactive">Market History</Button></li>
+            <li><Button className="inactive">Payment Methods</Button></li>
+            <li><Button className="inactive">Account Settings</Button></li>
+            <li><Button className="inactive">FAQ</Button></li> 
+            <li><Button className="inactive">Contact Us</Button></li> 
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
@@ -185,11 +185,11 @@ class NavbarVendor extends React.Component {
       <ul>
             <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
+            <li><Button className="inactive">Market History</Button></li>
+            <li><Button className="inactive">Payment Methods</Button></li>
+            <li><Button className="inactive">Account Settings</Button></li>
+            <li><Button className="inactive">FAQ</Button></li> 
+            <li><Button className="inactive">Contact Us</Button></li>  
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
@@ -213,11 +213,11 @@ class NavbarVendor extends React.Component {
       <ul>
             <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
+            <li><Button className="inactive">Market History</Button></li>
+            <li><Button className="inactive">Payment Methods</Button></li>
+            <li><Button className="inactive">Account Settings</Button></li>
+            <li><Button className="inactive">FAQ</Button></li> 
+            <li><Button className="inactive">Contact Us</Button></li> 
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>
@@ -241,11 +241,11 @@ class NavbarVendor extends React.Component {
       <ul>
             <li><Link to="/searchmarkets"><Button>Home</Button></Link></li>
             <li><Link to="/vendorprofile"><Button>Vendor Profile</Button></Link></li>
-            <li><Button>Market History</Button></li>
-            <li><Button>Payment Methods</Button></li>
-            <li><Button>Account Settings</Button></li>
-            <li><Button>FAQ</Button></li> 
-            <li><Button>Contact Us</Button></li> 
+            <li><Button className="inactive">Market History</Button></li>
+            <li><Button className="inactive">Payment Methods</Button></li>
+            <li><Button className="inactive">Account Settings</Button></li>
+            <li><Button className="inactive">FAQ</Button></li> 
+            <li><Button className="inactive">Contact Us</Button></li> 
             <li className="bottom-padding"><a href="/"><Button onClick={()=> localStorage.clear()}>Sign Out</Button></a></li> 
           </ul>
         </StyledPaper>  
@@ -365,6 +365,8 @@ const StyledBox = styled(Box)`
   top: 0;
   margin-top: 2px;
   align-items: center;
+  vertical-align: middle;
+
   .menuIcon {
     padding: 0 16px;
     pointer-events: auto;
@@ -633,6 +635,10 @@ ul{
   }
   
 
+}
+.inactive {
+ 
+  color: lightgrey;
 }
 .bottom-padding {
   padding-top: 48px;
