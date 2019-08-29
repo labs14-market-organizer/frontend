@@ -180,7 +180,11 @@ const StyledDiv = styled.div`
     color: #484848;
     margin-bottom: 16px;
     @media(min-width: 692px) {
-    max-width: 508px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    max-width: 608px;
+    font-size: 21px;
+    line-height: 1.4;
   
 
     }
