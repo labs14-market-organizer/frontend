@@ -816,12 +816,22 @@ const Step1Label = styled(Box)`
   position: absolute;
   margin-right: 300px;
   flex-wrap: nowrap;
+  flex: 1;
 
   .MuiTypography-subtitle2 {
     font-size: 22px;
     font-weight: 600;
     transform: rotate(270deg);
     margin-right: -12px;
+    white-space: nowrap;
+    padding-right: 16px;
+    /* width: 700px; */
+    @media (min-width: 692px) {
+      padding-right: 32px;
+    }
+    @media (min-width: 1300px) {
+      padding-right: 64px;
+    }
   }
 
   @media (min-width: 692px) {
@@ -1119,7 +1129,7 @@ const TitleBox = styled(Box)`
   padding-left: 28px;
   @media (min-width: 692px) {
     margin-top: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
 
   .MuiTypography-subtitle1 {
@@ -1142,6 +1152,9 @@ const TitleBox = styled(Box)`
     margin-bottom: 12px;
     @media (max-width: 368px) {
       margin-top: 34px;
+    }
+    @media (min-width: 692px) {
+      margin-bottom: 24px;
     }
   }
   @media (min-width: 692px) {

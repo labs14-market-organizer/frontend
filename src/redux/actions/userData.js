@@ -42,7 +42,6 @@ export const getUserData = (token=null, force=false) => async dispatch => {
     .catch(err => {
             count++;
             dispatch({ type: ERROR_GET_USER_DATA, payload: {error: err} });
-            console.log(err.response.data);
             if (count > 10){
                 localStorage.clear();
             }

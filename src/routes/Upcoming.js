@@ -28,19 +28,24 @@ class Upcoming extends React.Component {
    }
    renderVendor = () => {
     return (
-        <p>vendor</p>
+        <>
+        {this.props.user.userData.upcoming_vdr.map((day, index) => {
+            return <MarketDay day={day} />
+        })}
+        </>
     )
-}
+    }
 
     render() {
+        var marketOwner = this.props.user.userType === "Market Owner";
+        // console.log(this.props.user.userData);
         return (
-            
-            <div>
+            <div style={{marginBottom: marketOwner ? "24px" : "0px"}}>
   
-            <NavbarMarket />
+            { marketOwner ? <NavbarMarket /> : "" }
             
-            <p style={{paddingTop: "140px", fontFamily:"Raleway"}}>Upcoming Schedule</p>
-            { this.props.user.userType ===  "Market Owner" ? this.renderMarketOwner()  : this.renderVendor() }
+            <p style={{paddingTop: marketOwner ? "140px" : "0px", fontFamily:"Raleway", fontSize: "18px", fontWeight: "600"}}>{marketOwner ? "Upcoming Market Schedule" : "Your Upcoming Schedule"}</p>
+            { marketOwner ? this.renderMarketOwner()  : this.renderVendor() }
             </div>
         )
     }
@@ -49,7 +54,8 @@ class Upcoming extends React.Component {
 const mapStateToProps = state => {
     return {
         user: {...state.checkUserData},
-        market: {...state.checkMarketData}
+        market: {...state.checkMarketData},
+        vendor: {...state.checkVendorData}
     }
 }
 

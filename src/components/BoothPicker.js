@@ -9,9 +9,10 @@ import {
 import {Button, Typography} from '@material-ui/core'
 import Expandor from "./Expandor"
 import styled from "styled-components";
-import {createReservation, getBoothReservations, deleteBoothReservation, getVendorsWhoRented} from '../redux/actions/boothReserve'
+import {createReservation, getBoothReservations, deleteBoothReservation, getVendorsWhoRented} from '../redux/actions/boothReserve';
 import {connect} from 'react-redux';
-import {getUserData} from '../redux/actions/userData'
+import {getUserData} from '../redux/actions/userData';
+import { Link } from 'react-router-dom';
 
 
 
@@ -198,6 +199,7 @@ render()
     let showing1 = (this.state.vendors) ? "showing" : "notshowing";
     let showing = (this.state.vendors) ? "notshowing" : "showing";
     var acceptedRules = this.props.vendor.vendorData && this.props.vendor.vendorData.status_mkt ? this.props.vendor.vendorData.status_mkt.find(x=> x && x.market_id === market.id && x.market_id) ? 1 : 0 : -1;
+
     return (
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -259,9 +261,7 @@ render()
                             <div style={{textAlign: "left", ...maintext}}>{x.description}</div>
                           </div> : null} 
                           
-                          {acceptedRules === 0 ? <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> : <div/>}
-                          <Button style={loading || this.props.reserve.fetching || this.disable || acceptedRules  < 1 || ban || creating < 0 ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{if(this.disable) return; this.disable = true; setTimeout(()=>this.disable=false, 1000); this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={loading || this.props.reserve.fetching || this.disable || acceptedRules < 1 || ban || creating < 0}>{creating > 0 ? "Rent Booth" : creating === 0 && !this.disable ? "Delete Reservation": "Loading"}</Button>
-                          
+                          {acceptedRules === 0 ?<> <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> <DisabledRent>Rent Booth</DisabledRent></> : <Link to={`/rentbooth/${market.id}/${x.id}/${this.state.date}`} style={{textDecoration: "none"}}><Rent>Rent Booth</Rent></Link>}
                         </div> : <div>
                         <div style={{fontFamily: "Roboto", fontSize: "12px", fontWeight: "500", color: "#044d4c", display: "flex", justifyContent: "flex-start"}}><div style={{marginRight: "1%"}}>Vendors: </div><div>{this.props.reserve.vendorsWhoRented && !this.disable ? this.props.reserve.vendorsWhoRented.filter(y=> y.booth_id === x.id).length : this.disable ? <Spinner/> : ""}</div></div>
                           {(this.props.reserve.vendorsWhoRented !== undefined && this.props.reserve.vendorsWhoRented !== null && !this.disable ) ? <>
@@ -272,8 +272,9 @@ render()
                           : <>
                             {this.oldVendors.map(y=> y.booth_id === x.id ? <div style={{textAlign: "left", fontFamily: "Raleway", fontSize: "16px"}}>{y.name}</div> : "")} 
                           <Spinner/> </> } 
-                          {acceptedRules === 0 ? <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> : <div/>}
-                          <Button style={loading || this.props.reserve.fetching || this.disable || acceptedRules  < 1 || ban || creating < 0 ? buttonDisabled : creating > 0 ? button : buttonRed} onClick={()=>{if(this.disable) return; this.disable = true; setTimeout(()=>this.disable=false, 500); this.setState({...this.state}); creating > 0 ?  this.createReservation(market.id, x.id) : this.fireDelete(x);}} disabled={loading || this.props.reserve.fetching || this.disable || acceptedRules < 1 || ban || creating < 0}>{creating > 0 ? "Rent Booth" : creating === 0 && !this.disable ? "Delete Reservation": "Loading"}</Button>
+                          {acceptedRules === 0 ?<> <ErrorDiv>Must Accept Rules Before Reserving</ErrorDiv> <DisabledRent>Rent Booth</DisabledRent></> : <Link to={`/rentbooth/${market.id}/${x.id}/${this.state.date}`} style={{textDecoration: "none"}}><Rent >Rent Booth</Rent></Link>}
+                          
+                          
                         </div> } 
                         
                       </Booth>
@@ -288,6 +289,7 @@ render()
 
     );
 }
+// creating > 0 ? "Rent Booth" : creating === 0 && !this.disable ? "Delete Reservation": "Loading" ///inside {button}
   checkUsed = (x) =>
   {
     if(!this.props.reserve.reserveData) return -1;
@@ -325,7 +327,35 @@ Date.prototype.isSameDateAs = function(pDate) {
   );
 }
 
-
+const Rent = styled(Button)`
+  width: 300px;
+  height: 60px;
+  border-raidus: 8px;
+  background-color: #478529;
+  font-size: 18px;
+  font-family: Raleway;
+  font-weight: bold;
+  color: white;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+`;
+const DisabledRent = styled(Button)`
+  width: 300px;
+  height: 60px;
+  border-raidus: 8px;
+  background-color: white;
+  font-size: 18px;
+  font-family: Raleway;
+  font-weight: bold;
+  color: #E8E8E8;
+  border: 1px solid #E8E8E8;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+`;
 const ErrorDiv = styled.div`
   margin 0 auto;
   padding-left: 10px;

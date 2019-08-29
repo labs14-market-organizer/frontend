@@ -37,7 +37,7 @@ goBack = () => {
 
   render() {
   let market = this.props.marketData;
-  if(!market) return <Redirect to={this.props.back ? this.props.back : "/"} />;
+  if(!market) return <div/>;
   let editing = this.props.userData.id === this.props.marketData.admin_id;  //means market owner.
   return (
       <div>

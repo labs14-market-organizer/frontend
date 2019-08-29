@@ -45,7 +45,9 @@ import LoadingScreen from "./components/LoadingScreen";
 import Upcoming from "./routes/Upcoming";
 import MarketDay from "./components/MarketDay";
 import VendorsRentedByDay from "./components/VendorsRentedByDay";
-
+import RentBooth from "./routes/RentBooth";
+import BoothConfirmation from "./routes/BoothConfirmation";
+import BoothRented from "./components/BoothRented";
 
 var user_type = localStorage.getItem("userType");
 let token = null;
@@ -159,7 +161,18 @@ class App extends React.Component {
               <Route 
               path="/boothrenters/:date"
               render={props => <VendorsRentedByDay {...props}/>} 
-
+              />
+               <Route 
+              path="/rentbooth/:marketid/:boothid/:date"
+              render={props => <RentBooth {...props}/>} 
+              />
+             <Route 
+              path="/rentalconfirmation"
+              render={props => <BoothConfirmation />}
+              />
+               <Route 
+              path="/boothrented/:marketid/:boothid/:date/:reservationid"
+              render={props => <BoothRented />}
               />
           </div>
         </MuiThemeProvider>
