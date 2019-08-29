@@ -1,9 +1,4 @@
-<!-- # frontend
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
 
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements. -->
 
 # Cloud Stands
 
@@ -56,11 +51,11 @@ You can find the deployed project at https://www.cloudstands.com/
 
 ## Project Overview
 
-1️⃣ [Trello Board](https://trello.com/b/EWAg9Fap/labs-14-market-organizer)
+ [Trello Board](https://trello.com/b/EWAg9Fap/labs-14-market-organizer)
 
-1️⃣ [Product Canvas](https://www.notion.so/Market-Organizer-50f2628c4a53467cb2e9d2282865e2fa)
+ [Product Canvas](https://www.notion.so/Market-Organizer-50f2628c4a53467cb2e9d2282865e2fa)
 
-1️⃣ [UX Design files](https://app.zeplin.io/project/5d2cb823422bad4cc42a0116)
+ [UX Design files](https://app.zeplin.io/project/5d2cb823422bad4cc42a0116)
 
 
 <!-- 🚫 Replace lorem ipsum with a description of your project -->
@@ -68,7 +63,7 @@ Cloud Stands is a the best way to promote organization and communication between
 Our mission is to streamline the on-boarding process of joining a market.
 
 
-### 4️⃣ Key Features
+###  Key Features
 
 -    Google and Facebook login platforms
 -    Market Owners can create their marketplace
@@ -76,7 +71,7 @@ Our mission is to streamline the on-boarding process of joining a market.
 -    Vendors are able to search for markets by city
 
 
-## 1️⃣ Tech Stack
+##  Tech Stack
 
 ### Front end built using:
 
@@ -121,79 +116,68 @@ Our mission is to streamline the on-boarding process of joining a market.
 -    Ability to work with Passport and Postgis
 -    familiarity 
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+#### pg-trgm
+
+-   trigram processing for fuzzy search that works with          postgres
+- It's an extension in postgres and it allows you to use special operators & functions within the calls
+- It's Simple and fast to implement for setup & individual execution.
+
+
+#### SendGrid
+
+-    Sending emails to users to assure them that their actions went into the system.
+-   Well known , well documented & trusted
+-   Easy to setup and offers a lot of useful analytics
+
+#### express-validator
+
+-    Used for validation
+
 
 # APIs
 
-## 2️⃣ Authentication API here
+##  Authentication API here
 
-Passport oAuth supporting Google & Facebook 
+Passport oAuth supporting Google , Facebook & Square 
 
-## 2️⃣ Payment API here
+##  Payment API here
 
-Square
-
-
-
-## 3️⃣ Misc API here
+Square (not finished)
 
 
 
-## 3️⃣ Misc API here
+#  Content Licenses
 
-🚫Replace text below with a description of the API
 
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
 
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
-
-# 3️⃣ Environment Variables
-
-In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
-
-🚫These are just examples, replace them with the specifics for your app
-
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
-
-# 5️⃣ Content Licenses
-
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
-
-| Image Filename | Source / Creator | License                                                                      |
+| Image type | Source / Creator | License                                                                      |
 | -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
+| icon    | Sketch app Sources   | [Sketch app Sources](sketchappsources.com) |
+| icon     | Material UI     | [Material UI Icons](https://material.io/resources/icons/?style=baseline)                            |
+| icon     | Font Awesome      | [Font Awesome](https://fontawesome.com/license/free)                           |
 
-# 4️⃣ Testing
 
-🚫Document what you used for testing and why
+#  Testing
 
-# 4️⃣ Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+We used Jest on the frontend to test that our major components were displaying properly.
 
-from root run `yarn` and run `yarn start`to get this up and running on your system. Alternatively we are live at http://cloudstands.com
+#  Installation Instructions
+
+Using yarn: From root run `yarn` and run `yarn start` to get this up and running on your system.
+
+Using npm: From root run `npm install` and run `npm start` to locally get started with npm. 
+
+ Alternatively we are live at http://cloudstands.com
+
 ## Other Scripts
 
-🚫replace these examples with your own
 
-    * typecheck - runs the TypeScript compiler
     * build - creates a build of the application
     * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+    * test - runs jest tests 
+    * test-auto - runs tests in **tests** directory 
+    * eject - copy the configuration files and dependencies into the project so you have full control over them 
 
 # Contributing
 
